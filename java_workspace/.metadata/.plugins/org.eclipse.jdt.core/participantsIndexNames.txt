@@ -1,5 +1,9 @@
 INDEX VERSION 1.134
 G:\내 드라이브\Coding\MultiCampus\Semi-project\github\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\132093741.index
 \Bark\src\main\java
+G:\내 드라이브\Coding\MultiCampus\Semi-project\github\java_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\132093741.index
+\Bark\src\main\java
 G:\내 드라이브\Coding\MultiCampus\Semi-project\github\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3990256419.index
+\Bark\src\main\java
+G:\내 드라이브\Coding\MultiCampus\Semi-project\github\java_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3990256419.index
 \Bark\src\main\java

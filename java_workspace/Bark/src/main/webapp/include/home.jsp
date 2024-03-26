@@ -6,13 +6,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/home-style.css" />
+    <link rel="stylesheet" href="./css/home.css" />
   </head>
   <body>
-    <!-- main container -->
-    <div class="main-container">
-      <!-- main inner-->
-      <div class="main-inner">
+  <div class="main-image">
         <!-- main cover -->
         <div class="main-cover"></div>
         <!-- end of main cover -->
@@ -46,9 +43,6 @@
             <!-- end of inner hero -->
           </section>
         </div>
-      </div>
-      <!-- end of main inner-->
-    </div>
-    <!-- end of main container -->
+        </div>
   </body>
 </html>

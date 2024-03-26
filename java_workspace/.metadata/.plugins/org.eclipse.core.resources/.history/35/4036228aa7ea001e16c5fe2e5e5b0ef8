@@ -1,0 +1,51 @@
+/*초기화 */
+.table{min-height: 500px;}
+
+.container{
+	position: absolute;
+	width: 890px;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+/* 제목 */
+.row>h{color: #52442a; font-weight: bold; font-size: 30px;}
+
+/* 글쓰기버튼 */
+.writeButton{display: flex; justify-content: end; text-align: end; padding: 5px; }
+.writeButton>a{ padding: 3px; font-size: 14px; border:1px solid #52442a; border-radius: 5px;}
+.writeButton>a:hover{ background-color: #52442a; color: #fcf1e7;}
+
+
+/* 테이블 */
+
+.noticetable{ border-spacing: 0;}
+.noticetable>thead>tr>th{
+	background-color:#fcf1e7; color: #52442a; text-align: center; font-weight: bold; padding: 5px;
+    border-bottom: 2px solid #52442a; border-top: 2px solid #52442a;
+}
+.noticetable>thead>tr>th:nth-child(2){
+    width: 500px;
+}
+.noticetable>thead>tr>th:nth-child(3){
+    width: 200px;
+}
+.noticetable>thead>tr>th:nth-child(4){
+    width: 100px;
+}
+.noticetable>tbody>tr>td{
+	background: #fcf1e7; color: #52442a; text-align: center; border-bottom: 1px solid #52442a;
+    padding: 5px;
+}
+/* 페이지 */
+.pageNumber{display: flex; justify-content: center;}
+.pageNumber>a{padding: 10px;}
+
+/* 카테고리 */
+.categori{padding-top: 10px;}
+.categori>select{
+    background: #fcf1e7; border-radius: 5px; border: 1px solid #52442a;
+}
+
+/* #fcf1e7 #52442a */

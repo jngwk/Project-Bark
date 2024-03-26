@@ -25,13 +25,26 @@ body {
   width: 1980px;
   height: 100dvh;
   margin: 0 auto;
+  z-index: 0;
 }
+
 li {
   list-style: none;
 }
 a {
   text-decoration: none;
   color: var(--color-bean-brown);
+}
+.content-container{
+	position: absolute; 
+	width: 1600px; 
+	height: calc(100dvh - 160px); 
+	right: 40px; 
+	top: 160px; 
+	z-index: -1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .btn {
   position: relative;
@@ -49,7 +62,7 @@ a {
   cursor: pointer;
 }
 strong {
-  font-size: 26px;
+  font-size: 1.5rem;
   /* line-height: 30px; */
 }
 h1 {
@@ -63,3 +76,4 @@ h1 {
   color: var(--color-rose-white);
 } */
 /* effects */
+

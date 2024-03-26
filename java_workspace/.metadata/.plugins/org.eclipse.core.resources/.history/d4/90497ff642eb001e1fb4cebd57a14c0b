@@ -1,0 +1,88 @@
+@charset "UTF-8";
+input, select{
+	background-color: var(--color-rose-white);
+}
+/* 타이틀 */
+.adoption-title{
+    padding-bottom: 50px; color:rgb(171, 100, 39); text-shadow: 2px 1px 1px rgb(195, 184, 175);
+}
+.container>div{
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* 테이블 전체 */
+.adoption-form>div>table{    
+    border-spacing: 0;  display: flex; justify-content: center;
+}
+.adoption-form tbody{    
+    border:1px solid #52442a;  border-bottom:0px;
+}
+.adoption-form td{
+    border-bottom:1px solid #52442a;  color: #52442a; text-align: center; height: 30px; font-size: 16px;
+}
+.adoption-form td:nth-child(odd){   
+    font-weight: bold; background-color:  rgb(195, 184, 175);
+}
+.adoption-form td:nth-child(even){   
+    font-weight: nomal; 
+}
+
+/* 테이블 각각 */
+.firstform td:nth-child(odd){     
+    width: 150px;    
+}
+.firstform td:nth-child(even){    
+    width: 320px;    }
+.secondform td:nth-child(odd){     
+    width: 150px;    
+}
+.secondform td:nth-child(even){    
+    width: 320px;    
+}
+.thirdform td:nth-child(odd){     
+    width: 100px;    
+}
+.thirdform td:nth-child(even){    
+    width: 100px;    
+}
+
+
+/* 인풋테두리정리 */
+.adoption-form input{  
+    border:0; height: 30px; width: 150px; background-color: var(--color-rose-white);
+}
+.adoption-form input:focus{   
+    outline: none;
+}
+.adoption-form>div>table>tbody>tr>td>select{ 
+    width: 50px; border:0; height: 30px; background-color: var(--color-rose-white);
+}
+.adoption-form>div>table>tbody>tr>td>select:focus{ 
+    outline: none;
+}
+
+/* 중간타이틀 */
+.adoption-form h{
+    font-size: 13px; display: block; padding-top: 40px;
+}
+.adoption-form h>input{height: 10px; width: 20px}
+
+
+
+/* 버튼 */
+.adoption-button{
+    display: flex; justify-content: center; align-items: center; margin-top:100px;
+}
+.adoption-button>input{
+    width: 80px; height: 30px; font-size: 16px; font-weight: bold; margin: 10px; border-radius: 5px; border: 0px; color: #52442a; 
+    }
+.adoption-button>input:hover{
+    background-color: rgb(195, 184, 175);
+}
+
+/* 주의사항 */
+.adoption-text{display: block; text-align: center; margin-top: 100px; color:#52442a;}
+.adoption-text>h3{padding-top: 20px;}
+
+
+/* #fcf1e7 #52442a */
