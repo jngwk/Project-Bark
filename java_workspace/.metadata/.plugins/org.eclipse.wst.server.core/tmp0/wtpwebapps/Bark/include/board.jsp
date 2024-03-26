@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row">
         
-            <h>Notice</h>
+            <h2>공지사항</h2>
             
             <div class="notice_up">
             <form action="#" method="post" class="notice_searchform">

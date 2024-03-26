@@ -58,15 +58,15 @@
               <a href="index.jsp?target=./include/adoptionForm"><strong>입양</strong></a>
             </li>
             <li class="nav-item dropdown">
-              <a href="index.jsp?target=./include/board"><strong>게시판</strong></a>
+              <a href="#"><strong>게시판</strong></a>
               <div class="dropdown-content">
-                <a href="index.jsp?target=./include/home"><strong>공지사항</strong></a>
+                <a href="index.jsp?target=./include/board"><strong>공지사항</strong></a>
                 <a href="index.jsp?target=./include/home"><strong>정보공유</strong></a>
                 <a href="index.jsp?target=./include/home"><strong>문의하기</strong></a>
               </div>
             </li>
             <li class="nav-item">
-              <a href="index.jsp?target=./include/joinUser"><strong>로그인</strong></a>
+              <a href="index.jsp?target=./include/myPost"><strong>로그인</strong></a>
             </li>
           </ul>
         </div>
