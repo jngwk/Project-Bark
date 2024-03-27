@@ -95,7 +95,11 @@
 .nav-item > a > strong:hover {
   color: var(--color-effect) !important;
 }
-
+.nav-item img:hover{
+	cursor: pointer;
+	opacity: 0.7;
+	transition: .5s;
+}
 .nav-item:hover .dropdown-content {
   transform: translateY(0);
   height: 500px;
@@ -108,4 +112,80 @@
 }
 .dropdown-content strong:hover {
   border-bottom: 2px solid var(--color-bean-brown);
+}
+
+.profile{
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-menu{
+  position: absolute;
+  padding: 10px 20px;
+  right:45px;
+  top: 150px;
+  background: var(--color-inactive);
+  width: 200px;
+  min-height: 330px;
+  border-radius: 15px;
+  transition: 0.5s;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9999;
+}
+.profile-menu.active{
+  top: 100px;
+  visibility: visible;
+  opacity: 1;
+}
+.profile-menu::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  background: var(--color-inactive);
+  transform: rotate(45deg);
+}
+.profile-menu h3 {
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  padding: 20px 0;
+  font-weight: 500;
+  color: var(--color-bean-brown);
+  line-height: 1.5em;
+}
+.profile-menu h3 span{
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--color-deep-brown);
+}
+.profile-menu ul {
+	display: block;
+}
+.profile-menu ul li {
+  padding: 16px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+.profile-menu ul li img {
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+.profile-menu ul li:hover img {
+  opacity: 1;
+}
+.profile-menu ul li a {
+  display: inline-block;
+  color: var(--color-bean-brown);
+  font-weight: 500;
+  transition: 0.5s;
+}
+.profile-menu ul li:hover a {
+  color: var(--color-effect);
 }

@@ -13,10 +13,10 @@ body{display: flex; justify-content: center; align-content: center;}
 
 /* 제목 */
 .row>h{color: #52442a; font-weight: bold; font-size: 30px;}
-.myPost_up{display: flex; justify-content: space-between; align-content: center; padding: 5px 0; margin-top:50px;}
+.myPost-up{display: flex; justify-content: space-between; align-content: center; padding: 5px 0; margin-top:50px;}
 
 /* 카테고리 */
-.myPost_Category>select{
+.myPost-category>select{
     border-radius: 5px; border: 1px solid rgb(195, 184, 175); text-align:center;
 }
 
@@ -28,36 +28,36 @@ body{display: flex; justify-content: center; align-content: center;}
 .myPost-search-submit:hover{background-color: rgb(195, 184, 175); color:#fcf1e7; border:thin solid rgb(195, 184, 175);}
 
 /* 글쓰기버튼 */
-.writeButton>a{ padding: 3px; font-size: 14px; background-color:white; border-radius: 5px; border:thin solid rgb(195, 184, 175); font-size: 15px;}
-.writeButton>a:hover{ background-color: rgb(195, 184, 175); color:#fcf1e7; border:thin solid rgb(195, 184, 175); }
+.write-button>a{ padding: 3px; font-size: 14px; background-color:white; border-radius: 5px; border:thin solid rgb(195, 184, 175); font-size: 15px;}
+.write-button>a:hover{ background-color: rgb(195, 184, 175); color:#fcf1e7; border:thin solid rgb(195, 184, 175); }
 
 
 /* 테이블 */
 
-.myPosttable{ border-spacing: 0;}
-.myPosttable>thead>tr>th{
+.myPost-table{ border-spacing: 0;}
+.myPost-table>thead>tr>th{
 	background-color:  rgb(195, 184, 175); color: #52442a; text-align: center; padding: 7px;
     border-bottom: 1px solid #52442a; font-weight: bold;
 }
-.myPosttable>thead>tr>th:nth-child(2){
+.myPost-table>thead>tr>th:nth-child(2){
     width: 50px;
 }
-.myPosttable>thead>tr>th:nth-child(3){
+.myPost-table>thead>tr>th:nth-child(3){
     width: 500px;
 }
-.myPosttable>thead>tr>th:nth-child(4){
+.myPost-table>thead>tr>th:nth-child(4){
     width: 200px;
 }
-.myPosttable>thead>tr>th:nth-child(5){
+.myPost-table>thead>tr>th:nth-child(5){
     width: 100px;
 }
-.myPosttable>tbody>tr>td{
+.myPost-table>tbody>tr>td{
 	background: #fcf1e7; color: #52442a; text-align: center; border-bottom: 1px solid rgb(195, 184, 175);
     padding: 5px;
 }
 /* 페이지 */
-.pageNumber{display: flex; justify-content: center;}
-.pageNumber>a{padding: 10px;}
+.page-number{display: flex; justify-content: center;}
+.page-number>a{padding: 10px;}
 
 
 

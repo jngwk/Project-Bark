@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/home.css" />
+    <c:set var="contextPath" value="${pageContext.request.contextPath }"/>  
+    
+    <link rel="stylesheet" href="${contextPath }/css/home.css" />
   </head>
   <body>
   <div class="main-image">
@@ -34,7 +37,7 @@
                       찾고 있습니다.
                     </p>
                   </div>
-                  <button class="call-to-action">입양하기</button>
+                  <button class="call-to-action" onclick="location.href='${contextPath}/index.jsp?target=./include/adoptionForm'">입양하기</button>
                 </div>
                 <!-- end of description container -->
               </div>

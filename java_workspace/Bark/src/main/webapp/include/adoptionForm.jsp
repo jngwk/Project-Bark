@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./css/adoptionForm.css">
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+<link rel="stylesheet" href="${contextPath }/css/adoptionForm.css">
 </head>
 <body>
 	<div class="container">
@@ -25,7 +27,7 @@
                     </table>
                 </div>
 
-                <div><h>*신청자 정보</h></div>
+                <div><h2>*신청자 정보</h2></div>
                 <div class="secondform">
                     <table>
                         <tbody>
