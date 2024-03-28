@@ -13,12 +13,11 @@
   padding: 0;
   font-family: "Noto Sans KR", sans-serif;
   font-optical-sizing: auto;
-  font-weight: bold;
   font-style: normal;
 }
 html {
   position: relative;
-  background-color: var(--color-rose-white);
+  /*background-color: var(--color-rose-white);*/
 }
 body {
   position: relative;

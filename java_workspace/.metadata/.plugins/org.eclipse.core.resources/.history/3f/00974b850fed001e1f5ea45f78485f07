@@ -1,0 +1,18 @@
+package dao;
+
+import javax.servlet.ServletContext;
+
+import utils.JDBConnect;
+
+public class UserDAO extends JDBConnect{
+
+	public UserDAO(ServletContext application) {
+		super(application);
+	}
+	
+	public int login(String id, String pwd) {
+		int result = 0;
+		return result;
+	}
+
+}
