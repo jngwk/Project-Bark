@@ -42,6 +42,7 @@
       </div>
       <!-- end of side -->
       <!-- nav -->
+      <div class="navigation-cover nav-scroll"></div>
       <div class="navigation-wrap">
         <!-- nav inner -->
         <div class="navigation-inner">
@@ -58,12 +59,12 @@
               </div>
             </li>
             <li class="nav-item">
-              <a href="index.jsp?target=./include/adoptionForm"><strong>입양</strong></a>
+              <a href="index.jsp?target=./include/userAdoptionFrm"><strong>입양</strong></a>
             </li>
             <li class="nav-item dropdown">
               <a href="#"><strong>게시판</strong></a>
               <div class="dropdown-content">
-                <a href="index.jsp?target=./include/board"><strong>공지사항</strong></a>
+                <a href="index.jsp?target=./include/boardList"><strong>공지사항</strong></a>
                 <a href="#"><strong>정보공유</strong></a>
                 <a href="#"><strong>문의하기</strong></a>
               </div>
@@ -71,8 +72,8 @@
             <li class="nav-item">
               <!-- 로그인 상태 확인 -->
 			  <c:choose>
-			  	<c:when test="${sessionScope.member == null}">
-			  		<a href="index.jsp?target=./include/login"><strong>로그인</strong></a>
+			  	<c:when test="${sessionScope.user == null}">
+			  		<a href="index.jsp?target=./include/loginFrm"><strong>로그인</strong></a>
 			  	</c:when>
 			  	<c:otherwise>
 			  		<div class="profile-area">
@@ -90,38 +91,45 @@
 			  			</div>
 			  			<div class="profile-menu">
 			  				<c:choose>
-				  				<c:when test="${sessionScope.memberType == 'user' }">
-				  					<h3>홍길동<br><span>gildong1234</span></h3>
+				  				<c:when test="${sessionScope.user.type == '1' || sessionScope.user.type == '2'}">
+				  					<h3>${user.name}<br><span>${user.id}</span></h3>
 							        <ul>
 							          <li>
-							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/editProfile">회원정보 수정</a>
+							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">회원정보 수정</a>
 							          </li>
 							          <li>
-							            <img src="${contextPath }/images/icons/post.png" /><a href="index.jsp?target=./include/myPost">작성글 관리</a>
+							            <img src="${contextPath }/images/icons/post.png" /><a href="index.jsp?target=./include/userMyPostList">작성글 관리</a>
 							          </li>
 							          <li>
-							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/userManageApp">기부/입양/입소 관리</a>
+							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/userManageAppList">기부/입양/입소 관리</a>
 							          </li>
 							          <li>
 							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logoutProc.jsp">로그아웃</a>
 							          </li>
 							        </ul>
 				  				</c:when>
-				  				<c:when test="${sessionScope.memberType == 'shelter' }">
-				  				</c:when>
-				  				<c:when test="${sessionScope.memberType == 'admin' }">
+				  				<c:when test="${sessionScope.user.type == '3' }">
+				  					<h3>${user.name}<br><span>${user.id}</span></h3>
+							        <ul>
+							          <li>
+							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">회원정보 수정</a>
+							          </li>
+							          <li>
+							            <img src="${contextPath }/images/icons/post.png" /><a href="index.jsp?target=./include/adminManageDonationList">기부금 목록</a>
+							          </li>
+							          <li>
+							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/adminEditUserList">회원 관리</a>
+							          </li>
+							          <li>
+							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logoutProc.jsp">로그아웃</a>
+							          </li>
+							        </ul>
 				  				</c:when>
 				  				<c:otherwise>
 				  				</c:otherwise>
 			  				</c:choose>
 		  				</div>
 	  				</div>
-	  				<script>
-				      function menuToggle() {
-				        const toggleMenu = document.querySelector(".profile-menu");
-				        toggleMenu.classList.toggle("active");
-				      }
-				    </script>
 			  	</c:otherwise>
 			  </c:choose>
             </li>

@@ -1,0 +1,7 @@
+document.addEventListener("scroll", function(){
+	let nav = document.querySelector(".nav-scroll");
+	if(window.scrollY != 0)
+		nav.classList.add("scrolled");
+	if(window.scrollY == 0)
+		nav.classList.remove("scrolled");
+});

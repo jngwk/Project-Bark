@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.container{
+	position: absolute;
+	top: -150px;
+}
+.main_info {
+    min-width:500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.info-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.label-text {
+	position: relative;
+    width: 80px; /* 고정 너비 설정 */
+    height: 40px;
+    font-size: 18px;
+    float: left;
+    left: 0;
+    
+}
+.profile-info{
+	position: relative;
+	height: 40px;
+	width: 60%;
+	line-height: 35px;
+	right: 0;
+}
+.form-element{
+	height: 40px;
+	padding-bottom: 40px;
+	width: 100%;
+	align-items: center;
+}
+.form-element input{
+	float:right;
+}
+.align-right {
+    text-align: right;
+    padding-top: 20px;
+}
+
+    

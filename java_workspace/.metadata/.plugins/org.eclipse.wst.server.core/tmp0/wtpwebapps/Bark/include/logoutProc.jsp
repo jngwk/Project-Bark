@@ -8,8 +8,7 @@
 </head>
 <body>
 <%
-session.setAttribute("member", null); 
-session.setAttribute("memberType", null);
+session.setAttribute("user", null);
 response.sendRedirect(request.getContextPath()+"/main.jsp");
 %>
 </body>

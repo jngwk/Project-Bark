@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+:root {
+  --color-bean-brown: #302819;
+  --color-rose-white: #fbf1e7;
+  --color-deep-brown: #52442a;
+  --color-effect: rgb(171, 100, 39);
+  --color-strong: rgb(82, 68, 42);
+  --color-inactive: rgb(195, 184, 175);
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+html {
+  position: relative;
+  background-color: var(--color-rose-white);
+}
+body {
+  position: relative;
+  width: 1980px;
+  height: 100dvh;
+  margin: 0 auto;
+  z-index: 0;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: var(--color-bean-brown);
+}
+input, button, .btn{
+	border-radius: 3px;
+	box-shadow: none;
+}
+button, .btn:hover{
+	cursor: pointer;
+	
+}
+.content-container{
+	position: absolute; 
+	width: 1600px; 
+	height: calc(100dvh - 160px);
+	right: 40px;
+	top: 160px; 
+	z-index: -1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.content-blur{
+	position: fixed;
+	width: 1600px; 
+	right: 40px;
+	height: calc(100dvh - 1050px);
+	bottom: 0;
+	background: var(--color-rose-white);
+	opacity: 0.9;
+	z-index: 9999;
+	
+}
+.btn {
+  position: relative;
+  box-sizing: border-box;
+  white-space: pre;
+  padding-block: 1px;
+  padding-inline: 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonborder;
+  border-image: initial;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+strong {
+  font-size: 1.5rem;
+  /* line-height: 30px; */
+}
+h1 {
+  text-align: center;
+  padding-bottom: 8px;
+}
+/* .active {
+  background-color: var(--color-bean-brown);
+}
+.active strong {
+  color: var(--color-rose-white);
+} */
+/* effects */
+

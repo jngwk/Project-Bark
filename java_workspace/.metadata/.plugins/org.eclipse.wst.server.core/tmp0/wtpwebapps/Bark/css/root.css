@@ -6,6 +6,7 @@
   --color-effect: rgb(171, 100, 39);
   --color-strong: rgb(82, 68, 42);
   --color-inactive: rgb(195, 184, 175);
+
 }
 
 * {
@@ -17,11 +18,11 @@
 }
 html {
   position: relative;
-  /*background-color: var(--color-rose-white);*/
+  background-color: var(--color-rose-white);
 }
 body {
   position: relative;
-  width: 1980px;
+  width: 1920px;
   height: 100dvh;
   margin: 0 auto;
   z-index: 0;
@@ -34,31 +35,64 @@ a {
   text-decoration: none;
   color: var(--color-bean-brown);
 }
+input, button, .btn{
+	border-radius: 5px;
+	box-shadow: none !important;
+	border: 1px solid var(--color-bean-brown);
+	color: var(--color-bean-brown);
+}
+input{
+	font-size: 18px;
+	padding: 0 10px;
+}
+input[readonly]{
+	background-color: rgb(224, 224, 224);
+}
+input:not([readonly]):focus{
+	border: 2px solid var(--color-effect) !important;
+}
+
 .content-container{
 	position: absolute; 
 	width: 1600px; 
-	height: calc(100dvh - 160px); 
-	right: 40px; 
+	height: calc(100dvh - 160px);
+	right: 40px;
 	top: 160px; 
 	z-index: -1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+/* .content-blur{
+	position: fixed;
+	width: 1600px; 
+	right: 40px;
+	height: calc(100dvh - 1050px);
+	bottom: 0;
+	background: var(--color-rose-white);
+	opacity: 0.9;
+	z-index: 9999;
+	
+} */
 .btn {
   position: relative;
   box-sizing: border-box;
   white-space: pre;
   padding-block: 1px;
   padding-inline: 6px;
-  border-width: 2px;
-  border-style: outset;
-  border-color: buttonborder;
-  border-image: initial;
 }
-
-.btn:hover {
-  cursor: pointer;
+button:not(.call-to-action), .btn{
+	color: var(--color-bean-brown) !important;
+  background-color: var(--color-inactive) !important;
+}
+button:hover{
+	cursor: pointer !important;
+}
+button:not(.call-to-action):hover, .btn:hover, .btn.checked{
+	cursor: pointer !important;
+	background-color: var(--color-strong) !important;
+	color: var(--color-rose-white) !important;
+	transition: 0.3s;
 }
 strong {
   font-size: 1.5rem;
@@ -66,13 +100,8 @@ strong {
 }
 h1 {
   text-align: center;
-  padding-bottom: 8px;
+  padding-bottom: 30px;
+  font-size: 30px;
 }
-/* .active {
-  background-color: var(--color-bean-brown);
-}
-.active strong {
-  color: var(--color-rose-white);
-} */
-/* effects */
+
 

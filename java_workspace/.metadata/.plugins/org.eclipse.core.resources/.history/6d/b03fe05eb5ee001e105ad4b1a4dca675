@@ -1,0 +1,4 @@
+document.addEventListener("scroll", function(){
+	let nav = document.querySelector("navigation-wrap");
+	nav.classList.add("nav-scroll");
+});

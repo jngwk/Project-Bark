@@ -1,0 +1,16 @@
+<script type="text/javascript"> //pw 유효성 체크
+	  function checkPwd(){
+	  var input = document.forms[0];
+	  var pwd = input.pwd.value;
+	  var pwdCheck = input.pwdCheck.value;
+	  if(pwd!=pwdCheck){
+	   document.getElementById('checkPwd').style.color = "red";	//밝은 빨강으로 수정
+	   document.getElementById('checkPwd').innerHTML = "비밀번호가 일치하지 않습니다."; 
+	  }else{
+	   document.getElementById('checkPwd').style.color = "green";	//밝은 파랑으로 수정
+	   document.getElementById('checkPwd').innerHTML = "비밀번호가 일치합니다.";
+	  }
+
+	  
+}
+</script>

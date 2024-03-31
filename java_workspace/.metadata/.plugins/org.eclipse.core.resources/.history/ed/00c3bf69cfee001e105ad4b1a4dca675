@@ -1,0 +1,88 @@
+/* join */
+
+#join h1 {
+  position: relative;
+  text-align: center;
+  top: 5%;
+  height: 80px;
+  margin-top: 50px;
+}
+
+.join-form {	/* 전체 콘텐츠를 담은 div */
+  position: absolute;
+  /*background-color: var(--color-bean-brown);
+  color: var(--color-rose-white);
+  border: 1px solid var(--color-deep-brown);*/
+  color: var(--color-bean-brown);
+  top: 0;
+  width: 50%;
+  height: fit-content;
+  /* box-shadow: 1px 1px 1px 0.4px; */
+}
+.join-select{	/* 개인회원 / 보호소회원 버튼 담을 div */
+	position: relative;
+	display: inline;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 100%;
+	height: fit-content;
+	padding-bottom: 40px;
+}
+
+.join-form form{	/* 회원가입 항목을 담은 div */
+  position: relative;
+  height: 80%;
+  width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.join-form .btn {	/* 가입하기 버튼 */
+  position: relative;
+  top: 4%;
+  width: 50%;
+  height: 60px;
+  margin: 0 auto;
+  font-size: 20px;
+  color: var(--color-bean-brown);
+  background-color: var(--color-rose-white);
+  box-shadow: none;
+  text-align: center;
+  padding: 0 0 5px 0;
+  font-weight: bold;
+}
+.join-form .btn.submit{
+	margin-bottom: 50px;
+}
+.form-element {	/* 각 항목과 항목 입력칸이 들어갈 div */
+  display: inline;
+  width: 100%;
+  height: 85px;
+}
+
+
+.form-element span{	/* 항목(ex.아이디*) */
+  float:left;
+  text-align: center;
+  padding: 5px 0 15px 0;
+  font-size: 20px;
+}
+
+.form-element input {	/* 항목 입력칸 */
+  float: right;
+  width: 70%;
+  height: 40px;
+  line-height: 35px;
+  font-size: large;
+  padding: 0 10px;
+}
+
+.check-message{	/* 비밀번호 유효성 확인용 메세지 */
+	float: none;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 15px;
+}
