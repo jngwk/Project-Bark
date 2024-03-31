@@ -33,15 +33,6 @@
 	            	<button type="button" class="btn checked" id="user-join-btn" data-type="1">개인 회원</button>
 	            	<button type="button" class="btn" id="shelter-join-btn" data-type="2">보호소 회원</button>
 	            </div>
-	            <script>
-	            	let genBtn = ;
-	            	let shelterBtn = ;
-	            	function check(){
-	            		this.classList.remove("checked");
-	            	}
-	            </script>
-	            <c:set var="userType" value=""/>
-	            <input type="hidden" name="type" value="${userType }"/>
             	<div>
             	<p id="required"><span class="red-star">*</span>필수입력사항</p>
             	</div>

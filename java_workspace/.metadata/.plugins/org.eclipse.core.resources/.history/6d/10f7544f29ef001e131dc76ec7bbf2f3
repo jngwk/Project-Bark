@@ -3,7 +3,7 @@
   position: sticky;
   top: 40px;
   overflow: visible;
-  width: 100%;
+  width: 1920px;
   height: 120px;
   margin: 0 auto;
   z-index: 9999;
