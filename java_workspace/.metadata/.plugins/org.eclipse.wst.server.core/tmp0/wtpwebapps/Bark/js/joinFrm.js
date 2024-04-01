@@ -2,6 +2,7 @@
 
 
 //  pw 유효성 체크
+//  비밀번호 확인 칸에 focus시 비밀번호 확인칸에도 eventlistener 추가?
 function checkPwd(){
 	var input = document.forms[0];
 	var pwd = input.pwd.value;
@@ -37,4 +38,22 @@ $(document).ready(function() {
 		});
 	});
 });
+
+// 유저 타입
+function check(elem){
+	let buttons = document.querySelector(".user-type-select").children;
+    // console.log(buttons[0]);
+	if(!elem.className.includes("checked")){
+		elem.classList.add("checked");
+		let userType = document.querySelector(".user-type");
+		userType.value = elem.dataset.type;
+		// console.log(userType.value);
+		if(elem == buttons[0]){
+			buttons[1].classList.remove("checked");
+		}
+		else{
+			buttons[0].classList.remove("checked");
+		}
+	}
+}
 

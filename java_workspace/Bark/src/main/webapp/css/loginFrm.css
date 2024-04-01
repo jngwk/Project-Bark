@@ -1,15 +1,6 @@
 /* login */
-#login .nav-item strong {
-  color: var(--color-bean-brown) !important;
-}
-
-#login .nav-item:nth-child(5) {
-  /* border-bottom: 2px solid var(--color-rose-white); */
-  border-bottom: 2px solid var(--color-deep-brown);
-}
 .login-form {
-  position: absolute;
-  top: 100px;
+  position: relative;
   background-color: var(--color-rose-white);
   color: var(--color-bean-brown);
   opacity: 1;
@@ -64,9 +55,10 @@
   height: 30px;
   width: 95%;
 }
-.find-id-pwd:hover ul{
+.find-id-pwd span:hover {
 	font-weight: bold;
 	cursor: pointer;
+	transition: 0.3s;
 }
 .find-id-pwd ul {
   position: absolute;

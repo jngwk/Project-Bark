@@ -12,7 +12,7 @@
   position: sticky;
   top: 0;
   float: left;
-  width: 278px;
+  width: 258px;
   height: 1000px;
   border-right: 2px solid var(--color-bean-brown);
 }
@@ -194,15 +194,16 @@
   opacity: 0.5;
   transition: 0.5s;
 }
-.profile-menu ul li:hover img {
+.profile-menu ul li:hover > img {
   opacity: 1;
 }
 .profile-menu ul li a {
   display: inline-block;
   color: var(--color-bean-brown);
   font-weight: 500;
-  transition: 0.5s;
+
 }
-.profile-menu ul li:hover a {
+.profile-menu ul li:hover > a {
   color: var(--color-effect);
+  transition: 0.5s;
 }

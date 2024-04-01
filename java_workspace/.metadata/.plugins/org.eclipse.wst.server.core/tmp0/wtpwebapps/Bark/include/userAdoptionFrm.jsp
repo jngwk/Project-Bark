@@ -27,7 +27,7 @@
                     </table>
                 </div>
 
-                <div><h2>*신청자 정보</h2></div>
+                <div><h>*신청자 정보</h></div>
                 <div class="secondform">
                     <table>
                         <tbody>

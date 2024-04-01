@@ -3,13 +3,12 @@
 #join h1 {
   position: relative;
   text-align: center;
-  top: 5%;
   height: 80px;
-  margin-top: 50px;
 }
 
 .join-form {	/* 전체 콘텐츠를 담은 div */
-  position: absolute;
+  position: relative;
+  margin: 0 auto;
   /*background-color: var(--color-bean-brown);
   color: var(--color-rose-white);
   border: 1px solid var(--color-deep-brown);*/
@@ -57,12 +56,12 @@
   font-weight: bold;
 }
 .join-form .join-btn{
-	margin-bottom: 50px;
+	margin: 50px auto;
 }
 .form-element {	/* 각 항목과 항목 입력칸이 들어갈 div */
   display: inline;
   width: 100%;
-  height: 85px;
+  padding-bottom: 25px;
 }
 
 
@@ -78,7 +77,7 @@
   width: 60%;
   height: 40px;
   line-height: 35px;
-  font-size: 18px;
+  font-size: 16px;
   padding: 0 10px;
 }
 
@@ -86,5 +85,15 @@
 	float: none;
 	margin: 0 auto;
 	text-align: center;
-	font-size: 15px;
+	font-size: 14px;
+	transform: translateX(10px);
+}
+.red-star{	/* 항목옆의 별 */
+	color:red;
+	font-size: 14px;
+}
+#required{	/* "필수입력사항" */
+	float: right;
+	margin: 0 0 10px 0;
+	font-size: 14px;	
 }

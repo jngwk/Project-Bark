@@ -1,8 +1,4 @@
 @charset "UTF-8";
-.container{
-	position: absolute;
-	top: 100px;
-}
 .main_info {
     min-width:500px;
     display: flex;
@@ -23,10 +19,10 @@ h1{
 .label-text {
 	position: relative;
     width: 80px; /* 고정 너비 설정 */
-    height: 40px;
-    font-size: 18px;
+    font-size: 16px !important;
     float: left;
     left: 0;
+    padding-top: 8px;
     
 }
 .profile-info{
@@ -44,6 +40,7 @@ h1{
 }
 .form-element input{
 	float:right;
+	font-size: 16px;
 }
 .main_info .edit-btn-area{
 	text-align: center;

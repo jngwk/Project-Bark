@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="nav-scroll"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="pageContext."/>
+			<item value="sessionScope"/>
+			<item value="font-size"/>
+			<item value="font"/>
+			<item value="favi"/>
 			<item value="nav-scroll"/>
 			<item value="padding"/>
 			<item value="margin"/>
@@ -18,10 +23,10 @@
 			<item value="dropdown-menu"/>
 			<item value="gori"/>
 			<item value="categori"/>
-			<item value="-f"/>
-			<item value="favi"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="pageContext"/>
 			<item value="gory"/>
 		</list>
 	</section>

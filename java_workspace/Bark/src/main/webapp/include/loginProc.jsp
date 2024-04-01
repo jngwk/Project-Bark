@@ -18,8 +18,10 @@ pageContext.setAttribute("dao", dao);
 <c:set var="result" value="${dao.login(param.id, param.pwd) }"/>
 <c:choose>
 	<c:when test="${result == 1 }">
-		<c:set var="user" value="${dao.getUser(param.id) }" scope="session"/>
-		
+		<c:set var="user" value="${dao.getUser(param.id) }"/>
+		<c:set var="userId" value="${param.id }" scope="session"/>
+		<c:set var="userType" value="${user.type }" scope="session"/>
+		<c:set var="userName" value="${user.name }" scope="session"/>
 		<script>
 			alert('환영합니다.');
 			location.href = "../main.jsp";

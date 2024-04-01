@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-@charset "UTF-8";
-.container{
-	width: 880px;
-}
 /*초기화 */
 .table {
   min-height: 600px;

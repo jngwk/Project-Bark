@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div class="container">
 <strong>ABOUT</strong>
+</div>
 </body>
 </html>

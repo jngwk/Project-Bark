@@ -3,7 +3,6 @@
 
 /*초기화 */
 .table{min-height: 600px;}
-.row{margin-top:200px}
 
 /* 제목 */
 .row>h{color: #52442a; font-weight: bold; font-size: 30px;}

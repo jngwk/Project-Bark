@@ -11,6 +11,7 @@
     <script type="text/javascript" src="${contextPath }/js/common.js"></script>
     <link rel="stylesheet" href="${contextPath }/css/root.css" />
     <link rel="stylesheet" href="${contextPath }/css/headerFooter.css" />
+    <link rel="shortcut icon" href="${contextPath }/images/bark_logo_removebg.png">
   </head>
   <body>
     <jsp:include page="./include/headerFooter.jsp" flush="false"/>

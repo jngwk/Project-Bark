@@ -22,7 +22,7 @@ html {
 }
 body {
   position: relative;
-  width: 1920px;
+  width: 1900px;
   height: 100dvh;
   margin: 0 auto;
   z-index: 0;
@@ -54,26 +54,39 @@ input:not([readonly]):focus{
 
 .content-container{
 	position: absolute; 
-	width: 1600px; 
-	height: calc(100dvh - 160px);
+	width: 1600px;
+	min-height: 800px;
+	/* height: calc(100dvh - 160px); 
+	height: 880px;
+	height: fit-content;*/
 	right: 40px;
 	top: 160px; 
 	z-index: -1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	padding-top: 80px;
+	/*display: flex;
+	justify-content: center;*/
+	
+	
 }
-/* .content-blur{
+.padding-bottom{
+	padding-bottom: calc(100dvh - 1040px);
+}
+.container{
+	position: relative;
+	margin: 0 auto;
+	width: fit-content;
+}
+.content-blur{
 	position: fixed;
-	width: 1600px; 
-	right: 40px;
-	height: calc(100dvh - 1050px);
+	width: 100%;
+	left: 0;
+	height: calc(100dvh - 1040px);
 	bottom: 0;
 	background: var(--color-rose-white);
-	opacity: 0.9;
+	opacity: 0.8;
 	z-index: 9999;
 	
-} */
+}
 .btn {
   position: relative;
   box-sizing: border-box;

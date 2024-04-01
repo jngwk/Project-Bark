@@ -15,7 +15,7 @@
   </head>
   <body>
   	<jsp:include page="./include/headerFooter.jsp" flush="false"/>
-  	<div class="content-container">
+  	<div class="content-container padding-bottom">
     <jsp:include page="<%=target %>" flush="false"/>
     <div class="content-blur"></div>
     </div>

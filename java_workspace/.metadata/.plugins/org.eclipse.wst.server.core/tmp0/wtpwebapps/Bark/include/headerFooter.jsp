@@ -54,7 +54,7 @@
               <a href="#"><strong>보호소 및 후원</strong></a>
               <div class="dropdown-content">
                 <a href="#"><strong>후원 안내</strong></a>
-                <a href="#"><strong>보호소 조회</strong></a>
+                <a href="index.jsp?target=./include/findShelter"><strong>보호소 조회</strong></a>
                 <a href="#"><strong>보호소 이야기</strong></a>
               </div>
             </li>
@@ -64,15 +64,15 @@
             <li class="nav-item dropdown">
               <a href="#"><strong>게시판</strong></a>
               <div class="dropdown-content">
-                <a href="index.jsp?target=./include/boardList"><strong>공지사항</strong></a>
-                <a href="#"><strong>정보공유</strong></a>
-                <a href="#"><strong>문의하기</strong></a>
+                <a href="index.jsp?target=./include/boardNoticeList"><strong>공지사항</strong></a>
+                <a href="index.jsp?target=./include/boardInfoList"><strong>정보공유</strong></a>
+                <a href="index.jsp?target=./include/boardEnquiryList"><strong>문의하기</strong></a>
               </div>
             </li>
             <li class="nav-item">
               <!-- 로그인 상태 확인 -->
 			  <c:choose>
-			  	<c:when test="${sessionScope.user == null}">
+			  	<c:when test="${userId == null}">
 			  		<a href="index.jsp?target=./include/loginFrm"><strong>로그인</strong></a>
 			  	</c:when>
 			  	<c:otherwise>
@@ -91,8 +91,8 @@
 			  			</div>
 			  			<div class="profile-menu">
 			  				<c:choose>
-				  				<c:when test="${sessionScope.user.type == '1' || sessionScope.user.type == '2'}">
-				  					<h3>${user.name}<br><span>${user.id}</span></h3>
+				  				<c:when test="${userType == '1' || userType == '2'}">
+				  					<h3>${userName}<br><span>${userId}</span></h3>
 							        <ul>
 							          <li>
 							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">회원정보 수정</a>
@@ -104,12 +104,12 @@
 							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/userManageAppList">기부/입양/입소 관리</a>
 							          </li>
 							          <li>
-							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logoutProc.jsp">로그아웃</a>
+							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logout.jsp">로그아웃</a>
 							          </li>
 							        </ul>
 				  				</c:when>
-				  				<c:when test="${sessionScope.user.type == '3' }">
-				  					<h3>${user.name}<br><span>${user.id}</span></h3>
+				  				<c:when test="${userType == '3' }">
+				  					<h3>${userName}<br><span>${userId}</span></h3>
 							        <ul>
 							          <li>
 							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">회원정보 수정</a>
@@ -121,7 +121,7 @@
 							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/adminEditUserList">회원 관리</a>
 							          </li>
 							          <li>
-							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logoutProc.jsp">로그아웃</a>
+							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logout.jsp">로그아웃</a>
 							          </li>
 							        </ul>
 				  				</c:when>

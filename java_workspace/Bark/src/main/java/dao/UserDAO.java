@@ -69,7 +69,7 @@ public class UserDAO extends JDBConnect{
 	public int join(UserDTO user) {
 		int result = 0;
 		String sql = "INSERT INTO user(id, pwd, name, phone, email, addr, addrDetail, postcode, bank, bankAcc, type)"
-						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
+						+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user.getId());
