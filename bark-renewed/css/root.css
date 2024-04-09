@@ -23,7 +23,7 @@ html {
   min-width: 1920px;
   min-height: 1080px;
   position: relative;
-  background-color: var(--color-sky-blue);
+  background-color: #fff;
   z-index: -9999;
 }
 body {
