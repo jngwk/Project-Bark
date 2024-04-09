@@ -1,0 +1,172 @@
+body {
+  overflow-x: hidden;
+  background-color: var(--color-strong);
+  min-width: 1920px;
+}
+.slider-wrapper {
+  overflow: hidden;
+  position: relative;
+  height: 100dvh;
+  width: 100vw;
+  min-width: 1920px;
+  z-index: -99999;
+}
+/* slider */
+.slider {
+  position: relative;
+  height: 100dvh;
+  width: 100vw;
+  min-width: 1920px;
+  top: 0;
+  z-index: -99999;
+  display: flex;
+  flex-direction: column;
+}
+.container {
+  position: absolute;
+  left: 0;
+  top: 100;
+  display: none;
+}
+.container.active {
+  top: 0;
+  display: block;
+}
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.9;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* vertical slider */
+/* .slider {
+    position: relative;
+    height: 200dvh;
+    width: 100vw;
+    top: -100dvh;
+    z-index: -99999;
+    display: flex;
+    flex-direction: column;
+  }
+
+.shifting {
+  transition: top 2s ease-out;
+} */
+
+.hero-image {
+  position: relative;
+  background-image: url(images/seok-gu.jpg);
+  background-repeat: no-repeat;
+  width: 100vw;
+  min-width: 1920px;
+  height: 100vh;
+  z-index: -9999;
+  overflow: hidden;
+}
+.hero-image img {
+  object-fit: cover;
+  width: 100%;
+}
+.hero-image::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100vw;
+  min-width: 1920px;
+  height: 100dvh;
+  background-color: var(--color-bean-brown);
+  background-size: cover;
+  opacity: 0.1;
+}
+.container-inner {
+  position: absolute;
+  width: 80%;
+  height: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hero-title {
+  float: left;
+}
+.hero-content {
+  float: right;
+  width: 20%;
+}
+.hero-text {
+  line-height: 30px;
+  color: #ffffff;
+}
+.call-to-action {
+  margin-top: 50px;
+}
+.call-to-action .btn:hover {
+  scale: 1.1;
+  transition: 0.5s;
+}
+.paw-icon {
+  opacity: 0;
+}
+.paw-icon img {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  z-index: 99999;
+  transform: translate(-30%, -60%);
+}
+.call-to-action .btn:hover ~ .paw-icon {
+  opacity: 0.8;
+  transition: 0.5s;
+}
+.slider-btn {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.slider-btn img {
+  position: relative;
+  width: 100px;
+  height: 82px;
+  opacity: 0.7;
+  z-index: 9999;
+}
+.slider-btn:hover {
+  cursor: pointer !important;
+}
+.bounce {
+  animation: bounce 2s ease infinite;
+}
+.bounce:hover {
+  animation-iteration-count: 0;
+}
+
+@keyframes bounce {
+  60% {
+    transform: translateY(0%);
+  }
+  70% {
+    transform: translateY(-10%);
+  }
+  80% {
+    transform: translateY(0%);
+  }
+  90% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

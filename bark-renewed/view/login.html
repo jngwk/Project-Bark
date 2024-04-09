@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" background-color="#DAEBFF">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/root.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link rel="stylesheet" href="../css/transition.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header-container">
+      <div class="header-inner">
+        <a href="main.html">
+          <img
+            class="logo"
+            src="images/bark_logo-removebg.png"
+            alt="logo"
+            width="200px"
+          />
+        </a>
+        <div class="navigation-menu">
+          <ul>
+            <li>
+              <a class="transition" href="#"
+                ><strong class="xlarge-font hover-underline">소개</strong></a
+              >
+            </li>
+            <li class="dropdown">
+              <a class="transition" href="#"
+                ><strong class="xlarge-font hover-underline"
+                  >보호소 및 후원</strong
+                ></a
+              >
+              <div class="dropdown-content">
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >후원 안내</strong
+                  ></a
+                >
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >보호소 조회</strong
+                  ></a
+                >
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >캠페인 둘러보기</strong
+                  ></a
+                >
+              </div>
+            </li>
+            <li class="dropdown">
+              <a class="transition" href="#"
+                ><strong class="xlarge-font hover-underline">입양</strong></a
+              >
+              <div class="dropdown-content">
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >입양 안내</strong
+                  ></a
+                >
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >입양하기</strong
+                  ></a
+                >
+              </div>
+            </li>
+            <li class="dropdown">
+              <a class="transition" href="#"
+                ><strong class="xlarge-font hover-underline">게시판</strong></a
+              >
+              <div class="dropdown-content">
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >공지사항</strong
+                  ></a
+                >
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >정보공유</strong
+                  ></a
+                >
+                <a class="transition" href="#"
+                  ><strong class="large-font hover-underline"
+                    >문의하기</strong
+                  ></a
+                >
+              </div>
+            </li>
+            <li>
+              <a class="transition" href="login.html"
+                ><strong class="xlarge-font hover-underline">
+                  로그인
+                </strong></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- log in -->
+    <div class="container">
+      <div class="login-form fade-in">
+        <form action="${contextPath }/include/loginProc.jsp" method="post">
+          <h1>로그인</h1>
+          <div class="form-element">
+            <span>아이디 </span><br />
+            <input
+              type="text"
+              class="login-input"
+              name="id"
+              maxlength="20"
+              required
+            /><br />
+          </div>
+          <div class="form-element">
+            <span>비밀번호</span><br />
+            <input
+              type="password"
+              class="login-input"
+              name="pwd"
+              maxlength="20"
+              required
+            /><br />
+          </div>
+          <div class="find-id-pwd">
+            <ul>
+              <li>
+                <a href="index.jsp?target=./include/findIdFrm"
+                  ><span>아이디 </span></a
+                >
+              </li>
+              <div class="divider"></div>
+              <li>
+                <a href="index.jsp?target=./include/findPwdFrm"
+                  ><span> 비밀번호 찾기</span></a
+                >
+              </li>
+            </ul>
+          </div>
+          <button type="submit" class="login-btn btn">
+            <span>로그인</span>
+          </button>
+          <a class="join-btn btn" href="index.jsp?target=./include/joinFrm"
+            ><span>회원가입</span></a
+          >
+        </form>
+      </div>
+    </div>
+    <!-- footer -->
+    <div class="footer">
+      <div class="footer-inner">
+        <div class="copy-right">
+          <span class="font-dark">
+            Copyright © Bark Co.,Ltd<br />
+            All Rights Reserved
+          </span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

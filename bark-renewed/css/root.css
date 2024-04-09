@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+:root {
+  --color-bean-brown: #302819;
+  --color-rose-white: #fbf1e7;
+  --color-deep-brown: #52442a;
+  --color-effect: rgb(171, 100, 39);
+  --color-strong: rgb(82, 68, 42);
+  --color-inactive: rgb(195, 184, 175);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  color: #fff;
+}
+html {
+  min-width: 1920px;
+  min-height: 1080px;
+  position: relative;
+  background-color: #daebff;
+  z-index: -9999;
+}
+body {
+  position: relative;
+  overflow-x: hidden;
+  z-index: -1;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.btn {
+  cursor: pointer;
+  width: 150px;
+  height: 70px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+}
+.font-bright {
+  color: #ffffff;
+}
+.font-dark {
+  color: #000 !important;
+}
+
+.xxlarge-font {
+  font-size: 60px;
+}
+.xlarge-font {
+  font-size: 24px;
+}
+.large-font {
+  font-size: 20px;
+}
+
+.hover-underline {
+  display: inline-block;
+}
+.hover-underline::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+}
+.hover-underline:hover::after {
+  width: 100%;
+  transition: 0.5s;
+}
