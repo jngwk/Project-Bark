@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../css/popup.css" />
+    <link rel="stylesheet" href="../css/root.css" />
     <script src="../js/popup.js"></script>
   </head>
   <body>
     <a href="javascript:openPop()">
-      <div>팝업오픈!</div>
+      <div class="font-dark">팝업오픈!</div>
     </a>
-    <div class="popup_layer" id="popup_layer" style="display: none">
+    <div class="popup_layer" id="popup_layer">
       <div class="popup_box">
-        <div style="height: 10px; width: 375px; float: top">
-          <a href="javascript:closePop();"
-            ><img
-              src="/static/img/ic_close.svg"
-              class="m_header-banner-close"
-              width="30px"
-              height="30px"
-          /></a>
-        </div>
         <!--팝업 컨텐츠 영역-->
-        <div class="popup_cont">
-          <h5>POPUP TILTE</h5>
-          <p>
+        <div class="popup_content">
+          <strong class="font-dark large-font">로그인</strong>
+          <hr />
+          <p class="font-dark">
             !!!!!!!!!!!!!!!!!!!!<br />
             ~~~~~~~~~~~~~~~~~ @@@@@@@@@@@@@@@@@@@ %%%%%%%%%%%%%%%%
             ^^^^^^^^^^^^^^^^ &&&&&&&&&&&&&& *************
           </p>
         </div>
         <!--팝업 버튼 영역-->
-        <div class="popup_btn" style="float: bottom; margin-top: 200px">
-          <a href="javascript:closePop();">닫기</a>
+        <div class="popup_btn">
+          <a class="font-dark" href="javascript:closePop();">닫기</a>
         </div>
       </div>
     </div>
