@@ -1,6 +1,6 @@
 body {
   overflow-x: hidden;
-  background-color: var(--color-strong);
+  background-color: var(--color-light-brown);
   min-width: 1920px;
 }
 .slider-wrapper {

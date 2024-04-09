@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 :root {
-  --color-bean-brown: #302819;
-  --color-rose-white: #fbf1e7;
-  --color-deep-brown: #52442a;
-  --color-effect: rgb(171, 100, 39);
-  --color-strong: rgb(82, 68, 42);
-  --color-inactive: rgb(195, 184, 175);
+  --color-brown: #453f32;
+  --color-light-brown: #82765e;
+  --color-olive: #2a392c;
+  --color-green: #83c680;
+  --color-sky-blue: #a6d2fd;
+  --color-blue: #94c2f9;
+  --color-bright: #ffffff;
+  --color-dark: #000000;
+  --color-grey: #fefefe;
 }
 
 * {
@@ -14,13 +17,13 @@
   font-family: "Noto Sans KR", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
-  color: #fff;
+  color: var(--color-bright);
 }
 html {
   min-width: 1920px;
   min-height: 1080px;
   position: relative;
-  background-color: #daebff;
+  background-color: var(--color-sky-blue);
   z-index: -9999;
 }
 body {
@@ -34,19 +37,20 @@ li {
 a {
   text-decoration: none;
 }
-.btn {
+.bright-btn {
   cursor: pointer;
   width: 150px;
   height: 70px;
   border-radius: 5px;
   border: none;
-  background-color: #fff;
+  background-color: var(--color-bright);
 }
+
 .font-bright {
-  color: #ffffff;
+  color: var(--color-bright);
 }
 .font-dark {
-  color: #000 !important;
+  color: var(--color-dark) !important;
 }
 
 .xxlarge-font {
@@ -58,6 +62,12 @@ a {
 .large-font {
   font-size: 20px;
 }
+.medium-font {
+  font-size: 16px;
+}
+.small-font {
+  font-size: 14px;
+}
 
 .hover-underline {
   display: inline-block;
@@ -67,7 +77,7 @@ a {
   display: block;
   width: 0;
   height: 2px;
-  background-color: #fff;
+  background-color: var(--color-bright);
 }
 .hover-underline:hover::after {
   width: 100%;
