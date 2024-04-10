@@ -9,7 +9,7 @@ window.onload = function () {
   const prevBtns = document.querySelectorAll(".prev-btn");
   const openPopBtn = document.querySelector(".open-pop");
   const closePopBtn = document.querySelector(".close-pop");
-
+  const findAccountBtn = document.querySelector(".forgot-id-pwd");
   //   open or close
   openPopBtn.onclick = openPop;
   closePopBtn.onclick = () => {
@@ -24,6 +24,7 @@ window.onload = function () {
   //   shelter btn 구분
   generalBtn.onclick = hideShelterSlides;
   shelterBtn.onclick = showShelterSlides;
+  findAccountBtn.onclick = nextSlide;
   nextBtns.forEach((btn) => {
     btn.onclick = nextSlide;
   });
@@ -83,5 +84,11 @@ window.onload = function () {
   }
   function closePop() {
     document.getElementById("popup_layer").style.display = "none";
+    document.getElementById("popup_layer").transition = "display 1s";
+    document.querySelector("popup_box").style.opacity = "0";
+    document.querySelector("popup_box").transition = "opacity 1s";
   }
+
+  function showIdPwd() {}
+  function showLogin() {}
 };
