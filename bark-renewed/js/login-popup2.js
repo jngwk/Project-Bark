@@ -1,7 +1,9 @@
 window.onload = function () {
   let counter = 0;
   let slideWidth = 0;
-  const slides = document.querySelector(".form-slides");
+  const allSlides = document.querySelectorAll(".form-slides");
+  const contSlides = allSlides[0];
+  const subContSlides = allSlides[1];
   const imgBtn = document.querySelector(".img__btn");
   const generalBtn = document.querySelector(".general-btn");
   const shelterBtn = document.querySelector(".shelter-btn");
@@ -10,6 +12,7 @@ window.onload = function () {
   const openPopBtn = document.querySelector(".open-pop");
   const closePopBtn = document.querySelector(".close-pop");
   const findAccountBtn = document.querySelector(".forgot-id-pwd");
+  const loginPrevBtn = document.querySelector(".login-prev-btn");
   //   open or close
   openPopBtn.onclick = openPop;
   closePopBtn.onclick = () => {
@@ -24,26 +27,35 @@ window.onload = function () {
   //   shelter btn 구분
   generalBtn.onclick = hideShelterSlides;
   shelterBtn.onclick = showShelterSlides;
-  findAccountBtn.onclick = nextSlide;
+  findAccountBtn.addEventListener("click", () => {
+    nextSlide(contSlides);
+  });
+  loginPrevBtn.addEventListener("click", () => {
+    prevSlide(contSlides);
+  });
   nextBtns.forEach((btn) => {
-    btn.onclick = nextSlide;
+    btn.addEventListener("click", () => {
+      nextSlide(subContSlides);
+    });
   });
   prevBtns.forEach((btn) => {
-    btn.onclick = prevSlide;
+    btn.addEventListener("click", () => {
+      prevSlide(subContSlides);
+    });
   });
-  imgBtn.addEventListener("transitionend", () => {
-    imgBtn.con;
-  });
+  // imgBtn.addEventListener("transitionend", () => {
+  //   imgBtn.con;
+  // });
 
   function getWidth() {
     return document.querySelector(".form-slide").clientWidth;
   }
-  function nextSlide() {
+  function nextSlide(slides) {
     slideWidth = getWidth();
     counter++;
     slides.style.transform = "translateX(" + (0 - slideWidth) * counter + "px)";
   }
-  function prevSlide() {
+  function prevSlide(slides) {
     slideWidth = getWidth();
     counter--;
     slides.style.transform = "translateX(" + (0 - slideWidth) * counter + "px)";
@@ -51,7 +63,9 @@ window.onload = function () {
   function initSlide() {
     imgBtn.addEventListener("transitionend", () => {
       counter = 0;
-      slides.style.transform = "translateX(0)";
+      allSlides.forEach((slides) => {
+        slides.style.transform = "translateX(0)";
+      });
       document.querySelectorAll("input").forEach((input) => {
         input.value = "";
       });
@@ -59,7 +73,9 @@ window.onload = function () {
   }
   function initPop() {
     counter = 0;
-    slides.style.transform = "translateX(0)";
+    allSlides.forEach((slides) => {
+      slides.style.transform = "translateX(0)";
+    });
     document.querySelectorAll("input").forEach((input) => {
       input.value = "";
     });
@@ -70,25 +86,19 @@ window.onload = function () {
     shelterSlides.forEach((slide) => {
       slide.style.display = "none";
     });
-    nextSlide();
+    nextSlide(subContSlides);
   }
   function showShelterSlides() {
     const shelterSlides = document.querySelectorAll(".shelter-slide");
     shelterSlides.forEach((slide) => {
       slide.style.display = "block";
     });
-    nextSlide();
+    nextSlide(subContSlides);
   }
   function openPop() {
     document.getElementById("popup_layer").style.display = "block";
   }
   function closePop() {
     document.getElementById("popup_layer").style.display = "none";
-    document.getElementById("popup_layer").transition = "display 1s";
-    document.querySelector("popup_box").style.opacity = "0";
-    document.querySelector("popup_box").transition = "opacity 1s";
   }
-
-  function showIdPwd() {}
-  function showLogin() {}
 };

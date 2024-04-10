@@ -110,7 +110,7 @@ button {
   transition: transform 1.2s ease-in-out;
 }
 .cont.s--signup .sub-cont {
-  transform: translate3d(-6z40px, 0, 0);
+  transform: translate3d(-640px, 0, 0);
 }
 
 button {
@@ -284,7 +284,8 @@ input {
 .fb-btn,
 .to-login-btn,
 .shelter-btn,
-.prev-btn {
+.prev-btn,
+.login-prev-btn {
   border: 2px solid #ccc5b8;
   color: var(--color-brown);
 }
