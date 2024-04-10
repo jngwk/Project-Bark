@@ -110,7 +110,7 @@ button {
   transition: transform 1.2s ease-in-out;
 }
 .cont.s--signup .sub-cont {
-  transform: translate3d(-6z40px, 0, 0);
+  transform: translate3d(-640px, 0, 0);
 }
 
 button {
