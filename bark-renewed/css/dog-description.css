@@ -1,0 +1,58 @@
+.dog-desc-container {
+  position: relative;
+  max-width: 800px;
+  line-height: 28px;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+.arrow {
+  width: 40px;
+  position: absolute;
+  top: 0;
+  transform: translateX(-100%);
+}
+.summary {
+  display: flex;
+  gap: 5%;
+  justify-content: center;
+  align-items: center;
+}
+.summary img {
+  min-width: 300px;
+  max-width: 350px;
+  /* max-height: 400px; */
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px -2px #000;
+}
+.summary-cont {
+  display: inline-block;
+  /* border-left: 1px solid #000; */
+}
+.summary-cont table {
+  margin: 0 auto;
+  font-size: 16px;
+}
+.summary-cont td,
+.summary-cont th {
+  height: fit-content;
+  text-align: left;
+  line-height: 45px;
+  width: 150px;
+}
+.summary-cont th {
+  display: inline-block;
+  text-align: left;
+  padding-left: 60px;
+  /* width: max-content; */
+}
+.more {
+  margin: 80px 0;
+  padding: 0 40px;
+  line-height: 35px;
+}
+.buttons {
+  padding: 0 40px;
+}
+.from-btn {
+  height: 20px;
+}
