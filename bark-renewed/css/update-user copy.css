@@ -32,22 +32,18 @@
   line-height: 1.4rem;
   font-size: 16px;
 }
-/* x 버튼 */
-.popup_btn {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: -30px;
-  right: 0;
-  z-index: 9999;
+/* content 스크롤 */
+.popup_content::-webkit-scrollbar {
+  width: 10px;
 }
-.popup_btn a img {
-  width: 22px;
-  position: absolute;
+.popup_content::-webkit-scrollbar-thumb {
+  background-color: var(--color-light-brown);
+  border-radius: 5px;
+  background-clip: padding-box;
+  border: 1px solid transparent;
 }
-.popup_btn:hover,
-.forgot-id-pwd:hover {
-  cursor: pointer;
+.popup_content::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 /*title*/
@@ -70,6 +66,7 @@
   margin: 30px 0;
   font-size: 14px;
   font-weight: bold;
+  padding-top: 60px;
 }
 .popup_content .content {
   padding-top: 40px;
@@ -79,12 +76,12 @@
   justify-content: center;
 }
 .popup_content span {
-  width: 150px;
+  width: 130px;
   padding: 10px;
 }
 .popup_content label p {
   width: 48%;
-  padding: 5px;
+  padding: px;
 }
 input,
 button {
@@ -101,6 +98,9 @@ input {
   border-bottom: 1px solid var(--color-dark);
 }
 
+
+
+
 /*비밀번호변경*/
 .popup_content .pwd-btn {
   display: inline-block;
@@ -108,10 +108,15 @@ input {
   margin-left: 100px;
   font-size: 12px;
   width: 100px;
-  border: 1px solid var(--color-brown);
-  border-radius: 5px;
+  border-radius: 3px;
+  background: var(--color-light-brown);
+  color: #fff;
   padding: 0;
 }
+.popup_content:hover .pwd-btn:hover{
+  background: var(--color-brown);
+}
+
 .menu {
   overflow: hidden;
   height: 0px;
@@ -135,6 +140,9 @@ input {
 label button > img {
   width: 20px;
 }
+.reset-btn{
+  visibility: hidden
+}
 /* 하단버튼 */
 .completeBtn {
   display: flex;
@@ -155,5 +163,7 @@ label button > img {
   font-size: 15px;
   cursor: pointer;
   margin: 20px;
-  background: var(--color-brown);
+  background: var(--color-light-brown);;
 }
+
+.cancle-btn:hover,.save-btn:hover{background-color: var(--color-brown);}

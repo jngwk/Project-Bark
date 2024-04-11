@@ -17,7 +17,7 @@
 /* 검색 탭 */
 /* side창 꽉차게 만들기 */
 .shelter-tap {
-  padding:30px;
+  padding: 30px;
   background: var(--color-feldgrau);
   color: var(--color-bright);
 }
@@ -32,7 +32,7 @@
   text-align: center;
 }
 
-.tap li:active{
+.tap li:active {
   transform: translateY(15%);
   transition: 0.1s;
 }
@@ -41,27 +41,72 @@
 }
 
 /* 검색 창 */
-.shelter-search{
-    padding: 10px 0; display: flex; justify-content: center; background: var(--color-honeydew);
+.shelter-search {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  background: var(--color-honeydew);
 }
-.shelter-search input{
-    height: 40px; border: 0; background-color: transparent; padding: 0 10px;
+.shelter-search input {
+  height: 40px;
+  border: 0;
+  background-color: transparent;
+  padding: 0 10px;
 }
-.shelter-search select{
-    height: 40px; border: 0; background-color: transparent;
+.shelter-search select {
+  height: 40px;
+  border: 0;
+  background-color: transparent;
 }
 
 /* 검색 리스트 */
-.list-container{
-    overflow-y: scroll; height: 100%; background: var(--color-honeydew);
-    border-top: 2px solid var(--color-cambridgeolive) ;
+.list-container {
+  overflow-y: scroll;
+  height: 100%;
+  background: var(--color-honeydew);
+  border-top: 2px solid var(--color-cambridgeolive);
 }
-.shelter-list li{
-    padding: 20px;
-    background: var(--color-honeydew);
+.shelter-list li {
+  padding: 20px;
+  background: var(--color-honeydew);
 }
-.shelter-list li:hover{
-  background-color: var(--color-olive); color: var(--color-bright); 
+.shelter-list li:hover {
+  background-color: var(--color-feldgrau);
+  color: var(--color-bright);
+}
+
+/* 검색디테일 */
+.shelter-detail {
+  position: relative;
+  overflow: hidden;
+  transition: all 1s;
+  height: 0px;
+}
+.shelter-detail.liExpand {
+  height: 80px;
+  border-top: 1px solid var(--color-cambridgeolive);
+}
+.detail-box{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 390px;
+  padding: 10px 0;
+  
+}
+.shelter-detail a {
+  position: relative;
+  top: 0;
+  padding: 18px;
+  margin:0 2px;
+  border-radius: 5px;
+  background-color: var(--color-feldgrau);
+  color: var(--color-bright);
+}
+
+.shelter-detail a:hover{
+  background-color: var(--color-cambridgeolive);
 }
 
 /* 검색 스크롤 */
