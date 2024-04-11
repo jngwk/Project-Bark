@@ -86,6 +86,9 @@ a {
 .small-font {
   font-size: 14px;
 }
+.xsmall-font {
+  font-size: 12px;
+}
 
 .hover-underline {
   display: inline-block;
