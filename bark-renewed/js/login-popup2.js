@@ -14,7 +14,10 @@ window.onload = function () {
   const findAccountBtn = document.querySelector(".forgot-id-pwd");
   const loginPrevBtn = document.querySelector(".login-prev-btn");
   //   open or close
-  openPopBtn.onclick = openPop;
+  openPopBtn.addEventListener("click", () => {
+    // this.preventDefault();
+    openPop();
+  });
   closePopBtn.onclick = () => {
     closePop();
     initPop();

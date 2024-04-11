@@ -5,11 +5,28 @@
   margin: 0 auto;
   margin-top: 200px;
 }
-.arrow {
+.arrow-btn {
   width: 40px;
   position: absolute;
   top: 0;
   transform: translateX(-100%);
+}
+.arrow-btn:hover {
+  animation: side-bounce 0.45s forwards;
+}
+@keyframes side-bounce {
+  0% {
+    transform: translateX(-100%);
+  }
+  33% {
+    transform: translateX(-120%);
+  }
+  66% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-120%);
+  }
 }
 .summary {
   display: flex;
@@ -17,12 +34,17 @@
   justify-content: center;
   align-items: center;
 }
-.summary img {
+.summary .dog1-large {
   min-width: 300px;
   max-width: 350px;
   /* max-height: 400px; */
   border-radius: 5px;
   box-shadow: 0px 0px 10px -2px #000;
+}
+.summary .table-icon {
+  width: 24px;
+  float: right;
+  margin-right: 20px;
 }
 .summary-cont {
   display: inline-block;
@@ -37,12 +59,12 @@
   height: fit-content;
   text-align: left;
   line-height: 45px;
-  width: 150px;
+  width: 120px;
 }
 .summary-cont th {
   display: inline-block;
   text-align: left;
-  padding-left: 60px;
+  /* padding-left: 60px; */
   /* width: max-content; */
 }
 .more {
@@ -53,6 +75,21 @@
 .buttons {
   padding: 0 40px;
 }
-.from-btn {
-  height: 20px;
+.form-btn {
+  height: 50px;
+  width: 100px;
+}
+.adoption-form {
+  position: relative;
+  max-width: 800px;
+  line-height: 28px;
+  margin: 0 auto;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 1.5s;
+}
+.adoption-form.expand {
+  pointer-events: initial;
+  opacity: 1;
 }

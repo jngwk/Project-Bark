@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
 :root {
+  --main-font-color: #fefefe;
   --color-brown: #453f32;
   --color-light-brown: #82765e;
   --color-olive: #2a392c;
-  --color-cambridgeolive: #89A98F;
-  --color-feldgrau: #455E49;
-  --color-honeydew:#D0DDD2;
+  --color-cambridgeolive: #89a98f;
+  --color-feldgrau: #455e49;
+  --color-honeydew: #d0ddd2;
   --color-green: #83c680;
   --color-sky-blue: #a6d2fd;
   --color-blue: #94c2f9;
