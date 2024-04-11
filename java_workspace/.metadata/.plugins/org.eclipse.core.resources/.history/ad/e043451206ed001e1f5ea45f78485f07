@@ -1,7 +1,0 @@
-package dao;
-
-import utils.JDBConnect;
-
-public class UserDAO extends JDBConnect{
-
-}

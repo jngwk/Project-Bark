@@ -37,7 +37,7 @@
                       찾고 있습니다.
                     </p>
                   </div>
-                  <button class="call-to-action" onclick="location.href='${contextPath}/index.jsp?target=./include/userAdoptionFrm'">입양하기</button>
+                  <button class="call-to-action" onclick="location.href='${contextPath}/index.jsp?target=./include/adoptionList'">입양하기</button>
                 </div>
                 <!-- end of description container -->
               </div>

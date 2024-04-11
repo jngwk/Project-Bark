@@ -74,7 +74,7 @@
 
 			<div class="right">
 				<div class="map-box">
-					<img src="./images/map.jpg">
+					<jsp:include page="${application.contextPath }/api/map.jsp"></jsp:include>
 				</div>
 			</div>
 

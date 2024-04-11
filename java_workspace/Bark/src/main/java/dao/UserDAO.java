@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContext;
 
 import dto.UserDTO;
@@ -93,7 +96,62 @@ public class UserDAO extends JDBConnect{
 		// 데이터베이스 오류
 		return -1;
 	}
+	public List<UserDTO> getList(){
+		List<UserDTO> uList = new ArrayList<>();
+		String sql = "SELECT * FROM user";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				UserDTO user = new UserDTO();
+				user.setId(rs.getString("id"));
+				user.setPwd(rs.getString("pwd"));
+				user.setName(rs.getString("name"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setAddr(rs.getString("addr"));
+				user.setAddrDetail(rs.getString("addrDetail"));
+				user.setPostcode(rs.getString("postcode"));
+				user.setBank(rs.getString("bank"));
+				user.setBankAcc(rs.getString("bankAcc"));
+				user.setRegDate(rs.getDate("regDate"));
+				user.setType(rs.getInt("type"));
+				uList.add(user);
+			}
+			return uList;
+		}catch (Exception e) {
+			System.out.println("getList: " + e.getMessage());
+			return uList;
+		}
+	}
 	
-	
+	public List<UserDTO> getAdminList(){
+		List<UserDTO> uList = new ArrayList<>();
+		String sql = "SELECT * FROM user WHERE type=3";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				UserDTO user = new UserDTO();
+				user.setId(rs.getString("id"));
+				user.setPwd(rs.getString("pwd"));
+				user.setName(rs.getString("name"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setAddr(rs.getString("addr"));
+				user.setAddrDetail(rs.getString("addrDetail"));
+				user.setPostcode(rs.getString("postcode"));
+				user.setBank(rs.getString("bank"));
+				user.setBankAcc(rs.getString("bankAcc"));
+				user.setRegDate(rs.getDate("regDate"));
+				user.setType(rs.getInt("type"));
+				uList.add(user);
+			}
+			return uList;
+		}catch (Exception e) {
+			System.out.println("getList: " + e.getMessage());
+			return uList;
+		}
+	}
 	
 }
