@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bark</title>
-    <c:set var="contextPath" value="${pageContext.request.contextPath }"/>  
+    <c:set var="contextPath" value="${pageContext.request.contextPath }" scope="application"/>  
 	<script type="text/javascript" src="${contextPath }/js/common.js"></script>
     <link rel="stylesheet" href="${contextPath }/css/root.css" />
     <link rel="stylesheet" href="${contextPath }/css/headerFooter.css" />

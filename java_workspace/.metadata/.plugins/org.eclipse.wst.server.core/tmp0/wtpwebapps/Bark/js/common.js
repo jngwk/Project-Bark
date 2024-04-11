@@ -8,9 +8,3 @@ document.addEventListener("scroll", function(){
 			element.classList.remove("scrolled");
 	})
 });
-
-// 프로필 드롭 다운
-function menuToggle() {
-	const toggleMenu = document.querySelector(".profile-menu");
-	toggleMenu.classList.toggle("active");
-}

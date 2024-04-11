@@ -1,9 +1,0 @@
-document.addEventListener("scroll", function(){
-	let nav = document.querySelectorAll(".nav-scroll");
-	nav.forEach(function(){
-		if(window.scrollY != 0)
-			nav.classList.add("scrolled");
-		if(window.scrollY == 0)
-			nav.classList.remove("scrolled");
-	})
-});
