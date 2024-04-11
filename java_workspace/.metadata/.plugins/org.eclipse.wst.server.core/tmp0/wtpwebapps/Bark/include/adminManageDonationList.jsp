@@ -14,9 +14,9 @@
       <div class="row">
         <div class="menu">
           <div class="sub-menu">
-            <h><a href="#">회원조회</a></h>
-            <h><a href="#">회원정보변경</a></h>
-            <h>기부금관리</h>
+            <h><a href="#">내 정보</a></h>
+            <h>기부금 관리</h>
+            <h><a href="#">회원 관리</a></h>
           </div>
           <div class="main-menu">
             <h>기부금 관리</h>

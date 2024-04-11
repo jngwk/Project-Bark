@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,9 +26,13 @@
 	        	    <input type="search" class="notice-search">
                     <input type="submit" class="notice-search-submit" value="검색">
 	        </form>
-	        
-            <div class="writeButton"><a href="${pageContext.request.contextPath }/index.jsp?target=include/boardWrite"><img src="./images/icons/pencil-regular-24.png"/>글쓰기</a></div>
-            </div>
+	        <c:choose>
+	        	<c:when test="${userType == 3 }">
+		            <div class="writeButton"><a href="${pageContext.request.contextPath }/index.jsp?target=include/boardWrite"><img src="./images/icons/pencil-regular-24.png"/>글쓰기</a></div>
+		           </c:when>
+            </c:choose>
+		            </div>
+            	
             
             <div class="table">
             <table class="noticetable">
@@ -42,7 +47,7 @@
                 <tbody>
                     <tr>
                         <td>3</td>
-                        <td><a href="#"> 제목입니다</a></td>
+                        <td><a href="${contextPath }/index.jsp?target=include/boardView"> 제목입니다</a></td>
                         <td>wlgus8846</td>
                         <td>2024-03-24</td>
                     </tr>

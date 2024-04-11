@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value=""/>
+		<item key="selection" value="${contextPath }/images/dogs"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="./images"/>
 			<item value="pageContext."/>
 			<item value="sessionScope"/>
 			<item value="font-size"/>
@@ -22,9 +23,9 @@
 			<item value="hover"/>
 			<item value="dropdown-menu"/>
 			<item value="gori"/>
-			<item value="categori"/>
 		</list>
 		<list key="replacehistory">
+			<item value="${contextPath }/images/dogs"/>
 			<item value=""/>
 			<item value="pageContext"/>
 			<item value="gory"/>

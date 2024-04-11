@@ -55,11 +55,11 @@
               <div class="dropdown-content">
                 <a href="#"><strong>후원 안내</strong></a>
                 <a href="index.jsp?target=./include/findShelter"><strong>보호소 조회</strong></a>
-                <a href="#"><strong>보호소 이야기</strong></a>
+                <a href="index.jsp?target=./include/boardShelterList"><strong>보호소 이야기</strong></a>
               </div>
             </li>
             <li class="nav-item">
-              <a href="index.jsp?target=./include/userAdoptionFrm"><strong>입양</strong></a>
+              <a href="index.jsp?target=./include/adoptionList"><strong>입양</strong></a>
             </li>
             <li class="nav-item dropdown">
               <a href="#"><strong>게시판</strong></a>
@@ -72,7 +72,7 @@
             <li class="nav-item">
               <!-- 로그인 상태 확인 -->
 			  <c:choose>
-			  	<c:when test="${userId == null}">
+			  	<c:when test="${empty userId}">
 			  		<a href="index.jsp?target=./include/loginFrm"><strong>로그인</strong></a>
 			  	</c:when>
 			  	<c:otherwise>
@@ -95,13 +95,13 @@
 				  					<h3>${userName}<br><span>${userId}</span></h3>
 							        <ul>
 							          <li>
-							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">회원정보 수정</a>
+							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">내 정보 조회/수정</a>
 							          </li>
 							          <li>
 							            <img src="${contextPath }/images/icons/post.png" /><a href="index.jsp?target=./include/userMyPostList">작성글 관리</a>
 							          </li>
 							          <li>
-							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/userManageAppList">기부/입양/입소 관리</a>
+							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/userManageAppList">기부/입양 관리</a>
 							          </li>
 							          <li>
 							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logout.jsp">로그아웃</a>
@@ -112,13 +112,16 @@
 				  					<h3>${userName}<br><span>${userId}</span></h3>
 							        <ul>
 							          <li>
-							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">회원정보 수정</a>
+							            <img src="${contextPath }/images/icons/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">내 정보 조회/수정</a>
 							          </li>
 							          <li>
 							            <img src="${contextPath }/images/icons/post.png" /><a href="index.jsp?target=./include/adminManageDonationList">기부금 목록</a>
 							          </li>
 							          <li>
-							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/adminEditUserList">회원 관리</a>
+							            <img src="${contextPath }/images/icons/book-heart.png" /><a href="index.jsp?target=./include/adminUserList">회원 관리</a>
+							          </li>
+							          <li>
+							            <img src="${contextPath }/images/icons/admin.png" /><a href="index.jsp?target=./include/adminManageAdminList">관리자 계정 관리</a>
 							          </li>
 							          <li>
 							            <img src="${contextPath }/images/icons/logout.png" /><a href="${contextPath }/include/logout.jsp">로그아웃</a>

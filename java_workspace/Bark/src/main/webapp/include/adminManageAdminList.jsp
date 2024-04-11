@@ -1,3 +1,6 @@
+<%@page import="dto.UserDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,10 +26,10 @@
               <option value="1">아이디</option>
             </select>
             <input type="search" class="search-bar" />
-            <input type="submit" class="search btn" value="검색" />
+            <input type="submit" class="search-btn" value="검색" />
           </form>
 
-          <div class="create-account btn"><a href="#">계정 생성</a></div>
+          <div class="create-account-btn"><a href="#">계정 생성</a></div>
         </div>
 
         <div class="table">
@@ -40,24 +43,30 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="#">sample1234</a></td>
-                <td>홍길동</td>
-                <td>2024-03-24</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><a href="#">admin1234</a></td>
-                <td>관리자</td>
-                <td>2024-03-24</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><a href="#">conan1234</a></td>
-                <td>코난</td>
-                <td>2024-03-24</td>
-              </tr>
+            <%
+            	UserDAO dao = new UserDAO(application);
+            	List<UserDTO> uList = dao.getAdminList();
+            	pageContext.setAttribute("uList", uList);
+            	
+            %>
+            	<c:forEach items="${uList }" var="user">
+            	<c:set var="count" value="1"/>
+            		<tr>
+            		<td>
+            			${count }
+            			<c:set var="count" value="${count+1}"/>
+            		</td>
+            		<td>
+            			<a href="${contextPath }/index.jsp?target=include/adminEditUser&id=${user.id}">${user.id }</a>
+            		</td>
+            		<td>
+            			${user.name }
+            		</td>
+            		<td>
+            			${user.regDate }
+            		</td>
+            	</tr>
+            	</c:forEach>
             </tbody>
           </table>
         </div>
