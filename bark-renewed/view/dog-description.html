@@ -17,7 +17,9 @@
           $(".adoption-form").addClass("expand");
           $("html,body").animate(
             {
-              scrollTop: $(".adoption-form").offset().top,
+              scrollTop:
+                $(".adoption-form").offset().top -
+                $(".adoption-form").height() / 2,
             },
             "slow"
           );
@@ -47,11 +49,13 @@
           alt="arrow"
       /></a>
       <div class="summary">
-        <img
-          src="https://www.animal.go.kr/files/shelter/2024/03/202404051304148_s.jpg"
-          alt=""
-          class="dog1-large"
-        />
+        <div class="img-wrapper">
+          <img
+            src="https://www.animal.go.kr/files/shelter/2024/03/202404051304148_s.jpg"
+            alt=""
+            class="dog1-large"
+          />
+        </div>
         <div class="summary-cont">
           <table>
             <tr>
@@ -152,9 +156,9 @@
     <!-- end of dog-desc -->
     <div class="adoption-form">
       <form action="#" method="post">
-        <h2>입양 신청서</h2>
-        <span>*신청자 정보</span>
-        <div class="secondform">
+        <header class="header-font">입양 신청서</header>
+        <span>신청자 정보</span>
+        <div class="user-info">
           <table>
             <tbody>
               <tr>
@@ -165,12 +169,12 @@
               </tr>
               <tr>
                 <td>생년월일</td>
-                <td><input type="date" name="date" required /></td>
+                <td><input type="date" name="birthday" required /></td>
                 <td>연락처</td>
                 <td>
                   <input
                     type="tel"
-                    name="tel"
+                    name="phone"
                     required
                     pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                   />
@@ -178,7 +182,7 @@
               </tr>
               <tr>
                 <td>직업</td>
-                <td><input type="text" name="jop" /></td>
+                <td><input type="text" name="job" /></td>
                 <td>e-mail</td>
                 <td><input type="email" name="email" required /></td>
               </tr>
@@ -187,27 +191,27 @@
         </div>
         <div>
           <h
-            >*본인 신청 여부 : 본인<input
+            >본인 신청 여부 : 본인<input
               type="radio"
               name="check"
               value="1"
               checked />대리인<input type="radio" name="check" value="2"
           /></h>
         </div>
-        <div><h>*동거인 동의</h></div>
-        <div class="thirdform">
+        <div><h>동거인 동의</h></div>
+        <div class="consent">
           <table>
             <tbody>
               <tr>
                 <td>성명</td>
                 <td><input type="text" name="name" /></td>
                 <td>관계</td>
-                <td><input type="text" name="relationship" /></td>
+                <td><input type="text" name="rel" /></td>
                 <td>연락처</td>
                 <td>
                   <input
                     type="tel"
-                    name="tel"
+                    name="phone"
                     required
                     pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                   />
@@ -224,12 +228,12 @@
                 <td>성명</td>
                 <td><input type="text" name="name" /></td>
                 <td>관계</td>
-                <td><input type="text" name="relationship" /></td>
+                <td><input type="text" name="rel" /></td>
                 <td>연락처</td>
                 <td>
                   <input
                     type="tel"
-                    name="tel"
+                    name="phone"
                     required
                     pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                   />
@@ -246,12 +250,12 @@
                 <td>성명</td>
                 <td><input type="text" name="name" /></td>
                 <td>관계</td>
-                <td><input type="text" name="relationship" /></td>
+                <td><input type="text" name="rel" /></td>
                 <td>연락처</td>
                 <td>
                   <input
                     type="tel"
-                    name="tel"
+                    name="phone"
                     required
                     pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                   />
@@ -267,14 +271,22 @@
             </tbody>
           </table>
         </div>
-        <div class="adoption-text">
+        <div class="form-text">
           <p>*Bark의 입양 안내사항을 성실히 이행할 것을 서약하며,</p>
           <p>학대 •파양 등의 정황이 발견 될 시 불이익이 있을 수 있습니다.</p>
           <h3>Bark는 올바른 입양 문화를 지향합니다.</h3>
         </div>
-        <div class="adoption-button">
-          <input type="submit" value="신청" class="form-submit-btn" />
-          <input type="button" value="접기" class="fold-btn" />
+        <div class="form-button">
+          <input
+            type="submit"
+            value="신청"
+            class="form-submit-btn dark-btn font-bright"
+          />
+          <input
+            type="button"
+            value="접기"
+            class="fold-btn dark-btn font-bright"
+          />
         </div>
       </form>
     </div>

@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/root.css" />
     <link rel="stylesheet" href="../css/dog-list.css" />
+    <link rel="stylesheet" href="../css/pagination.css" />
+    <script src="../js/pagination.js"></script>
   </head>
   <body>
     <div class="grid__container">
@@ -177,6 +179,40 @@
           </div>
         </article>
       </div>
+    </div>
+    <!-- 페이지넘버 -->
+    <div class="story-page">
+      <div class="pagination">
+        <span class="pagination__number-indicator"></span>
+        <button class="pagination__arrow">
+          <span class="pagination__arrow-half"></span>
+          <span class="pagination__arrow-half"></span>
+        </button>
+        <button class="pagination__number">1</button>
+        <button class="pagination__number">2</button>
+        <button class="pagination__number">3</button>
+        <button class="pagination__number pagination__number--active">4</button>
+        <button class="pagination__number">5</button>
+        <button class="pagination__number">6</button>
+        <button class="pagination__number">7</button>
+        <button class="pagination__arrow pagination__arrow--right">
+          <span class="pagination__arrow-half"></span>
+          <span class="pagination__arrow-half"></span>
+        </button>
+      </div>
+      <!-- <div class="page-number">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+              </div>
+              <div class="page-btn">
+                <div class="prev-btn">
+                  <a href="#">이전</a>
+                </div>
+                <div class="next-btn">
+                  <a href="#">다음</a>
+                </div>
+              </div> -->
     </div>
   </body>
 </html>

@@ -30,14 +30,21 @@
 }
 .summary {
   display: flex;
-  gap: 5%;
+  gap: 1%;
   justify-content: center;
   align-items: center;
 }
-.summary .dog1-large {
-  min-width: 300px;
-  max-width: 350px;
-  /* max-height: 400px; */
+.img-wrapper {
+  position: relative;
+  width: 280px;
+  height: 330px;
+}
+.img-wrapper .dog1-large {
+  /* min-width: 300px;
+  max-width: 350px; */
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   border-radius: 5px;
   box-shadow: 0px 0px 10px -2px #000;
 }
@@ -84,10 +91,17 @@
   max-width: 800px;
   line-height: 28px;
   margin: 0 auto;
+  padding: 300px 0;
   overflow: hidden;
   pointer-events: none;
+  height: fit-content;
   opacity: 0;
   transition: all 1.5s;
+  text-align: center;
+}
+
+.adoption-form header {
+  margin-bottom: 10px;
 }
 .adoption-form.expand {
   pointer-events: initial;

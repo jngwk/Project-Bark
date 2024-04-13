@@ -3,10 +3,12 @@
   --main-font-color: #fefefe;
   --color-brown: #453f32;
   --color-light-brown: #82765e;
+  --color-white-smoke:#F6F5F3;
+
   --color-olive: #2a392c;
-  --color-cambridgeolive: #89a98f;
-  --color-feldgrau: #455e49;
-  --color-honeydew: #d0ddd2;
+  --color-cambridgeolive: #89A98F;
+  --color-feldgrau: #A0BAA3;
+  --color-honeydew:#E4F2E3;
   --color-green: #83c680;
   --color-sky-blue: #a6d2fd;
   --color-blue: #94c2f9;
@@ -85,6 +87,9 @@ a {
 }
 .small-font {
   font-size: 14px;
+}
+.xsmall-font {
+  font-size: 12px;
 }
 
 .hover-underline {

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/notice.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <!-- <script src="../js/popup.js"></script> -->
+    <script src="../js/pagination.js"></script>
+    <script src="../js/notice.js"></script>
+  </head>
+  <body>
+    <header style="display: block; background-color: black; height: 140px">
+      헤더
+    </header>
+
+        <section class="notice">
+          <div class="page-title">
+            <div class="container">
+              <h3>공지사항</h3>
+            </div>
+          </div>
+
+      <!-- board seach area -->
+      <div id="board-search">
+        <div class="container">
+          <div class="search-window">
+            <form action="#" method="post">
+              <div class="search-wrap">
+                <label for="search" class="blind">공지사항 내용 검색</label>
+                <select>
+                  <option>카테고리</option>
+                  <option>공지사항</option>
+                  <option>정보공유</option>
+                  <option>보호소이야기</option>
+                  <option>문의하기</option>
+                </select>
+                <input
+                  id="search"
+                  type="search"
+                  name=""
+                  placeholder="검색어를 입력해주세요."
+                  value=""
+                />
+                <button type="submit" class="btn btn-dark">검색</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- board list area -->
+      <div id="board-list">
+        <div class="container">
+          <table class="board-table">
+            <thead>
+              <tr>
+                <th scope="col" class="th-num">번호</th>
+                <th scope="col" class="th-title">제목</th>
+                <th scope="col" class="th-date">등록일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>3</td>
+                <th>
+                  <a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a>
+                  <p>테스트</p>
+                </th>
+                <td>2017.07.13</td>
+              </tr>
+
+              <tr>
+                <td>2</td>
+                <th>
+                  <a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a>
+                </th>
+                <td>2017.06.15</td>
+              </tr>
+
+              <tr>
+                <td>1</td>
+                <th>
+                  <a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a>
+                </th>
+                <td>2017.06.15</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 페이지넘버 -->
+    <div class="story-page">
+      <div class="pagination">
+        <span class="pagination__number-indicator"></span>
+        <button class="pagination__arrow">
+          <span class="pagination__arrow-half"></span>
+          <span class="pagination__arrow-half"></span>
+        </button>
+        <button class="pagination__number">1</button>
+        <button class="pagination__number">2</button>
+        <button class="pagination__number">3</button>
+        <button class="pagination__number pagination__number--active">4</button>
+        <button class="pagination__number">5</button>
+        <button class="pagination__number">6</button>
+        <button class="pagination__number">7</button>
+        <button class="pagination__arrow pagination__arrow--right">
+          <span class="pagination__arrow-half"></span>
+          <span class="pagination__arrow-half"></span>
+        </button>
+      </div>
+      <!-- <div class="page-number">
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+            </div>
+            <div class="page-btn">
+              <div class="prev-btn">
+                <a href="#">이전</a>
+              </div>
+              <div class="next-btn">
+                <a href="#">다음</a>
+              </div>
+            </div> -->
+    </div>
+  </body>
+</html>
