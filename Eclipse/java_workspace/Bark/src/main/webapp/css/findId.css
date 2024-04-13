@@ -1,0 +1,86 @@
+/* findID */
+#findId .nav-item strong {
+  color: var(--color-bean-brown) !important;
+}
+
+#findId h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 10%;
+}
+
+#findId .main-cover {
+  background: transparent;
+  opacity: 0.3;
+  border-left: 2px solid var(--color-bean-brown);
+  /* border-right: 2px solid var(--color-bean-brown); */
+}
+
+.findId-select{	/* 아이디찾기/비밀번호찾기 버튼 담을 div */
+	position: absolute;
+  	left: 50%;
+  	transform: translateX(-50%);
+  	top: 30%;
+	display: inline;
+	width: 500px;
+	height: 50px;
+}
+
+.findId-form {	/* 전체 콘텐츠를 담은 div */
+  position: absolute;
+  background-color: var(--color-bean-brown);
+  color: var(--color-rose-white);
+  opacity: 0.7;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 65%;
+  margin: 0 auto;
+  border: 1px solid var(--color-deep-brown);
+  /* box-shadow: 1px 1px 1px 0.4px; */
+}
+
+.findId-form form {	/* 이메일 항목을 담은 div */
+  position: relative;
+  top: 10%;
+  height: 100%;
+  width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.findId-form .btn {	/* 아이디 찾기 버튼 */
+  position: relative;
+  top: 15%;
+  width: 280px;
+  height: 55px;
+  margin: 0 auto;
+  font-size: 20px;
+  color: var(--color-bean-brown);
+  background-color: var(--color-rose-white);
+  box-shadow: none;
+  text-align: center;
+}
+
+.form-element {	/* 이메일 입력칸이 들어갈 div */
+  width: 100%;
+  height: 80px;
+}
+
+.form-element item{	/* 항목(ex.이메일) */
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.form-element input {	/* 항목 입력칸 */
+  width: 100%;
+  height: 40px;
+  line-height: 35px;
+  font-size: large;
+  padding: 0 10px;
+}
+

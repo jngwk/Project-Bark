@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+:root {
+  --color-bean-brown: #302819;
+  --color-rose-white: #fbf1e7;
+  --color-deep-brown: #52442a;
+  --color-effect: rgb(171, 100, 39);
+  --color-strong: rgb(82, 68, 42);
+  --color-inactive: rgb(195, 184, 175);
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+html:not(.main) {
+  position: relative;
+  background-image: url(../images/background-img.png);
+}
+html:not(.main) {
+  position: relative;
+  background-color: var(--color-rose-white);
+}
+body {
+  position: relative;
+  width: 1900px;
+  height: 100dvh;
+  margin: 0 auto;
+  z-index: 0;
+}
+
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: var(--color-bean-brown);
+}
+input, button, .btn{
+	border-radius: 5px;
+	box-shadow: none !important;
+	border: 1px solid var(--color-bean-brown);
+	color: var(--color-bean-brown);
+}
+input{
+	font-size: 18px;
+	padding: 0 10px;
+}
+input[readonly]{
+	background-color: rgb(224, 224, 224);
+}
+input:not([readonly]):focus{
+	border: 2px solid var(--color-effect) !important;
+}
+
+.content-container{
+	position: absolute; 
+	width: 1600px;
+	min-height: 800px;
+	/* height: calc(100dvh - 160px); 
+	height: 880px;
+	height: fit-content;*/
+	right: 40px;
+	top: 160px; 
+	z-index: -1;
+	padding-top: 80px;
+	/*display: flex;
+	justify-content: center;*/
+	
+	
+}
+.padding-bottom{
+	padding-bottom: calc(100dvh - 1040px);
+}
+.container{
+	position: relative;
+	margin: 0 auto;
+	width: fit-content;
+}
+.content-blur{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	height: calc(100dvh - 1040px);
+	bottom: 0;
+	background: var(--color-rose-white);
+	opacity: 0.8;
+	z-index: 9999;
+	
+}
+.btn {
+  position: relative;
+  box-sizing: border-box;
+  white-space: pre;
+  padding-block: 1px;
+  padding-inline: 6px;
+}
+button:not(.call-to-action), .btn{
+	color: var(--color-bean-brown) !important;
+  background-color: var(--color-inactive) !important;
+}
+button:hover, select:hover{
+	cursor: pointer !important;
+}
+button:not(.call-to-action):hover, .btn:hover, .btn.checked{
+	cursor: pointer !important;
+	background-color: var(--color-strong) !important;
+	color: var(--color-rose-white) !important;
+	transition: 0.3s;
+}
+strong {
+  font-size: 1.5rem;
+  /* line-height: 30px; */
+}
+h1 {
+  text-align: center;
+  padding-bottom: 30px;
+  font-size: 30px;
+}
+
+

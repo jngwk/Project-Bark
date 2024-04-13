@@ -1,0 +1,119 @@
+.container{
+    width: 1200px;
+    color: var(--color-deep-brown);
+    font-size: 14px;
+}
+
+/* left */
+.left{
+    width: 30%;
+    float: left;
+    margin: 0 20px;
+}
+
+/* first-info */
+.first-info {
+    background-color: var(--color-rose-white);
+    border: 1px solid var(--color-deep-brown);
+    border-radius: 5px;
+    height: 100px;
+    box-shadow: 0px 0px 7px -2px var(--color-deep-brown);
+}
+
+.first-info table{
+    padding: 0 25px 0 25px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+    border-radius: 5px;
+}
+
+.first-info td:nth-child(1){
+    float: left;
+}
+.first-info td:nth-child(2){
+    float: right;
+}
+
+.status1{
+    width: 100px; height: 20px; 
+    text-align: center; font-weight: bold;
+	background: rgb(25, 183, 130); color: white; 
+    border-radius: 15px;
+    padding-bottom: 5px;
+}
+
+.status2{
+    width: 80px; height: 20px; 
+    text-align: center; font-weight: bold; font-size: 14px;
+	background: rgb(39, 147, 255); color: white; 
+    border-radius: 5px;
+    padding-bottom: 1px;
+}
+
+
+/* second-info */
+.second-info{
+    margin-top: 20px;
+    background-color: var(--color-rose-white);
+    border: 1px solid var(--color-deep-brown);
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px -2px var(--color-deep-brown);
+}
+
+.second-info table{
+    width: 100%;
+    padding: 15px;
+}
+
+.dog-image img{
+    width: 70%;
+}
+
+.status3{
+    width: 120px; height: 20px; 
+    text-align: center; font-weight: bold;
+	background: var(--color-deep-brown); color: var(--color-rose-white); 
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px -2px var(--color-deep-brown);
+    padding-bottom: 2px;
+    transform: translateX(200px);
+}
+
+
+/* third-info */
+.shelter-info{
+    margin-top: 30px;
+    height: 100px;
+    background-color: var(--color-rose-white);
+    border: 1px solid var(--color-deep-brown);
+    box-shadow: 0px 0px 7px -2px var(--color-deep-brown);
+    border-radius: 5px;
+}
+
+.shelter-info table{
+    padding: 25px 0 0 20px;
+}
+
+.shelter-info tr:nth-child(1){
+    font-weight: bolder;
+}
+
+
+
+
+/* right */
+.right{
+    width: 60%;
+    float: right;
+    height: 752px;
+    margin: 0 20px;
+    border: 1px solid var(--color-deep-brown);
+    border-radius: 5px;
+}
+
+
+.right img{
+    width: 100%;
+    height: 100%;
+}

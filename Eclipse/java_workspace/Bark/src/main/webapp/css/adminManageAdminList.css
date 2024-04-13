@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+/*초기화 */
+.table {
+  min-height: 600px;
+}
+
+/* 제목 */
+.row > h {
+  color: #52442a;
+  font-weight: bold;
+  font-size: 30px;
+}
+.table-top {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 5px 0;
+  margin-top: 50px;
+}
+
+/*검색*/
+.table-search-form > select {
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgb(195, 184, 175);
+  text-align: center;
+  height: 27px;
+}
+.search-bar {
+  border-radius: 5px;
+  border: thin solid rgb(195, 184, 175);
+  height: 27px;
+}
+.table-search-form {
+  display: flex;
+}
+
+.search-btn {
+  border-radius: 5px;
+  border: thin solid rgb(195, 184, 175);
+  background-color: white;
+  width: 50px;
+  height: 27px;
+  font-size: 15px;
+}
+.search-btn:hover {
+  background-color: rgb(195, 184, 175);
+  color: #fcf1e7;
+  border: thin solid rgb(195, 184, 175);
+  cursor: pointer;
+}
+
+
+
+.create-account-btn {
+  border: none;
+}
+.create-account-btn > a {
+  padding: 3px;
+  font-size: 14px;
+  border-radius: 5px;
+  font-size: 15px;
+}
+.create-account-btn > a:hover {
+  background-color: rgb(195, 184, 175);
+  color: #fcf1e7;
+  border: thin solid rgb(195, 184, 175);
+}
+
+.create-account-btn > a {
+  padding: 3px 6px;
+  font-size: 14px;
+  background-color: white;
+  border-radius: 5px;
+  border: thin solid rgb(195, 184, 175);
+  font-size: 15px;
+}
+.create-account-btn > a:hover {
+  background-color: rgb(195, 184, 175);
+  color: #fcf1e7;
+  border: thin solid rgb(195, 184, 175);
+}
+.create-account-btn > a > img {
+  padding-bottom: 1px;
+  padding-right: 6px;
+  width: 21px;
+  vertical-align: middle;
+}
+
+/* 테이블 */
+
+.admin-table {
+  border-spacing: 0;
+}
+.admin-table > thead > tr > th {
+  background-color: rgb(195, 184, 175);
+  color: #52442a;
+  text-align: center;
+  padding: 7px;
+  border-bottom: 1px solid #52442a;
+  font-weight: bold;
+}
+.admin-table > thead > tr > th:nth-child(2) {
+  width: 333px;
+}
+.admin-table > thead > tr > th:nth-child(3) {
+  width: 333px;
+}
+.admin-table > thead > tr > th:nth-child(4) {
+  width: 333px;
+}
+.admin-table > tbody > tr > td {
+  background: #fcf1e7;
+  color: #52442a;
+  text-align: center;
+  border-bottom: 1px solid rgb(195, 184, 175);
+  padding: 5px;
+}
+/* 페이지 */
+.page-number {
+  display: flex;
+  justify-content: center;
+}
+.page-number > a {
+  padding: 10px;
+}
+
+/* #fcf1e7 #52442a */
