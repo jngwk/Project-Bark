@@ -1,9 +1,8 @@
-window.onload = function () {
   let counter = 0;
   let slideWidth = 0;
-  const allSlides = document.querySelectorAll(".form-slides");
-  const contSlides = allSlides[0];
-  const subContSlides = allSlides[1];
+  const allPopupSlides = document.querySelectorAll(".form-slides");
+  const contSlides = allPopupSlides[0];
+  const subContSlides = allPopupSlides[1];
   const imgBtn = document.querySelector(".img__btn");
   const generalBtn = document.querySelector(".general-btn");
   const shelterBtn = document.querySelector(".shelter-btn");
@@ -14,10 +13,13 @@ window.onload = function () {
   const findAccountBtn = document.querySelector(".forgot-id-pwd");
   const loginPrevBtn = document.querySelector(".login-prev-btn");
   //   open or close
-  openPopBtn.addEventListener("click", (event) => {
+  if(openPopBtn != null){
+	openPopBtn.addEventListener("click", (event) => {
     event.preventDefault();
     openPop();
   });
+  }
+  
   closePopBtn.onclick = () => {
     closePop();
     initPop();
@@ -31,14 +33,14 @@ window.onload = function () {
   generalBtn.onclick = hideShelterSlides;
   shelterBtn.onclick = showShelterSlides;
   findAccountBtn.addEventListener("click", () => {
-    nextSlide(contSlides);
+    nextPopupSlide(contSlides);
   });
   loginPrevBtn.addEventListener("click", () => {
     prevSlide(contSlides);
   });
   nextBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-      nextSlide(subContSlides);
+      nextPopupSlide(subContSlides);
     });
   });
   prevBtns.forEach((btn) => {
@@ -53,7 +55,7 @@ window.onload = function () {
   function getWidth() {
     return document.querySelector(".form-slide").clientWidth;
   }
-  function nextSlide(slides) {
+  function nextPopupSlide(slides) {
     slideWidth = getWidth();
     counter++;
     slides.style.transform = "translateX(" + (0 - slideWidth) * counter + "px)";
@@ -66,7 +68,7 @@ window.onload = function () {
   function initSlide() {
     imgBtn.addEventListener("transitionend", () => {
       counter = 0;
-      allSlides.forEach((slides) => {
+      allPopupSlides.forEach((slides) => {
         slides.style.transform = "translateX(0)";
       });
       document.querySelectorAll("input").forEach((input) => {
@@ -76,7 +78,7 @@ window.onload = function () {
   }
   function initPop() {
     counter = 0;
-    allSlides.forEach((slides) => {
+    allPopupSlides.forEach((slides) => {
       slides.style.transform = "translateX(0)";
     });
     document.querySelectorAll("input").forEach((input) => {
@@ -89,14 +91,14 @@ window.onload = function () {
     shelterSlides.forEach((slide) => {
       slide.style.display = "none";
     });
-    nextSlide(subContSlides);
+    nextPopupSlide(subContSlides);
   }
   function showShelterSlides() {
     const shelterSlides = document.querySelectorAll(".shelter-slide");
     shelterSlides.forEach((slide) => {
       slide.style.display = "block";
     });
-    nextSlide(subContSlides);
+    nextPopupSlide(subContSlides);
   }
   function openPop() {
     document.getElementById("popup_layer").style.display = "block";
@@ -104,4 +106,3 @@ window.onload = function () {
   function closePop() {
     document.getElementById("popup_layer").style.display = "none";
   }
-};

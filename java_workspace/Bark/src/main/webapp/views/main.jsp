@@ -9,7 +9,7 @@
     <title>Document</title>
     <c:set var="contextPath" value="${pageContext.request.contextPath }" scope="application"/>
     <c:set var="css" value="${contextPath }/resources/css" scope="application"/>
-    <c:set var="view" value="${application.contextPath }/view" scope="application"/>
+    <c:set var="views" value="${application.contextPath }/views" scope="application"/>
     <c:set var="images" value="${contextPath }/resources/images" scope="application"/>
     <c:set var="icons" value="${images }/icons" scope="application"/>
     <c:set var="js" value="${contextPath }/resources/js" scope="application"/>
@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="${css }/main.css" />
     <link rel="stylesheet" href="${css }/transition.css" />
     <!-- <script src="../js/main-vertical-slider.js"></script> -->
-    <script type="text/javascript" src="${js }/main.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -27,7 +26,7 @@
   </head>
   <body>
     <!-- header -->
-    <jsp:include page="${view }/header.jsp" flush="false"></jsp:include>
+    <jsp:include page="${views }/header.jsp" flush="false"></jsp:include>
     <!-- main -->
     <div class="slider-wrapper">
       <div class="slider">
@@ -50,7 +49,9 @@
                 </p>
               </div>
               <div class="call-to-action">
+              <a href="${contextPath }/views/adoption/list.jsp">
                 <button class="bright-btn font-dark large-font">입양하기</button>
+                </a>
                 <div class="paw-icon">
                   <img src="${icons }/grey-paw.png" alt="pawprint" />
                 </div>
@@ -78,7 +79,9 @@
                 </p>
               </div>
               <div class="call-to-action">
+              <a href="${contextPath }/views/adoption/list.jsp">
                 <button class="bright-btn font-dark large-font">입양하기</button>
+                </a>
                 <div class="paw-icon">
                   <img src="${icons }/grey-paw.png" alt="pawprint" />
                 </div>
@@ -106,7 +109,9 @@
                 </p>
               </div>
               <div class="call-to-action">
+              <a href="#">
                 <button class="bright-btn font-dark large-font">후원하기</button>
+                </a>
                 <div class="paw-icon">
                   <img src="${icons }/pawprint.png" alt="pawprint" />
                 </div>
@@ -126,6 +131,7 @@
     </div>
 
     <!-- footer -->
-    <jsp:include page="${view }/footer.jsp" flush="false"></jsp:include>
+    <jsp:include page="${views }/footer.jsp" flush="false"></jsp:include>
+    <script type="text/javascript" src="${js }/main.js"></script>
   </body>
 </html>

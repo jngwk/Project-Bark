@@ -14,12 +14,22 @@
      <!-- header -->
     <div class="header-container">
       <div class="header-inner">
+      <c:choose>
+			<c:when test="${fn:contains(pageContext.request.requestURI, 'main.jsp')}">
+				<c:set var="logo" value="${images }/logo-white.png"/>
+  			</c:when>
+  			<c:otherwise>
+	  			<c:set var="logo" value="${images }/logo-brown.png"/>
+  			</c:otherwise>
+	  </c:choose>
+      <a href="${contextPath }/views/main.jsp">
         <img
           class="logo"
-          src="${images }/logo-white.png"
+          src="${logo}"
           alt="logo"
           width="200px"
         />
+        </a>
         <div class="navigation-menu">
           <ul>
             <li>
@@ -104,7 +114,7 @@
 				  			로그인
 				  		</strong>
 				  	</a>
-				  	<jsp:include page="${view }/account/loginPopup.jsp" flush="false"></jsp:include>
+				  	<jsp:include page="${views }/account/loginPopup.jsp" flush="false"></jsp:include>
 			  	</c:when>
 			  	<c:otherwise>
 			  		<div class="profile-area">
@@ -126,16 +136,16 @@
 				  					<h3>${userName}<br><span>${userId}</span></h3>
 							        <ul>
 							          <li>
-							            <img src="${icons }/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">내 정보 조회/수정</a>
+							            <img src="${icons }/user-detail.png" /><a href="../index.jsp?target=./include/userEditProfileFrm">내 정보 조회/수정</a>
 							          </li>
 							          <li>
-							            <img src="${icons }/post.png" /><a href="index.jsp?target=./include/userMyPostList">작성글 관리</a>
+							            <img src="${icons }/post.png" /><a href="../index.jsp?target=./include/userMyPostList">작성글 관리</a>
 							          </li>
 							          <li>
-							            <img src="${icons }/book-heart.png" /><a href="index.jsp?target=./include/userManageAppList">기부/입양 관리</a>
+							            <img src="${icons }/book-heart.png" /><a href="../index.jsp?target=./include/userManageAppList">기부/입양 관리</a>
 							          </li>
 							          <li>
-							            <img src="${icons }/logout.png" /><a href="${contextPath }/include/logout.jsp">로그아웃</a>
+							            <img src="${icons }/logout.png" /><a href="../include/logout.jsp">로그아웃</a>
 							          </li>
 							        </ul>
 				  				</c:when>
@@ -143,16 +153,16 @@
 				  					<h3>${userName}<br><span>${userId}</span></h3>
 							        <ul>
 							          <li>
-							            <img src="${icons }/user-detail.png" /><a href="index.jsp?target=./include/userEditProfileFrm">내 정보 조회/수정</a>
+							            <img src="${icons }/user-detail.png" /><a href="../index.jsp?target=./include/userEditProfileFrm">내 정보 조회/수정</a>
 							          </li>
 							          <li>
-							            <img src="${icons }/post.png" /><a href="index.jsp?target=./include/adminManageDonationList">기부금 목록</a>
+							            <img src="${icons }/post.png" /><a href="../index.jsp?target=./include/adminManageDonationList">기부금 목록</a>
 							          </li>
 							          <li>
-							            <img src="${icons }/book-heart.png" /><a href="index.jsp?target=./include/adminUserList">회원 관리</a>
+							            <img src="${icons }/book-heart.png" /><a href="../index.jsp?target=./include/adminUserList">회원 관리</a>
 							          </li>
 							          <li>
-							            <img src="${icons }/admin.png" /><a href="index.jsp?target=./include/adminManageAdminList">관리자 계정 관리</a>
+							            <img src="${icons }/admin.png" /><a href="../index.jsp?target=./include/adminManageAdminList">관리자 계정 관리</a>
 							          </li>
 							          <li>
 							            <img src="${icons }/logout.png" /><a href="${contextPath }/include/logout.jsp">로그아웃</a>

@@ -8,3 +8,10 @@ document.addEventListener("scroll", function(){
 			element.classList.remove("scrolled");
 	})
 });
+
+/* 회원 메뉴*/
+ // 프로필 드롭 다운
+	function menuToggle() {
+		const toggleMenu = document.querySelector(".profile-menu");
+		toggleMenu.classList.toggle("active");
+	}

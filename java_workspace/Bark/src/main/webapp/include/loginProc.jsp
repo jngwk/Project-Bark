@@ -24,7 +24,7 @@ pageContext.setAttribute("dao", dao);
 		<c:set var="userName" value="${user.name }" scope="session"/>
 		<script>
 			alert('환영합니다.');
-			location.href = "../main.jsp";
+			location.href = "../views/main.jsp";
 		</script>
 	</c:when>
 	<c:when test="${result == 0 || result == -1}">
@@ -36,7 +36,7 @@ pageContext.setAttribute("dao", dao);
 	<c:otherwise>
 		<script>
 			alert('데이터베이스에 접근하는데 오류가 발생했습니다. 관리자에게 문의해주세요.');
-			location.href = "../main.jsp";
+			location.href = "../views/main.jsp";
 		</script>
 	</c:otherwise>
 </c:choose>

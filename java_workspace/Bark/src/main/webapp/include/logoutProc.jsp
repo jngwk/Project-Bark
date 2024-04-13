@@ -15,7 +15,7 @@
 	session.removeAttribute("userName");
 	session.removeAttribute("userType");
 	%>
-	location.href = "../main.jsp";
+	location.href = "../views/main.jsp";
 </script>
 </body>
 </html>
