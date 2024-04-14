@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   gap: 20px;
-  width: 1920px;
   height: 960px;
   padding-top: 30px;
   background: var(--color-white-smoke);

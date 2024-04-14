@@ -113,7 +113,7 @@ body {
 .call-to-action {
   margin-top: 50px;
 }
-.call-to-action .bright-btn:hover {
+.call-to-action .btn:hover {
   scale: 1.1;
   transition: 0.5s;
 }
@@ -127,7 +127,7 @@ body {
   z-index: 99999;
   transform: translate(-30%, -60%);
 }
-.call-to-action .bright-btn:hover ~ .paw-icon {
+.call-to-action .btn:hover ~ .paw-icon {
   opacity: 0.8;
   transition: 0.5s;
 }

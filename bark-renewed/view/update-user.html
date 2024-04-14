@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/update-user.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <script src="../js/update-user.js"></script>
+  </head>
+  <body>
+    <a href="javascript:openPop()">
+      <div class="font-dark">팝업오픈!</div>
+    </a>
+    <div class="popup_layer" id="popup_layer">
+      <div class="popup_box">
+        <div class="popup_btn">
+          <a href="javascript:closePop();"
+            ><img src="../images/icons/x-regular-36.png" alt="x"
+          /></a>
+        </div>
+        <!--팝업 컨텐츠 영역-->
+        <div class="popup_content">
+          <div class="title">
+            <p class="font-dark large-font">개인정보 수정</p><hr />
+          </div>
+
+          <div class="content">
+            <div class="profile">
+            <label>
+              <span>이름</span>
+              <p>김지현</p>
+            </label>
+            <label>
+              <span>아이디</span>
+              <p>wlgus8846</p></label>
+              <span class="pwdBtn">비밀번호 변경</span>
+            
+            <div class="menu">
+              <ul class="sub">
+                <li>
+                  <label class="pwd-menu">
+                    <span>현재 비밀번호</span>
+                    <input type="password" />
+                  </label>
+                </li>
+                <li>
+                  <label class="pwd-menu">
+                    <span>변경 비밀번호</span>
+                    <input type="password" />
+                  </label>
+                </li>
+                <li>
+                  <label class="pwd-menu">
+                    <span>비밀번호 확인</span>
+                    <input type="password" />
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <label>
+              <span>이메일</span>
+              <input type="email" />
+            </label>
+            <label>
+              <span>전화번호</span>
+              <input type="text" oninput="hypenTel(this)" maxlength="13" />
+            </label>
+        </div>
+        <div class="bank">
+            <label>
+                <span>예금주</span>
+                <input type="text" />
+              </label>
+              <label>
+                <span>은행명</span>
+                <input type="text" />
+              </label>
+              <label>
+                <span>계좌번호</span>
+                <input type="text" />
+              </label>
+              
+            </div>
+            <div class="addr">
+                <label>
+                <span>우편번호</span>
+                <input type="text" />
+              </label>
+              <label>
+                <span>주소</span>
+                <input type="text" />
+              </label>
+              <label>
+                <span>세부 주소</span>
+                <input type="text" />
+              </label>
+            </div>
+              <label>
+              <div style="height: 80px;"> </div>
+            </div>
+            <div class="completeBtn">
+            <button type="button" class="cancle-btn">다음</button>
+            <button type="button" class="save-btn">이전</button>
+          </div>
+        </div>
+        <!--팝업 버튼 영역-->
+        <!-- <div class="popup_btn">
+          <a class="font-dark" href="javascript:closePop();">닫기</a>
+        </div> -->
+      </div>
+    </div>
+  </body>
+</html>
