@@ -2,7 +2,6 @@ package com.bark.service;
 
 import java.util.Random;
 
-
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -15,10 +14,13 @@ import org.springframework.stereotype.Service;
 import com.bark.domain.User;
 import com.bark.mapper.UserMapper;
 
+import lombok.Setter;
+
 @Service
 @Component
 public class MailService {
 	@Autowired
+	private UserMapper mapper;
 	private JavaMailSenderImpl mailSender;
 	private int authNumber; //난수코드
 	
@@ -45,6 +47,8 @@ public class MailService {
 				"<br>" +"아이디: "+user.getId()+
 				"<br>" +"----------------------"+
 				"<br><br>" + "인증 번호는 " + authNumber + "입니다." + "<br>" + "해당 인증번호를 입력해 주세요."; 
+		mailSend(setFrom, toMail, title, content);
+        return Integer.toString(authNumber);
 	}
 	
 	//이메일 전송 메소드

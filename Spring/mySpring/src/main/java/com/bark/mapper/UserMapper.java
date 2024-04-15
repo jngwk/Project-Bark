@@ -2,6 +2,8 @@ package com.bark.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.bark.domain.User;
 
 public interface UserMapper {
@@ -12,4 +14,6 @@ public interface UserMapper {
 	public int insert(User user);
 	public int update(User user);
 	public int delete(User user);
+	@Select("select User from user where email = #{email}")
+    public User findUser(String email);
 }
