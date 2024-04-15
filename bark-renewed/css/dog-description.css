@@ -85,8 +85,31 @@
 }
 .adoption-form {
   height: 0;
-  width: 80%;
+  width: 100%;
   transition: height 2s;
+}
+.adoption-form form {
+  position: relative;
+  width: 35%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+}
+
+.adoption-form .criteria {
+  height: 50px;
+  padding-top: 50px;
+}
+.adoption-form th {
+  width: 10%;
+  text-align: left;
+}
+.adoption-form td {
+  width: 12%;
+  text-align: left;
+  padding-left: 10px;
 }
 .adoption-form.show {
   height: fit-content;

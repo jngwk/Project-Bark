@@ -81,22 +81,29 @@
       </div>
     </div>
     <!-- end of dog-desc -->
-    <div class="adoption-form">
+    <div class="adoption-form show">
       <form action="#" method="post">
+        <input type="hidden" name="dogno" value="1" />
+        <input type="hidden" name="shelterId" value="1" />
+        <input type="hidden" name="userId" value="gildong" />
+        <input type="hidden" name="dogno" value="1" />
         <table>
           <tr>
             <th>강아지 이름</th>
-            <td><input type="text" name="" value="영철이" readonly /></td>
+            <td>영철이</td>
             <th>보호소명</th>
             <td>안산보호소</td>
           </tr>
-        </table>
-        <span>신청자 정보</span>
-        <table>
+          <tr>
+            <th class="criteria" colspan="4">
+              <span>신청자 정보</span>
+            </th>
+          </tr>
           <tr>
             <th>성명</th>
             <td>홍길동</td>
             <th>주소</th>
+            <!-- 주소가 있으면 출력하고 없으면 빈칸 -->
             <td>경기도 안산시 단원구 고잔동 81, 101동 302호</td>
           </tr>
           <tr>
@@ -110,6 +117,11 @@
             <td>학생</td>
             <th>이메일</th>
             <td>gildong@bark.com</td>
+          </tr>
+          <tr>
+            <td class="consent" colspan="4">
+              <input type="checkbox" />Bark 입양 약관에 동의합니다.
+            </td>
           </tr>
         </table>
       </form>
