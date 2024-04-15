@@ -10,18 +10,17 @@
     <script src="../js/notice.js"></script>
   </head>
   <body>
-    <header style="display: block; background-color: black; height: 140px">
+    <header style="display: block; background-color: var(--color-brown); height: 140px">
       헤더
     </header>
 
         <section class="notice">
-          <div class="page-title">
-            <div class="container">
-              <h3>공지사항</h3>
-            </div>
-          </div>
+          <p class="page-title">Notice</p>
 
           <!-- board seach area -->
+          <div class="notice-button">
+            <a href="#">글쓰기</a>
+          </div>
           <div id="board-search">
             <div class="container">
               <div class="search-window">
@@ -30,10 +29,9 @@
                     <label for="search" class="blind">공지사항 내용 검색</label>
                     <select>
                       <option>카테고리</option>
-                      <option>공지사항</option>
-                      <option>정보공유</option>
-                      <option>보호소이야기</option>
-                      <option>문의하기</option>
+                      <option>내용</option>
+                      <option>제목</option>
+                      <option>작성자</option>
                     </select>
                     <input
                       id="search"
@@ -57,7 +55,8 @@
                   <tr>
                     <th scope="col" class="th-num">번호</th>
                     <th scope="col" class="th-title">제목</th>
-                    <th scope="col" class="th-date">등록일</th>
+                    <th scope="col" class="th-exe">등록일</th>
+                    <th scope="col" class="th-exe">조회수</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -67,9 +66,9 @@
                       <a href="#!"
                         >[공지사항] 개인정보 처리방침 변경안내처리방침</a
                       >
-                      <p>테스트</p>
                     </th>
                     <td>2017.07.13</td>
+                    <td>84</td>
                   </tr>
 
                   <tr>
@@ -80,6 +79,7 @@
                       >
                     </th>
                     <td>2017.06.15</td>
+                    <td>84</td>
                   </tr>
 
                   <tr>
@@ -90,6 +90,7 @@
                       >
                     </th>
                     <td>2017.06.15</td>
+                    <td>84</td>
                   </tr>
                 </tbody>
               </table>

@@ -5,7 +5,7 @@
 
 /* 보호소이야기 */
 .shelter-title {
-  margin: 50px 100px;
+  margin: 50px 300px;
 }
 
 /* 버튼 */
@@ -30,10 +30,6 @@
 
 
 /* 리스트 */
-.story {
-  margin: 10px;
-}
-
 /* 그리드 */
 ul{
     display: flex;

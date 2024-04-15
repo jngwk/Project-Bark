@@ -2,12 +2,12 @@
 :root {
   --color-brown: #453f32;
   --color-light-brown: #82765e;
-  --color-white-smoke:#F6F5F3;
+  --color-white-smoke: #f6f5f3;
 
   --color-olive: #2a392c;
-  --color-cambridgeolive: #89A98F;
-  --color-feldgrau: #A0BAA3;
-  --color-honeydew:#E4F2E3;
+  --color-cambridgeolive: #89a98f;
+  --color-feldgrau: #a0baa3;
+  --color-honeydew: #e4f2e3;
   --color-green: #83c680;
   --color-sky-blue: #a6d2fd;
   --color-blue: #94c2f9;
@@ -104,4 +104,12 @@ a {
 .hover-underline:hover::after {
   width: 100%;
   transition: 0.5s;
+}
+.page-title {
+  margin-bottom: 60px;
+  margin: 50px auto;
+  font-size: 60px;
+  color: #333333;
+  font-weight: 400;
+  width: 60%;
 }
