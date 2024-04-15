@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bark.domain.User;
+import com.bark.service.MailService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class UserController {
 	private UserService service;
+	private MailService mailservice;
 	
 	@GetMapping("/userList")
 	public void userList(Model model) {
@@ -88,5 +91,18 @@ public class UserController {
 		session.removeAttribute("userType");
 		session.removeAttribute("userName");
 		return "redirect:/";
+	}
+
+	@GetMapping("/mail")
+	public void mail() {
+		
+	}
+	
+	@GetMapping("/mailCheck")
+	@ResponseBody //@ResponseBody: 자바 객체를 json 기반의 HTTP Body로 변환
+	public String mailCheck(String email) {
+		System.out.println("이메일 인증 요청");
+		System.out.println("이메일 인증 이메일 : " + email);
+		return mailservice.joinEmail(email);
 	}
 }
