@@ -1,27 +1,38 @@
 .notice{
-    height: 740px;
+    height: 780px;
 }
+
+/* 버튼 */
+.notice-button {
+  display: flex;
+  justify-content: center;
+  margin:-30px 0 10px 980px;
+}
+.notice-button a {
+  background-color: var(--color-light-brown);
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin: 5px;
+  color: var(--color-bright);
+  transition: background-color 0.3s;
+}
+.notice-button a:hover {
+  background-color: var(--color-brown);
+  color: var(--color-bright);
+  
+}
+/* 테이블 */
 table {
     border-collapse: collapse;
     border-spacing: 0;
-  }
-  section.notice {
-    padding: 80px 0;
-  }
-  
-  .page-title {
-    margin-bottom: 60px;
-  }
-  .page-title h3 {
-    font-size: 28px;
-    color: #333333;
-    font-weight: 400;
-    text-align: center;
+
   }
   
   #board-search .search-window {
     padding: 15px 0;
-    background-color: #f9f7f9;
+    border-radius: 5px 5px  0 0 ;
+    background-color: var(--color-white-smoke);
   }
   #board-search .search-window .search-wrap {
     position: relative;
@@ -35,6 +46,7 @@ table {
     font-size: 14px;
     padding: 7px 14px;
     border: 1px solid #ccc;
+    border-radius: 5px;
   }
   #board-search .search-window .search-wrap input {
     height: 40px;
@@ -42,6 +54,7 @@ table {
     font-size: 14px;
     padding: 7px 14px;
     border: 1px solid #ccc;
+    border-radius: 5px;
   }
   #board-search .search-window .search-wrap input:focus {
     border-color: #333;
@@ -59,7 +72,6 @@ table {
   }
   
   .board-table {
-    font-size: 13px;
     width: 100%;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
@@ -84,8 +96,8 @@ table {
     text-align: center;
   }
   
-  .board-table .th-date {
-    width: 200px;
+  .board-table .th-exe {
+    width: 110px;
   }
   
   .board-table th, .board-table td {
@@ -101,17 +113,12 @@ table {
     padding-left: 28px;
     padding-right: 14px;
     border-top: 1px solid #e7e7e7;
-    text-align: left;
-  }
-  
-  .board-table tbody th p{
-    display: none;
+    text-align: center;
   }
   
   .btn {
     display: inline-block;
     padding: 0 30px;
-    font-size: 15px;
     font-weight: 400;
     background: transparent;
     text-align: center;
@@ -137,25 +144,15 @@ table {
   }
   
   .btn-dark {
-    background: #555;
+    background: var(--color-light-brown);
+    border-radius: 5px;
     color: #fff;
+
   }
   
   .btn-dark:hover, .btn-dark:focus {
-    background: #373737;
-    border-color: #373737;
-    color: #fff;
-  }
-  
-  .btn-dark {
-    background: #555;
-    color: #fff;
-  }
-  
-  .btn-dark:hover, .btn-dark:focus {
-    background: #373737;
-    border-color: #373737;
-    color: #fff;
+    background: var(--color-brown);
+    color: var(--color-bright);
   }
   
   /* reset */
