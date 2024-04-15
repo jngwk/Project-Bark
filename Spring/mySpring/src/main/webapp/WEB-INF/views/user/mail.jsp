@@ -16,8 +16,7 @@
 					<option>@naver.com</option>
 					<option>@daum.net</option>
 					<option>@gmail.com</option>
-					<option>@hanmail.com</option>
-					<option>@yahoo.co.kr</option>
+					<option>@kakao.com</option>
 				</select> 
 		</div>
 		<div class="input-group-addon">
