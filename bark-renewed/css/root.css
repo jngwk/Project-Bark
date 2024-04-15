@@ -105,3 +105,10 @@ a {
   width: 100%;
   transition: 0.5s;
 }
+.page-title{
+  margin-bottom: 60px;
+  margin: 50px 300px;
+  font-size: 60px;
+  color: #333333;
+  font-weight: 400;
+}
