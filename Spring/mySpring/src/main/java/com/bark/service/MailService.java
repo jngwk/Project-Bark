@@ -2,6 +2,7 @@ package com.bark.service;
 
 import java.util.Random;
 
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
@@ -11,48 +12,52 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.bark.domain.User;
+import com.bark.mapper.UserMapper;
+
 @Service
 @Component
 public class MailService {
 	@Autowired
 	private JavaMailSenderImpl mailSender;
-	private int authNumber; //³­¼öÄÚµå
+	private int authNumber; //ë‚œìˆ˜ì½”ë“œ
 	
 	public void makeRandomNumber() {
-		// ³­¼öÀÇ ¹üÀ§ 111111 ~ 999999 (6ÀÚ¸® ³­¼ö)
+		// ë‚œìˆ˜ì˜ ë²”ìœ„ 111111 ~ 999999 (6ìë¦¬ ë‚œìˆ˜)
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
-		System.out.println("ÀÎÁõ¹øÈ£ : " + checkNum);
+		System.out.println("ì¸ì¦ë²ˆí˜¸ : " + checkNum);
 		authNumber = checkNum;
 	}
 	
 	
-	public String joinEmail(String email) {	//ÀÌ¸ŞÀÏ º¸³¾ ¾ç½Ä(href Ãß°¡ÇØµµ µÉµí?)
+	public String joinEmail(String email) {	//ì´ë©”ì¼ ë³´ë‚¼ ì–‘ì‹(href ì¶”ê°€í•´ë„ ë ë“¯?)
 		makeRandomNumber();
+		User user = mapper.findUser(email);
 		
-		String setFrom = "jwlee20541@gmail.com"; // email-config¿¡ ¼³Á¤ÇÑ ÀÚ½ÅÀÇ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·Â
+		String setFrom = "jwlee20541@gmail.com"; // email-configì— ì„¤ì •í•œ ìì‹ ì˜ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ì…ë ¥
 		String toMail = email;
-		String title = "È¸¿ø °¡ÀÔ ÀÎÁõ ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù."; // ÀÌ¸ŞÀÏ Á¦¸ñ
-		String content = "Bark¸¦ ¹æ¹®ÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù." + 
-				"<br><br>" + "ÀÎÁõ ¹øÈ£´Â " + authNumber + "ÀÔ´Ï´Ù." + "<br>" + "ÇØ´ç ÀÎÁõ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä."; 
-		// htmlÇü½Ä
-		// ÀÌ¸ŞÀÏ ³»¿ë »ğÀÔ
-		
-		mailSend(setFrom, toMail, title, content);
-		return Integer.toString(authNumber);
+		String title = "Bark ì¸ì¦ ì´ë©”ì¼ ì…ë‹ˆë‹¤."; // ì´ë©”ì¼ ì œëª©
+		String content = "ì•ˆë…•í•˜ì„¸ìš”, "+user.getName()+" ë‹˜."+
+				"<br>" +"Barkë¥¼ ë°©ë¬¸í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤." +
+				"<br>" +"íšŒì›ë‹˜ì˜ ê³„ì •ì •ë³´ëŠ” ì•„ë˜ì™€ ê°™ìŠµë‹ˆë‹¤."+
+				"<br>" +"----------------------"+
+				"<br>" +"ì•„ì´ë””: "+user.getId()+
+				"<br>" +"----------------------"+
+				"<br><br>" + "ì¸ì¦ ë²ˆí˜¸ëŠ” " + authNumber + "ì…ë‹ˆë‹¤." + "<br>" + "í•´ë‹¹ ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”."; 
 	}
 	
-	//ÀÌ¸ŞÀÏ Àü¼Û ¸Ş¼Òµå
+	//ì´ë©”ì¼ ì „ì†¡ ë©”ì†Œë“œ
 	public void mailSend(String setFrom, String toMail, String title, String content) {
 		MimeMessage message = mailSender.createMimeMessage();
-		// true ¸Å°³°ªÀ» Àü´ŞÇÏ¸é multipart Çü½ÄÀÇ ¸Ş¼¼Áö Àü´ŞÀÌ °¡´É(¹®ÀÚ ÀÎÄÚµù ¼³Á¤µµ °¡´É)
+		// true ë§¤ê°œê°’ì„ ì „ë‹¬í•˜ë©´ multipart í˜•ì‹ì˜ ë©”ì„¸ì§€ ì „ë‹¬ì´ ê°€ëŠ¥(ë¬¸ì ì¸ì½”ë”© ì„¤ì •ë„ ê°€ëŠ¥)
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 			helper.setFrom(setFrom);
 			helper.setTo(toMail);
 			helper.setSubject(title);
 			
-			// true Àü´Ş > html Çü½ÄÀ¸·Î Àü¼Û, ÀÛ¼ºÇÏÁö ¾ÊÀ¸¸é ´Ü¼ø ÅØ½ºÆ®·Î Àü´Ş
+			// true ì „ë‹¬ > html í˜•ì‹ìœ¼ë¡œ ì „ì†¡, ì‘ì„±í•˜ì§€ ì•Šìœ¼ë©´ ë‹¨ìˆœ í…ìŠ¤íŠ¸ë¡œ ì „ë‹¬
 			helper.setText(content, true);
 			mailSender.send(message);
 		} catch (MessagingException e) {
