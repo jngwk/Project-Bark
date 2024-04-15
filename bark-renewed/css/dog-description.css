@@ -83,3 +83,11 @@
   width: 100px;
   float: right;
 }
+.adoption-form {
+  height: 0;
+  width: 80%;
+  transition: height 2s;
+}
+.adoption-form.show {
+  height: fit-content;
+}
