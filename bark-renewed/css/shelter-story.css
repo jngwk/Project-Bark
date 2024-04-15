@@ -10,23 +10,25 @@
 
 /* 버튼 */
 .story-button {
-  display: flex;
-  justify-content: center;
-  margin:-30px 0 10px 980px;
-
+  height: 70px;
+  width: 1200px;
+  margin: 0 auto;
 }
 .story-button a {
-  background-color: rgb(238, 233, 223);
+float: right;
+}
+/* .story-button a {
+  background-color: var(--color-light-brown);
   border: 0;
   border-radius: 5px;
   padding: 10px 20px;
   margin: 5px;
-  color: var(--color-dark);
+  color: var(--color-bright);
+  transition: background-color 0.3s;
 }
 .story-button a:hover {
-  background-color: #999999;
-  color: var(--color-bright);
-}
+  background-color: var(--color-brown);
+} */
 
 
 /* 리스트 */
@@ -34,11 +36,11 @@
 ul{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 .story-list {
-
   display: grid;
-  grid-template-columns: repeat(3,300px);
+  grid-template-columns: repeat(3,345px);
   grid-template-rows: repeat(3,400px);
   gap: 50px 80px;
 }
@@ -49,7 +51,7 @@ ul{
   background: var(--color-bright);
   box-shadow: 1px 1px 5px rgb(0, 0, 0, 0.2);
   border-radius: 5px;
-  width: 300px;
+  width: 345px;
   height: 400px;
   overflow: hidden;
   transition: all 0.5s;
