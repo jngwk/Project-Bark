@@ -21,7 +21,6 @@ import lombok.extern.log4j.Log4j;
 
 public class BoardController {
 	private BoardService service;
-	private MailService mailservice;
 
 	@GetMapping("/list") 
 	public void list(Model model){ 
@@ -57,19 +56,6 @@ public class BoardController {
 			rttr.addFlashAttribute("result", "success"); 
 		}
 		return "redirect:/board/list";
-	}
-
-	@GetMapping("/mail")
-	public void mail() {
-		
-	}
-	
-	@GetMapping("/mailCheck")
-	@ResponseBody //@ResponseBody: 자바 객체를 json 기반의 HTTP Body로 변환
-	public String mailCheck(String email) {
-		System.out.println("이메일 인증 요청");
-		System.out.println("이메일 인증 이메일 : " + email);
-		return mailservice.joinEmail(email);
 	}
 
 }
