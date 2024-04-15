@@ -13,7 +13,7 @@
   --color-blue: #94c2f9;
   --color-bright: #ffffff;
   --color-dark: #000000;
-  --color-grey: #fefefe;
+  --color-grey: #eeeeee;
 }
 
 * {
@@ -106,10 +106,58 @@ a {
   transition: 0.5s;
 }
 .page-title {
-  margin-bottom: 60px;
   margin: 50px auto;
   font-size: 60px;
   color: #333333;
   font-weight: 400;
   width: 60%;
+}
+
+/* 미디움 버튼 */
+.medium-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 0 15px;
+  height: 40px;
+  border: 0;
+  border-radius: 5px;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+/* large 버튼 */
+.large-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 50px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+/* 브라운 버튼 */
+.brown-btn{
+  background-color: var(--color-light-brown);
+  color: var(--color-bright);
+}
+.brown-btn:hover{
+  background-color: var(--color-brown);
+  color: var(--color-bright);
+}
+
+/* 그린버튼 */
+.green-btn{
+  background-color: var(--color-cambridgeolive);
+  color: var(--color-bright);
+}
+.green-btn:hover{
+  background-color: var(--color-olive);
+  color: var(--color-bright);
 }

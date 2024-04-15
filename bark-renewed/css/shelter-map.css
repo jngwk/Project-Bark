@@ -101,14 +101,7 @@
   padding: 18px;
   margin:0 2px;
   border-radius: 5px;
-  background-color: var(--color-feldgrau);
-  color: var(--color-bright);
 }
-
-.shelter-detail a:hover{
-  background-color: var(--color-cambridgeolive);
-}
-
 /* 검색 스크롤 */
 .list-container::-webkit-scrollbar {
   width: 10px;
