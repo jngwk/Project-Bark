@@ -56,11 +56,17 @@
 								</div>
 							</div>
 						</li>
-
-						<li>
+<li>
 							<div class="shelter-detail">
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
+							</div>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -68,11 +74,12 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -80,11 +87,12 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -92,11 +100,12 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -104,11 +113,12 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -116,11 +126,12 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -128,11 +139,12 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -140,17 +152,64 @@
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
 							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 						<li>
 							<div class="shelter-detail">
 								<p>1조보호소</p>
 								<span>서울시 강남구</span>
+							</div>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="shelter-detail">
+								<p>1조보호소</p>
+								<span>서울시 강남구</span>
+							</div>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="shelter-detail">
+								<p>1조보호소</p>
+								<span>서울시 강남구</span>
+							</div>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="shelter-detail">
+								<p>1조보호소</p>
+								<span>서울시 강남구</span>
+							</div>
+							<div class="shelter-buttons">
+								<div class="detail-box">
+									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								</div>
 							</div>
 						</li>
 					</ul>

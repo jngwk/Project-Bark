@@ -58,7 +58,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/userDetail")
-	public void userDetail(@RequestParam("id") String id, Model model) {
+	public void userDetail(@RequestParam("id") String id, Model model, HttpSession session) {
 		log.info("userDetail");
 		model.addAttribute("user", service.getUser(id));
 	}
