@@ -3,7 +3,6 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-    height: 960px;
     padding-top: 30px;
     background: var(--color-white-smoke);
   }
@@ -54,14 +53,15 @@
     width: 50%;
   }
   .read-board {
-    min-height: 800px;
-    padding: 30px 120px;
+    min-height: 600px;
+    padding: 30px 50px;
     background: var(--color-bright);
     border-radius: 5px;
   }
 
   .read-top{
     display: flex;
+    justify-content: center;
     width: 100%;
     padding: 20px;
   }
@@ -77,8 +77,15 @@
     font-size: 14px;
   }
   .read-info p:nth-child(1){
+    text-align: center;
+    margin: 2px;
     width: 50px;
-
+    background: var(--color-white-smoke);
+  }
+  .read-info p:nth-child(2){
+    width: 70%;
+    border-bottom:1px solid var(--color-white-smoke) ;
+    margin-left: 5px;
   }
   .read-content{
     padding: 20px;
@@ -88,17 +95,29 @@
   .read-button{
     display: flex;
     justify-content: center;
-    margin-top: 30px;
-  }
-  .story-button a {
+    padding: 30px;
     background-color: var(--color-bright);
-    border: 0;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 10px 50px;
-    color: var(--color-dark);
   }
-  .story-button a:hover {
-    background-color: var(--color-light-brown);
-    color: var(--color-bright);
+
+
+  /* 댓글 */
+  .reply-board{
+    padding: 30px 100px;
+    background: var(--color-bright);
+    border-radius: 5px;
+  }
+  .reply-write{
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  .reply-button{
+    width: 9%;
+    padding: 10px
+  }
+
+  .reply-list input{
+    padding:5px 10px;
+    margin-top: 10px;
+    border:0;
   }
