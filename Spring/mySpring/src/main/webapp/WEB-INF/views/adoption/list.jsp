@@ -19,7 +19,7 @@
     </script>
   </head>
   <body>
-  <jsp:include page="${views }/header.jsp" flush="false"/>
+  <jsp:include page="${views }/include/header.jsp" flush="false"/>
   	
     <div class="grid__container">
     <!-- <h1 class="adoption-list-header">입양 목록</h1> -->
@@ -197,6 +197,6 @@
       </div>
     </div>
     <jsp:include page="${views }/include/pagination.jsp" flush="false"/>
-    <jsp:include page="${views }/footer.jsp" flush="false"/>
+    <jsp:include page="${views }/include/footer.jsp" flush="false"/>
   </body>
 </html>

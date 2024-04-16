@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="${css }/header.css" />
+    <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   <body>
      <!-- header -->
@@ -49,6 +53,11 @@
                     >후원 안내</strong
                   ></a
                 >
+                <a class="transition" href="${contextPath }/donation/form"
+                  ><strong class="large-font hover-underline"
+                    >후원하기</strong
+                  ></a
+                >
                 <a class="transition" href="#"
                   ><strong class="large-font hover-underline"
                     >보호소 조회</strong
@@ -71,7 +80,7 @@
                     >입양 안내</strong
                   ></a
                 >
-                <a class="transition" href="#"
+                <a class="transition" href="${contextPath }/adoption/list"
                   ><strong class="large-font hover-underline"
                     >입양하기</strong
                   ></a
@@ -175,10 +184,10 @@
 			  	</c:otherwise>
 			  </c:choose>
             </li>
-            
           </ul>
         </div>
       </div>
     </div>
+    <script src="${js }/header.js"></script>
   </body>
 </html>

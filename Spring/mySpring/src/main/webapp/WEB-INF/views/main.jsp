@@ -35,8 +35,8 @@
             <img src="${images }/judy.jpg" alt="hero-image" />
           </div>
           <div class="container-inner slide">
-            <div class="hero-title">
-              <strong class="xxlarge-font slide-animation">
+            <div class="hero-title slide-animation">
+              <strong class="xxlarge-font ">
                 주디는 바크를 <br />통해 새로운 가족을<br />만났습니다
               </strong>
             </div>
@@ -49,7 +49,7 @@
                 </p>
               </div>
               <div class="call-to-action slide-animation">
-              <a href="${contextPath }/views/adoption/list.jsp">
+              <a href="${contextPath }/adoption/list">
                 <button class="bright-btn font-dark large-font">입양하기</button>
                 </a>
                 <div class="paw-icon">
@@ -64,7 +64,7 @@
             <img src="${images }/seok-gu3.jpg" alt="hero-image" />
           </div>
           <div class="container-inner slide">
-            <div class="hero-title">
+            <div class="hero-title slide-animation">
               <strong class="xxlarge-font slide-animation">
                 수많은 <br />강아지들이 집을 <br />찾고 있습니다
               </strong>
@@ -79,7 +79,7 @@
                 </p>
               </div>
               <div class="call-to-action slide-animation">
-              <a href="${contextPath }/views/adoption/list.jsp">
+              <a href="${contextPath }/adoption/list">
                 <button class="bright-btn font-dark large-font">입양하기</button>
                 </a>
                 <div class="paw-icon">
@@ -94,7 +94,7 @@
             <img src="${images }/kara.jpg" alt="hero-image" />
           </div>
           <div class="container-inner slide">
-            <div class="hero-title">
+            <div class="hero-title slide-animation">
               <strong class="xxlarge-font slide-animation">
                 보호소 아이들에게 <br />여러분의 마음을<br />전달해주세요
               </strong>
