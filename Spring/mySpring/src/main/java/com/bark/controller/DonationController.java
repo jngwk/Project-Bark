@@ -16,4 +16,8 @@ public class DonationController {
 	public void form() {
 		log.info("form...........");
 	}
+	@GetMapping("/map")
+	public void map() {
+		log.info("map...........");
+	}
 }

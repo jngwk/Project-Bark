@@ -16,8 +16,6 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-	<header
-		style="display: block; background-color: var(- -color-brown); height: 140px;"></header>
 	<jsp:include page="${views }/include/header.jsp" flush="false"></jsp:include>
 	<div class="donate-container">
 		<div class="donate-page slide-animation">

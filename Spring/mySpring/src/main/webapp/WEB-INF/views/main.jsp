@@ -109,7 +109,7 @@
                 </p>
               </div>
               <div class="call-to-action slide-animation">
-              <a href="#">
+              <a href="${contextPath }/donation/map">
                 <button class="bright-btn font-dark large-font">후원하기</button>
                 </a>
                 <div class="paw-icon">
