@@ -6,6 +6,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="../css/root.css" />
     <link rel="stylesheet" href="../css/dog-description.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="nav-area">Nav bar</div>
@@ -76,8 +81,51 @@
       </div>
     </div>
     <!-- end of dog-desc -->
-    <div class="adoption-form">
-      <form action="#" method="post"></form>
+    <div class="adoption-form show">
+      <form action="#" method="post">
+        <input type="hidden" name="dogno" value="1" />
+        <input type="hidden" name="shelterId" value="1" />
+        <input type="hidden" name="userId" value="gildong" />
+        <input type="hidden" name="dogno" value="1" />
+        <table>
+          <tr>
+            <th>강아지 이름</th>
+            <td>영철이</td>
+            <th>보호소명</th>
+            <td>안산보호소</td>
+          </tr>
+          <tr>
+            <th class="criteria" colspan="4">
+              <span>신청자 정보</span>
+            </th>
+          </tr>
+          <tr>
+            <th>성명</th>
+            <td>홍길동</td>
+            <th>주소</th>
+            <!-- 주소가 있으면 출력하고 없으면 빈칸 -->
+            <td>경기도 안산시 단원구 고잔동 81, 101동 302호</td>
+          </tr>
+          <tr>
+            <th>생년월일</th>
+            <td>1998.01.15</td>
+            <th>연락처</th>
+            <td>010-1111-1111</td>
+          </tr>
+          <tr>
+            <th>직업</th>
+            <td>학생</td>
+            <th>이메일</th>
+            <td>gildong@bark.com</td>
+          </tr>
+          <tr>
+            <td class="consent" colspan="4">
+              <input type="checkbox" />Bark 입양 약관에 동의합니다.
+            </td>
+          </tr>
+        </table>
+      </form>
     </div>
+    <script src="../js/dog-description.js"></script>
   </body>
 </html>
