@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${css }/loginPopup.css" />
 </head>
 <body>
-	<div class="popup_layer" id="popup_layer">
+	<div class="popup_layer close-pop" id="popup_layer">
 		<div class="popup_box">
 			<div class="popup_btn close-pop">
 				<img src="${icons }/x-regular-36.png" alt="x" />

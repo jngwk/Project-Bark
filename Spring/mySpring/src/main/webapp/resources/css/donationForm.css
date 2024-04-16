@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   background-color: var(--color-white-smoke);
+  padding-block: 140px 50px;
 }
 
 .donate-page {

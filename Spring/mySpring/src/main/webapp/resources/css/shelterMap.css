@@ -1,0 +1,155 @@
+.header-container{
+	background-color: var(--color-olive);
+}
+.header-container strong{
+	color: var(--main-font-color) !important;
+}
+
+.map-container{
+	position: relative;
+	width: 100%;
+	height: 100dvh;
+	padding-block: 140px 0;
+}
+.map {
+  position: relative;
+ 	float: right;
+ 	width: 80%;
+ 	height: 100%;
+ 	overflow: hidden;
+}
+.map img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* 검색 */
+.shelter-side {
+  position: relative;
+  float: left;
+  width: 20%;
+  height: 100%;
+  overflow: hidden;
+}
+/* 검색 탭 */
+/* side창 꽉차게 만들기 */
+.shelter-tab {
+	height: 9%;
+/*   padding: 30px; */
+display: flex;
+justify-content: center;
+align-items: center;
+  background: var(--color-feldgrau);
+  color: var(--color-bright);
+}
+.tab {
+  display: inline-flex;
+}
+.tab li > a {
+  position: relative;
+  width: 50%;
+  padding: 0 30px;
+  text-align: center;
+}
+
+.tab li:active {
+  transform: translateY(15%);
+  transition: 0.1s;
+}
+.area-search {
+  display: none;
+}
+
+/* 검색 창 */
+.shelter-search {
+	height: 6%;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-honeydew);
+}
+.shelter-search input {
+  height: 40px;
+  border: 0;
+  background-color: transparent;
+  padding: 0 10px;
+}
+.shelter-search select {
+  height: 40px;
+  border: 0;
+  background-color: transparent;
+}
+.shelter-search input.search{
+	  border-bottom: 1px solid var(--color-dark);
+}
+/* 검색 리스트 */
+.list-container {
+	height: 85%;
+  overflow-y: scroll;
+  background: var(--color-honeydew);
+  border-top: 2px solid var(--color-cambridgeolive);
+}
+.shelter-list li {
+  background: var(--color-honeydew);
+  height: 90px;
+    transition: all 1s;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+.shelter-list li:hover {
+  background-color: var(--color-feldgrau);
+  color: var(--color-bright);
+  cursor: pointer;
+}
+.shelter-list li.liExpand{
+	height: 180px;
+	border-bottom: 1px solid var(--color-cambridgeolive);
+	  background-color: var(--color-feldgrau);
+	  color: var(--color-bright);
+}
+.shelter-detail{
+	  padding: 20px;
+}
+/* 검색디테일 */
+.shelter-buttons {
+  position: relative;
+  height: fit-content;
+}
+
+.detail-box{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 390px;
+  padding: 10px 0;
+  
+}
+.shelter-buttons a {
+  position: relative;
+  top: 0;
+  padding: 18px;
+  margin:0 2px;
+  border-radius: 5px;
+}
+/* 검색 스크롤 */
+.list-container::-webkit-scrollbar {
+  width: 10px;
+}
+.list-container::-webkit-scrollbar-thumb {
+  background-color: var(--color-cambridgeolive);
+  border-radius: 5px;
+  background-clip: padding-box;
+  border: 1px solid transparent;
+}
+.list-container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+/* 지도 */
+.api {
+  position: relative;
+  overflow: hidden;
+  height: 940px;
+}

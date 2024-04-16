@@ -58,7 +58,7 @@
                     >후원하기</strong
                   ></a
                 >
-                <a class="transition" href="#"
+                <a class="transition" href="${contextPath }/donation/map"
                   ><strong class="large-font hover-underline"
                     >보호소 조회</strong
                   ></a
