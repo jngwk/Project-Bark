@@ -1,9 +1,9 @@
-function openPop() {
+function openUpdatePop() {
   document.getElementById("popup_layer").style.display = "block";
 }
 
 //팝업 닫기
-function closePop() {
+function closeUpdatePop() {
   document.getElementById("popup_layer").style.display = "none";
 }
 window.onload = function () {
@@ -22,7 +22,7 @@ window.onload = function () {
   let inputText = document.querySelectorAll(".input-text");
   let resetBtn = document.querySelectorAll(".reset-btn");
   inputText.forEach((input) => {
-    input.onkeydown = function () {
+    input.addEventListener("keyup", function () {
       if (input.value == "") {
         input.nextElementSibling.style.visibility = "hidden";
       } else if (input.value != "") {
@@ -31,6 +31,6 @@ window.onload = function () {
       input.nextElementSibling.onclick = function () {
         this.style.visibility = "hidden";
       };
-    };
+    });
   });
 };
