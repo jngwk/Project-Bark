@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   gap: 20px;
-  height: 960px;
-  padding-top: 30px;
+  height: 100dvh;
+  padding-top: 140px;
   background: var(--color-white-smoke);
 }
 
@@ -54,6 +54,8 @@
   width: 50%;
 }
 .write-board {
+  min-width: 50rem;
+  max-width: 75rem;
   height: 800px;
   padding: 20px 120px;
   background: var(--color-bright);
@@ -100,6 +102,10 @@
 }
 
 /* 파일업로드 */
+.write-imgUpload {
+  display: inline-flex;
+  width: 100%;
+}
 .write-imgUpload input {
   display: inline-block;
   height: 40px;
@@ -112,11 +118,11 @@
   color: #999999;
 }
 .write-imgUpload label {
-  display: inline-block;
-  padding: 10px 15px;
-  color: #fff;
-  vertical-align: middle;
-  background-color: #999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 0 15px;
   border-radius: 5px;
   cursor: pointer;
   height: 38px;
@@ -134,18 +140,18 @@
 
 /* 버튼 */
 .write-button {
-  width: 685px;
+  width: 100%;
   display: flex;
   justify-content: end;
 }
-.write-button input {
-    background-color: var(--color-white-smoke);
-    border: 0;
-    border-radius: 5px;
-    margin: 10px;
-    color: var(--color-dark);
+/* .write-button input {
+  background-color: var(--color-white-smoke);
+  border: 0;
+  border-radius: 5px;
+  margin: 10px;
+  color: var(--color-dark);
 }
 .write-button input:hover {
   background-color: var(--color-light-brown);
   color: var(--color-bright);
-}
+} */
