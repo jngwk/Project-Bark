@@ -92,7 +92,7 @@
                 ><strong class="xlarge-font hover-underline">게시판</strong></a
               >
               <div class="dropdown-content">
-                <a class="transition" href="#"
+                <a class="transition" href="${contextPath }/board/noticeList"
                   ><strong class="large-font hover-underline"
                     >공지사항</strong
                   ></a

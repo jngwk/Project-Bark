@@ -34,11 +34,16 @@ public class BoardController {
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/list";
 	}
+	
+	@GetMapping("/write")     //게시글 저장
+	public void write() {
+	}
 
 	@GetMapping("/read")
 	public void read(@RequestParam("bno") Integer bno,  Model model) {
-		log.info("/read");
-		model.addAttribute("board", service.read(bno));
+		/*
+		 * log.info("/read"); model.addAttribute("board", service.read(bno));
+		 */
 	}
 	@PostMapping( "/modify")
 	public String modify(Board board, RedirectAttributes rttr) {

@@ -17,7 +17,7 @@
 
 		<!-- board seach area -->
 		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="#">글쓰기</a>
+			<a class="medium-btn brown-btn" href="${contextPath }/board/write">글쓰기</a>
 		</div>
 		<div id="board-search">
 			<div class="container">
@@ -53,21 +53,21 @@
 					<tbody>
 						<tr>
 							<td>3</td>
-							<th><a href="#!">[공지사항] 개인정보 처리방침 변경안내처리방침</a></th>
+							<th><a href="${contextPath }/board/read">[공지사항] 개인정보 처리방침 변경안내처리방침</a></th>
 							<td>2017.07.13</td>
 							<td>84</td>
 						</tr>
 
 						<tr>
 							<td>2</td>
-							<th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
+							<th><a href="${contextPath }/board/read">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
 							<td>2017.06.15</td>
 							<td>84</td>
 						</tr>
 
 						<tr>
 							<td>1</td>
-							<th><a href="#!">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
+							<th><a href="${contextPath }/board/read">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
 							<td>2017.06.15</td>
 							<td>84</td>
 						</tr>

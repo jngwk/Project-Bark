@@ -3,7 +3,6 @@
   --color-brown: #453f32;
   --color-light-brown: #82765e;
   --color-white-smoke: #f6f5f3;
-
   --color-olive: #2a392c;
   --color-cambridgeolive: #89a98f;
   --color-feldgrau: #a0baa3;
@@ -14,6 +13,7 @@
   --color-bright: #ffffff;
   --color-dark: #000000;
   --color-grey: #eeeeee;
+  --main-font-color: #ffffff;
 }
 
 * {
@@ -42,7 +42,8 @@ li {
 a {
   text-decoration: none;
 }
-input:focus, textarea:focus{
+input:focus,
+textarea:focus {
   outline: none;
 }
 
@@ -54,15 +55,6 @@ input:focus, textarea:focus{
   height: 70px;
   border-radius: 5px;
   border: none;
-}
-.bright-btn {
-  background-color: var(--color-bright);
-}
-.dark-btn {
-  background-color: var(--color-brown);
-}
-.secondary-btn {
-  background-color: var(--color-light-brown);
 }
 
 .font-bright {
@@ -117,6 +109,25 @@ input:focus, textarea:focus{
   width: 60%;
 }
 
+.medium-btn,
+.large-btn,
+.bright-btn,
+.dark-btn,
+.secondary-btn,
+.brown-btn,
+.green-btn {
+  transition: background-color 0.3s;
+}
+.medium-btn:hover,
+.large-btn:hover,
+.bright-btn:hover,
+.dark-btn:hover,
+.secondary-btn:hover,
+.brown-btn:hover,
+.green-btn:hover {
+  cursor: pointer;
+}
+
 /* 미디움 버튼 */
 .medium-btn {
   display: flex;
@@ -128,7 +139,6 @@ input:focus, textarea:focus{
   border: 0;
   border-radius: 5px;
   margin: 5px;
-  transition: background-color 0.3s;
 }
 
 /* large 버튼 */
@@ -143,25 +153,37 @@ input:focus, textarea:focus{
   border-radius: 5px;
   margin: 5px;
   font-size: 16px;
-  transition: background-color 0.3s;
+}
+
+.bright-btn {
+  background-color: var(--color-bright);
+}
+.dark-btn {
+  background-color: var(--color-brown);
+}
+.secondary-btn {
+  background-color: #999999;
+}
+.secondary-btn:hover {
+  background-color: #5e5e5e;
 }
 
 /* 브라운 버튼 */
-.brown-btn{
+.brown-btn {
   background-color: var(--color-light-brown);
   color: var(--color-bright);
 }
-.brown-btn:hover{
+.brown-btn:hover {
   background-color: var(--color-brown);
   color: var(--color-bright);
 }
 
 /* 그린버튼 */
-.green-btn{
+.green-btn {
   background-color: var(--color-cambridgeolive);
   color: var(--color-bright);
 }
-.green-btn:hover{
+.green-btn:hover {
   background-color: var(--color-olive);
   color: var(--color-bright);
 }
