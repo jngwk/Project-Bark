@@ -44,30 +44,9 @@
       <div class="read-container">
         <div class="read-board">
           <div class="read-top">
-            <div class="read-left">
               <div class="read-title">
                 <p>제목입니다.</p>
               </div>
-            </div>
-            <div class="read-right">
-              <div class="read-info">
-                <p>작성자</p>
-                <p>지현</p>
-              </div>
-              <div class="read-info">
-                <p>조회수</p>
-                <p>8</p>
-              </div>
-              <div class="read-info">
-                <p>추천수</p>
-                <p>15</p>
-              </div>
-              <div class="read-info">
-                <p>작성일</p>
-                <p>2024-04-13 12:22:22</p>
-              </div>
-
-            </div>
           </div>
           <div class="read-board">
             <p>
@@ -121,23 +100,63 @@
         <div class="reply-container">
           <div class="reply-board">
             <form action="#" method="post">
-              <input class="reply-write" type="text" name="reply" placeholder="댓글을 입력하세요">
-              <input class="reply-button" type="submit" value="작성">
+              <input
+                class="reply-write"
+                type="text"
+                name="reply"
+                placeholder="댓글을 입력하세요"
+              />
+              <label for="reply-buttom">
+                <img src="/images/icons/write-icon.png"> </label>
+              <input class="reply-button" id="reply-buttom" type="submit"/>
             </form>
             <div class="reply-list">
               <ul>
                 <li>
-                  <span>김지현</span>
-                  <span>정욱님 프론트 언제쯤 되세요</span>
-                  <span>2024-04-13</span>
+                  <div class="reply-profile">
+                    <span>김지현</span><span>2024-04-13</span>
+                  </div>
+                  <div class="reply-content">
+                    <p>정욱님 프론트 언제쯤 되세요</p>
+                    <a href="#" id="removeBtn" class="font-dark">수정</a>
+                    <a href="#" id="update" class="font-dark">삭제</a>
+                  </div>
                 </li>
                 <li>
-                  <span>김지현</span>
-                  <span>정욱님 프론트 언제쯤 되세요</span>
-                  <span>2024-04-13</span>
+                  <div class="reply-profile">
+                    <span>김지현</span><span>2024-04-13</span>
+                  </div>
+                  <div class="reply-content">
+                    <p>정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요</p>
+                    <a href="#" id="removeBtn" class="font-dark">수정</a>
+                    <a href="#" id="update" class="font-dark">삭제</a>
+                  </div>
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="category-container">
+        <div class="readinfo-category">
+          <div class="read-right">
+            <div class="read-info">
+              <p>작성자</p>
+              <p>지현</p>
+            </div>
+            <div class="read-info">
+              <p>조회수</p>
+              <p>8</p>
+            </div>
+            <div class="read-info">
+              <p>추천수</p>
+              <p>15</p>
+            </div>
+            <div class="read-info">
+              <p>작성일</p>
+              <p>2024-04-13 12:22:22</p>
+            </div>
+          </div>
           </div>
         </div>
       </div>
