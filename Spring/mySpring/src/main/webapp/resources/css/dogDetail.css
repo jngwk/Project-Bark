@@ -1,11 +1,14 @@
-.nav-area {
-  width: 100%;
-  height: 140px;
-  background-color: var(--color-brown);
+.header-container{
+	background-color: var(--color-brown);
 }
+.header-container strong{
+	color: var(--main-font-color) !important;
+}
+
 .dog-desc-container {
   position: relative;
-  height: 84dvh;
+  height: 100dvh;
+  padding-top: 250px; 
 }
 .dog-desc-inner {
   position: relative;
@@ -86,7 +89,7 @@
 .more p {
   display: block;
   max-width: 75rem;
-  min-width: 50rem;
+/*   min-width: 50rem; */
   margin-bottom: 30px;
 }
 .expand-btn {
@@ -128,7 +131,7 @@
   padding-left: 10px;
 } */
 .adoption-form.show {
-  height: 3000px;
+  height: 1500px;
 }
 
 /* application form */

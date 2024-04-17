@@ -144,7 +144,7 @@ function initSlide() {
     allPopupSlides.forEach((slides) => {
       slides.style.transform = "translateX(0)";
     });
-    document.querySelectorAll("input").forEach((input) => {
+    document.querySelectorAll(".login-popup-input").forEach((input) => {
       input.value = "";
     });
     hideGeneralForm();
@@ -156,7 +156,7 @@ function initPop() {
   allPopupSlides.forEach((slides) => {
     slides.style.transform = "translateX(0)";
   });
-  document.querySelectorAll("input").forEach((input) => {
+  document.querySelectorAll(".login-popup-input").forEach((input) => {
     input.value = "";
   });
   document.querySelector(".cont").classList.remove("s--signup");

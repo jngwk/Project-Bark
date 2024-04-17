@@ -1,17 +1,32 @@
+.header-container{
+	background-color: var(--color-brown);
+}
+.header-container strong{
+	color: var(--main-font-color) !important;
+}
+
 .board-write {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px;
   height: 100dvh;
   padding-top: 140px;
   background: var(--color-white-smoke);
 }
+.board-write-inner{
+	height: fit-content;
+	width: fit-content;
+}
+.board-write-inner > div{
+	float: left;
+}
 
 /* 카테고리 */
 /*게시판*/
 .category-container {
-  padding: 20px 0;
+/*   padding: 20px 0; */
 }
 .write-category {
   text-align: center;
@@ -50,13 +65,12 @@
 
 /* 글쓰기 */
 .write-container {
-  padding: 20px 0;
-  width: 50%;
+  padding: 0 30px;
 }
 .write-board {
-  min-width: 50rem;
-  max-width: 75rem;
-  height: 800px;
+  min-width: 65rem;
+  max-width: 90rem;
+  height: 70dvh;
   padding: 20px 120px;
   background: var(--color-bright);
   border-radius: 5px;
@@ -68,14 +82,20 @@
 
 .write-read {
   width: 100%;
-  height: 70%;
-  background-color: var(--color-white-smoke);
+  height: 80%;
   border-radius: 5px;
-  padding: 10px 40px;
+}
+.write-read form{
+	height: 100%;
+}
+.form-bg{
+	  background-color: var(--color-white-smoke);
+	  height: 100%;
+	  padding: 10px 30px;
 }
 .write-table {
   width: 100%;
-  height: 100%;
+  height: 90%;
   border-collapse: collapse;
   border-style: hidden;
 }
@@ -93,17 +113,23 @@
   border: 0;
   border-radius: 5px;
 }
+.textarea{
+	  padding: 10px 0;
+}
 .write-table textarea {
   width: 100%;
-  height: 400px;
+  height: 100%;
   border: 0;
   padding: 10px;
   border-radius: 5px;
+  resize: none;
+
 }
 
 /* 파일업로드 */
 .write-imgUpload {
   display: inline-flex;
+  justify-content: space-between;
   width: 100%;
 }
 .write-imgUpload input {
@@ -114,7 +140,7 @@
   border-radius: 5px;
   border: 1px solid var(--color-white-smoke);
   width: 85%;
-  margin-bottom: 40px;
+
   color: #999999;
 }
 .write-imgUpload label {
@@ -126,7 +152,6 @@
   border-radius: 5px;
   cursor: pointer;
   height: 38px;
-  margin-bottom: 40px;
 }
 
 .write-imgUpload input[type="file"] {
@@ -143,6 +168,7 @@
   width: 100%;
   display: flex;
   justify-content: end;
+  margin-block-start: 10px;
 }
 /* .write-button input {
   background-color: var(--color-white-smoke);
