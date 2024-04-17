@@ -38,7 +38,7 @@
           <div class="card__data">
             <span class="card__description">수원보호소</span>
             <h2 class="card__title">불쌍해</h2>
-            <a href="dog-description.html" class="card__button">입양하기</a>
+            <a href="${contextPath }/adoption/detail" class="card__button">입양하기</a>
           </div>
         </article>
         <article class="card__article">
