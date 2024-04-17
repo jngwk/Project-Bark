@@ -117,6 +117,7 @@ textarea:focus {
 .brown-btn,
 .green-btn {
   transition: background-color 0.3s;
+  text-wrap: nowrap;
 }
 .medium-btn:hover,
 .large-btn:hover,
@@ -161,8 +162,10 @@ textarea:focus {
 .dark-btn {
   background-color: var(--color-brown);
 }
+
 .secondary-btn {
   background-color: #999999;
+  color: var(--color-bright);
 }
 .secondary-btn:hover {
   background-color: #5e5e5e;

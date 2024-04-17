@@ -16,4 +16,9 @@ public class AdoptionController {
 	public void list() {
 		log.info("list...........");
 	}
+	
+	@GetMapping("/detail")
+	public void detail() {
+		log.info("detail...........");
+	}
 }
