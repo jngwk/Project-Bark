@@ -52,7 +52,6 @@
   top: 0;
   width: 684px;
   background: var(--color-bright);
-  
 }
 .popup_content > .title > p {
   padding: 20px;
@@ -98,9 +97,6 @@ input {
   border-bottom: 1px solid var(--color-dark);
 }
 
-
-
-
 /*비밀번호변경*/
 .popup_content .pwd-btn {
   display: inline-block;
@@ -113,7 +109,7 @@ input {
   color: #fff;
   padding: 0;
 }
-.popup_content:hover .pwd-btn:hover{
+.popup_content:hover .pwd-btn:hover {
   background: var(--color-brown);
 }
 
@@ -140,8 +136,8 @@ input {
 label button > img {
   width: 20px;
 }
-.reset-btn{
-  visibility: hidden
+.reset-btn {
+  visibility: hidden;
 }
 /* 하단버튼 */
 .completeBtn {
@@ -152,7 +148,7 @@ label button > img {
   bottom: 0;
   background-color: var(--color-bright);
 }
-.cancle-btn,
+.cancel-btn,
 .save-btn {
   display: inline-block;
   text-align: center;
@@ -163,7 +159,10 @@ label button > img {
   font-size: 15px;
   cursor: pointer;
   margin: 20px;
-  background: var(--color-light-brown);;
+  background: var(--color-light-brown);
 }
 
-.cancle-btn:hover,.save-btn:hover{background-color: var(--color-brown);}
+.cancel-btn:hover,
+.save-btn:hover {
+  background-color: var(--color-brown);
+}

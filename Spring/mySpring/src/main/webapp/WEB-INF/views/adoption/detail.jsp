@@ -1,11 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../css/root.css" />
-    <link rel="stylesheet" href="../css/dog-description.css" />
+    <link rel="stylesheet" href="${css }/root.css" />
+    <link rel="stylesheet" href="${css }/dogDetail.css" />
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -13,12 +15,11 @@
     ></script>
   </head>
   <body>
-    <div class="nav-area">Nav bar</div>
+  <jsp:include page="${views }/include/header.jsp" flush="false"/>
     <div class="dog-desc-container">
-      <p class="page-title">Detail</p>
       <div class="dog-desc-inner">
         <a href="dog-list.html"
-          ><img class="arrow" src="../images/icons/arrow-back.png" alt="arrow"
+          ><img class="arrow" src="${icons }/arrow-back.png" alt="arrow"
         /></a>
         <div class="summary">
           <div class="img-wrapper">
@@ -31,37 +32,37 @@
           <div class="summary-cont">
             <table>
               <tr>
-                <td><img src="../images/icons/name.png" alt="icon" /></td>
+                <td><img src="${icons }/name.png" alt="icon" /></td>
                 <th>이름</th>
                 <td>영철이</td>
               </tr>
               <tr>
-                <td><img src="../images/icons/gender.png" alt="icon" /></td>
+                <td><img src="${icons }/gender.png" alt="icon" /></td>
                 <th>성별</th>
                 <td>남</td>
               </tr>
               <tr>
-                <td><img src="../images/icons/breed.png" alt="icon" /></td>
+                <td><img src="${icons }/breed.png" alt="icon" /></td>
                 <th>견종</th>
                 <td>믹스</td>
               </tr>
               <tr>
-                <td><img src="../images/icons/age.png" alt="icon" /></td>
+                <td><img src="${icons }/age.png" alt="icon" /></td>
                 <th>나이</th>
                 <td>4</td>
               </tr>
               <tr>
-                <td><img src="../images/icons/shelter.png" alt="icon" /></td>
+                <td><img src="${icons }/shelter.png" alt="icon" /></td>
                 <th>보호소</th>
                 <td>안산보호소</td>
               </tr>
               <tr>
-                <td><img src="../images/icons/neut.png" alt="icon" /></td>
+                <td><img src="${icons }/neut.png" alt="icon" /></td>
                 <th>중성화</th>
                 <td>O</td>
               </tr>
               <tr>
-                <td><img src="../images/icons/adopt.png" alt="icon" /></td>
+                <td><img src="${icons }/adopt.png" alt="icon" /></td>
                 <th>입양</th>
                 <td>가능</td>
               </tr>
@@ -86,8 +87,8 @@
     <div class="adoption-form">
       <div class="form-container">
         <div class="form-page">
-          <form action="" method="post">
-            <img src="../images/bark_logo-removebg-trimmed.png" />
+          <form action="#" method="post">
+            <img src="${images }/logo-brown.png" />
             <div class="form-title">영철이의 가족이 되어 주세요</div>
             <div class="shelter-info form-section">
               <div class="form-subtitle">보호소 정보</div>
@@ -226,6 +227,8 @@
         </div>
       </div>
     </div>
-    <script src="../js/dog-description.js"></script>
+    <jsp:include page="${views }/include/footer.jsp" flush="false"/>
+    <script src="${js }/dogDetail.js"></script>
   </body>
 </html>
+

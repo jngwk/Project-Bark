@@ -1,7 +1,15 @@
+.header-container {
+  background-color: var(--color-brown);
+}
+.header-container strong {
+  color: var(--main-font-color) !important;
+}
+
 .donate-container {
   display: flex;
   justify-content: center;
   background-color: var(--color-white-smoke);
+  padding-block: 140px 50px;
 }
 
 .donate-page {
@@ -12,12 +20,12 @@
   background: var(--color-bright);
   border-radius: 5px;
 }
-.donate-page img{
-    position: relative;
-    width: 80px;
-    margin-left: 50%;
-    right: 40px;
-    top: 30px;
+.donate-page img {
+  position: relative;
+  width: 80px;
+  margin-left: 50%;
+  right: 40px;
+  top: 30px;
 }
 
 .donate-title {
@@ -37,28 +45,28 @@
   justify-content: center;
 }
 
-
 .donate-table th {
   width: 100px;
   font-weight: normal;
 }
-.donate-table td input{
-    width: 300px;
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid var(--color-grey);
-    border-radius: 5px;
+.donate-table td input {
+  width: 300px;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid var(--color-grey);
+  border-radius: 5px;
 }
-.donate-table td a{
+.donate-table td a {
   float: left;
   padding: 10px;
   font-size: 14px;
   color: var(--color-dark);
-  background:  var(--color-white-smoke);
-  border-radius: 5px; margin: 10px;
+  background: var(--color-white-smoke);
+  border-radius: 5px;
+  margin: 10px;
 }
 .donate-table td a:hover {
-    background: rgb(226, 220, 205);
+  background: rgb(226, 220, 205);
 }
 
 .donate-button {
