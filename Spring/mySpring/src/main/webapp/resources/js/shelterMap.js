@@ -49,7 +49,7 @@ window.onload = function () {
   console.log(listContainer);
   console.log(shelterLists);
   shelterLists.forEach((list) => {
-    list.onclick = function () {
+    list.querySelector(".shelter-detail").onclick = function () {
     if(!list.classList.contains("liExpand")){
     	shelterLists.forEach((el) => {
     		el.classList.remove("liExpand");
