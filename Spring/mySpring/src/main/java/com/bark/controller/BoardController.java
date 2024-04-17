@@ -22,10 +22,9 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private BoardService service;
 
-	@GetMapping("/list") 
+	@GetMapping("/noticeList") 
 	public void list(Model model){ 
-		log.info("list");
-		model.addAttribute("bList", service.getList()); 
+
 	}
 
 	@PostMapping("/write")     //게시글 저장
