@@ -63,7 +63,7 @@
                     >보호소 조회</strong
                   ></a
                 >
-                <a class="transition" href="#"
+                <a class="transition" href="#" 
                   ><strong class="large-font hover-underline"
                     >캠페인 둘러보기</strong
                   ></a
