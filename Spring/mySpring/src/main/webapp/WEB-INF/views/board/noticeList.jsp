@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,14 +24,14 @@
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
-					<form action="#" method="post">
+					<form action="/board/noticeList" method="get">
 						<div class="search-wrap">
-							<label for="search" class="blind">공지사항 내용 검색</label> <select>
-								<option>카테고리</option>
-								<option>내용</option>
-								<option>제목</option>
-								<option>작성자</option>
-							</select> <input id="search" type="search" name=""
+							<label for="search" class="blind">공지사항 내용 검색</label> <select name="searchField">
+								<option value="">카테고리</option>
+								<option value="content">내용</option>
+								<option value="title">제목</option>
+								<option value="id">작성자</option>
+							</select> <input id="search" type="search" name="searchWord"
 								placeholder="검색어를 입력해주세요." value="" />
 							<button type="submit" class="btn btn-dark">검색</button>
 						</div>
@@ -51,26 +53,14 @@
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="bList" items="${bList}" >
 						<tr>
-							<td>3</td>
-							<th><a href="${contextPath }/board/read">[공지사항] 개인정보 처리방침 변경안내처리방침</a></th>
-							<td>2017.07.13</td>
-							<td>84</td>
+							<td>${bList.no}</td>
+							<td><a href="/notice/read?bno=${bList.bno}">${bList.title}</a></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
+							<td>${bList.hit}</td>
 						</tr>
-
-						<tr>
-							<td>2</td>
-							<th><a href="${contextPath }/board/read">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-							<td>2017.06.15</td>
-							<td>84</td>
-						</tr>
-
-						<tr>
-							<td>1</td>
-							<th><a href="${contextPath }/board/read">공지사항 안내입니다. 이용해주셔서 감사합니다</a></th>
-							<td>2017.06.15</td>
-							<td>84</td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>
