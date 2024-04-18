@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="../css/update-user copy.css" />
-    <link rel="stylesheet" href="../css/login-popup.css" />
     <link rel="stylesheet" href="../css/root.css" />
-    <script src="../js/update-user copy.js"></script>
   </head>
   <body>
     <a href="javascript:openUpdatePop()">
       <div class="font-dark">팝업오픈!</div>
     </a>
     <div class="update-popup-layer" id="update-popup-layer" data-feat="update">
-
-
       <div class="update-popupbox">
         <!--팝업 컨텐츠 영역-->
         <div class="update-popup-content">
@@ -160,14 +156,16 @@
               <button
                 type="button"
                 onclick="location.href='javascript:closeUpdatePop()'"
-                class="update-cancel-btn">취소</button>
+                class="update-cancel-btn"
+              >
+                취소
+              </button>
               <button type="submit" class="update-save-btn">저장</button>
             </div>
           </form>
         </div>
-
-
       </div>
     </div>
+    <script src="../js/update-user copy.js"></script>
   </body>
 </html>

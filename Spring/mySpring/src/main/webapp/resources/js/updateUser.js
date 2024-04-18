@@ -1,10 +1,12 @@
 function openUpdatePop() {
   document.getElementById("update-popup-layer").style.display = "block";
+  document.querySelector("body").classList.add("noscroll");
 }
 
 //팝업 닫기
 function closeUpdatePop() {
   document.getElementById("update-popup-layer").style.display = "none";
+  document.querySelector("body").classList.remove("noscroll");
 }
 
 const hypenTel = (target) => {

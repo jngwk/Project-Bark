@@ -60,32 +60,24 @@ submitBtns.forEach((btn) => {
     inputs.forEach((input) => {
       console.log(input.value);
       input.addEventListener("animationend", () => {
-        input.classList.remove("required");
+        input.classList.remove("invalid");
       });
       // Check for an empty string instead of null
       if (input.value == "" && input.type != "hidden") {
-        input.classList.add("required");
-        input.closest("label").classList.add("required");
+        input.classList.add("invalid");
+        input.closest("label").classList.add("invalid");
         valid = false;
       } else if (input.type != "hidden") {
-        input.classList.remove("required");
-        input.closest("label").classList.remove("required");
+        input.classList.remove("invalid");
+        input.closest("label").classList.remove("invalid");
       }
     });
     // inputs.forEach((input) => {});
     if (valid) {
       // labels.forEach((label) => {
-      //   label.classList.remove("required");
+      //   label.classList.remove("invalid");
       // });
-    	
-    	if(btn.classList.contains("login-btn")){
-    		login.call(this);
-    	}
-    	else{
-    		btn.closest("form").submit();
-    	}
-
-      
+      btn.closest("form").submit();
     }
   });
 });
@@ -102,16 +94,16 @@ nextBtns.forEach((btn) => {
     inputs.forEach((input) => {
       console.log(input.value);
       input.addEventListener("animationend", () => {
-        input.classList.remove("required");
+        input.classList.remove("invalid");
       });
       // Check for an empty string instead of null
       if (input.value == "" && input.type != "hidden") {
-        input.classList.add("required");
-        input.closest("label").classList.add("required");
+        input.classList.add("invalid");
+        input.closest("label").classList.add("invalid");
         valid = false;
       } else if (input.type != "hidden") {
-        input.classList.remove("required");
-        input.closest("label").classList.remove("required");
+        input.classList.remove("invalid");
+        input.closest("label").classList.remove("invalid");
       }
     });
     if (hasDuplicateClass(labels)) {
@@ -195,31 +187,87 @@ function closePop() {
   document.getElementById("popup_layer").style.display = "none";
 }
 
-
-// Bind input events to each class to handle as they are typed into
-$(".id-input").on("input", function(e) {
-  checkId.call(this, e); // Use `call` to set `this` context correctly for `checkId`
+$(".id-input").each((input) => {
+  input.on("input", checkId(this));
 });
 
-// Function to check for duplicate ID
-function checkId(e) {
-  var id = $(this).val(); // Correctly fetch the value of the input
-  var $label = $(this).closest(".popup-label"); // Assuming .popup-label is the container that needs the class changes
-
-  console.log(id); // Log the ID value to ensure it's captured correctly
-
+// 중복성 검사
+function checkId() {
+  var id = $(this).val(); //id값이 "id"인 입력란의 값을 저장
+  var $label = $(this).closest(".popup-label");
+  console.log($(this).val());
   $.ajax({
-    url: "/user/checkId", // Endpoint to check the ID
-    type: "POST", // Use POST method
-    data: { id: id }, // Send ID to server
+    url: "/user/checkId", //Controller에서 요청 받을 주소
+    type: "post", //POST 방식으로 전달
+    data: { id: id },
     success: function (cnt) {
-      // Based on the response, adjust classes
+      //컨트롤러에서 넘어온 cnt값을 받는다
       if (cnt == 0) {
-        // If cnt is 0, ID is available
-        $label.removeClass("required duplicate").addClass("available");
+        //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+        $label.removeClass("invalid");
+        $label.removeClass("duplicate");
+        $label.addClass("available");
       } else {
-        // If cnt is 1 or more, ID is duplicate
-        $label.removeClass("required available").addClass("duplicate");
+        // cnt가 1일 경우 -> 이미 존재하는 아이디
+        $label.removeClass("invalid");
+        $label.removeClass("available");
+        $label.addClass("duplicate");
+      }
+    },
+    error: function () {
+      alert("오류가 발생했습니다.");
+    },
+  });
+}
+
+// Confirm password for shelter form
+$("#confirm-pwd-shelter").on("keyup", function () {
+  checkPwd("pwd-shelter", "confirm-pwd-shelter");
+});
+
+// Confirm password for general form
+$("#confirm-pwd-gen").on("keyup", function () {
+  checkPwd("pwd-gen", "confirm-pwd-gen");
+});
+
+// Function to check if passwords match
+function checkPwd(passwordSelector, confirmPasswordSelector) {
+  var pwd = document.getElementById(passwordSelector).value || "";
+  var pwdCheck = document.getElementById(confirmPasswordSelector).value || "";
+  var $label = $("#" + confirmPasswordSelector).closest(".popup-label");
+
+  if (pwdCheck !== "") {
+    // Only check if there is something in the confirmation password input
+    if (pwd === pwdCheck) {
+      $label.removeClass("not-match invalid").addClass("match");
+    } else {
+      $label.removeClass("match").addClass("not-match");
+    }
+  } else {
+    $label.removeClass("match not-match invalid"); // Clear all classes if the confirmation password is empty
+  }
+}
+
+function login(e) {
+  var $form = $(this).closest(".form-slide"); // Get the closest parent that groups the inputs
+  var id = $form.find('input[name="id"]').val(); // Correctly fetch the value of the ID input
+  var pwd = $form.find('input[name="pwd"]').val(); // Fetch the password input value
+  var $label = $form.find(".popup-label").last(); // This might need adjustment based on where you want the label changes to appear
+  console.log(id + ", " + pwd);
+  $.ajax({
+    url: "/user/login", // Endpoint to check the ID
+    type: "POST", // Use POST method
+    data: { id: id, pwd: pwd }, // Send ID and password to server
+    success: function (result) {
+      if (result == 0) {
+        // If result is 0, login fail
+        $label.removeClass("invalid").addClass("not-user");
+      } else if (result == 1) {
+        // If result is 1, login success
+        $label.removeClass("invalid not-user");
+        window.location.href = "/"; // Redirect on successful login
+      } else {
+        alert("데이터베이스 오류");
       }
     },
     error: function () {
@@ -227,73 +275,3 @@ function checkId(e) {
     },
   });
 }
-
-// Confirm password for shelter form
-$("#confirm-pwd-shelter").on("input", function() {
-    checkPwd("pwd-shelter", "confirm-pwd-shelter");
-});
-
-// Confirm password for general form
-$("#confirm-pwd-gen").on("input", function() {
-    checkPwd("pwd-gen", "confirm-pwd-gen");
-});
-
-// Function to check if passwords match
-function checkPwd(passwordSelector, confirmPasswordSelector) {
-    console.log("Password selector:", passwordSelector, document.getElementById(passwordSelector));
-    console.log("Confirm password selector:", confirmPasswordSelector, document.getElementById(confirmPasswordSelector));
-
-    var pwd = document.getElementById(passwordSelector).value || '';
-    var pwdCheck = document.getElementById(confirmPasswordSelector).value || '';
-    var $label = $("#" + confirmPasswordSelector).closest(".popup-label");
-    
-    if (pwdCheck !== "") {
-        if (pwd === pwdCheck) {
-            $label.removeClass("not-match required");
-        } else {
-            $label.removeClass("required").addClass("not-match");
-        }
-    } else {
-        $label.removeClass("match not-match required"); // Clear all classes if the confirmation password is empty
-    }
-}
-
-// 로그인 확인
-function login(e) {
-    var id = $(".login-form").find('input[name="id"]').val(); // Correctly fetch the value of the ID input
-    var pwd = $(".login-form").find('input[name="pwd"]').val(); // Fetch the password input value
-    var $label = $(".login-form").find('.popup-label').last(); // This might need adjustment based on where you want the label changes to appear
-    console.log(id + ", " + pwd);
-    $.ajax({
-        url: "/user/login/", // Endpoint to check the ID
-        type: "post", // Use POST method
-        data: { id: id, pwd: pwd }, // Send ID and password to server
-        dataType: "json",
-        success: function (result) {
-            if (result == 0) {
-                // If result is 0, login fail
-                $label.removeClass("required").addClass("not-user");
-            } else if(result == 1) {
-                // If result is 1, login success
-                $label.removeClass("required not-user");
-                window.location.href="/"; // Redirect on successful login
-            } else {
-                alert('데이터베이스 오류');
-            }
-        },
-        error: function () {
-            alert("오류가 발생했습니다."); // Error handling
-        },
-    });
-}
-
-function hasDuplicateClass(labels) {
-  labels.forEach((label) => {
-    if (label.classList.contains(".duplicate")) {
-      return true;
-    }
-  });
-  return false;
-}
-
-
