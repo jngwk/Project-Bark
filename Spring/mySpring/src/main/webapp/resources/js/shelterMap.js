@@ -43,21 +43,13 @@ window.onload = function () {
     }
   };
 
-  //보호소 정보
-  let listContainer = document.querySelector(".shelter-ul");
-  let shelterLists = listContainer.querySelectorAll("li");
-  console.log(listContainer);
-  console.log(shelterLists);
-  shelterLists.forEach((list) => {
-    list.querySelector(".shelter-detail").onclick = function () {
-    if(!list.classList.contains("liExpand")){
-    	shelterLists.forEach((el) => {
-    		el.classList.remove("liExpand");
-    	});
-    	list.classList.toggle("liExpand");
-    }
-    else{
-      list.classList.toggle("liExpand");
-    }};
-  });
+//맵 api
+
+		
+		
+
+
+
+
+
 };
