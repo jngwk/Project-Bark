@@ -1,10 +1,10 @@
 function openUpdatePop() {
-  document.getElementById("popup_layer").style.display = "block";
+  document.getElementById("update-popup-layer").style.display = "block";
 }
 
 //팝업 닫기
 function closeUpdatePop() {
-  document.getElementById("popup_layer").style.display = "none";
+  document.getElementById("update-popup-layer").style.display = "none";
 }
 window.onload = function () {
   const hypenTel = (target) => {
@@ -15,7 +15,7 @@ window.onload = function () {
 
   const pwdBtn = document.querySelector(".pwd-btn");
   pwdBtn.onclick = function () {
-    document.querySelector(".menu").classList.toggle("expand");
+    document.querySelector(".pwd-mainmenu").classList.toggle("expand");
   };
 
   // 리셋버튼

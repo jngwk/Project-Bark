@@ -1,6 +1,6 @@
 /*popup*/
 /* 뒷 배경 */
-.popup_layer {
+.update-popup-layer {
   position: fixed;
   display: none;
   top: 0;
@@ -11,7 +11,7 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 /*팝업 박스*/
-.popup_box {
+.update-popupbox {
   position: relative;
   top: 50%;
   left: 50%;
@@ -26,34 +26,35 @@
   -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
 /*컨텐츠 영역*/
-.popup_box .popup_content {
+.update-popupbox .update-popup-content {
   overflow-y: scroll;
   height: 100%;
   line-height: 1.4rem;
   font-size: 16px;
 }
 /* content 스크롤 */
-.popup_content::-webkit-scrollbar {
+.update-popup-content::-webkit-scrollbar {
   width: 10px;
 }
-.popup_content::-webkit-scrollbar-thumb {
+.update-popup-content::-webkit-scrollbar-thumb {
   background-color: var(--color-light-brown);
   border-radius: 5px;
   background-clip: padding-box;
   border: 1px solid transparent;
 }
-.popup_content::-webkit-scrollbar-track {
+.update-popup-content::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
 /*title*/
-.popup_content > .title {
+.update-popup-content > .update-title {
   position: absolute;
   top: 0;
   width: 684px;
   background: var(--color-bright);
+  
 }
-.popup_content > .title > p {
+.update-popup-content > .update-title > p {
   padding: 20px;
   text-align: center;
   color: var(--color-bark);
@@ -67,29 +68,28 @@
   font-weight: bold;
   padding-top: 60px;
 }
-.popup_content .content {
+.update-popup-content .update-content {
   padding-top: 40px;
 }
-.popup_content label {
+.update-popup-content label {
   display: flex;
   justify-content: center;
 }
-.popup_content span {
+.update-popup-content span {
   width: 130px;
   padding: 10px;
 }
-.popup_content label p {
+.update-popup-content label p {
   width: 48%;
   padding: px;
 }
-input,
-button {
+.update-popup-content label input,.update-popup-content label button {
   border: none;
   outline: none;
   background: none;
 }
 
-input {
+.update-popup-content label input {
   display: block;
   width: 45%;
   margin-top: 5px;
@@ -97,8 +97,11 @@ input {
   border-bottom: 1px solid var(--color-dark);
 }
 
+
+
+
 /*비밀번호변경*/
-.popup_content .pwd-btn {
+.update-popup-content .pwd-btn {
   display: inline-block;
   text-align: center;
   margin-left: 100px;
@@ -109,38 +112,34 @@ input {
   color: #fff;
   padding: 0;
 }
-.popup_content:hover .pwd-btn:hover {
+.update-popup-content:hover .pwd-btn:hover{
   background: var(--color-brown);
 }
 
-.menu {
+.update-popup-content .pwd-mainmenu {
   overflow: hidden;
   height: 0px;
   transition: height 1s;
 }
 
-.expand {
+.update-popup-content .expand {
   height: 130px;
 }
 
-.menu > .sub {
-  height: 0;
-  list-style: none;
-}
-
-.menu > .sub label {
+.update-popup-content .pwd-mainmenu > .pwd-sub label {
   text-decoration: none;
 }
 
 /* 데이터 초기화 버튼 */
-label button > img {
+.update-popup-content label button > img {
   width: 20px;
 }
-.reset-btn {
-  visibility: hidden;
+.update-popup-content .reset-btn{
+  visibility: hidden
 }
+
 /* 하단버튼 */
-.completeBtn {
+.update-completeBtn {
   display: flex;
   justify-content: center;
   width: 660px;
@@ -148,8 +147,8 @@ label button > img {
   bottom: 0;
   background-color: var(--color-bright);
 }
-.cancel-btn,
-.save-btn {
+.update-cancel-btn,
+.update-save-btn {
   display: inline-block;
   text-align: center;
   width: 100px;
@@ -160,9 +159,8 @@ label button > img {
   cursor: pointer;
   margin: 20px;
   background: var(--color-light-brown);
+  border: 0px;
 }
 
-.cancel-btn:hover,
-.save-btn:hover {
-  background-color: var(--color-brown);
-}
+.update-cancel-btn:hover,.update-save-btn:hover{
+  background-color: var(--color-brown);}
