@@ -190,3 +190,7 @@ textarea:focus {
   background-color: var(--color-olive);
   color: var(--color-bright);
 }
+
+.noscroll{
+	overflow: hidden;
+}

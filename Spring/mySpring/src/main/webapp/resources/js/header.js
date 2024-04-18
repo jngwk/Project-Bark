@@ -12,3 +12,10 @@ $('.dropdown').hover(
         $('.header-container').removeClass('expand'); // Remove 'expand' class when not hovering
     }
 );
+
+/* 회원 메뉴*/
+ // 프로필 드롭 다운
+	function menuToggle() {
+		const toggleMenu = document.querySelector(".profile-menu");
+		toggleMenu.classList.toggle("active");
+	}

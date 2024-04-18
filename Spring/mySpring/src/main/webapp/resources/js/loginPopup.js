@@ -19,12 +19,14 @@ const shelterForm = document.querySelector(".shelter-form");
 //   open or close
 if (openPopBtn != null) {
   openPopBtn.addEventListener("click", (event) => {
+    document.querySelector("body").classList.add("noscroll");
     event.preventDefault();
     openPop();
   });
 }
 
 closePopBtn.onclick = () => {
+  document.querySelector("body").classList.remove("noscroll");
   closePop();
   initPop();
 };
