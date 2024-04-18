@@ -251,21 +251,47 @@ body {
   color: #cfcfcffa;
 }
 
-.popup-label::after {
-  display: block;
-  opacity: 0;
-  pointer-events: none;
-  content: "* 필수 입력 사항입니다.";
-  font-size: 10px;
-  color: red;
+.popup-label::after{
+	display: block;
+	font-size: 10px;
   width: fit-content;
   margin: 0;
+  content: "";
+  	    display: inline-flex;
+}
+.popup-label.required::after {
+  content: "* 필수 입력 사항입니다.";
+    color: red;
 }
 
-.popup-label.invalid::after {
-  opacity: 1;
-  transition: 0.2s;
+.popup-label.duplicate::after {
+ 
+  content: "이미 사용중인 아이디입니다.";
+  color: red;
 }
+
+.popup-label.available::after {
+
+  content: "사용 가능한 아이디입니다.";
+    color: green;
+}
+.popup-label.not-match::after{
+	  content: "비밀번호가 일치하지 않습니다.";
+	    color: red;
+}
+.popup-label.match::after{
+	  content: "비밀번호가 일치합니다.";
+	    color: green;
+}
+.popup-label.not-user::after{
+	  content: "아이디 또는 비밀번호를 확인해주세요.";
+	    color: red;
+}
+.popup-label.invalid::after{
+	content: "올바르지 않은 형식입니다.";
+	    color: red;
+}
+
 .login-popup-input {
   display: block;
   width: 100%;

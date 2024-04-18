@@ -67,4 +67,11 @@ public class UserServiceTest {
 		log.info(user);
 		log.info("Deleted: " + deleted);
 	}
+	
+	@Test
+	public void testCheckId() {
+		String id = "gildong";
+		int count = service.checkId(id);
+		log.info("count = " + count);
+	}
 }

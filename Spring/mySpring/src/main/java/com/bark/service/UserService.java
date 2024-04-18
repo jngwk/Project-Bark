@@ -41,4 +41,7 @@ public class UserService {
 		log.info("delete..................");
 		return mapper.delete(user)==1;
 	}
+	public int checkId(String id) {
+		return mapper.checkId(id);
+	}
 }
