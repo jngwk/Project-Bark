@@ -18,30 +18,30 @@ import lombok.extern.log4j.Log4j;
 public class BoardMapperTest {
 	@Setter(onMethod_ = {@Autowired})
 	private BoardMapper mapper;
-
-	@Test
-	public void testGetList() {
-		mapper.getList().forEach(board -> log.info(board));  //람다식
-	}
-	@Test
-	public void testInsert() {
-		Board board = new Board();
-		board.setTitle("새로 작성하는 글");
-		board.setContent("새로 작성하는 내용");
-		board.setWriter("newbie");
-		mapper.insert(board);
-		log.info(board);
-	}
-
-	@Test
-	public void testInsertSelectKey() {
-		Board board = new Board();
-		board.setTitle("새로 작성하는 글");
-		board.setContent("새로 작성하는 내용");
-		board.setWriter("newbie");
-		mapper.insertSelectKey(board);
-		log.info(board);
-	}
+//
+//	@Test
+//	public void testGetList() {
+//		mapper.getList().forEach(board -> log.info(board));  //람다식
+//	}
+//	@Test
+//	public void testInsert() {
+//		Board board = new Board();
+//		board.setTitle("새로 작성하는 글");
+//		board.setContent("새로 작성하는 내용");
+//		board.setWriter("newbie");
+//		mapper.insert(board);
+//		log.info(board);
+//	}
+//
+//	@Test
+//	public void testInsertSelectKey() {
+//		Board board = new Board();
+//		board.setTitle("새로 작성하는 글");
+//		board.setContent("새로 작성하는 내용");
+//		board.setWriter("newbie");
+//		mapper.insertSelectKey(board);
+//		log.info(board);
+//	}
 
 	@Test
 	public void testRead() {
