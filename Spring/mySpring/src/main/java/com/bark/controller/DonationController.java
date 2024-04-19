@@ -59,14 +59,25 @@ public class DonationController {
 
     }
 	
-	@GetMapping(value="shelterSearchList",produces = "application/json; charset=utf8")
+	@GetMapping(value="shelterSearchName",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<Shelter> shelterSearchList(@RequestParam ("name") String name,Model model) {
+	public List<Shelter> shelterSearchName(@RequestParam ("name") String name,Model model) {
 		log.info("-------sheltername search mapping o--------");
 		log.info(name);
-		return service.searchShelterList(name);
-//		model.addAttribute("sList", sList);
-
+		return service.searchShelterName(name);
+	}
+	
+	@GetMapping(value="shelterSearchAddr",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Shelter> shelterSearchAddr(@RequestParam ("addr") String addr,Model model) {
+		log.info("-------shelteraddr search mapping o--------");
+		log.info(addr);
+		return service.searchShelterAddr(addr);
+	}
+	
+	@GetMapping("/campaign")
+	public void campaign() {
+		log.info("campaign...........");
 	}
 	
 	

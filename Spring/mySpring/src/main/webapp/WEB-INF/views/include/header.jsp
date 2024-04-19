@@ -44,7 +44,7 @@
 								class="large-font hover-underline">후원하기</strong></a>
 							<a class="transition" href="${contextPath }/donation/map"><strong
 								class="large-font hover-underline">보호소
-									조회</strong></a> <a class="transition" href="#"><strong
+									조회</strong></a> <a class="transition" href="${contextPath }/donation/campaign"><strong
 								class="large-font hover-underline">캠페인
 									둘러보기</strong></a>
 						</div></li>
@@ -61,11 +61,11 @@
 						<div class="dropdown-content">
 							<a class="transition" href="${contextPath }/board/noticeList"><strong
 								class="large-font hover-underline">공지사항</strong></a>
-							<a class="transition" href="#"><strong
+							<a class="transition" href="${contextPath }/board/shareList"><strong
 								class="large-font hover-underline">정보공유</strong></a>
 							<a class="transition" href="#"><strong
 								class="large-font hover-underline">보호소
-									이야기</strong></a> <a class="transition" href="#"><strong
+									이야기</strong></a> <a class="transition" href="${contextPath }/board/contactWrite"><strong
 								class="large-font hover-underline">문의하기</strong></a>
 						</div></li>
 					<li>

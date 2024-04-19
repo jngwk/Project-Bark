@@ -23,8 +23,10 @@ public class ShelterService {
 		return mapper.getShelterList();
 	}
 
-	public List<Shelter> searchShelterList(String name) {
-		return mapper.searchShelterList(name);
-		
+	public List<Shelter> searchShelterName(String name) {
+		return mapper.searchShelterName(name);
+	}
+	public List<Shelter> searchShelterAddr(String addr) {
+		return mapper.searchShelterAddr(addr);
 	}
 }

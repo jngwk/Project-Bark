@@ -17,6 +17,9 @@ public interface ApiMapper {
 	public List<Shelter> getShelterList();
 
 	@Select("select * from shelter where shelterName like concat('%',#{name},'%')")
-	public List<Shelter> searchShelterList(String name);
+	public List<Shelter> searchShelterName(String name);
+	
+	@Select("select * from shelter where shelterAddr like concat('%',#{addr},'%')")
+	public List<Shelter> searchShelterAddr(String addr);
 	
 }

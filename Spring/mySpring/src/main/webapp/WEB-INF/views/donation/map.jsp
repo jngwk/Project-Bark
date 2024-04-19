@@ -32,14 +32,16 @@
 					</form>
 				</div>
 				<div class="area-search">
-					<form action="${contextPath }/donation/map">
+					<form name="searchAddr">
 						<select class="main-city">
 							<option>지역</option>
 							<option value="seoul">서울</option>
 							<option value="gyeonggi">경기도</option>
-						</select> <select class="sub-city" name="city" id="sub-city">
-							<option>시/군/구</option>
-						</select> <input class="submit" type="submit" value="검색">
+						</select>
+						<select class="sub-city" name="city" id="sub-city">
+							<option value="">시/군/구</option>
+						</select>
+						<input class="submit" id="addrSearchBtn" type="submit" value="검색">
 					</form>
 				</div>
 			</div>
@@ -56,9 +58,9 @@
 								</div>
 								<div class="shelter-buttons">
 									<div class="detail-box">
-										<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+										<a href="${contextPath }/donation/form" class="donate green-btn large-btn">후원하기</a> <a
 											href="#" class="shelter-story green-btn large-btn">보호소
-											이야기</a> <a href="#" class="campaign green-btn large-btn">캠페인
+											이야기</a> <a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인
 											둘러보기</a>
 									</div>
 								</div>
@@ -76,16 +78,17 @@
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051"></script>
 	<script src="${js }/shelterMap.js"></script>
 	<script>
+	//이름 ajax
 	$("#nameSearchBtn").on("click",function(e){
 		e.preventDefault();
-		getSearchList();
+		getSearchName();
 		console.log("click");
 	})
-	function getSearchList(){
-		console.log( $("form[name=searchName]").serialize());
+	function getSearchName(){
+/* 		console.log( $("form[name=searchName]").serialize()); */
 		$.ajax({
 			type: 'GET',
-			url : "/donation/shelterSearchList",
+			url : "/donation/shelterSearchName",
 			data : $("form[name=searchName]").serialize(),
 			success : function(result){
 				console.log(result);
@@ -103,10 +106,51 @@
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-								href="#" class="shelter-story green-btn large-btn">보호소
-								이야기</a> <a href="#" class="campaign green-btn large-btn">캠페인
-								둘러보기</a>
+							<a href="${contextPath }/donation/form" class="donate green-btn large-btn">후원하기</a>
+							<a href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+							<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+						</div>
+					</div>
+				</li>`
+						$('.shelter-ul').append(str);
+	        		}) 
+				}
+			}
+		})
+	}
+	
+
+	//주소 ajax
+	$("#addrSearchBtn").on("click",function(e){
+		e.preventDefault();
+		getSearchAddr();
+		console.log("click");
+	})
+	function getSearchAddr(){
+		console.log($(".sub-city").val());
+		$.ajax({
+			type: 'GET',
+			url : "/donation/shelterSearchAddr",
+			data : {addr: $(".sub-city").val()},
+			success : function(result){
+				console.log(result);
+				//테이블 초기화
+				$('.shelter-ul').empty();
+				if(result.length>=1){
+					result.forEach(function(item){
+						str=`
+						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+							<div class="shelter-detail" >
+						<p>\${item.shelterName}</p>
+						<span>\${item.shelterAddr}</span>
+							<p style="display: none;">\${item.lat}</p>
+						<p style="display: none;">\${item.lng}</p>
+					</div>
+					<div class="shelter-buttons">
+						<div class="detail-box">
+							<a href="${contextPath }/donation/form" class="donate green-btn large-btn">후원하기</a> <a
+								href="#" class="shelter-story green-btn large-btn">보호소	이야기</a>
+								<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
 						</div>
 					</div>
 				</li>`

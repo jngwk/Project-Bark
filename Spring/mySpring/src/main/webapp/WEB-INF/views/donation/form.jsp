@@ -98,14 +98,14 @@
 					</table>
 				</div>
 				<div class="donate-button">
-					<input class="large-btn brown-btn" type="button"
+					<input class="large-btn green-btn" type="button"
 						onclick="history.back()" value="취소"> <input
-						class="large-btn brown-btn" type="submit" value="후원하기">
+						class="large-btn green-btn" type="submit" value="후원하기">
 				</div>
 			</form>
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
-	<script src="${js }/donation.js"></script>
+	<script src="${js }/donationform.js"></script>
 </body>
 </html>
