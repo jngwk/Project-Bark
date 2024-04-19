@@ -24,18 +24,20 @@
 			</div>
 			<div class="shelter-search">
 				<div class="name-search">
-					<form>
-						<input class="search" type="search" placeholder="보호소 이름 검색">
-						<input class="submit" type="submit" value="검색">
+					<form name="searchName">
+						<input class="search" name="name" type="search"
+							placeholder="보호소 이름 검색">
+						<input class="submit" id="nameSearchBtn"
+						type="submit" value="검색">
 					</form>
 				</div>
 				<div class="area-search">
-					<form>
+					<form action="${contextPath }/donation/map">
 						<select class="main-city">
 							<option>지역</option>
 							<option value="seoul">서울</option>
 							<option value="gyeonggi">경기도</option>
-						</select> <select class="sub-city" id="sub-city">
+						</select> <select class="sub-city" name="city" id="sub-city">
 							<option>시/군/구</option>
 						</select> <input class="submit" type="submit" value="검색">
 					</form>
@@ -45,11 +47,11 @@
 				<div class="shelter-list">
 					<ul class="shelter-ul">
 						<c:forEach var="list" items="${sList}">
-							<li onclick="shelterMap(${list.lat},${list.lng})">
-								<div class="shelter-detail" >
+							<li onclick="shelterMap(${list.lat},${list.lng}); expandList(this)">
+								<div class="shelter-detail">
 									<p>${list.shelterName}</p>
 									<span>${list.shelterAddr}</span>
-  									<p style="display: none;">${list.lat}</p>
+									<p style="display: none;">${list.lat}</p>
 									<p style="display: none;">${list.lng}</p>
 								</div>
 								<div class="shelter-buttons">
@@ -72,60 +74,49 @@
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051"></script>
-			<script src="${js }/shelterMap.js"></script>
+	<script src="${js }/shelterMap.js"></script>
 	<script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		level : 3
-	// 지도의 확대 레벨
-	};
-
-	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-
-	// 마커가 표시될 위치입니다 
-	var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-		position : markerPosition
-	});
-	
-	  function shelterMap(lat,lng){
-		    map.setCenter(new kakao.maps.LatLng(lat,lng));
-		    marker.setPosition(new kakao.maps.LatLng(lat,lng));    
-		}
-	  marker.setMap(map);
-
-	// 마커가 지도 위에 표시되도록 설정합니다
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);
-	
-	  //보호소 정보
-  let listContainer = document.querySelector(".shelter-ul");
-  let shelterLists = listContainer.querySelectorAll("li");
-  
-
-  console.log(listContainer);
-  console.log(shelterLists);
-  shelterLists.forEach((list) => { list.querySelector(".shelter-detail").onclick = function (e) {
-	  
-	    if(!list.classList.contains("liExpand")){        
-	    	
-	    	shelterLists.forEach((el) => {            
-	    		el.classList.remove("liExpand");
-	    	});
-	    	list.classList.toggle("liExpand");         
-	    }
-	    else{                                            
-	      list.classList.toggle("liExpand");             
-	    }
-    }; 
-  });
-
-
-	  
-	  
+	$("#nameSearchBtn").on("click",function(e){
+		e.preventDefault();
+		getSearchList();
+		console.log("click");
+	})
+	function getSearchList(){
+		console.log( $("form[name=searchName]").serialize());
+		$.ajax({
+			type: 'GET',
+			url : "/donation/shelterSearchList",
+			data : $("form[name=searchName]").serialize(),
+			success : function(result){
+				console.log(result);
+				//테이블 초기화
+				$('.shelter-ul').empty();
+				if(result.length>=1){
+					result.forEach(function(item){
+						str=`
+						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+							<div class="shelter-detail" >
+						<p>\${item.shelterName}</p>
+						<span>\${item.shelterAddr}</span>
+							<p style="display: none;">\${item.lat}</p>
+						<p style="display: none;">\${item.lng}</p>
+					</div>
+					<div class="shelter-buttons">
+						<div class="detail-box">
+							<a href="#" class="donate green-btn large-btn">후원하기</a> <a
+								href="#" class="shelter-story green-btn large-btn">보호소
+								이야기</a> <a href="#" class="campaign green-btn large-btn">캠페인
+								둘러보기</a>
+						</div>
+					</div>
+				</li>`
+						$('.shelter-ul').append(str);
+	        		}) 
+				}
+			}
+		})
+	}
 	</script>
+	<script src="${js }/map.js"></script>
 </body>
 </html>

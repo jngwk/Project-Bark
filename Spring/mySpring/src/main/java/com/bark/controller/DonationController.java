@@ -11,8 +11,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.xml.sax.SAXException;
 
 import com.bark.domain.Shelter;
@@ -51,10 +53,22 @@ public class DonationController {
         }
         log.info("-------insert into HaspMap--------");
         
-        model.addAttribute("sList", sList);
-        
+    	model.addAttribute("sList", sList);
+
         return "/donation/map";
 
     }
+	
+	@GetMapping(value="shelterSearchList",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Shelter> shelterSearchList(@RequestParam ("name") String name,Model model) {
+		log.info("-------sheltername search mapping o--------");
+		log.info(name);
+		return service.searchShelterList(name);
+//		model.addAttribute("sList", sList);
+
+	}
+	
+	
 	
 }
