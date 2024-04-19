@@ -61,17 +61,18 @@ public class UserController {
 			session.setAttribute("userName", user.getName());
 			return 1;
 		}
-		else {
+		else if(!user.getPwd().equals(pwd)){
 			return -1;
 		}
+		return -2;
 	}
 	
-	@PostMapping("/join")
-	public String join(User user, RedirectAttributes rttr) {
+	@PostMapping(value="join",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public boolean join(User user) {
 		log.info("join: " + user);
 		boolean result = service.join(user);
-		rttr.addFlashAttribute("result", result);
-		return "redirect:/";
+		return result;
 	}
 	
 	@GetMapping("/userDetail")
@@ -112,7 +113,7 @@ public class UserController {
 	
 	@PostMapping(value="checkId",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public int idCheck(@RequestParam("id") String id){
+	public int checkId(@RequestParam("id") String id){
 		int cnt = -1;
 		if(id != "") {
 			cnt = service.checkId(id);
