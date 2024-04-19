@@ -43,13 +43,5 @@ window.onload = function () {
     }
   };
 
-//맵 api
-
-		
-		
-
-
-
-
-
 };
+
