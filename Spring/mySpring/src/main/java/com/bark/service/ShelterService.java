@@ -22,4 +22,9 @@ public class ShelterService {
 	public List<Shelter> getShelterList() {;
 		return mapper.getShelterList();
 	}
+
+	public List<Shelter> searchShelterList(String name) {
+		return mapper.searchShelterList(name);
+		
+	}
 }
