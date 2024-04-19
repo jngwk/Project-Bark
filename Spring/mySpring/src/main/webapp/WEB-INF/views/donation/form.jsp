@@ -106,6 +106,6 @@
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
-	<script src="${js }/donation.js"></script>
+	<script src="${js }/donationform.js"></script>
 </body>
 </html>

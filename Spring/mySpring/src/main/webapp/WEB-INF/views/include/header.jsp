@@ -44,7 +44,7 @@
 								class="large-font hover-underline">후원하기</strong></a>
 							<a class="transition" href="${contextPath }/donation/map"><strong
 								class="large-font hover-underline">보호소
-									조회</strong></a> <a class="transition" href="#"><strong
+									조회</strong></a> <a class="transition" href="${contextPath }/donation/campaign"><strong
 								class="large-font hover-underline">캠페인
 									둘러보기</strong></a>
 						</div></li>

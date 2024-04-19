@@ -1,5 +1,5 @@
 .header-container{
-	background-color: var(--color-brown);
+	background-color: var(--color-olive);
 }
 .header-container strong{
 	color: var(--main-font-color) !important;
@@ -8,7 +8,7 @@
 .donate-container {
   display: flex;
   justify-content: center;
-  background-color: var(--color-white-smoke);
+  background-color: var(--color-honeydew);
   padding-block: 140px 50px;
 }
 
