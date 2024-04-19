@@ -117,6 +117,10 @@ align-items: center;
 .shelter-detail{
 	  padding: 20px;
 }
+.shelter-detail span{
+	  font-size:14px;
+}
+
 /* 검색디테일 */
 .shelter-buttons {
   position: relative;
