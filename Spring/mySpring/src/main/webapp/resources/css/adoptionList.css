@@ -20,16 +20,15 @@
 .header-container strong{
 	color: var(--main-font-color) !important;
 }
-
 .adoption-list-header{
-	text-align: center;
-	padding-bottom: 70px;
+	padding-top:140px;
+	background:var(--color-bright);
 }
-.adoption-list-header img{
-	width: 80px;
-}
-.adoption-list-header h1{
-	color: var(--color-brown);
+.page-subtitle{
+	font-size: 25px;
+    width: 60%;
+    margin: 0 auto;
+    transform: translate(270px,-90px);
 }
 article img {
   display: block;
@@ -43,11 +42,9 @@ article img {
 /*=============== CARD ===============*/
 .grid__container {
 	position: relative;
-	top: 140px;
   display: grid;
   place-items: center;
-  margin-inline: 1.5rem;
-  padding-block: 5rem;
+  background: var(--color-bright);
 }
 
 .card__container {

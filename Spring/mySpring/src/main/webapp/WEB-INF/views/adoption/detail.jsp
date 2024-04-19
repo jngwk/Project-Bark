@@ -17,8 +17,9 @@
   <body>
   <jsp:include page="${views }/include/header.jsp" flush="false"/>
     <div class="dog-desc-container">
+    <p class="page-title">Detail</p><p class="page-subtitle">[상세보기]</p>
       <div class="dog-desc-inner">
-        <a href="dog-list.html"
+        <a href="${contextPath }/adoption/list"
           ><img class="arrow" src="${icons }/arrow-back.png" alt="arrow"
         /></a>
         <div class="summary">

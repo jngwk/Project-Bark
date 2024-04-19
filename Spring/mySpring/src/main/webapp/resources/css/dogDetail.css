@@ -8,7 +8,14 @@
 .dog-desc-container {
   position: relative;
   height: 100dvh;
-  padding-top: 250px; 
+  padding-top: 140px; 
+  background:var(--color-white-smoke);
+}
+.page-subtitle{
+	font-size: 25px;
+    width: 60%;
+    margin: 0 auto;
+    transform: translate(180px,-90px);
 }
 .dog-desc-inner {
   position: relative;
@@ -83,7 +90,7 @@
   margin: 0 auto;
   padding: 80px 40px;
   line-height: 35px;
-  background-color: var(--color-white-smoke);
+   background:var(--color-bright);
   border-radius: 5px;
 }
 .more p {

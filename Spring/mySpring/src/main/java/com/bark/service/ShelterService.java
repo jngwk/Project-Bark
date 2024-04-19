@@ -1,5 +1,7 @@
 package com.bark.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +17,16 @@ public class ShelterService {
 	
 	public void putShelterInfo(Shelter shelter) {
 		mapper.putShelter(shelter);
+	}
+	
+	public List<Shelter> getShelterList() {;
+		return mapper.getShelterList();
+	}
+
+	public List<Shelter> searchShelterName(String name) {
+		return mapper.searchShelterName(name);
+	}
+	public List<Shelter> searchShelterAddr(String addr) {
+		return mapper.searchShelterAddr(addr);
 	}
 }

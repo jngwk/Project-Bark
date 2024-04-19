@@ -1,6 +1,7 @@
 /*popup*/
 /* 뒷 배경 */
 .update-popup-layer {
+	color: #000000 !important;
   position: fixed;
   display: none;
   top: 0;

@@ -106,6 +106,9 @@ nextBtns.forEach((btn) => {
         input.closest("label").classList.remove("invalid");
       }
     });
+    if (hasDuplicateClass(labels)) {
+      valid = false;
+    }
     if (valid) {
       nextPopupSlide(subContSlides);
     }
@@ -184,34 +187,91 @@ function closePop() {
   document.getElementById("popup_layer").style.display = "none";
 }
 
+$(".id-input").each((input) => {
+  input.on("input", checkId(this));
+});
+
 // 중복성 검사
-var idChk = 0;
 function checkId() {
-  var id = $("#id").val(); //id값이 "inputId"인 입력란의 값을 저장
+  var id = $(this).val(); //id값이 "id"인 입력란의 값을 저장
+  var $label = $(this).closest(".popup-label");
+  console.log($(this).val());
   $.ajax({
-    url: "idCheck",
-    type: "post",
-    data: id,
-    dataType: "json", //서버로 돌려받는 값의 타입 지정
-    //서버로 보낼 데이터 설정
-    contentType: "application/json; charset=utf-8",
-    success: function (data) {
-      //컨트롤러에서 넘어온 result값을 받음
-      if (data.result == 0) {
-        alert("아이디가 존재합니다. 다른 아이디를 입력해 주세요");
-        $(".chk-btn").addClass("has-error");
-        $(".chk-btn").removeClass("has-success");
-        $("#id").focus();
+    url: "/user/checkId", //Controller에서 요청 받을 주소
+    type: "post", //POST 방식으로 전달
+    data: { id: id },
+    success: function (cnt) {
+      //컨트롤러에서 넘어온 cnt값을 받는다
+      if (cnt == 0) {
+        //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+        $label.removeClass("invalid");
+        $label.removeClass("duplicate");
+        $label.addClass("available");
       } else {
-        alert("사용가능한 아이디입니다");
-        $(".chk-btn").addClass("has-success");
-        $(".chk-btn").removeClass("has-error");
-        $("#inputPwd").focus();
-        idChk = 1;
+        // cnt가 1일 경우 -> 이미 존재하는 아이디
+        $label.removeClass("invalid");
+        $label.removeClass("available");
+        $label.addClass("duplicate");
       }
     },
-    error: function (error) {
-      alert("아이디를 다시 입력해 주세요");
+    error: function () {
+      alert("오류가 발생했습니다.");
+    },
+  });
+}
+
+// Confirm password for shelter form
+$("#confirm-pwd-shelter").on("keyup", function () {
+  checkPwd("pwd-shelter", "confirm-pwd-shelter");
+});
+
+// Confirm password for general form
+$("#confirm-pwd-gen").on("keyup", function () {
+  checkPwd("pwd-gen", "confirm-pwd-gen");
+});
+
+// Function to check if passwords match
+function checkPwd(passwordSelector, confirmPasswordSelector) {
+  var pwd = document.getElementById(passwordSelector).value || "";
+  var pwdCheck = document.getElementById(confirmPasswordSelector).value || "";
+  var $label = $("#" + confirmPasswordSelector).closest(".popup-label");
+
+  if (pwdCheck !== "") {
+    // Only check if there is something in the confirmation password input
+    if (pwd === pwdCheck) {
+      $label.removeClass("not-match invalid").addClass("match");
+    } else {
+      $label.removeClass("match").addClass("not-match");
+    }
+  } else {
+    $label.removeClass("match not-match invalid"); // Clear all classes if the confirmation password is empty
+  }
+}
+
+function login(e) {
+  var $form = $(this).closest(".form-slide"); // Get the closest parent that groups the inputs
+  var id = $form.find('input[name="id"]').val(); // Correctly fetch the value of the ID input
+  var pwd = $form.find('input[name="pwd"]').val(); // Fetch the password input value
+  var $label = $form.find(".popup-label").last(); // This might need adjustment based on where you want the label changes to appear
+  console.log(id + ", " + pwd);
+  $.ajax({
+    url: "/user/login", // Endpoint to check the ID
+    type: "POST", // Use POST method
+    data: { id: id, pwd: pwd }, // Send ID and password to server
+    success: function (result) {
+      if (result == 0) {
+        // If result is 0, login fail
+        $label.removeClass("invalid").addClass("not-user");
+      } else if (result == 1) {
+        // If result is 1, login success
+        $label.removeClass("invalid not-user");
+        window.location.href = "/"; // Redirect on successful login
+      } else {
+        alert("데이터베이스 오류");
+      }
+    },
+    error: function () {
+      alert("오류가 발생했습니다."); // Error handling
     },
   });
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,24 +38,41 @@ public class UserController {
 		log.info("adminList");
 		model.addAttribute("aList", service.getAdminList());
 	}
-	@PostMapping("/login")
-	public String login(String id, String pwd, HttpSession session) {
-		log.info("login");
+	/*
+	 * @PostMapping("/login") public String login(String id, String pwd, HttpSession
+	 * session) { log.info("login"); User user = service.getUser(id);
+	 * if(user.getPwd().equals(pwd)) { session.setAttribute("userId", id);
+	 * session.setAttribute("userType", user.getType());
+	 * session.setAttribute("userName", user.getName()); } return "redirect:/"; }
+	 */
+	
+	@RequestMapping(value="login", produces = "application/json; charset=utf8", method = RequestMethod.POST)
+	@ResponseBody
+	public int login(@RequestParam("id") String id, @RequestParam("pwd") String pwd, HttpSession session){
+		log.info("login..................");
 		User user = service.getUser(id);
-		if(user.getPwd().equals(pwd)) {
+		log.info("id: " + id);
+		if(user == null) {
+			return 0;
+		}
+		else if(user.getPwd().equals(pwd)) {
 			session.setAttribute("userId", id);
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
+			return 1;
 		}
-		return "redirect:/";
+		else if(!user.getPwd().equals(pwd)){
+			return -1;
+		}
+		return -2;
 	}
 	
-	@PostMapping("/join")
-	public String join(User user, RedirectAttributes rttr) {
+	@PostMapping(value="join",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public boolean join(User user) {
 		log.info("join: " + user);
 		boolean result = service.join(user);
-		rttr.addFlashAttribute("result", result);
-		return "redirect:/";
+		return result;
 	}
 	
 	@GetMapping("/userDetail")
@@ -69,6 +87,7 @@ public class UserController {
 		rttr.addFlashAttribute("result", result);
 		return "redirect:/user/userDetail";
 	}
+	
 	@PostMapping("/delete")
 	public String delete(User user, RedirectAttributes rttr) {
 		log.info("delete");
@@ -81,7 +100,6 @@ public class UserController {
 		else {
 			return "redirect:/";
 		}
-		
 	}
 	
 	@GetMapping("/logout")
@@ -92,7 +110,29 @@ public class UserController {
 		session.removeAttribute("userName");
 		return "redirect:/";
 	}
-
+	
+	@PostMapping(value="checkId",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public int checkId(@RequestParam("id") String id){
+		int cnt = -1;
+		if(id != "") {
+			cnt = service.checkId(id);
+			log.info(id + ": " +cnt);
+		}
+		return cnt;
+	}
+	
+	@PostMapping(value="findAcc",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public int findAcc(@RequestParam("name") String name, @RequestParam("email") String email){
+		int result= service.findAcc(name, email);
+		log.info(name + " + " + email);
+		log.info("result: " + result);
+		return result;
+	}
+	
+	
+	
 	@GetMapping("/mail")
 	public void mail() {
 		

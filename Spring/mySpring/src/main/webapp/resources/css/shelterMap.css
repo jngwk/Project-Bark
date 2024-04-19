@@ -56,9 +56,12 @@ align-items: center;
   width: 50%;
   padding: 0 30px;
   text-align: center;
+  cursor: pointer;
+  font-size:20px;
+  
 }
 
-.tab li:active {
+.tab li:active,.tab li:hover {
   transform: translateY(15%);
   transition: 0.1s;
 }
@@ -117,6 +120,10 @@ align-items: center;
 .shelter-detail{
 	  padding: 20px;
 }
+.shelter-detail span{
+	  font-size:14px;
+}
+
 /* 검색디테일 */
 .shelter-buttons {
   position: relative;
@@ -138,6 +145,7 @@ align-items: center;
   padding: 18px;
   margin:0 2px;
   border-radius: 5px;
+  box-shadow: 1px 1px 3px var(--color-olive);
 }
 /* 검색 스크롤 */
 .list-container::-webkit-scrollbar {
