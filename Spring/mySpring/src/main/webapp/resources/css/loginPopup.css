@@ -40,11 +40,18 @@
 /* x 버튼 */
 .popup_btn {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  top: -30px;
+  height: 36px;
+  width: 36px;
+  top: 0;
   right: 0;
   z-index: 9999;
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+.popup_btn:hover{
+	opacity: 1;
+	
 }
 .popup_btn a img {
   width: 22px;
@@ -291,6 +298,18 @@ body {
 	content: "올바르지 않은 형식입니다.";
 	    color: red;
 }
+.popup-label.invalid-pwd::after{
+	content: "영문자, 숫자 및 특수문자를 포함해 8자리 이상 입력하세요.";
+	    color: red;
+}
+.popup-label.valid-pwd::after{
+	content: "사용 가능한 비밀번호입니다.";
+	    color: green;
+}
+.popup-label.no-acc::after{
+	content: "가입된 정보가 없습니다.";
+	    color: red;
+}
 
 .login-popup-input {
   display: block;
@@ -301,7 +320,7 @@ body {
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
 }
-.login-popup-input.invalid {
+.login-popup-input.required {
   animation: shake 0.2s ease-in-out 0s 2;
 }
 
@@ -334,6 +353,10 @@ body {
   margin-bottom: 20px;
   background: var(--color-brown);
   text-transform: uppercase;
+}
+.sub-cont-slides .next-btn, 
+.sub-cont-slides .submit-btn{
+	margin-top: 10px;
 }
 
 .fb-btn,

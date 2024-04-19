@@ -86,6 +86,7 @@ public class UserController {
 		rttr.addFlashAttribute("result", result);
 		return "redirect:/user/userDetail";
 	}
+	
 	@PostMapping("/delete")
 	public String delete(User user, RedirectAttributes rttr) {
 		log.info("delete");
@@ -98,7 +99,6 @@ public class UserController {
 		else {
 			return "redirect:/";
 		}
-		
 	}
 	
 	@GetMapping("/logout")
@@ -113,12 +113,24 @@ public class UserController {
 	@PostMapping(value="checkId",produces = "application/json; charset=utf8")
 	@ResponseBody
 	public int idCheck(@RequestParam("id") String id){
-		int cnt = service.checkId(id);
-		log.info(id + ": " +cnt);
+		int cnt = -1;
+		if(id != "") {
+			cnt = service.checkId(id);
+			log.info(id + ": " +cnt);
+		}
 		return cnt;
 	}
 	
-
+	@PostMapping(value="findAcc",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public int findAcc(@RequestParam("name") String name, @RequestParam("email") String email){
+		int result= service.findAcc(name, email);
+		log.info(name + " + " + email);
+		log.info("result: " + result);
+		return result;
+	}
+	
+	
 	
 	@GetMapping("/mail")
 	public void mail() {

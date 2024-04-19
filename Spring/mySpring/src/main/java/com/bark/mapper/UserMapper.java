@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -29,5 +30,7 @@ public interface UserMapper {
     public User findUser(String email);
     @Select("select count(id) from user where id = #{id}")
 	public int checkId(String id);
+    @Select("select count(id) from user where name = #{name} AND email = #{email}")
+	public int findAcc(@Param("name") String name, @Param("email") String email);
 	
 }

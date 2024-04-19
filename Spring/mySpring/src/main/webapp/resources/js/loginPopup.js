@@ -15,6 +15,7 @@ const findAccountBtn = document.querySelector(".forgot-id-pwd");
 const loginPrevBtn = document.querySelector(".login-prev-btn");
 const generalForm = document.querySelector(".general-form");
 const shelterForm = document.querySelector(".shelter-form");
+const inputs = document.querySelectorAll(".login-popup-input");
 
 //   open or close
 if (openPopBtn != null) {
@@ -35,6 +36,13 @@ imgBtn.addEventListener("click", function () {
   document.querySelector(".cont").classList.toggle("s--signup");
   initSlide();
 });
+
+inputs.forEach(input => {
+    input.addEventListener("input", () => {
+        input.closest(".popup-label").classList.remove("required");
+    });
+});
+
 //   shelter btn 구분
 generalBtn.addEventListener("click", () => {
   showGeneralForm();
@@ -50,93 +58,105 @@ findAccountBtn.addEventListener("click", () => {
 loginPrevBtn.addEventListener("click", () => {
   prevSlide(contSlides);
 });
-submitBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    let valid = true;
-    const parentSlide = btn.closest(".form-slide");
-    const inputs = Array.from(parentSlide.getElementsByTagName("input"));
-    const labels = Array.from(parentSlide.getElementsByTagName("label"));
-    // Convert HTMLCollection to array to use forEach
-    inputs.forEach((input) => {
-      console.log(input.value);
-      input.addEventListener("animationend", () => {
-        input.classList.remove("required");
-      });
-      // Check for an empty string instead of null
-      if (input.value == "" && input.type != "hidden") {
-        input.classList.add("required");
-        input.closest("label").classList.add("required");
-        valid = false;
-      } else if (input.type != "hidden") {
-        input.classList.remove("required");
-        input.closest("label").classList.remove("required");
-      }
-    });
-    // inputs.forEach((input) => {});
-    if (valid) {
-      // labels.forEach((label) => {
-      //   label.classList.remove("required");
-      // });
-    	
-    	if(btn.classList.contains("login-btn")){
-    		login.call(this);
-    	}
-    	else{
-    		btn.closest("form").submit();
-    	}
 
+// Utility function to handle form validation and button actions
+function handleFormButtonClick(btn, callback) {
+  const parentSlide = btn.closest(".form-slide");
+  const inputs = parentSlide.querySelectorAll("input");
+  let isValid = true;
+
+  inputs.forEach(input => {
+    // Log input values for debugging
+    console.log(input.value);
       
+    // Validate input fields
+    if (input.value.trim() === "" && input.type !== "hidden") {
+      input.classList.add("required");
+      input.closest(".popup-label").classList.add("required");
+    } else if (input.type !== "hidden") {
+      input.classList.remove("required");
+      input.closest(".popup-label").classList.remove("required");
     }
   });
+  
+  isValid = checkClass(Array.from(parentSlide.querySelectorAll(".popup-label")));
+  
+  // Only proceed if all validations pass
+  if (isValid) {
+    callback(btn);
+  }
+}
+
+// Add event listener to each submit button
+submitBtns.forEach(btn => {
+  btn.addEventListener("click", () => handleFormButtonClick(btn, submitButtonAction));
 });
-nextBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    let valid = true;
-    const parentSlide = btn.closest(".form-slide");
-    console.log(parentSlide);
-    const inputs = Array.from(parentSlide.getElementsByTagName("input"));
-    console.log(inputs);
-    const labels = Array.from(parentSlide.getElementsByTagName("label"));
-    console.log(labels);
-    // Convert HTMLCollection to array to use forEach
-    inputs.forEach((input) => {
-      console.log(input.value);
-      input.addEventListener("animationend", () => {
-        input.classList.remove("required");
-      });
-      // Check for an empty string instead of null
-      if (input.value == "" && input.type != "hidden") {
-        input.classList.add("required");
-        input.closest("label").classList.add("required");
-        valid = false;
-      } else if (input.type != "hidden") {
-        input.classList.remove("required");
-        input.closest("label").classList.remove("required");
-      }
-    });
-    if (hasDuplicateClass(labels)) {
-      valid = false;
-    }
-    if (valid) {
-      nextPopupSlide(subContSlides);
-    }
-  });
+
+
+// Add event listener to each next button
+nextBtns.forEach(btn => {
+  btn.addEventListener("click", () => handleFormButtonClick(btn, nextButtonAction));
 });
+
+
 prevBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    prevSlide(subContSlides);
-    if (btn.closest("div").classList.contains("first-slide")) {
-      btn.closest(".form-slides").addEventListener(
+    btn.addEventListener("click", () => prevButtonAction(btn));
+});
+
+// Function for handling next button
+function nextButtonAction(btn) {
+  const parentSlides = btn.closest(".form-slides");
+  console.log(parentSlides);
+  nextPopupSlide(parentSlides);
+}
+
+// Function for handling prev button
+function prevButtonAction(btn) {
+  let isValid = false;
+  const parentSlides = btn.closest(".form-slides");
+  console.log(parentSlides);
+  prevSlide(parentSlides);
+  if (btn.closest(".form-slide").classList.contains("first-slide")) {
+      parentSlides.addEventListener(
         "transitionend",
         () => {
+       	  removeAllInput();
+          removeAllClassFromLabel();
           hideGeneralForm();
           hideShelterForm();
         },
         { once: true }
       );
-    }
-  });
-});
+   }
+}
+
+// Define actions based on button type
+function submitButtonAction(btn) {
+  if (btn.classList.contains("login-btn")) {
+    login.call(btn);
+  } else if (btn.classList.contains("find-acc-btn")) {
+    findAcc.call(btn);
+  } else {
+    btn.closest("form").submit();
+  }
+}
+
+function checkClass(labels){
+    return !labels.some(label => $(label).hasClass("required") ||  $(label).hasClass("invalid") ||  $(label).hasClass("duplicate") ||  $(label).hasClass("not-user") ||  $(label).hasClass("not-match") ||  $(label).hasClass("no-acc") || $(label).hasClass("invalid-pwd"));
+}
+
+
+function removeAllClassFromLabel(){
+	document.querySelectorAll(".popup-label").forEach((label) => {
+      $(label).removeClass("required invalid duplicate available not-match match not-user no-acc invalid-pwd valid-pwd");
+    });
+}
+
+function removeAllInput(){
+	document.querySelectorAll(".login-popup-input").forEach((input) => {
+      input.value = "";
+    });
+}
 
 function getWidth() {
   return document.querySelector(".form-slide").clientWidth;
@@ -157,9 +177,8 @@ function initSlide() {
     allPopupSlides.forEach((slides) => {
       slides.style.transform = "translateX(0)";
     });
-    document.querySelectorAll(".login-popup-input").forEach((input) => {
-      input.value = "";
-    });
+    removeAllInput();
+    removeAllClassFromLabel();
     hideGeneralForm();
     hideShelterForm();
   });
@@ -171,8 +190,10 @@ function initPop() {
   });
   document.querySelectorAll(".login-popup-input").forEach((input) => {
     input.value = "";
+    input.classList.remove("required");
   });
   document.querySelector(".cont").classList.remove("s--signup");
+  removeAllClassFromLabel();
   hideGeneralForm();
   hideShelterForm();
 }
@@ -196,66 +217,133 @@ function closePop() {
 }
 
 
-// Bind input events to each class to handle as they are typed into
+// Validations from here ------------------------------
+
+
+// Bind input events to each ".id-input" to handle as they are typed into
 $(".id-input").on("input", function(e) {
-  checkId.call(this, e); // Use `call` to set `this` context correctly for `checkId`
+    checkId.call(this, e); // Use `call` to maintain correct context
 });
 
 // Function to check for duplicate ID
 function checkId(e) {
-  var id = $(this).val(); // Correctly fetch the value of the input
-  var $label = $(this).closest(".popup-label"); // Assuming .popup-label is the container that needs the class changes
+    var $input = $(this); // Using jQuery object of the input
+    var id = $input.val(); // Fetch the value of the input
+    var $label = $input.closest(".popup-label"); // Get the closest label
 
-  console.log(id); // Log the ID value to ensure it's captured correctly
+    if (id.trim() === "") {
+	    $label.removeClass("invalid available duplicate required"); // Remove all related classes
+	    console.log("Input cleared.");
+	    return; // Exit the function early
+    }
+    
+    console.log(id);    
 
-  $.ajax({
-    url: "/user/checkId", // Endpoint to check the ID
-    type: "POST", // Use POST method
-    data: { id: id }, // Send ID to server
-    success: function (cnt) {
-      // Based on the response, adjust classes
-      if (cnt == 0) {
-        // If cnt is 0, ID is available
-        $label.removeClass("required duplicate").addClass("available");
-      } else {
-        // If cnt is 1 or more, ID is duplicate
-        $label.removeClass("required available").addClass("duplicate");
-      }
-    },
-    error: function () {
-      alert("오류가 발생했습니다."); // Error handling
-    },
-  });
+    // Validate the ID locally first
+    if (idValidChk($input)) { // Pass jQuery object to validation function
+        $.ajax({
+            url: "/user/checkId", // Endpoint to check the ID
+            type: "POST", // Use POST method
+            data: { id: id }, // Send ID to server
+            success: function (cnt) {
+                // Based on the response, adjust classes
+                if (cnt == 0) {
+                    // If cnt is 0, ID is available
+                    $label.removeClass("required duplicate").addClass("available");
+                } else if (cnt > 0) {
+                    // If cnt is 1 or more, ID is duplicate
+                    $label.removeClass("required available").addClass("duplicate");
+                } else {
+                    // Handle unexpected values
+                    $label.removeClass("required available duplicate");
+                }
+            },
+            error: function () {
+                alert("오류가 발생했습니다."); // Error handling
+            },
+        });
+    }
+}
+
+// Function to check ID validity based on a regex pattern and length
+function idValidChk($input) {
+	// 영어 또는 숫자만 가능, 영어는 필수
+    const pattern = /^(?=.*[A-Za-z])[A-Za-z\d]{4,12}$/; // Regex to check valid ID characters
+    const id = $input.val().trim(); // Get the value, trim whitespace
+    const $label = $input.closest(".popup-label");
+	
+	// 4글자 이상 12글자 이하
+    if (!pattern.test(id) || !(id.length >= 4 && id.length <= 12)) {
+        console.log("Invalid ID.");
+        $label.removeClass("available duplicate").addClass("invalid"); // Adjust classes appropriately
+        return false;
+    } else{
+        console.log("Valid ID.");
+        $label.removeClass("invalid"); // Remove invalid class if present
+        return true;
+    }
 }
 
 // Confirm password for shelter form
-$("#confirm-pwd-shelter").on("input", function() {
-    checkPwd("pwd-shelter", "confirm-pwd-shelter");
+$("#pwd-shelter").on("input", function() {
+    setupPasswordValidation("pwd-shelter", "confirm-pwd-shelter");
 });
 
 // Confirm password for general form
-$("#confirm-pwd-gen").on("input", function() {
-    checkPwd("pwd-gen", "confirm-pwd-gen");
+$("#pwd-gen").on("input", function() {
+    setupPasswordValidation("pwd-gen", "confirm-pwd-gen");
 });
 
-// Function to check if passwords match
-function checkPwd(passwordSelector, confirmPasswordSelector) {
-    console.log("Password selector:", passwordSelector, document.getElementById(passwordSelector));
-    console.log("Confirm password selector:", confirmPasswordSelector, document.getElementById(confirmPasswordSelector));
+function setupPasswordValidation(passwordSelector, confirmPasswordSelector) {
+    var pwdInput = document.getElementById(passwordSelector);
+    var pwdCheckInput = document.getElementById(confirmPasswordSelector);
+    var pwdLabel = $("#" + passwordSelector).closest(".popup-label");
+    var pwdCheckLabel = $("#" + confirmPasswordSelector).closest(".popup-label");
+	
+	// 최소 8글자 이상이면서, 알파벳과 숫자 및 특수문자(@$!%*#?&)가 하나 이상 포함
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
-    var pwd = document.getElementById(passwordSelector).value || '';
-    var pwdCheck = document.getElementById(confirmPasswordSelector).value || '';
-    var $label = $("#" + confirmPasswordSelector).closest(".popup-label");
-    
-    if (pwdCheck !== "") {
-        if (pwd === pwdCheck) {
-            $label.removeClass("not-match required");
+    function validatePassword() {
+        var pwd = pwdInput.value || '';
+        
+        // Clear previous states
+        pwdLabel.removeClass("invalid-pwd valid-pwd");
+
+        // Check password against the regex pattern
+        if (!passwordRegex.test(pwd)) {
+            console.log("Password does not meet security requirements.");
+            pwdLabel.addClass("invalid-pwd");
         } else {
-            $label.removeClass("required").addClass("not-match");
+            console.log("Password meets security requirements.");
+            pwdLabel.addClass("valid-pwd");
         }
-    } else {
-        $label.removeClass("match not-match required"); // Clear all classes if the confirmation password is empty
+
+        // Validate the match as well, as the password rules might have changed
+        validatePasswordMatch();
     }
+
+    function validatePasswordMatch() {
+        var pwd = pwdInput.value || '';
+        var pwdCheck = pwdCheckInput.value || '';
+
+        // Clear previous states
+        pwdCheckLabel.removeClass("not-match match");
+
+        // Check if passwords match
+        if (pwdCheck !== "") {  // Only compare if the confirm password is not empty
+            if (pwd === pwdCheck) {
+                console.log("Passwords match.");
+                pwdCheckLabel.addClass("match").removeClass("not-match");
+            } else {
+                console.log("Passwords do not match.");
+                pwdCheckLabel.addClass("not-match").removeClass("match");
+            }
+        }
+    }
+
+    // Attach event listeners to both inputs for appropriate validation
+    pwdInput.addEventListener("input", validatePassword);
+    pwdCheckInput.addEventListener("input", validatePasswordMatch);
 }
 
 // 로그인 확인
@@ -287,13 +375,57 @@ function login(e) {
     });
 }
 
-function hasDuplicateClass(labels) {
-  labels.forEach((label) => {
-    if (label.classList.contains(".duplicate")) {
-      return true;
+// 이메일 유효성
+$("input[name='email']").on("input", function() {
+    emailValidChk($(this));  // Pass the jQuery object itself
+});
+
+function emailValidChk($input) {
+	const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const email = $input.val().trim(); // Get the value, trim whitespace
+    const $label = $input.closest(".popup-label");
+
+    console.log(email); // Log the cleaned email address
+    
+    $label.removeClass("required invalid")
+    
+	if (email !== ""){
+	    if (!pattern.test(email)) {
+	        console.log("Invalid email address.");
+	        $label.addClass("invalid");
+	    } else {
+	        console.log("Valid email address.");
+	    }
     }
-  });
-  return false;
 }
 
+
+// 계정 찾기 (미완)
+function findAcc(){
+	var id = $(".find-acc-form").find('input[name="name"]').val(); // Correctly fetch the value of the ID input
+    var pwd = $(".find-acc-form").find('input[name="email"]').val(); // Fetch the password input value
+    var $label = $(".find-acc-form").find('.popup-label').last(); // This might need adjustment based on where you want the label changes to appear
+    console.log(id + ", " + pwd);
+    $.ajax({
+        url: "/user/findAcc", // Endpoint to check the ID
+        type: "post", // Use POST method
+        data: { name: name, email: email }, // Send ID and password to server
+        dataType: "json",
+        success: function (result) {
+            if (result == 0) {
+                // If result is 0, login fail
+                $label.removeClass("required").addClass("no-acc");
+            } else if(result == 1) {
+                // If result is 1, login success
+                $label.removeClass("required no-acc");
+                window.location.href="/"; // Redirect on successful login
+            } else {
+                alert('데이터베이스 오류');
+            }
+        },
+        error: function () {
+            alert("오류가 발생했습니다."); // Error handling
+        },
+    });
+}
 

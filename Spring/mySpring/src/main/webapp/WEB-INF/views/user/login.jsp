@@ -38,20 +38,17 @@
 										</button>
 									</div>
 								<!-- 계정찾기 -->
-								<form action="${contextPath }/user/findAccount.jsp"
-									method="post">
-									<div class="form-slide">
+									<div class="form-slide find-acc-form">
 										<label class="popup-label"> <span>이름</span> <input
 											type="text" name="name" class="login-popup-input" />
 										</label> <label class="popup-label"> <span>이메일</span> <input
 											type="email" name="email" class="login-popup-input" />
 										</label>
-										<button type="button" class="submit-btn login-popup-btn">
+										<button type="button" class="submit-btn find-acc-btn login-popup-btn">
 											계정 찾기</button>
 										<button type="button" class="login-prev-btn login-popup-btn">
 											돌아가기</button>
 									</div>
-								</form>
 							</div>
 						</div>
 					</div>
@@ -96,7 +93,7 @@
 											</label> <label class="popup-label"> <span>비밀번호</span> <input
 												type="password" name="pwd" class="login-popup-input" id="pwd-gen"/>
 											</label> <label class="popup-label pwd-input" > <span>비밀번호 확인</span> <input
-												type="password" oninput="checkPwd()"
+												type="password"
 												class="login-popup-input" id="confirm-pwd-gen"/>
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
