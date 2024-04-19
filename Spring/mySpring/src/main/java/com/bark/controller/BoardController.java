@@ -65,6 +65,49 @@ public class BoardController {
 		model.addAttribute("page", page);
 	}	
 	
+	
+	@GetMapping("/shareList")
+	public void shareList(Model model,
+						   @RequestParam(required=false, value="searchField") String searchField,
+						   @RequestParam(required=false, value="searchWord") String searchWord,
+						   @RequestParam(required=false, value="pageNum") Integer pageNum,
+						   @RequestParam(required=false, value="amount") Integer amount) {
+		Integer type = 2;
+		System.out.println("noticeList type-feild-pageNum-amount : " + type +"-"+ searchField + "-" + searchWord +
+						"-" + pageNum + "-" + amount);
+		
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null) {   		// 값이 없으면 0 Set
+			pageNum = 0; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null) {
+			searchField = null;
+		}
+		if (searchField == null) {
+			searchField = null;
+		}
+
+		
+		int total = service.totalPage(type, searchField, "%" + searchWord + "%");
+
+		// 화면 page 처리에는 1을 더해 준다., 
+		cri.setPageNum(pageNum + 1);
+		cri.setAmount(amount);
+		Page page = new Page(cri, total);
+		
+		// sql문에서 사용시에는 Limit 에서 0부터 시작하므로 그대로 대입 후 10을 곱한다.
+		cri.setPageNum((pageNum)* 10) ;
+		
+		model.addAttribute("bList", service.searchList(cri, type, searchField, "%" + searchWord + "%"));
+		model.addAttribute("page", page);
+	}	
+	
+	
 	// 게시판별(type) 검색 단어(searchWord)가 있을 때 page별 조회  
 	@GetMapping("/searchlist")
 	public void searchList(Model model,
@@ -99,6 +142,16 @@ public class BoardController {
 
 		model.addAttribute("bList", service.searchList(cri, type, searchField, "%" + searchWord + "%"));
 		model.addAttribute("page", page);
+	}
+	
+	@GetMapping("/contactWrite")
+	public void contactWrite() {
+		
+	}
+	
+	@GetMapping("/shareWrite")
+	public void shareWrite() {
+		
 	}
 	
 //	@GetMapping("/read")
@@ -158,4 +211,6 @@ public class BoardController {
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/list";
 	}
+	
+	
 }

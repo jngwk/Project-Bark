@@ -20,13 +20,12 @@
   </head>
   <body>
   <jsp:include page="${views }/include/header.jsp" flush="false"/>
-  	
+  	   <div class="adoption-list-header">
+    <p class="page-title">Adoption</p><p class="page-subtitle">[입양 목록]</p>
+    </div>
     <div class="grid__container">
     <!-- <h1 class="adoption-list-header">입양 목록</h1> -->
-    <div class="adoption-list-header">
-    <img src="${icons }/breed.png">
-    <h1>입양</h1>
-    </div>
+
       <div class="card__container">
         <article class="card__article">
           <img

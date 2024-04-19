@@ -9,17 +9,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="${css }/root.css" />
-<link rel="stylesheet" href="${css }/noticeList.css" />
+<link rel="stylesheet" href="${css }/shareList.css" />
 </head>
 <body>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 	<section class="notice">
-		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
+		<p class="page-title">Sharing Info</p><p class="page-subtitle">[정보공유]</p>
 
 		<!-- board seach area -->
 		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="${contextPath }/board/write">글쓰기</a>
+			<a class="medium-btn brown-btn" href="${contextPath }/board/shareWrite">글쓰기</a>
 		</div>
 		<div id="board-search">
 			<div class="container">

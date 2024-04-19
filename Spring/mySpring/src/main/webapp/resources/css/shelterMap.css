@@ -56,9 +56,12 @@ align-items: center;
   width: 50%;
   padding: 0 30px;
   text-align: center;
+  cursor: pointer;
+  font-size:20px;
+  
 }
 
-.tab li:active {
+.tab li:active,.tab li:hover {
   transform: translateY(15%);
   transition: 0.1s;
 }

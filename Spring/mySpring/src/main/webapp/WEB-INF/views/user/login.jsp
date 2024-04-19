@@ -24,31 +24,31 @@
 						<div class="form-slider">
 							<div class="form-slides cont-slides">
 								<!-- 공통 -->
-									<div class="form-slide login-form">
-										<label class="popup-label"> <span>아이디</span> <input
-											type="text" name="id" class="login-popup-input" />
-										</label> <label class="popup-label"> <span>비밀번호</span> <input
-											type="password" name="pwd" class="login-popup-input" />
-										</label>
-										<p class="forgot-id-pwd">아이디 | 비밀번호 찾기</p>
-										<button type="button"
-											class="submit-btn login-btn login-popup-btn">로그인</button>
-										<button type="button" class="fb-btn login-popup-btn">
-											<span>간편</span> 로그인
-										</button>
-									</div>
+								<div class="form-slide login-form">
+									<label class="popup-label"> <span>아이디</span> <input
+										type="text" name="id" class="login-popup-input" />
+									</label> <label class="popup-label"> <span>비밀번호</span> <input
+										type="password" name="pwd" class="login-popup-input" />
+									</label>
+									<p class="forgot-id-pwd">아이디 | 비밀번호 찾기</p>
+									<button type="button"
+										class="submit-btn login-btn login-popup-btn">로그인</button>
+									<button type="button" class="fb-btn login-popup-btn">
+										<span>간편</span> 로그인
+									</button>
+								</div>
 								<!-- 계정찾기 -->
-									<div class="form-slide find-acc-form">
-										<label class="popup-label"> <span>이름</span> <input
-											type="text" name="name" class="login-popup-input" />
-										</label> <label class="popup-label"> <span>이메일</span> <input
-											type="email" name="email" class="login-popup-input" />
-										</label>
-										<button type="button" class="submit-btn find-acc-btn login-popup-btn">
-											계정 찾기</button>
-										<button type="button" class="login-prev-btn login-popup-btn">
-											돌아가기</button>
-									</div>
+								<div class="form-slide find-acc-form">
+									<label class="popup-label"> <span>이름</span> <input
+										type="text" name="name" class="login-popup-input" />
+									</label> <label class="popup-label"> <span>이메일</span> <input
+										type="email" name="email" class="login-popup-input" />
+									</label>
+									<button type="button"
+										class="submit-btn find-acc-btn login-popup-btn">계정 찾기</button>
+									<button type="button" class="login-prev-btn login-popup-btn">
+										돌아가기</button>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -88,13 +88,13 @@
 										<div class="form-slide first-slide">
 											<input type="hidden" name="type" value="1" /> <label
 												class="popup-label"> <span>아이디</span> <input
-												type="text" name="id"
-												class="login-popup-input id-input"/>
+												type="text" name="id" class="login-popup-input id-input" />
 											</label> <label class="popup-label"> <span>비밀번호</span> <input
-												type="password" name="pwd" class="login-popup-input" id="pwd-gen"/>
-											</label> <label class="popup-label pwd-input" > <span>비밀번호 확인</span> <input
-												type="password"
-												class="login-popup-input" id="confirm-pwd-gen"/>
+												type="password" name="pwd" class="login-popup-input"
+												id="pwd-gen" />
+											</label> <label class="popup-label pwd-input"> <span>비밀번호
+													확인</span> <input type="password" class="login-popup-input"
+												id="confirm-pwd-gen" />
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -106,11 +106,22 @@
 												type="text" name="name" class="login-popup-input" />
 											</label> <label class="popup-label"> <span>전화번호</span> <input
 												type="tel" name="phone" class="login-popup-input" />
-											</label> <label class="popup-label"> <span>이메일</span> <input
-												type="email" name="email" class="login-popup-input" />
 											</label>
-											<button type="button" class="submit-btn login-popup-btn">
-												가입하기</button>
+											<button type="button" class="next-btn login-popup-btn">
+												다음</button>
+											<button type="button" class="prev-btn login-popup-btn">
+												이전</button>
+										</div>
+										<div class="form-slide">
+											<label class="popup-label"> <span>이메일</span> <input
+												type="email" name="email" class="login-popup-input" />
+											</label> <label class="popup-label verify-label pending hide">
+												<span>인증번호</span> <input type="text" name="code"
+												class="login-popup-input code-input" />
+											</label>
+											<button type="button"
+												class="submit-btn login-popup-btn email-verify-btn"
+												data-stage="get-code">이메일 인증</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
@@ -120,13 +131,13 @@
 										<div class="form-slide first-slide">
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>아이디</span> <input
-												type="text" name="id"
-												class="login-popup-input id-input" />
+												type="text" name="id" class="login-popup-input id-input" />
 											</label> <label class="popup-label"> <span>비밀번호</span> <input
-												type="password" name="pwd" class="login-popup-input" id="pwd-shelter"/>
-											</label> <label class="popup-label pwd-input"> <span>비밀번호 확인</span> <input
-												type="password"
-												class="login-popup-input"  id="confirm-pwd-shelter"/>
+												type="password" name="pwd" class="login-popup-input"
+												id="pwd-shelter" />
+											</label> <label class="popup-label pwd-input"> <span>비밀번호
+													확인</span> <input type="password" class="login-popup-input"
+												id="confirm-pwd-shelter" />
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -139,15 +150,12 @@
 												type="text" name="name" class="login-popup-input" />
 											</label> <label class="popup-label"> <span>전화번호</span> <input
 												type="tel" name="phone" class="login-popup-input" />
-											</label> <label class="popup-label"> <span>이메일</span> <input
-												type="email" name="email" class="login-popup-input" />
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
-										<!-- 보호소 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>예금주</span> <input
 												type="text" name="accHolder" class="login-popup-input" />
@@ -169,12 +177,29 @@
 											</label> <label class="popup-label"> <span>우편번호</span> <input
 												type="text" name="postcode" class="login-popup-input" />
 											</label>
-											<button type="button" class="submit-btn login-popup-btn">
-												가입하기</button>
+											<button type="button" class="next-btn login-popup-btn">
+												다음</button>
+											<button type="button" class="prev-btn login-popup-btn">
+												이전</button>
+										</div>
+										<div class="form-slide">
+											<label class="popup-label"> <span>이메일</span> <input
+												type="email" name="email" class="login-popup-input" />
+											</label> <label class="popup-label verify-label pending hide">
+												<span>인증번호</span> <input type="text" name="code"
+												class="login-popup-input code-input" />
+											</label>
+											<button type="button"
+												class="submit-btn login-popup-btn email-verify-btn"
+												data-stage="get-code">이메일 인증</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
 									</form>
+									<div class="form-slide final-slide">
+										<p>회원가입이 완료 되었습니다!</p>
+										<p>로그인 후 이용해주세요</p>
+									</div>
 								</div>
 							</div>
 						</div>

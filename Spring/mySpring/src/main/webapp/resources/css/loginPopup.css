@@ -259,12 +259,29 @@ body {
 }
 
 .popup-label::after{
-	display: block;
-	font-size: 10px;
+  display: block;
+  font-size: 10px;
   width: fit-content;
   margin: 0;
   content: "";
-  	    display: inline-flex;
+  display: inline-flex;
+}
+.popup-label.verify-label{
+	transition: 1s;
+	transform: translateY(-100%);
+	opacity: 0;
+}
+.popup-label.verify-label.hide{
+	pointer-events: none;
+}
+.popup-label.verify-label.show{
+	transform: translateY(0);
+	opacity: 1;
+	pointer-events: initial;
+}
+.popup-label.pending::after{
+  	content: "이메일로 발송 된 인증번호를 확인해주세요.";
+    color: green;
 }
 .popup-label.required::after {
   content: "* 필수 입력 사항입니다.";
@@ -310,7 +327,14 @@ body {
 	content: "가입된 정보가 없습니다.";
 	    color: red;
 }
-
+.popup-label.wrong-code::after{
+	content: "인증번호가 일치하지 않습니다.";
+	    color: red;
+}
+.popup-label.valid-code::after{
+	content: "인증이 완료 되었습니다.";
+	    color: green;
+}
 .login-popup-input {
   display: block;
   width: 100%;
@@ -429,7 +453,10 @@ body {
 .form-slide.button-slide {
   transform: translateY(-40px);
 }
-.form-slide.complete {
-  transform: translateY(30%);
-  text-align: center;
+.form-slide.final-slide {
+  font-size: 20px;
+    color: black;
+    line-height: 45px;
+    transform: translateY(-10%);
+    text-align: center;
 }
