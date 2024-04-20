@@ -33,11 +33,10 @@ public class UserController {
 		model.addAttribute("uList", service.getUserList());
 	}
 	
-	@GetMapping("/adminList")
-	public void adminList(Model model) {
-		log.info("adminList");
-		model.addAttribute("aList", service.getAdminList());
-	}
+	/*
+	 * @GetMapping("/adminList") public void adminList(Model model) {
+	 * log.info("adminList"); model.addAttribute("aList", service.getAdminList()); }
+	 */
 	/*
 	 * @PostMapping("/login") public String login(String id, String pwd, HttpSession
 	 * session) { log.info("login"); User user = service.getUser(id);

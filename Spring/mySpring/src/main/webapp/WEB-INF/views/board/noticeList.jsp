@@ -56,7 +56,7 @@
 					<c:forEach var="bList" items="${bList}" >
 						<tr>
 							<td>${bList.no}</td>
-							<td><a href="/board/read3?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
+							<td><a href="/board/read?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
 							${bList.title}</a></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
 							<td>${bList.hit}</td>

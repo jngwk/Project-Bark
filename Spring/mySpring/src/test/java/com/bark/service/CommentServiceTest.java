@@ -30,8 +30,8 @@ public class CommentServiceTest {
 		Comment comment = new Comment();
 
 //		comment.setCommentNo(null);   // AUTO_INCREMENT
-		comment.setBno(100);
-		comment.setId("user02");
+		comment.setBoard_bno(100);
+		comment.setUser_id("user02");
 		comment.setContent("나도 댓글입니다.");
 //		comment.setRegDate(null);     // default now()
 
@@ -58,12 +58,12 @@ public class CommentServiceTest {
 		Comment comment = new Comment();
 
 //		comment.setCommentNo(1);   // AUTO_INCREMENT
-		comment.setBno(100);
+		comment.setBoard_bno(100);
 //		comment.setId("user01");
 //		comment.setContent("댓글입니다.");
 //		comment.setRegDate(null);     // default now()
 
-		log.info(service.list(comment.getBno()));
+		log.info(service.list(comment.getBoard_bno()));
 	}
 	
 	@Test
@@ -110,12 +110,12 @@ public class CommentServiceTest {
 		int cnt2 = bnoList.size();
 		if (cnt1 > 0 && cnt2 > 0) {
 			cnt1 = (cnt1 > 30)? 30 : cnt1 ;   			// user id가 30개가 넘을 경우 30개만 사용
-			cnt2 = (cnt2 > 30)? 10 : cnt2 ;   			// user id가 30개가 넘을 경우 30개만 사용
+			cnt2 = (cnt2 > 30)? 40 : cnt2 ;   			// user id가 30개가 넘을 경우 30개만 사용
 			for (int i = 0; i < 100; i++) {
 
 				//comment.setCommentNo(i);					// AUTO_INCREMENT
-				comment.setBno(bnoList.get(i % cnt2));
-				comment.setId(idList.get(i % cnt1));
+				comment.setBoard_bno(bnoList.get(i % cnt2));
+				comment.setUser_id(idList.get(i % cnt1));
 				comment.setContent("Comment Content_" + i);
 				//comment.setRegDate(null);
 				

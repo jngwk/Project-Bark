@@ -82,6 +82,26 @@ body {
   background: none;
 }
 
+.login-popup-input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding-bottom: 5px;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+.login-popup-btn {
+  display: block;
+  margin: 0 auto;
+  width: 260px;
+  height: 40px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
 .tip {
   font-size: 20px;
   margin: 40px auto 50px;
@@ -118,17 +138,6 @@ body {
 }
 .cont.s--signup .sub-cont {
   transform: translate3d(-640px, 0, 0);
-}
-
-.login-popup-btn {
-  display: block;
-  margin: 0 auto;
-  width: 260px;
-  height: 40px;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
 }
 
 .img {
@@ -247,6 +256,7 @@ body {
 }
 
 .popup-label{
+	position: relative;
   display: block;
   width: 260px;
   margin: 16px auto 0;
@@ -335,15 +345,7 @@ body {
 	content: "인증이 완료 되었습니다.";
 	    color: green;
 }
-.login-popup-input {
-  display: block;
-  width: 100%;
-  margin-top: 5px;
-  padding-bottom: 5px;
-  font-size: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
+
 .login-popup-input.required {
   animation: shake 0.2s ease-in-out 0s 2;
 }
@@ -376,7 +378,6 @@ body {
   margin-top: 40px;
   margin-bottom: 20px;
   background: var(--color-brown);
-  text-transform: uppercase;
 }
 .sub-cont-slides .next-btn, 
 .sub-cont-slides .submit-btn{
@@ -426,7 +427,13 @@ body {
   left: auto;
   right: 5px;
 }
-
+.search-btn-icon{
+	width: 20px;
+	position: absolute;
+	top: 25px;
+	right: 5px;
+	cursor: pointer;
+}
 .link-footer {
   position: absolute;
   left: 50%;
@@ -444,6 +451,7 @@ body {
   transition: transform 1s;
 }
 .form-slide {
+	position: relative;
   min-width: 580px;
   height: 400px;
   display: flex;
@@ -453,10 +461,23 @@ body {
 .form-slide.button-slide {
   transform: translateY(-40px);
 }
-.form-slide.final-slide {
+.form-slide.final-slide .text-wrap {
   font-size: 20px;
     color: black;
     line-height: 45px;
-    transform: translateY(-10%);
     text-align: center;
 }
+.form-slide.final-slide.general-slide > .text-wrap {
+    transform: translateY(-10%);
+}
+.form-slide.final-slide.shelter-slide > .text-wrap {
+    transform: translateY(20%);
+}
+.form-slide.final-slide.shelter-slide > .text-wrap > .sub-text {
+	transform: translateY(65px);
+  	font-size: 14px;
+}
+
+
+
+

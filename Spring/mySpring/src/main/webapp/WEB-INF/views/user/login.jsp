@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="${css }/loginPopup.css" />
+<link rel="stylesheet" href="${css }/searchDropdown.css" />
 </head>
 <body>
 	<div class="popup_layer " id="popup_layer">
@@ -129,6 +130,26 @@
 									<form class="shelter-form" action="${contextPath }/user/join"
 										method="post" display="none">
 										<div class="form-slide first-slide">
+											<div class="search-wrapper">
+												<div class="popup-label">
+													<div class="login-popup-input shelter-select-btn">
+														<span>보호소 선택</span> <img
+															src="${icons }/chev-down-icon.png" alt="" />
+													</div>
+													<div class="content">
+														<div class="search">
+															<img src="${icons }/search-btn.png" alt="" /> <input
+																id="search-input" spellcheck="false" type="text"
+																placeholder="보호소 이름을 검색해주세요..." />
+														</div>
+														<ul class="options"></ul>
+													</div>
+												</div>
+											</div>
+											<button type="button" class="next-btn login-popup-btn">다음</button>
+											<button type="button" class="prev-btn login-popup-btn">이전</button>
+										</div>
+										<div class="form-slide ">
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>아이디</span> <input
 												type="text" name="id" class="login-popup-input id-input" />
@@ -157,21 +178,10 @@
 												이전</button>
 										</div>
 										<div class="form-slide">
-											<label class="popup-label"> <span>예금주</span> <input
-												type="text" name="accHolder" class="login-popup-input" />
-											</label> <label class="popup-label"> <span>은행명</span> <input
-												type="text" name="bank" class="login-popup-input" />
-											</label> <label class="popup-label"> <span>계좌번호</span> <input
-												type="text" name="bankAcc" class="login-popup-input" />
-											</label>
-											<button type="button" class="next-btn login-popup-btn">
-												다음</button>
-											<button type="button" class="prev-btn login-popup-btn">
-												이전</button>
-										</div>
-										<div class="form-slide">
 											<label class="popup-label"> <span>주소</span> <input
-												type="text" name="addr" class="login-popup-input" />
+												type="text" name="addr" class="login-popup-input" readonly /><img
+												class="search-btn-icon" src="${icons }/search-btn.png"
+												alt="검색" />
 											</label> <label class="popup-label"> <span>세부 주소</span> <input
 												type="text" name="addrDetail" class="login-popup-input" />
 											</label> <label class="popup-label"> <span>우편번호</span> <input
@@ -196,9 +206,18 @@
 												이전</button>
 										</div>
 									</form>
-									<div class="form-slide final-slide">
-										<p>회원가입이 완료 되었습니다!</p>
-										<p>로그인 후 이용해주세요</p>
+									<div class="form-slide final-slide general-slide">
+										<div class="text-wrap">
+											<p>회원가입이 완료 되었습니다!</p>
+											<p>로그인 후 이용해주세요</p>
+										</div>
+									</div>
+									<div class="form-slide final-slide shelter-slide">
+										<div class="text-wrap">
+											<p>회원가입이 완료 되었습니다!</p>
+											<p>관리자 승인 후 로그인이 가능합니다.</p>
+											<p class="sub-text">* 영업일 기준 24시간 이내에 승인 이메일을 받으실 수 있습니다.</p>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -209,6 +228,76 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		const wrapper = document.querySelector(".search-wrapper"),
+		  selectBtn = wrapper.querySelector(".shelter-select-btn"),
+		  searchInp = wrapper.querySelector("#search-input"),
+		  options = wrapper.querySelector(".options");
+		
+		$(".shelter-btn").on("click",function(){
+			getShelterList();
+			console.log("click");
+		})
+		var shelters = [];
+		function getShelterList(){
+			console.log($(".sub-city").val());
+			$.ajax({
+				type: 'GET',
+				url : "/donation/map",
+/* 				data : {addr: $(".sub-city").val()}, */
+				success: function(shelters){
+					console.log(shelters);
+				    shelters = JSON.parse(words);
+				    for(var i = 0; i < 50; i++) {
+				        arrayen.push(shelters[i].en);
+				    }
+				    console.log(arrayen.length);
+
+				},error: (error) => {
+				     console.log(JSON.stringify(error));
+				}
+				
+			})
+		}
+
+		function addShelter(selectedShelter) {
+		  options.innerHTML = "";
+		  shelters.forEach((shelter) => {
+		    let isSelected = shelter == selectedShelter ? "selected" : "other";
+		    let li = `<li onclick="updateName(this)" class="\${isSelected}">\${shelter}</li>`;
+		    options.insertAdjacentHTML("beforeend", li);
+		  });
+		}
+		addShelter();
+
+		function updateName(selectedLi) {
+		  searchInp.value = "";
+		  addShelter(selectedLi.innerText);
+		  wrapper.classList.remove("active");
+		  selectBtn.firstElementChild.innerText = selectedLi.innerText;
+		}
+
+		searchInp.addEventListener("input", () => {
+		  let arr = [];
+		  let searchWord = searchInp.value.toLowerCase();
+		  arr = shelters
+		    .filter((data) => {
+		      return data.toLowerCase().startsWith(searchWord);
+		    })
+		    .map((data) => {
+		      let isSelected =
+		        data == selectBtn.firstElementChild.innerText ? "selected" : "";
+		      return `<li onclick="updateName(this)" class="\${isSelected}">\${data}</li>`;
+		    })
+		    .join("");
+		  options.innerHTML = arr
+		    ? arr
+		    : `<li onclick="updateName(this)">보호소 등록하기</li>`;
+		});
+
+		selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
+
+	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
 </body>
 </html>
