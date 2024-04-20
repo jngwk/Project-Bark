@@ -75,12 +75,14 @@
 						</tr>
 						<tr>
 							<th>후원방법</th>
-							<td><div class="acc-button">
+							<td>
+								<div class="acc-button">
 									<a href="#">계좌이체</a>
 								</div>
 								<div class="kakao-button">
 									<a href="#">카카오페이</a>
-								</div></td>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<th>은행명</th>
@@ -106,6 +108,7 @@
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
-	<script src="${js }/donationform.js"></script>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script src="${js }/donate.js"></script>
 </body>
 </html>
