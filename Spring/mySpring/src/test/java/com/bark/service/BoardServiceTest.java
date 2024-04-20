@@ -67,25 +67,42 @@ public class BoardServiceTest {
 		String searchField = "title";
 		String searchWord = "e_1";
 
-		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
-		if (pageNum == null) {   		// 값이 없으면 0 Set
-			pageNum = 0; 
+		
+		if (pageNum == null || pageNum == 0) { 	// 값이 없으면 0 Set
+			pageNum = 1; 
 		}
-		if (amount == null) {			// 값이 없으면 10 Set		
+		if (amount == null) {					// 값이 없으면 10 Set		
 			amount = 10;
 		}
-		
-		cri.setPageNum(pageNum);
-		cri.setAmount(amount);
+		if (searchField == null) {
+			searchField = "";
+		}
+		if (searchWord == null) {
+			searchWord = "";
+		}
 
-		int total = service.totalPage(type, searchField, searchWord);
-		// 화면 page 처리
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(2);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+
+
+		// 조회 조건에 따른 전게 건수 
+		int total = service.totalPage(cri);
+				
 		Page page = new Page(cri, total);
 
-		//log.info(service.list(cri, type));  // List test 
-		log.info(service.searchList(cri, type, searchField, "%" + searchWord + "%")); // searchList
+		log.info(service.searchList(cri));
+		/*
 		log.info(page);
+		*/
+
 	}
 	
 	@Test

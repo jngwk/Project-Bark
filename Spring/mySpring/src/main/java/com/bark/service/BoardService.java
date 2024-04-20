@@ -23,29 +23,29 @@ public class BoardService {
 //	private BoardAttachMapper attachMapper;
 
 	// 게시판 전체 건수 얻기
-	public int totalPage(Integer type, String searchField, String searchWord) {
-		return mapper.totalPage(type, searchField, searchWord);
+	public int totalPage(Criteria cri) {
+		return mapper.totalPage(cri);
 	}
 	// 게시판 ? page, 10 건 가져오기, 1page 10건 처리
-	public List<Board> list(Criteria cri, Integer type) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
-		return mapper.list(cri, type);
+	public List<Board> list(Criteria cri) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
+		return mapper.list(cri);
 	}
 	
 	// 게시판 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
-	public List<Board> searchList(Criteria cri, Integer type, String searchField, String searchWord) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
-		log.info(cri + " " + type  + " " + searchField + " " +searchWord);
-		return mapper.searchList(cri, type, searchField, searchWord);
+	public List<Board> searchList(Criteria cri) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
+		log.info("searchList : " + cri);
+		return mapper.searchList(cri);
 	}
 
-//	public Board read(Integer bno) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
-//		Board board = new Board();
-//
-//		board = mapper.read(bno);
-//		// 첨부파일 list get
-///		board.setAttachList(attachMapper.list(board.getBno()));
-//
-//		return board;
-//	}
+	public Board read(Integer bno) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
+		Board board = new Board();
+
+		board = mapper.read(bno);
+		// 첨부파일 list get
+//		board.setAttachList(attachMapper.list(board.getBno()));
+
+		return board;
+	}
 	
 	@Transactional
 	public int write(Board board) {
@@ -61,12 +61,12 @@ public class BoardService {
 		return result;
 	}	
 	
-//	@Transactional
-//	public void update(Board board) {
+	@Transactional
+	public void update(Board board) {
 //		List<Attached> aList = new ArrayList<Attached>();
-//
-//		mapper.update(board);						// 게시판 수정 
-//		
+
+		mapper.update(board);						// 게시판 수정 
+		
 //		aList = attachMapper.list(board.getBno());	// 기존 첨부파일 확인 
 //		
 //		// 수정 첨부파일이 없으면 기존 attached 전체 삭제
@@ -109,8 +109,8 @@ public class BoardService {
 //				}
 //			}
 //		}
-//		return;
-//	}
+		return;
+	}
 	
 	@Transactional
 	public int delete(Integer bno) {

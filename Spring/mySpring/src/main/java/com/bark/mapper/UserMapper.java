@@ -14,8 +14,11 @@ public interface UserMapper {
 	@Select("select * from user where type != 3")
 	public List<User> getUserList();
 	@Select("select * from user where type = 3")
-	public List<User> getAdminList();
-	@Select("select * from user where id = #{id}")
+	/*
+	 * public List<User> getAdminList();
+	 * 
+	 * @Select("select * from user where id = #{id}")
+	 */
 	public User getUser(String id);
 	@Insert("insert into user(id, pwd, name, phone, email, addr, addrDetail, postcode, bank, bankAcc, type)\r\n"
 			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{addrDetail}, #{postcode}, #{bank}, #{bankAcc}, #{type})")

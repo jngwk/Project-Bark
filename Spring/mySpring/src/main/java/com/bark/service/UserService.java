@@ -21,15 +21,17 @@ public class UserService {
 		log.info("getUserList..................");
 		return mapper.getUserList();
 	}
-	public List<User> getAdminList(){
-		log.info("getAdminList..................");
-		return mapper.getAdminList();
-	}
+
+	/*
+	 * public List<User> getAdminList(){ log.info("getAdminList..................");
+	 * return mapper.getAdminList(); }
+	 */
 	public User getUser(String id) {
 		log.info("getUser..................");
 		return mapper.getUser(id);
 	}
 	public boolean join(User user) {
+		user.setAddr(user.getAddr() + user.getAddrDetail());
 		log.info("insert..................");
 		return mapper.insert(user)==1;
 	}

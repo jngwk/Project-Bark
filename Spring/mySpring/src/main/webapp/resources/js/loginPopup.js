@@ -14,7 +14,9 @@ const closePopBtn = document.querySelector(".close-pop");
 const findAccountBtn = document.querySelector(".forgot-id-pwd");
 const loginPrevBtn = document.querySelector(".login-prev-btn");
 const generalForm = document.querySelector(".general-form");
+const generalSlide = document.querySelector(".general-slide");
 const shelterForm = document.querySelector(".shelter-form");
+const shelterSlide = document.querySelector(".shelter-slide");
 const inputs = document.querySelectorAll(".login-popup-input");
 
 //   open or close
@@ -224,15 +226,19 @@ function initPop() {
 }
 function showGeneralForm() {
   generalForm.style.display = "flex";
+  generalSlide.style.display = "block";
 }
 function hideGeneralForm() {
   generalForm.style.display = "none";
+  generalSlide.style.display = "none";
 }
 function showShelterForm() {
   shelterForm.style.display = "flex";
+  shelterSlide.style.display = "block";
 }
 function hideShelterForm() {
   shelterForm.style.display = "none";
+  shelterSlide.style.display = "none";
 }
 function openPop() {
   document.getElementById("popup_layer").style.display = "block";
