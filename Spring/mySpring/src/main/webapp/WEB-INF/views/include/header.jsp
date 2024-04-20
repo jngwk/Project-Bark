@@ -65,7 +65,7 @@
 								class="large-font hover-underline">정보공유</strong></a>
 							<a class="transition" href="#"><strong
 								class="large-font hover-underline">보호소
-									이야기</strong></a> <a class="transition" href="${contextPath }/board/contactWrite"><strong
+									이야기</strong></a> <a class="transition" href="${contextPath }/board/write"><strong
 								class="large-font hover-underline">문의하기</strong></a>
 						</div></li>
 					<li>
@@ -118,18 +118,12 @@
 													<span>${userId}</span>
 												</h3>
 												<ul>
-													<li><img src="${icons }/user-detail.png" /><a
-														href="javascript:openUpdatePop()">내
-															정보 조회</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="../index.jsp?target=./include/adminManageDonationList">기부금
+														href="${contextPath }/admin/donationList">기부금
 															목록</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
-														href="../index.jsp?target=./include/adminUserList">회원
+														href="${contextPath }/admin/userList">회원
 															관리</a></li>
-													<li><img src="${icons }/admin.png" /><a
-														href="../index.jsp?target=./include/adminManageAdminList">관리자
-															계정 관리</a></li>
 													<li><img src="${icons }/logout.png" /><a
 														href="${contextPath }/user/logout">로그아웃</a></li>
 												</ul>
