@@ -276,15 +276,15 @@ body {
   content: "";
   display: inline-flex;
 }
-.popup-label.verify-label{
+.popup-label.verify-label, .popup-label.shelter-name-label{
 	transition: 1s;
 	transform: translateY(-100%);
 	opacity: 0;
 }
-.popup-label.verify-label.hide{
+.popup-label.hide{
 	pointer-events: none;
 }
-.popup-label.verify-label.show{
+.popup-label.show{
 	transform: translateY(0);
 	opacity: 1;
 	pointer-events: initial;

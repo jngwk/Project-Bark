@@ -136,7 +136,12 @@
 														<span>보호소 선택</span> <img
 															src="${icons }/chev-down-icon.png" alt="" />
 													</div>
-													<div class="content">
+													<label class="popup-label shelter-name-label hide">
+														<span>보호소 이름</span> <input type="text" name="name"
+														id="selectedShelterName" class="login-popup-input"/>
+													</label>
+
+													<div class="shelter-name-content">
 														<div class="search">
 															<img src="${icons }/search-btn.png" alt="" /> <input
 																id="search-input" spellcheck="false" type="text"
@@ -177,7 +182,7 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
-										<div class="form-slide">
+										<div class="form-slide shelter-addr-slide">
 											<label class="popup-label"> <span>주소</span> <input
 												type="text" name="addr" class="login-popup-input" readonly /><img
 												class="search-btn-icon" src="${icons }/search-btn.png"
@@ -229,74 +234,97 @@
 		</div>
 	</div>
 	<script>
+		// 주소 설정하기
 		const wrapper = document.querySelector(".search-wrapper"),
 		  selectBtn = wrapper.querySelector(".shelter-select-btn"),
 		  searchInp = wrapper.querySelector("#search-input"),
-		  options = wrapper.querySelector(".options");
+		  options = wrapper.querySelector(".options"),
+		  shelterNameInp = wrapper.querySelector("#selectedShelterName"),
+		  shelterNameLabel = wrapper.querySelector(".shelter-name-label"),
+		  shelterAddrSlide = wrapper.querySelector(".shelter-addr-slide")
+		  ;
+		
+		selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
+		
 		
 		$(".shelter-btn").on("click",function(){
 			getShelterList();
 			console.log("click");
 		})
+		
 		var shelters = [];
+		var shelterNames = [];
 		function getShelterList(){
-			console.log($(".sub-city").val());
 			$.ajax({
 				type: 'GET',
-				url : "/donation/map",
-/* 				data : {addr: $(".sub-city").val()}, */
-				success: function(shelters){
-					console.log(shelters);
-				    shelters = JSON.parse(words);
-				    for(var i = 0; i < 50; i++) {
-				        arrayen.push(shelters[i].en);
-				    }
-				    console.log(arrayen.length);
-
+				url : "/donation/shelterList",
+				success: function(items){
+				    items.forEach(item => {
+				    	shelterNames.push(item.shelterName);
+				    	shelters.push(item);
+				    })
+				    addShelter();
+				    console.log(shelterNames.length);
+				    console.log(shelters.length);
+				    console.log(shelters[0].shelterAddr);
 				},error: (error) => {
 				     console.log(JSON.stringify(error));
-				}
-				
+				}				
 			})
 		}
 
 		function addShelter(selectedShelter) {
 		  options.innerHTML = "";
-		  shelters.forEach((shelter) => {
-		    let isSelected = shelter == selectedShelter ? "selected" : "other";
-		    let li = `<li onclick="updateName(this)" class="\${isSelected}">\${shelter}</li>`;
+		  shelterNames.forEach((sName) => {
+		    let isSelected = sName == selectedShelter ? "selected" : "other";
+		    let li = `<li onclick="updateName(this); hideShelterNameLabel(this);" class="\${isSelected}">\${sName}</li>`;
 		    options.insertAdjacentHTML("beforeend", li);
 		  });
 		}
-		addShelter();
+		
 
 		function updateName(selectedLi) {
 		  searchInp.value = "";
 		  addShelter(selectedLi.innerText);
 		  wrapper.classList.remove("active");
 		  selectBtn.firstElementChild.innerText = selectedLi.innerText;
+		  selectBtn.firstElementChild.classList.add("font-dark");
 		}
 
-		searchInp.addEventListener("input", () => {
+		searchInp.addEventListener("keyup", () => {
 		  let arr = [];
 		  let searchWord = searchInp.value.toLowerCase();
-		  arr = shelters
+		  arr = shelterNames
 		    .filter((data) => {
 		      return data.toLowerCase().startsWith(searchWord);
 		    })
 		    .map((data) => {
 		      let isSelected =
 		        data == selectBtn.firstElementChild.innerText ? "selected" : "";
-		      return `<li onclick="updateName(this)" class="\${isSelected}">\${data}</li>`;
+		      return `<li onclick="updateName(this); hideShelterNameLabel(this);" class="\${isSelected}">\${data}</li>`;
 		    })
 		    .join("");
 		  options.innerHTML = arr
 		    ? arr
-		    : `<li onclick="updateName(this)">보호소 등록하기</li>`;
+		    : `<li onclick="updateName(this); showShelterNameLabel();">보호소 등록하기</li>`;
+		    // onclick을 밑에 input 생기는 걸로 바꾸기
 		});
-
-		selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
-
+		
+		function showShelterNameLabel(){
+			/* selectBtn.firstElementChild.classList.remove("font-dark"); */
+			shelterNameInp.value = "";
+			shelterNameLabel.classList.remove("hide");
+			shelterNameLabel.classList.add("show");
+		}
+		function hideShelterNameLabel(selectedLi){
+			selectBtn.firstElementChild.classList.add("font-dark");
+			shelterNameInp.value = selectedLi.innerText;
+			shelterNameLabel.classList.add("hide");
+			shelterNameLabel.classList.remove("show", "required");
+		}
+		
+		
+		
 	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
 </body>

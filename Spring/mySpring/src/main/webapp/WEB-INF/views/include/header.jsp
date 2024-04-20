@@ -35,37 +35,35 @@
 					<li><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">소개</strong></a></li>
 					<li class="dropdown"><a class="transition" href="#"><strong
-							class="xlarge-font hover-underline">보호소
-								및 후원</strong></a>
+							class="xlarge-font hover-underline">보호소 및 후원</strong></a>
 						<div class="dropdown-content">
 							<a class="transition" href="#"><strong
-								class="large-font hover-underline">후원
-									안내</strong></a> <a class="transition" href="${contextPath }/donation/form"><strong
-								class="large-font hover-underline">후원하기</strong></a>
-							<a class="transition" href="${contextPath }/donation/map"><strong
-								class="large-font hover-underline">보호소
-									조회</strong></a> <a class="transition" href="${contextPath }/donation/campaign"><strong
-								class="large-font hover-underline">캠페인
-									둘러보기</strong></a>
+								class="large-font hover-underline">후원 안내</strong></a> <a
+								class="transition" href="${contextPath }/donation/form"><strong
+								class="large-font hover-underline">후원하기</strong></a> <a
+								class="transition" href="${contextPath }/donation/map"><strong
+								class="large-font hover-underline">보호소 조회</strong></a> <a
+								class="transition" href="${contextPath }/donation/campaign"><strong
+								class="large-font hover-underline">캠페인 둘러보기</strong></a>
 						</div></li>
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">입양</strong></a>
 						<div class="dropdown-content">
 							<a class="transition" href="#"><strong
-								class="large-font hover-underline">입양
-									안내</strong></a> <a class="transition" href="${contextPath }/adoption/list"><strong
+								class="large-font hover-underline">입양 안내</strong></a> <a
+								class="transition" href="${contextPath }/adoption/list"><strong
 								class="large-font hover-underline">입양하기</strong></a>
 						</div></li>
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">게시판</strong></a>
 						<div class="dropdown-content">
 							<a class="transition" href="${contextPath }/board/noticeList"><strong
-								class="large-font hover-underline">공지사항</strong></a>
-							<a class="transition" href="${contextPath }/board/shareList"><strong
-								class="large-font hover-underline">정보공유</strong></a>
-							<a class="transition" href="#"><strong
-								class="large-font hover-underline">보호소
-									이야기</strong></a> <a class="transition" href="${contextPath }/board/write"><strong
+								class="large-font hover-underline">공지사항</strong></a> <a
+								class="transition" href="${contextPath }/board/shareList"><strong
+								class="large-font hover-underline">정보공유</strong></a> <a
+								class="transition" href="#"><strong
+								class="large-font hover-underline">보호소 이야기</strong></a> <a
+								class="transition" href="${contextPath }/board/write"><strong
 								class="large-font hover-underline">문의하기</strong></a>
 						</div></li>
 					<li>
@@ -81,7 +79,7 @@
 									<div class="profile" onclick="menuToggle();">
 										<img src='${icons }/user-circle-rose-white.png'
 											alt="profile-badge-rose-white">
-											
+
 										<%-- 					  		<c:choose>
 					  			<c:when test="${fn:contains(pageContext.request.requestURI, '')}">
 					  				<img src='${icons }/user-circle-rose-white.png' alt="profile-badge-rose-white">
@@ -96,13 +94,11 @@
 									<div class="profile-menu">
 										<c:choose>
 											<c:when test="${userType == '1' || userType == '2'}">
-												<h3>${userName}<br>
-													<span>${userId}</span>
+												<h3>${userName}<br> <span>${userId}</span>
 												</h3>
 												<ul>
 													<li><img src="${icons }/user-detail.png" /><a
-														href="javascript:openUpdatePop()">내 정보 조회</a>
-													</li>
+														href="javascript:openUpdatePop()">내 정보 조회</a></li>
 													<li><img src="${icons }/post.png" /><a
 														href="../index.jsp?target=./include/userMyPostList">작성글
 															관리</a></li>
@@ -114,16 +110,13 @@
 												</ul>
 											</c:when>
 											<c:when test="${userType == '3' }">
-												<h3>${userName}<br>
-													<span>${userId}</span>
+												<h3>${userName}<br> <span>${userId}</span>
 												</h3>
 												<ul>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/admin/donationList">기부금
-															목록</a></li>
+														href="${contextPath }/admin/donationList">기부금 목록</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
-														href="${contextPath }/admin/userList">회원
-															관리</a></li>
+														href="${contextPath }/admin/userList">회원 관리</a></li>
 													<li><img src="${icons }/logout.png" /><a
 														href="${contextPath }/user/logout">로그아웃</a></li>
 												</ul>

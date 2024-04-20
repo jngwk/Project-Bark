@@ -89,7 +89,7 @@ function handleFormButtonClick(btn, callback) {
     console.log(input.value); // Debugging log
 
     const popupLabel = input.closest(".popup-label");
-    if (!popupLabel || popupLabel.classList.contains("hide")) {
+    if (!popupLabel || popupLabel.classList.contains("hide") || input.name == "") {
       return; // Skip this iteration as no related label was found
     }
 
