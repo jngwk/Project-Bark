@@ -90,10 +90,12 @@ public class BoardController {
 		if (amount == null) {			// 값이 없으면 10 Set		
 			amount = 10;
 		}
-		if (searchField == null) {
+		if (searchField == null || searchField == "") {
 			searchField = "";
+			searchWord = "";
 		}
-		if (searchWord == null) {
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
 			searchWord = "";
 		}
 		
@@ -115,7 +117,7 @@ public class BoardController {
 		
 		model.addAttribute("page", page);
 		model.addAttribute("board", service.read(bno));
-		model.addAttribute("user", userservice.getUser(board.getId()));
+		model.addAttribute("user", userservice.getUser(board.getUser_id()));
 	}
 	
 	@GetMapping("/read3")
@@ -147,10 +149,12 @@ public class BoardController {
 		if (amount == null) {			// 값이 없으면 10 Set		
 			amount = 10;
 		}
-		if (searchField == null) {
+		if (searchField == null || searchField == "") {
 			searchField = "";
+			searchWord = "";
 		}
-		if (searchWord == null) {
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
 			searchWord = "";
 		}
 
