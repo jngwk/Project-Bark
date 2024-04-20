@@ -144,15 +144,6 @@ public class BoardController {
 		model.addAttribute("page", page);
 	}
 	
-	@GetMapping("/contactWrite")
-	public void contactWrite() {
-		
-	}
-	
-	@GetMapping("/shareWrite")
-	public void shareWrite() {
-		
-	}
 	
 //	@GetMapping("/read")
 //	public void read(Model model, 

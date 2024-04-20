@@ -19,7 +19,7 @@
 
 		<!-- board seach area -->
 		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="${contextPath }/board/shareWrite">글쓰기</a>
+			<a class="medium-btn brown-btn" href="${contextPath }/board/write">글쓰기</a>
 		</div>
 		<div id="board-search">
 			<div class="container">
