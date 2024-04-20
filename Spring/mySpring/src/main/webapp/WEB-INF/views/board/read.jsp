@@ -14,7 +14,8 @@
 </head>
 <body>
 <%
-	session.setAttribute("userid", "user001");
+// ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
+	session.setAttribute("userid", "shelter");
 %>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
@@ -132,8 +133,8 @@
 					<div class="reply-content">
 					<p><textarea  style="border: none; width:100%;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>
 
-					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
-					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>
+					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.user_id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
+					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.user_id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>
 <!--
 					<button class="font-dark" id="updateBtn\${item.commentNo}" data-commentno="\${item.commentNo}">수정</button>
 					<button class="font-dark" id="removeBtn\${item.commentNo}" data-commentno="\${item.commentNo}">삭제</button>
@@ -142,7 +143,7 @@
 <!--					
 					<div class="reply-content" style="display:none" id="area\${item.commentNo}">
 					<p><textarea  style="width:80%;">\${item.content}</textarea></p>
-					<button class="font-dark" id="conformBtn\${item.commentNo}">확인</button>
+					<button class="font-dark" id="confirmBtn\${item.commentNo}">확인</button>
 					<button class="font-dark" id="cancelBtn\${item.commentNo}" >취소</button>
 					</div>
 -->				
@@ -196,6 +197,11 @@
 	registerBtn.on("click", function(e) {
 		e.preventDefault();
 		
+		if (content.val() <= 0) {
+			alert("내용을 입력하세요!!");
+			return;
+		}
+		
 		let comment={
 				content: content.val(),
 				user_id: idValue,
@@ -207,10 +213,6 @@
 			showList(1);
 		});
 	});
-	
-	$("form[id=reply_form]").serialize()
-	$("form#reply_form").serialize()
-	$("#reply_form").serialize()
 	
 	//댓글 관련 함수들
 	function add(comment, callback, error) { //댓글 추가 함수
@@ -245,12 +247,11 @@
 		});
 	}
 	
-	
 
-	function remove(rno, callback, error) {
+	function remove(commentNo, callback, error) {
 		$.ajax({
 			type:'delete',
-			url: '/replies/' + rno,
+			url: '/comment/' + commentNo,
 			success: function (result, status, xhr) {
 			    if (callback) { callback(result); }
 			},
@@ -276,6 +277,13 @@
 function btn1(obj) {
 
 	let commentNo=$(obj).data("commentno");
+	let userid=$(obj).data("userid");
+
+	if (userid != idValue) {
+		alert("댓글 작성자가 아닙니다.")
+		return;
+	}	
+	
 	let area = "#area" + commentNo;
 	let btn2 = "#btn2" + commentNo;
 	
@@ -286,27 +294,39 @@ function btn1(obj) {
 		$(area).focus();
 	}
 	else {
-		//$(obj).text("수정");
-		//$(btn2).text("삭제");
-		//$(area).attr("readonly", true);
-		let content = $(area).text();
+		$(obj).text("수정");
+		$(btn2).text("삭제");
+		$(area).attr("readonly", true);
+		$(area).focusout();
+		let content = $(area).val();
+
+		let comment={commentNo: commentNo, board_bno: bnoValue, user_id: idValue, content: content };
 		
-		alert(bnoValue +content);
-		 
-		let comment = {commentNo:commentNo, board_no: bnoValue, content:content };
 		update(comment, function(result) {
 			alert(result);
 			showList(1);
-		}); 
+
+		});
+
+		
+		
 	}
 }
 
 //삭제 
 function btn2(obj) {
+
 	let commentNo=$(obj).data("commentno");
+	let userid=$(obj).data("userid");
+
+	if (userid != idValue) {
+		alert("댓글 작성자가 아닙니다.")
+		return;
+	}	
+
 	let area 	= "#area" + commentNo;
 	let btn1 = "#btn1" + commentNo;
-	
+
 	if ("취소" ==  $(obj).text()) {
 		$(obj).text("삭제");
 		$(btn1).text("수정");
@@ -314,10 +334,18 @@ function btn2(obj) {
 
 	}
 	else {
-		//삭제 처리 ~~~ 
+		if(confirm("삭제 하시겠습니까?")){
+			remove(commentNo, function(result) {
+				alert(result);
+				showList(1);
+			});
+		}else{
+			alert("취소 하셨습니다.");
+		}
+		
+ 
 	}
 }
-
 
 </script>
 </body>
