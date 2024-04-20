@@ -11,7 +11,6 @@ public class Page {
 	private Integer 	total;  // 총건
 	private Criteria	cri;
 	
-	
 	public Page(Criteria cri, Integer total) {
 		this.cri 	= cri;
 		this.total 	= total;
@@ -25,14 +24,13 @@ public class Page {
 		this.prev 	= this.start > 1;
 		this.next	= this.end   < realEnd;
 		
-		this.cri = cri;
-		
 		// 검수용 삭제 가능
-		System.out.println("cri-[" + cri.getPageNum() + ":" + cri.getAmount() + "]");
-		System.out.println("page-[" + this.start + ":" + this.end + ":" + total +  "]");
-		System.out.println("page-[" + this.prev + ":" + this.next + "]");
-		
+		System.out.println("page display--------------------------");
+		System.out.println("page-[" + this.start + ":" + this.end + ":" + this.prev + ":" + this.next +  ":" + total +"]" );
+		System.out.println("cri-[" + cri.getType() + ":" + cri.getPageNum() + ":" + cri.getPageSql() + ":" + cri.getAmount() + ":" + cri.getSearchField() + ":" + cri.getSearchWord() + ":" + cri.getSearchWordSql() + "]");
 		// ---------
+		
+
 
 	}
 }

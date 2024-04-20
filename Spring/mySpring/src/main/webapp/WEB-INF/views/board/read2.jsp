@@ -10,7 +10,6 @@
 <title>Document</title>
 <link rel="stylesheet" href="${css }/read.css" />
 <link rel="stylesheet" href="${css }/root.css" />
-<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
@@ -72,13 +71,35 @@
 					<div>
 					<input class="reply-write" type="text" name="reply"
 							placeholder="댓글을 입력하세요" /> 
-					
-						<label for="reply-buttom"><input class="reply-button" id="reply-buttom" type="submit" > <img src="/images/icons/write-icon.png"></label> 
+					<input class="reply-button" id="reply-buttom" type="submit" > 
+						<label for="reply-buttom"> <img	src="/images/icons/write-icon.png"></label> 
+					</input>
 					</div>
 <!-- end : css 수정 필요  form > div  -->
 					<div class="reply-list">
 						<ul class="comment">
-
+							<li>
+								<div class="reply-profile">
+									<span>김지현</span><span>2024-04-13</span>
+								</div>
+								<div class="reply-content">
+									<p>정욱님 프론트 언제쯤 되세요</p>
+									<a href="#" id="removeBtn" class="font-dark">수정</a> <a href="#"
+										id="update" class="font-dark">삭제</a>
+								</div>
+							</li>
+							<li>
+								<div class="reply-profile">
+									<span>김지현</span><span>2024-04-13</span>
+								</div>
+								<div class="reply-content">
+									<p>정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤
+										되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤
+										되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요</p>
+									<a href="#" id="removeBtn" class="font-dark">수정</a> <a href="#"
+										id="update" class="font-dark">삭제</a>
+								</div>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -111,7 +132,7 @@
 <script>
 $(document).ready(function(){
 	let bnoValue = '<c:out value="${board.bno}"/>'; //현재 게시글에 댓글추가
-	//let idValue = '<c:out value="${board.id}"/>'; //헌재 접속자 id 
+	let idValue = '<c:out value="${board.id}"/>'; //현재 게시글에 댓글추가
 	
 	let findtag = $(".reply-board");
 	let content = findtag.find("input[name='reply']");
@@ -119,7 +140,7 @@ $(document).ready(function(){
 	let commentBtn = $("#reply-buttom");
 
 	
-	let replyUL = $(".comment");
+	let replyUL = $(".reply");
 	showList(1);
  	
 	function showList(page) {
@@ -135,58 +156,18 @@ $(document).ready(function(){
 			list.forEach(function(item) {
 				str += `<li data-commentNo="\${item.commentNo}">
 					<div class="reply-profile">
-						<span>\${item.name}</span><span>\${item.regDate}</span>
-					</div>
+						<span>\${item.name}</span><span><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="\${comment.regDate} />"</span>
 					<div class="reply-content">
-					<p>\${item.content}</p>
+					<p>\${comment.content}</p>
 					<a href="#" id="removeBtn" class="font-dark">수정</a> <a href="#"
 						id="update" class="font-dark">삭제</a>
-					</div>
 					</li>
 					`;
 			});
 			replyUL.html(str);
 		});
 	}
-					
-	function displayTime(timeValue) {
-		//alert(timeValue);
-		let today 	= new Date();
-		let gap 	= today.getTime() - timeValue;
-		let dateObj	= new Date(timeValue);
-		if (gap < (1000*60*60*24)) {
-			let hh = dateObj.getHours();
-			let mi = dateObj.getMinutes();
-			let ss = dateObj.getSeconds();
-			return [(hh>9?'':'0')+hh, ':', (mi>9?'':'0')+mi, ':', (ss>9?'':'0')+ss].join('');
-			// return [ (hh>9?'':'0')+hh, ':', (mi>9?'':'0')+mi, ':', (ss>9?'':'0')+ss].join('');
-		}
-		else {
-			let yy = dateObj.getFullYear();
-			let mm = dateObj.getMonth()+1;
-			let dd = dateObj.getDate();
-			return [yy,'/', (mm>9?'':'0')+mm,'/', (dd>9?'':'0')+dd].join('');
-			// return [yy,'/', (mm>9?'':'0')+mm,'/', (dd>9?'':'0')+dd].join('');
-		}
-	}				
-					
-					
-					
-					
-	function getList(param, callback, error) {
-		let bno = param.bno;
-		let page = param.page || 1;
-		$.getJSON("/comment/pages/" + bno + "/" + page + ".json",
-			function(data) {
-				if (callback) { callback(data);}
-			
-		}).fail(function(xhr, status, err) {
-			if (error) { error();}
-		});
-	}
-			
-		
-/* 	
+	
 	commentBtn.on("click", function(e) {
 	let comment={
 			comment: content.val(),
@@ -199,7 +180,6 @@ $(document).ready(function(){
 		modal.modal("hide");
 		showList(1);
 	});
-	 */
 });
 </script>
 </body>
