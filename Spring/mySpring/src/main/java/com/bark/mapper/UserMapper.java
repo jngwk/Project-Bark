@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.bark.domain.User;
 
 public interface UserMapper {
+	
 	@Select("select * from user where type != 3")
 	public List<User> getUserList();
 	@Select("select * from user where type = 3")
@@ -32,5 +33,8 @@ public interface UserMapper {
 	public int checkId(String id);
     @Select("select count(id) from user where name = #{name} AND email = #{email}")
 	public int findAcc(@Param("name") String name, @Param("email") String email);
+    
+    @Select("select * from user where type = #{type}")
+    public List<User> getUserType(int type);
 	
 }

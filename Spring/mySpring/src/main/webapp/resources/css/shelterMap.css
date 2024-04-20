@@ -51,6 +51,9 @@ align-items: center;
 .tab {
   display: inline-flex;
 }
+
+
+
 .tab li > a {
   position: relative;
   width: 50%;
@@ -58,13 +61,34 @@ align-items: center;
   text-align: center;
   cursor: pointer;
   font-size:20px;
+  transition: 0.3s;
   
 }
-
-.tab li:active,.tab li:hover {
-  transform: translateY(15%);
-  transition: 0.1s;
+.shelter-name{
+	text-decoration: underline;
+    text-underline-position: 20px;
+    text-underline-offset: 5px;
 }
+
+.shelter-name.select{
+	text-decoration: underline;
+    text-underline-position: 20px;
+    text-underline-offset: 5px;
+}
+.shelter-area.notselect{
+	text-decoration: none;
+}
+.shelter-area.select{
+	text-decoration: underline;
+    text-underline-position: 20px;
+    text-underline-offset: 5px;
+}
+.shelter-name.notselect{
+	text-decoration: none;
+}
+
+
+
 .area-search {
   display: none;
 }

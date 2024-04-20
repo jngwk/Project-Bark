@@ -49,4 +49,8 @@ public class UserService {
 		log.info("findAcc..................");
 		return mapper.findAcc(name, email);
 	}
+	public List<User> getUserType(int type) {
+		// TODO Auto-generated method stub
+		return mapper.getUserType(type);
+	}
 }
