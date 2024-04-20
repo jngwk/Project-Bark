@@ -114,6 +114,12 @@
 				</li>`
 						$('.shelter-ul').append(str);
 	        		}) 
+				}else if(result.length == 0){
+					str=`
+					<div style="display:flex; align-items: center; justify-content: center; height: 100px;">
+						<p>검색 내용과 일치하는 보호소가 없습니다.</p>
+					</div>`
+					$('.shelter-ul').append(str);
 				}
 			}
 		})
@@ -156,7 +162,13 @@
 				</li>`
 						$('.shelter-ul').append(str);
 	        		}) 
-				}
+				}else if(result.length == 0){
+					str=`
+						<div style="display:flex; align-items: center; justify-content: center; height: 100px;">
+							<p>검색 내용과 일치하는 보호소가 없습니다.</p>
+						</div>`
+						$('.shelter-ul').append(str);
+					}
 			}
 		})
 	}

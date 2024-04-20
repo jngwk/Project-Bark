@@ -42,16 +42,19 @@ public class DonationController {
         ShelterInfo shelterinfo = new ShelterInfo();
         log.info("-------shelter json--------");
         
-        List<Shelter> sList = service.getShelterList();
-        log.info("-------get shelter list--------");
+        List<Shelter> sqlList = service.getShelterList();
+        log.info("-------get sqlshelter list--------");
         
         HashMap<String, Shelter> sMap = shelterinfo.getShelterInfo();		
-        if(sList.size()<=0) {
+        if(sqlList.size()<=0) {
 	        for(Entry<String, Shelter> entrySet : sMap.entrySet()) {
 	        	service.putShelterInfo(entrySet.getValue());
 	        }
         }
         log.info("-------insert into HaspMap--------");
+        
+        List<Shelter> sList = service.getShelterList();
+        log.info("-------get shelter list--------");
         
     	model.addAttribute("sList", sList);
 
