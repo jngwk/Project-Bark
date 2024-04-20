@@ -37,8 +37,8 @@ public class CommentService {
 		return mapper.delete(commentNo);
 	}
 	
-	public List<Comment> list(Integer bno) { 
-		log.info("getComment List of a Board ...." + bno);
-		return mapper.List(bno);
+	public List<Comment> list(Integer board_bno) { 
+		log.info("getComment List of a Board ...." + board_bno);
+		return mapper.List(board_bno);
 	}
 }

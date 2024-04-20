@@ -29,17 +29,17 @@ public class CommentController {
 	
 	@PostMapping(value="/new", consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody Comment comment) {
-		log.info("Comment : " + comment);
+		log.info("Comment new : " + comment);
 		int insertCount = service.insert(comment);
 		log.info("Comment INSERT COUNT : " + insertCount);
 		return insertCount == 1 ? new ResponseEntity<>("Success", HttpStatus.OK)
 				                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping(value="/pages/{bno}/{page}", produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<Comment>> getList(@PathVariable("page") int page, @PathVariable("bno") Integer bno) {
+	@GetMapping(value="/pages/{board_bno}/{page}", produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<List<Comment>> getList(@PathVariable("page") int page, @PathVariable("board_bno") Integer board_bno) {
 		log.info("Comment getList..........");
-		List <Comment> cList = service.list(bno);  
+		List <Comment> cList = service.list(board_bno);  
 
 		log.info(cList);
 		
@@ -74,9 +74,12 @@ public class CommentController {
 	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH}, value="/{commentNo}", consumes="application/json",
 					produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String>modify(@RequestBody Comment comment, @PathVariable("commentNo")Integer commentNo){
-	   comment.setCommentNo(commentNo); log.info("commentNo: "+commentNo);   log.info("modify : "+comment);
-	   return service.update(comment) ==1 ? new ResponseEntity<>("success", HttpStatus.OK)
-			   							  : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+   
+		log.info("modify : "+comment);
+		comment.setCommentNo(commentNo);
+
+		return service.update(comment) ==1 ? new ResponseEntity<>("success", HttpStatus.OK)
+			   							   : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }
