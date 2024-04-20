@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,208 +24,143 @@
 			</div>
 			<div class="shelter-search">
 				<div class="name-search">
-					<form>
-						<input class="search" type="search" placeholder="보호소 이름 검색"> 
-						<input class="submit" type="submit" value="검색">
+					<form name="searchName">
+						<input class="search" name="name" type="search"
+							placeholder="보호소 이름 검색">
+						<input class="submit" id="nameSearchBtn"
+						type="submit" value="검색">
 					</form>
 				</div>
 				<div class="area-search">
-					<form>
+					<form name="searchAddr">
 						<select class="main-city">
 							<option>지역</option>
 							<option value="seoul">서울</option>
 							<option value="gyeonggi">경기도</option>
-						</select> <select class="sub-city" id="sub-city">
-							<option>시/군/구</option>
-						</select> <input class="submit" type="submit" value="검색">
+						</select>
+						<select class="sub-city" name="city" id="sub-city">
+							<option value="">시/군/구</option>
+						</select>
+						<input class="submit" id="addrSearchBtn" type="submit" value="검색">
 					</form>
 				</div>
 			</div>
 			<div class="list-container">
 				<div class="shelter-list">
 					<ul class="shelter-ul">
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+						<c:forEach var="list" items="${sList}">
+							<li onclick="shelterMap(${list.lat},${list.lng}); expandList(this)">
+								<div class="shelter-detail">
+									<p>${list.shelterName}</p>
+									<span>${list.shelterAddr}</span>
+									<p style="display: none;">${list.lat}</p>
+									<p style="display: none;">${list.lng}</p>
 								</div>
-							</div>
-						</li>
-<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+								<div class="shelter-buttons">
+									<div class="detail-box">
+										<a href="${contextPath }/donation/form" class="donate green-btn large-btn">후원하기</a> <a
+											href="#" class="shelter-story green-btn large-btn">보호소
+											이야기</a> <a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인
+											둘러보기</a>
+									</div>
 								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="shelter-detail">
-								<p>1조보호소</p>
-								<span>서울시 강남구</span>
-							</div>
-							<div class="shelter-buttons">
-								<div class="detail-box">
-									<a href="#" class="donate green-btn large-btn">후원하기</a> <a
-										href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-									<a href="#" class="campaign green-btn large-btn">캠페인 둘러보기</a>
-								</div>
-							</div>
-						</li>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<div class="map">
-			<div class="shelter-map">
-				<div class="api-image">
-					<img class="api" src="${images }/map.jpg">
-				</div>
-			</div>
-		</div>
+		<div class="map" id="map" style="width: 100%;"></div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051"></script>
 	<script src="${js }/shelterMap.js"></script>
+	<script>
+	//이름 ajax
+	$("#nameSearchBtn").on("click",function(e){
+		e.preventDefault();
+		getSearchName();
+		console.log("click");
+	})
+	function getSearchName(){
+/* 		console.log( $("form[name=searchName]").serialize()); */
+		$.ajax({
+			type: 'GET',
+			url : "/donation/shelterSearchName",
+			data : $("form[name=searchName]").serialize(),
+			success : function(result){
+				console.log(result);
+				//테이블 초기화
+				$('.shelter-ul').empty();
+				if(result.length>=1){
+					result.forEach(function(item){
+						str=`
+						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+							<div class="shelter-detail" >
+						<p>\${item.shelterName}</p>
+						<span>\${item.shelterAddr}</span>
+							<p style="display: none;">\${item.lat}</p>
+						<p style="display: none;">\${item.lng}</p>
+					</div>
+					<div class="shelter-buttons">
+						<div class="detail-box">
+							<a href="${contextPath }/donation/form" class="donate green-btn large-btn">후원하기</a>
+							<a href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
+							<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+						</div>
+					</div>
+				</li>`
+						$('.shelter-ul').append(str);
+	        		}) 
+				}
+			}
+		})
+	}
+	
+
+	//주소 ajax
+	$("#addrSearchBtn").on("click",function(e){
+		e.preventDefault();
+		getSearchAddr();
+		console.log("click");
+	})
+	function getSearchAddr(){
+		console.log($(".sub-city").val());
+		$.ajax({
+			type: 'GET',
+			url : "/donation/shelterSearchAddr",
+			data : {addr: $(".sub-city").val()},
+			success : function(result){
+				console.log(result);
+				//테이블 초기화
+				$('.shelter-ul').empty();
+				if(result.length>=1){
+					result.forEach(function(item){
+						str=`
+						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+							<div class="shelter-detail" >
+						<p>\${item.shelterName}</p>
+						<span>\${item.shelterAddr}</span>
+							<p style="display: none;">\${item.lat}</p>
+						<p style="display: none;">\${item.lng}</p>
+					</div>
+					<div class="shelter-buttons">
+						<div class="detail-box">
+							<a href="${contextPath }/donation/form" class="donate green-btn large-btn">후원하기</a> <a
+								href="#" class="shelter-story green-btn large-btn">보호소	이야기</a>
+								<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+						</div>
+					</div>
+				</li>`
+						$('.shelter-ul').append(str);
+	        		}) 
+				}
+			}
+		})
+	}
+	</script>
+	<script src="${js }/map.js"></script>
 </body>
 </html>

@@ -9,17 +9,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="${css }/root.css" />
-<link rel="stylesheet" href="${css }/noticeList.css" />
+<link rel="stylesheet" href="${css }/shareList.css" />
 </head>
 <body>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 	<section class="notice">
-		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
+		<p class="page-title">Sharing Info</p><p class="page-subtitle">[정보공유]</p>
 
 		<!-- board seach area -->
 		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="${contextPath }/board/write">글쓰기</a>
+			<a class="medium-btn brown-btn" href="${contextPath }/board/shareWrite">글쓰기</a>
 		</div>
 		<div id="board-search">
 			<div class="container">
@@ -27,12 +27,12 @@
 					<form action="/board/noticeList" method="get">
 						<div class="search-wrap">
 							<label for="search" class="blind">공지사항 내용 검색</label> <select name="searchField">
-								<option value="" >카테고리</option>
-								<option value="content" <c:if test="${page.cri.searchField == 'content'}">selected</c:if>>내용</option>
-								<option value="title" <c:if test="${page.cri.searchField == 'title'}">selected</c:if>>제목</option>
-								<option value="id" <c:if test="${page.cri.searchField == 'id'}">selected</c:if>>작성자</option>
+								<option value="">카테고리</option>
+								<option value="content">내용</option>
+								<option value="title">제목</option>
+								<option value="id">작성자</option>
 							</select> <input id="search" type="search" name="searchWord"
-								placeholder="검색어를 입력해주세요." value="${page.cri.searchWord}" />
+								placeholder="검색어를 입력해주세요." value="" />
 							<button type="submit" class="btn btn-dark">검색</button>
 						</div>
 					</form>
@@ -56,8 +56,7 @@
 					<c:forEach var="bList" items="${bList}" >
 						<tr>
 							<td>${bList.no}</td>
-							<td><a href="/board/read3?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
-							${bList.title}</a></td>
+							<td><a href="/notice/read?bno=${bList.bno}">${bList.title}</a></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
 							<td>${bList.hit}</td>
 						</tr>

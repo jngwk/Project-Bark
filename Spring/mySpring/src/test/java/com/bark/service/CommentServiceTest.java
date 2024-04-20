@@ -110,8 +110,8 @@ public class CommentServiceTest {
 		int cnt2 = bnoList.size();
 		if (cnt1 > 0 && cnt2 > 0) {
 			cnt1 = (cnt1 > 30)? 30 : cnt1 ;   			// user id가 30개가 넘을 경우 30개만 사용
-			cnt2 = (cnt2 > 30)? 30 : cnt2 ;   			// user id가 30개가 넘을 경우 30개만 사용
-			for (int i = 0; i < 500; i++) {
+			cnt2 = (cnt2 > 30)? 10 : cnt2 ;   			// user id가 30개가 넘을 경우 30개만 사용
+			for (int i = 0; i < 100; i++) {
 
 				//comment.setCommentNo(i);					// AUTO_INCREMENT
 				comment.setBno(bnoList.get(i % cnt2));

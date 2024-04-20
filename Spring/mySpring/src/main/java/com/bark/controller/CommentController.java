@@ -39,7 +39,11 @@ public class CommentController {
 	@GetMapping(value="/pages/{bno}/{page}", produces= {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
 	public ResponseEntity<List<Comment>> getList(@PathVariable("page") int page, @PathVariable("bno") Integer bno) {
 		log.info("Comment getList..........");
-		return new ResponseEntity<>(service.list(bno), HttpStatus.OK);
+		List <Comment> cList = service.list(bno);  
+
+		log.info(cList);
+		
+		return new ResponseEntity<>(cList, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/{commentNo}",

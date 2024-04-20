@@ -135,7 +135,7 @@ $(document).ready(function(){
 			list.forEach(function(item) {
 				str += `<li data-commentNo="\${item.commentNo}">
 					<div class="reply-profile">
-						<span>\${item.name}</span><span>\${item.regDate}</span>
+						<span>\${item.name}</span><span>\${displayTime(item.regDate)}</span>
 					</div>
 					<div class="reply-content">
 					<p>\${item.content}</p>
@@ -155,13 +155,17 @@ $(document).ready(function(){
 		let gap 	= today.getTime() - timeValue;
 		let dateObj	= new Date(timeValue);
 		if (gap < (1000*60*60*24)) {
+
+
 			let hh = dateObj.getHours();
 			let mi = dateObj.getMinutes();
 			let ss = dateObj.getSeconds();
+			alert("aaa" + hh + mi + ss);			
 			return [(hh>9?'':'0')+hh, ':', (mi>9?'':'0')+mi, ':', (ss>9?'':'0')+ss].join('');
 			// return [ (hh>9?'':'0')+hh, ':', (mi>9?'':'0')+mi, ':', (ss>9?'':'0')+ss].join('');
 		}
 		else {
+
 			let yy = dateObj.getFullYear();
 			let mm = dateObj.getMonth()+1;
 			let dd = dateObj.getDate();
@@ -169,8 +173,6 @@ $(document).ready(function(){
 			// return [yy,'/', (mm>9?'':'0')+mm,'/', (dd>9?'':'0')+dd].join('');
 		}
 	}				
-					
-					
 					
 					
 	function getList(param, callback, error) {
@@ -184,22 +186,7 @@ $(document).ready(function(){
 			if (error) { error();}
 		});
 	}
-			
-		
-/* 	
-	commentBtn.on("click", function(e) {
-	let comment={
-			comment: content.val(),
-			id: idValue,
-			bno: bnoValue
-	};
-	add(reply, function(result) {
-		alert(result);
-		modal.find("input").val("");
-		modal.modal("hide");
-		showList(1);
-	});
-	 */
+
 });
 </script>
 </body>

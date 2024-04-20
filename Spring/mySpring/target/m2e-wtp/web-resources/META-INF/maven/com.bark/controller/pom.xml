@@ -232,7 +232,12 @@
 			<artifactId>spring-social-google</artifactId>
 			<version>1.0.0.RELEASE</version>
 		</dependency>
-
+		<!-- spring-security-web 비밀번호 암호화-->
+<!-- 		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.2.2.RELEASE</version>
+		</dependency> -->
 	</dependencies>
 	<build>
 		<plugins>

@@ -41,4 +41,12 @@ public class UserService {
 		log.info("delete..................");
 		return mapper.delete(user)==1;
 	}
+	public int checkId(String id) {
+		log.info("checkId..................");
+		return mapper.checkId(id);
+	}
+	public int findAcc(String name, String email) {
+		log.info("findAcc..................");
+		return mapper.findAcc(name, email);
+	}
 }
