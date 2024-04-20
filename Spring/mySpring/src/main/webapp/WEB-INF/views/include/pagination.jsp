@@ -15,19 +15,19 @@
       <div class="pagination">
         <span class="pagination__number-indicator"></span>
         <button class="pagination__arrow pagination-btn" id="prev" onclick="location.href=
-        	'/board/noticeList?pageNum=${page.start-2}&amount=10&searchfield=${searchfield}&searchWord=${searchWord}'">
+        	'/board/noticeList?pageNum=${page.start-1}&amount=10&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">
           <span class="pagination__arrow-half"></span>
           <span class="pagination__arrow-half"></span>
         </button>
         <c:forEach var="num" begin="${page.start}" end="${page.end}">
         <c:choose>
         <c:when test="${num eq page.cri.pageNum}">
-        	 <button class="pagination__number pagination-btn pagination__number--active " id="btn" onclick="location.href=
-				'/board/noticeList?pageNum=${num-1}&amount=10&searchfield=${searchfield}&searchWord=${searchWord}'">${num}</button>
+        	 <button class="pagination__number pagination-btn pagination__number--active " onclick="location.href=
+				'/board/noticeList?pageNum=${num}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">${num}</button>
         </c:when>
         <c:otherwise>
-        	<button class="pagination__number pagination-btn" id="btn" onclick="location.href=
-				'/board/noticeList?pageNum=${num-1}&amount=10&searchfield=${searchfield}&searchWord=${searchWord}'">${num}</button>
+        	<button class="pagination__number pagination-btn" onclick="location.href=
+				'/board/noticeList?pageNum=${num}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">${num}</button>
         </c:otherwise>
         </c:choose>
         
@@ -36,7 +36,7 @@
 		</c:if>
         </c:forEach>
         <button class="pagination__arrow pagination__arrow--right pagination-btn"  id="next" onclick="location.href=
-        	'/board/noticeList?pageNum=${page.end}&amount=10&searchfield=${searchfield}&searchWord=${searchWord}'">
+        	'/board/noticeList?pageNum=${page.end+1}&amount=${page.cri.amount}&searchfield=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">
           <span class="pagination__arrow-half"></span>
           <span class="pagination__arrow-half"></span>
         </button>
@@ -44,8 +44,10 @@
       
 <script>
 	
-	alert("start-end-prev-next[" + ${page.start} + "-" + ${page.end} + "-" + ${page.prev} + "-" + ${page.next} +"]" + typeof(${page.start}));
-	
+	//alert("KYW 확인용[" + ${page.start} + "-" + ${page.end} + "-" + ${page.prev} + "-" + ${page.next} +"]\n["
+	//		+ ${page.cri.pageNum} + "-" + ${page.cri.amount} + "]");
+
+			
 	if (${page.prev}) {
 		document.getElementById('prev').style.display = 'block';
 	} else {
@@ -57,12 +59,6 @@
 	} else {
 		document.getElementById('next').style.display = 'none';
 	}
-	
-/*  	$("#btn").on("click",function() {
-		$(this).addClass("pagination__number--active");
-	});
- */
-
 
 </script>
 </body>

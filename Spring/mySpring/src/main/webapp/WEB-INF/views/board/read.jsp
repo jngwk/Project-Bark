@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +10,7 @@
 <title>Document</title>
 <link rel="stylesheet" href="${css }/read.css" />
 <link rel="stylesheet" href="${css }/root.css" />
+<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
@@ -40,31 +43,11 @@
 			<div class="read-board">
 				<div class="read-top">
 					<div class="read-title">
-						<p>제목입니다.</p>
+						<p>${board.title}</p>
 					</div>
 				</div>
 				<div class="read-board">
-					<p>대통령으로 선거될 수 있는 자는 국회의원의 피선거권이 있고 선거일 현재 40세에 달하여야 한다. 국가는
-						주택개발정책등을 통하여 모든 국민이 쾌적한 주거생활을 할 수 있도록 노력하여야 한다. 대통령은 국가의 원수이며, 외국에
-						대하여 국가를 대표한다. 모든 국민은 언론·출판의 자유와 집회·결사의 자유를 가진다. 헌법재판소는 법관의 자격을 가진
-						9인의 재판관으로 구성하며, 재판관은 대통령이 임명한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된
-						국회의원으로 구성한다. 법률이 헌법에 위반되는 여부가 재판의 전제가 된 경우에는 법원은 헌법재판소에 제청하여 그 심판에
-						의하여 재판한다. 국가는 평생교육을 진흥하여야 한다. 중앙선거관리위원회는 대통령이 임명하는 3인, 국회에서 선출하는
-						3인과 대법원장이 지명하는 3인의 위원으로 구성한다. 위원장은 위원중에서 호선한다. 대통령으로 선거될 수 있는 자는
-						국회의원의 피선거권이 있고 선거일 현재 40세에 달하여야 한다. 국가는 주택개발정책등을 통하여 모든 국민이 쾌적한
-						주거생활을 할 수 있도록 노력하여야 한다. 대통령은 국가의 원수이며, 외국에 대하여 국가를 대표한다. 모든 국민은
-						언론·출판의 자유와 집회·결사의 자유를 가진다. 헌법재판소는 법관의 자격을 가진 9인의 재판관으로 구성하며, 재판관은
-						대통령이 임명한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 법률이 헌법에
-						위반되는 여부가 재판의 전제가 된 경우에는 법원은 헌법재판소에 제청하여 그 심판에 의하여 재판한다. 국가는 평생교육을
-						진흥하여야 한다. 중앙선거관리위원회는 대통령이 임명하는 3인, 국회에서 선출하는 3인과 대법원장이 지명하는 3인의
-						위원으로 구성한다. 위원장은 위원중에서 호선한다. 대통령으로 선거될 수 있는 자는 국회의원의 피선거권이 있고 선거일
-						현재 40세에 달하여야 한다. 국가는 주택개발정책등을 통하여 모든 국민이 쾌적한 주거생활을 할 수 있도록 노력하여야
-						한다. 대통령은 국가의 원수이며, 외국에 대하여 국가를 대표한다. 모든 국민은 언론·출판의 자유와 집회·결사의 자유를
-						가진다. 헌법재판소는 법관의 자격을 가진 9인의 재판관으로 구성하며, 재판관은 대통령이 임명한다. 국회는 국민의
-						보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 법률이 헌법에 위반되는 여부가 재판의 전제가 된
-						경우에는 법원은 헌법재판소에 제청하여 그 심판에 의하여 재판한다. 국가는 평생교육을 진흥하여야 한다.
-						중앙선거관리위원회는 대통령이 임명하는 3인, 국회에서 선출하는 3인과 대법원장이 지명하는 3인의 위원으로 구성한다.
-						위원장은 위원중에서 호선한다.</p>
+					<p>${board.content}</p>
 				</div>
 			</div>
 			<div class="read-button">
@@ -77,37 +60,25 @@
 			</div>
 			<div class="reply-container">
 				<div class="reply-board">
+<!-- restController 처리 : start css 수정 필요  form > div
 					<form action="#" method="post">
 						<input class="reply-write" type="text" name="reply"
 							placeholder="댓글을 입력하세요" /> <label
 							for="reply-buttom"> <img
 							src="/images/icons/write-icon.png">
 						</label> <input class="reply-button" id="reply-buttom" type="submit" />
-					</form>
+					</form> 
+-->
+					<div>
+					<input class="reply-write" type="text" name="reply"
+							placeholder="댓글을 입력하세요" /> 
+					
+						<label for="reply-buttom"><input class="reply-button" id="reply-buttom" type="submit" > <img src="/images/icons/write-icon.png"></label> 
+					</div>
+<!-- end : css 수정 필요  form > div  -->
 					<div class="reply-list">
-						<ul>
-							<li>
-								<div class="reply-profile">
-									<span>김지현</span><span>2024-04-13</span>
-								</div>
-								<div class="reply-content">
-									<p>정욱님 프론트 언제쯤 되세요</p>
-									<a href="#" id="removeBtn" class="font-dark">수정</a> <a href="#"
-										id="update" class="font-dark">삭제</a>
-								</div>
-							</li>
-							<li>
-								<div class="reply-profile">
-									<span>김지현</span><span>2024-04-13</span>
-								</div>
-								<div class="reply-content">
-									<p>정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤
-										되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤
-										되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요정욱님 프론트 언제쯤 되세요</p>
-									<a href="#" id="removeBtn" class="font-dark">수정</a> <a href="#"
-										id="update" class="font-dark">삭제</a>
-								</div>
-							</li>
+						<ul class="comment">
+
 						</ul>
 					</div>
 				</div>
@@ -118,24 +89,105 @@
 				<div class="read-right">
 					<div class="read-info">
 						<p>작성자</p>
-						<p>지현</p>
+						<p>${user.name}</p>
 					</div>
 					<div class="read-info">
 						<p>조회수</p>
-						<p>8</p>
+						<p>${board.hit}</p>
 					</div>
 					<div class="read-info">
 						<p>추천수</p>
-						<p>15</p>
+						<p>${board.likea}</p>
 					</div>
 					<div class="read-info">
 						<p>작성일</p>
-						<p>2024-04-13 12:22:22</p>
+						<p><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${board.regDate}" /></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
+<script>
+$(document).ready(function(){
+	let bnoValue = '<c:out value="${board.bno}"/>'; //현재 게시글에 댓글추가
+	//let idValue = '<c:out value="${board.id}"/>'; //헌재 접속자 id 
+	
+	let findtag = $(".reply-board");
+	let content = findtag.find("input[name='reply']");
+
+	let commentBtn = $("#reply-buttom");
+
+	
+	let replyUL = $(".comment");
+	showList(1);
+ 	
+	function showList(page) {
+		getList({
+			bno : bnoValue,
+			page : page || 1
+		}, function(list) {
+			let str="";
+			if (list == null || list.length==0) {
+				replyUL.html("");
+				return;
+			}
+			list.forEach(function(item) {
+				str += `<li data-commentNo="\${item.commentNo}">
+					<div class="reply-profile">
+						<span>\${item.name}</span><span>\${displayTime(item.regDate)}</span>
+					</div>
+					<div class="reply-content">
+					<p>\${item.content}</p>
+					<a href="#" id="removeBtn" class="font-dark">수정</a> <a href="#"
+						id="update" class="font-dark">삭제</a>
+					</div>
+					</li>
+					`;
+			});
+			replyUL.html(str);
+		});
+	}
+					
+	function displayTime(timeValue) {
+		//alert(timeValue);
+		let today 	= new Date();
+		let gap 	= today.getTime() - timeValue;
+		let dateObj	= new Date(timeValue);
+		if (gap < (1000*60*60*24)) {
+
+
+			let hh = dateObj.getHours();
+			let mi = dateObj.getMinutes();
+			let ss = dateObj.getSeconds();
+			alert("aaa" + hh + mi + ss);			
+			return [(hh>9?'':'0')+hh, ':', (mi>9?'':'0')+mi, ':', (ss>9?'':'0')+ss].join('');
+			// return [ (hh>9?'':'0')+hh, ':', (mi>9?'':'0')+mi, ':', (ss>9?'':'0')+ss].join('');
+		}
+		else {
+
+			let yy = dateObj.getFullYear();
+			let mm = dateObj.getMonth()+1;
+			let dd = dateObj.getDate();
+			return [yy,'/', (mm>9?'':'0')+mm,'/', (dd>9?'':'0')+dd].join('');
+			// return [yy,'/', (mm>9?'':'0')+mm,'/', (dd>9?'':'0')+dd].join('');
+		}
+	}				
+					
+					
+	function getList(param, callback, error) {
+		let bno = param.bno;
+		let page = param.page || 1;
+		$.getJSON("/comment/pages/" + bno + "/" + page + ".json",
+			function(data) {
+				if (callback) { callback(data);}
+			
+		}).fail(function(xhr, status, err) {
+			if (error) { error();}
+		});
+	}
+
+});
+</script>
 </body>
 </html>
