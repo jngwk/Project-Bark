@@ -127,6 +127,59 @@ public class BoardController {
 			 @RequestParam(required=false, value="amount") Integer amount) {
 		return ;
 	}
+
+	@GetMapping("/shareList")
+	public void shareList(Model model,
+						   @RequestParam(required=false, value="searchField") String searchField,
+						   @RequestParam(required=false, value="searchWord") String searchWord,
+						   @RequestParam(required=false, value="pageNum") Integer pageNum,
+						   @RequestParam(required=false, value="amount") Integer amount) {
+		Integer type = 2;
+		System.out.println("noticeList type-feild-pageNum-amount : " + type +"-"+ searchField + "-" + searchWord +
+						"-" + pageNum + "-" + amount);
+		
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null) {   		// 값이 없으면 0 Set
+			pageNum = 0; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null) {
+			searchField = "";
+		}
+		if (searchWord == null) {
+			searchWord = "";
+		}
+
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+		// 조회 조건에 따른 전게 건수 
+		int total = service.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		model.addAttribute("bList", service.searchList(cri));
+		model.addAttribute("page", page);
+	}	
+	
+	@GetMapping("/contactWrite")
+	public void contactWrite() {
+		
+	}
+	
+	@GetMapping("/shareWrite")
+	public void shareWrite() {
+		
+	}	
 	
 	@PostMapping("/write")
 	public String write(Board board, RedirectAttributes rttr) {
