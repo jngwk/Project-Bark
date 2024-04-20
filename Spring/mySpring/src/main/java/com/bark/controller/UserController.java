@@ -145,4 +145,9 @@ public class UserController {
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailservice.joinEmail(email);
 	}
+	
+	@GetMapping("/userWriteList")
+	public void userWriteList() {
+		log.info("userWriteList...........");
+	}
 }
