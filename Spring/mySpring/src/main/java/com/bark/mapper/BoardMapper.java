@@ -13,30 +13,27 @@ import com.bark.domain.Criteria;
 
 public interface BoardMapper {
 	
-	@Select("SELECT COUNT(1) FROM board WHERE type = #{type} "
-			  + " AND ((#{searchField} = 'title' AND title LIKE #{searchWord}) "
-			  + " OR   (#{searchField} = 'content' AND content LIKE #{searchWord}) "
-			  + " OR   (#{searchField} = 'id' AND id LIKE #{searchWord}) "
-			  + " OR   (#{searchField} is null ) OR (#{searchField} = '')) ")
-		public int totalPage(@Param("type") Integer type, 
-				  			 @Param("searchField") String searchField, 
-				  			 @Param("searchWord") String searchWord	);
+	@Select("SELECT COUNT(1) FROM board WHERE type = #{cri.type} "
+			  + " AND ((#{cri.searchField} = 'title' AND title LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) ")
+		public int totalPage(@Param("cri") Criteria cri);
 		
 		// 게시판별(type) 검색 단어(searchWord)가 없을 때 page별 조회
 		@Select("SELECT ROW_NUMBER() OVER(ORDER BY b.bno ASC) AS no, b.*"
-			  + " FROM board b WHERE type = #{type} ORDER BY no DESC LIMIT #{cri.pageNum}, #{cri.amount}")
-		public List<Board> list(@Param("cri") Criteria cri, @Param("type") Integer type);
+			  + " FROM board b WHERE type = #{cri.type} ORDER BY no DESC LIMIT #{cri.pageNum}, #{cri.amount}")
+		public List<Board> list(@Param("cri") Criteria cri);
 
 		// 게시판별(type) 검색 단어(searchWord)가 있을 때 page별 조회 
 		@Select("SELECT ROW_NUMBER() OVER(ORDER BY b.bno ASC) AS no, b.*"
-				  + " FROM board b WHERE type = #{type} "
-				  + " AND ((#{searchField} = 'title' AND title LIKE #{searchWord}) "
-				  + " OR   (#{searchField} = 'content' AND content LIKE #{searchWord}) "
-				  + " OR   (#{searchField} = 'id' AND id LIKE #{searchWord}) "
-				  + " OR   (#{searchField} is null ) OR (#{searchField} = '')) "
-				  + " ORDER BY no DESC LiMIT #{cri.pageNum}, #{cri.amount}")
-		public List<Board> searchList(@Param("cri") Criteria cri, @Param("type") Integer type, 
-									  @Param("searchField") String searchField, @Param("searchWord") String searchWord	);
+				  + " FROM board b WHERE type = #{cri.type} "
+				  + " AND ((#{cri.searchField} = 'title' AND title LIKE #{cri.searchWordSql}) "
+				  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
+				  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
+				  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) "
+				  + " ORDER BY no DESC LiMIT #{cri.pageSql}, #{cri.amount}")
+		public List<Board> searchList(@Param("cri") Criteria cri);
 		
 		// 게시글 등록
 		@Insert("INSERT INTO board VALUES(null, #{id}, #{title}, #{content}, now(), 0, 0, #{type})")
@@ -69,5 +66,12 @@ public interface BoardMapper {
 		// User 테이블의 회원 Id List 추출 
 		@Select("SELECT id FROM user ")
 		public List<String> getId();
+		
+		@Select("SELECT bno FROM board ORDER BY bno DESC ")
+		public List<Integer> getBno();
+		
+		
+		
+		
 
 }
