@@ -177,11 +177,11 @@
                     <input
                       type="text"
                       name="addr"
-                      id="price"
+                      id="addr"
                       maxlength="20"
                     /><a
                       class="addr-search-btn secondary-btn medium-btn"
-                      href="#"
+                     type="button" onclick="findAddr()"
                       >검색</a
                     >
                   </td>
@@ -189,13 +189,13 @@
                 <tr>
                   <th>상세주소</th>
                   <td>
-                    <input type="text" name="addrDetail" value="" readonly />
+                    <input type="text" name="addrDetail" id="addrDetail" value="" readonly />
                   </td>
                 </tr>
                 <tr>
                   <th>우편번호</th>
                   <td>
-                    <input type="text" name="postcode" value="" readonly />
+                    <input type="text" name="postcode" id="postcode" value="" readonly />
                   </td>
                 </tr>
                 <tr>
@@ -230,6 +230,8 @@
     </div>
     <jsp:include page="${views }/include/footer.jsp" flush="false"/>
     <script src="${js }/dogDetail.js"></script>
+    <script src="${js }/findAddr.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   </body>
 </html>
 
