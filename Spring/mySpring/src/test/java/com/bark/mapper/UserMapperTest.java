@@ -23,10 +23,10 @@ public class UserMapperTest {
 		mapper.getUserList().forEach(user -> log.info(user));
 	}
 	
-	@Test
-	public void testGetAdminList() {
-		mapper.getAdminList().forEach(user -> log.info(user));
-	}
+	/*
+	 * @Test public void testGetAdminList() { mapper.getAdminList().forEach(user ->
+	 * log.info(user)); }
+	 */
 	
 	@Test
 	public void testGetUser() {

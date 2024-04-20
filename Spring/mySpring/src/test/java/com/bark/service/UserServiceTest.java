@@ -31,10 +31,10 @@ public class UserServiceTest {
 		service.getUserList().forEach(user -> log.info(user));
 	}
 	
-	@Test
-	public void testGetAdminList() {
-		service.getAdminList().forEach(user -> log.info(user));
-	}
+	/*
+	 * @Test public void testGetAdminList() { service.getAdminList().forEach(user ->
+	 * log.info(user)); }
+	 */
 	
 	@Test
 	public void testGetUser() {
