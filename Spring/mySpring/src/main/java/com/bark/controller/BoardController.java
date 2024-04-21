@@ -1,7 +1,9 @@
 package com.bark.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Page;
+import com.bark.mapper.CommentMapper;
 import com.bark.service.BoardService;
-import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,7 +27,7 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	private BoardService service;
 	
-	private UserService userservice;
+	private CommentMapper commentmapper;
 
 	@GetMapping("/noticeList")
 	public void noticeList(Model model,
@@ -46,10 +48,12 @@ public class BoardController {
 		if (amount == null) {			// 값이 없으면 10 Set		
 			amount = 10;
 		}
-		if (searchField == null) {
+		if (searchField == null || searchField == "") {
 			searchField = "";
+			searchWord = "";
 		}
-		if (searchWord == null) {
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
 			searchWord = "";
 		}
 
@@ -70,7 +74,7 @@ public class BoardController {
 		model.addAttribute("bList", service.searchList(cri));
 	}	
 	
-	@GetMapping("/read")
+	@GetMapping("/noticeRead")
 	public void read(Model model, 
 					 @RequestParam("bno") Integer  bno,						   
 					 @RequestParam(required=false, value="searchField") String searchField,
@@ -84,7 +88,7 @@ public class BoardController {
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
 		
-		if (pageNum == null || pageNum == 0) { // 값이 없으면 0 Set
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 1 Set
 			pageNum = 1; 
 		}
 		if (amount == null) {			// 값이 없으면 10 Set		
@@ -115,9 +119,12 @@ public class BoardController {
 		Board board = new Board();
 		board = service.read(bno);
 		
+		// 조회 수(hit) 증가
+		service.updateHit(bno);
+		
 		model.addAttribute("page", page);
 		model.addAttribute("board", service.read(bno));
-		model.addAttribute("user", userservice.getUser(board.getUser_id()));
+		model.addAttribute("commentCount", commentmapper.getCount(bno));
 	}
 	
 	@GetMapping("/read3")
@@ -129,7 +136,47 @@ public class BoardController {
 			 @RequestParam(required=false, value="amount") Integer amount) {
 		return ;
 	}
+ 
+	@GetMapping("/noticeWrite")
+	public void write() {
 
+	}
+	
+	@PostMapping("/noticeWrite")
+	public String write(Board board, RedirectAttributes rttr) {
+		
+		log.info("write : " + board);
+		board.setType(2);				// 공지사항
+		service.write(board);
+		rttr.addFlashAttribute("result", board.getBno());
+		return "redirect:/board/noticeList";
+	}
+	
+	@GetMapping("/noticeUpate")
+	public void update() {
+
+	}
+	
+	@PostMapping("/noticeUpdate")
+	public String update(Board board, RedirectAttributes rttr) {
+		
+		log.info("update : " + board);
+
+		service.update(board);
+		rttr.addFlashAttribute("result", board.getBno());
+		return "redirect:/board/list";
+	}
+
+	@PostMapping("/noticeDelete")
+	public String delete(@RequestParam("bno") Integer  bno, RedirectAttributes rttr) {
+		
+		log.info("delete : " + bno);
+
+		service.delete(bno);
+		rttr.addFlashAttribute("result", bno);
+		return "redirect:/board/noticeList";
+	}
+	
 	@GetMapping("/shareList")
 	public void shareList(Model model,
 						   @RequestParam(required=false, value="searchField") String searchField,
@@ -185,33 +232,5 @@ public class BoardController {
 		
 	}	
 	
-	@PostMapping("/write")
-	public String write(Board board, RedirectAttributes rttr) {
-		
-		log.info("write : " + board);
 
-		service.write(board);
-		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/list";
-	}
-	
-	@PostMapping("/update")
-	public String update(Board board, RedirectAttributes rttr) {
-		
-		log.info("update : " + board);
-
-		service.update(board);
-		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/list";
-	}
-
-	@PostMapping("/delete")
-	public String delete(Board board, RedirectAttributes rttr) {
-		
-		log.info("delete : " + board);
-
-		service.delete(board.getBno());
-		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/list";
-	}
 }

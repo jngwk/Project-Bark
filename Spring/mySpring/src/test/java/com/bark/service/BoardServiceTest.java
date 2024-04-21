@@ -234,7 +234,7 @@ public class BoardServiceTest {
 		int cnt = idList.size();
 		if (cnt > 0) {
 			cnt = (cnt > 30)? 30 : cnt ;   			// user id가 30개가 넘을 경우 30개만 사용
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 635; i++) {
 				//board.setBno(i);					// AUTO_INCREMENT
 				board.setUser_id(idList.get(i % cnt));
 				board.setTitle("Title_" + i);
