@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,7 +26,7 @@
         <div class="summary">
           <div class="img-wrapper">
             <img
-              src="https://www.animal.go.kr/files/shelter/2024/03/202404051304148_s.jpg"
+              src="${dog.imgUrl }"
               alt=""
               class="dog1-large"
             />
@@ -40,32 +41,59 @@
               <tr>
                 <td><img src="${icons }/gender.png" alt="icon" /></td>
                 <th>성별</th>
-                <td>남</td>
+                <td>
+                	<c:choose>
+					    <c:when test="${dog.gender eq 'M'}">
+					        남
+					    </c:when>
+					    <c:when test="${dog.gender eq 'F'}">
+					        여
+					    </c:when>
+					</c:choose>
+				</td>
               </tr>
               <tr>
                 <td><img src="${icons }/breed.png" alt="icon" /></td>
                 <th>견종</th>
-                <td>믹스</td>
+                <td>${dog.breed}</td>
               </tr>
               <tr>
                 <td><img src="${icons }/age.png" alt="icon" /></td>
                 <th>나이</th>
-                <td>4</td>
+                <td>${dog.age}</td>
               </tr>
               <tr>
                 <td><img src="${icons }/shelter.png" alt="icon" /></td>
                 <th>보호소</th>
-                <td>안산보호소</td>
+                <td>${dog.shelterName}</td>
               </tr>
               <tr>
                 <td><img src="${icons }/neut.png" alt="icon" /></td>
                 <th>중성화</th>
-                <td>O</td>
+                <td>
+                	<c:choose>
+					    <c:when test="${dog.neuter == 0}">
+					        O
+					    </c:when>
+					    <c:when test="${dog.neuter == 1}">
+					        X
+					    </c:when>
+					</c:choose>
+			    </td>
               </tr>
               <tr>
                 <td><img src="${icons }/adopt.png" alt="icon" /></td>
                 <th>입양</th>
-                <td>가능</td>
+                <td>
+                	<c:choose>
+					    <c:when test="${dog.available == 0}">
+					        입양불가
+					    </c:when>
+					    <c:when test="${dog.available == 1}">
+					        입양가능
+					    </c:when>
+					</c:choose>
+				</td>	
               </tr>
             </table>
           </div>
@@ -73,11 +101,13 @@
         <!-- end of summary -->
         <div class="more">
           <p>
+          	${dog.feature}
+          	<br>
             영철이는 중앙동 거리에서 피부병과 각종 질병등을 보유한 상태로 발견
             보호소에서 다른 강아질과 잘 어울리며 평소에 차분하고 의젓한 모습을
             보입니다. 터그와 공놀이를 좋아하며 활동량이 많은 강아지로 잦은
             산책과 활동을 필요로 합니다. 영철이와 함께 활동적인 생활을 해주실 수
-            있는 견주님을 찾습니다.
+            있는 견주님을 찾습니다. 
           </p>
           <button class="large-btn brown-btn expand-btn">입양하기</button>
           <!-- <button class="prev-btn secondary-btn font-bright">목록</button> -->
@@ -184,12 +214,15 @@
                      type="button" onclick="findAddr()"
                       >검색</a
                     >
+                    <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+						<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="width:40px;cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+					</div>
                   </td>
                 </tr>
                 <tr>
                   <th>상세주소</th>
                   <td>
-                    <input type="text" name="addrDetail" id="addrDetail" value="" readonly />
+                    <input type="text" name="addrDetail" id="addrDetail" value=""/>
                   </td>
                 </tr>
                 <tr>

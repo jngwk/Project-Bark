@@ -13,8 +13,7 @@
 	
 	
 	
-	<mybatis-spring:scan
-		base-package="com.bark.mapper" />
+	<mybatis-spring:scan base-package="com.bark.mapper" />
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName"
