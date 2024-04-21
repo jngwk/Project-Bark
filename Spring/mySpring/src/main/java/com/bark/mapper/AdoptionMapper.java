@@ -9,7 +9,7 @@ import com.bark.domain.Dog;
 
 @Mapper
 public interface AdoptionMapper {
-	@Select("select d.dogno, d.breed, s.shelterName, a.imgUrl "
+	@Select("select d.dogno, d.breed, d.name, s.shelterName, a.imgUrl "
 			+ "from dog d "
 			+ "	join attach a "
 			+ "		on d.dogno = a.dog_dogno"
