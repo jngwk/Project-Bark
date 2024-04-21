@@ -2,9 +2,11 @@ package com.bark.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.mapper.AdoptionMapper;
 
@@ -26,4 +28,11 @@ public class AdoptionService {
 		log.info("getDog..................");
 		return mapper.getDog(dogno);
 	}
+	
+	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
+	public List<Dog> searchList(Criteria cri) {
+		log.info("searchList : " + cri);
+		return mapper.searchList(cri);
+	}
+	
 }
