@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service;
 import com.bark.domain.User;
 import com.bark.mapper.UserMapper;
 
-import lombok.Setter;
 
 @Service
 @Component
 public class MailService {
 	@Autowired
-	private UserMapper mapper;
 	private JavaMailSenderImpl mailSender;
+	
+	private UserMapper mapper;
 	private int authNumber; //난수코드
 	
 	public int makeRandomNumber() {

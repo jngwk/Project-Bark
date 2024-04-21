@@ -17,12 +17,12 @@ public class AdoptionService {
 	@Setter(onMethod_=@Autowired)
 	private AdoptionMapper mapper;
 	
-	public List<Dog> getDogList(){
+	public List<Dog> getDogList(){	//입양하기 -> 강아지 리스트
 		log.info("getDogList..................");
 		return mapper.getDogList();
 	}
 	
-	public Dog getDog(int dogno) {
+	public Dog getDog(int dogno) {	//입양 상세 -> 강아지 상세정보
 		log.info("getDog..................");
 		return mapper.getDog(dogno);
 	}
