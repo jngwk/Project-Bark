@@ -47,8 +47,14 @@ public class UserService {
 		log.info("checkId..................");
 		return mapper.checkId(id);
 	}
-	public int findAcc(String name, String email) {
+	public int checkEmail(String email) {
 		log.info("findAcc..................");
-		return mapper.findAcc(name, email);
+		return mapper.checkEmail(email);
+	}
+	public String getUserId(String email) {
+		return mapper.getUserId(email);
+	}
+	public int updateUserPwd(String email, String pwd) {
+		return mapper.updateUserPwd(email, pwd);
 	}
 }

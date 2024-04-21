@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class UserController {
 	private UserService service;
-	private MailService mailservice;
+	private MailService mailService;
 	
 	@GetMapping("/userList")
 	public void userList(Model model) {
@@ -121,28 +121,20 @@ public class UserController {
 		return cnt;
 	}
 	
-	@PostMapping(value="findAcc",produces = "application/json; charset=utf8")
+	@PostMapping(value="checkEmail",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public int findAcc(@RequestParam("name") String name, @RequestParam("email") String email){
-		int result= service.findAcc(name, email);
-		log.info(name + " + " + email);
+	public int findAcc(@RequestParam("email") String email){
+		int result= service.checkEmail(email);
+		log.info(email);
 		log.info("result: " + result);
 		return result;
 	}
 	
-	
-	
-	@GetMapping("/authCheck")
-	public void mail() {
-		int authNumber = mailservice.makeRandomNumber();
-
-	}
-	
-	@GetMapping("/mailCheck")
-	@ResponseBody //@ResponseBody: 자바 객체를 json 기반의 HTTP Body로 변환
-	public String mailCheck(String email) {
-		System.out.println("이메일 인증 요청");
-		System.out.println("이메일 인증 이메일 : " + email);
-		return mailservice.joinEmail(email);
+	@PostMapping(value="updatePwd",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public int updatePwd(@RequestParam("email") String email, @RequestParam("pwd") String pwd){
+		int result= service.updateUserPwd(email, pwd);
+		log.info("result: " + result);
+		return result;
 	}
 }
