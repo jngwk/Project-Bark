@@ -24,17 +24,18 @@ public class MailService {
 	private JavaMailSenderImpl mailSender;
 	private int authNumber; //난수코드
 	
-	public void makeRandomNumber() {
+	public int makeRandomNumber() {
 		// 난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
 		System.out.println("인증번호 : " + checkNum);
 		authNumber = checkNum;
+		return authNumber;
 	}
 	
 	
 	public String joinEmail(String email) {	//이메일 보낼 양식(href 추가해도 될듯?)
-		makeRandomNumber();
+		authNumber = makeRandomNumber();
 		User user = mapper.findUser(email);
 		
 		String setFrom = "jwlee20541@gmail.com"; // email-config에 설정한 자신의 이메일 주소를 입력

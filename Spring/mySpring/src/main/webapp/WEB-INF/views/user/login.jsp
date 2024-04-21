@@ -207,7 +207,7 @@
 											<button type="button"
 												class="submit-btn login-popup-btn email-verify-btn"
 												data-stage="get-code">이메일 인증</button>
-											<button type="button" class="prev-btn login-popup-btn">
+											<button type="button" onclick="authCheck()" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
 									</form>
@@ -327,5 +327,23 @@
 		
 	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
+	<script>
+	const authCheck = () => {
+        $.ajax({
+            // 요청방식: get
+            // 요청주소: /ex01
+            type: "get",
+            url: "/authCheck",
+            // 요청이 성공했을 때 실행되는 부분
+            success: function (res) {
+                console.log("성공", res)
+            },
+            // 요청이 실패했을 때 실행되는 부분
+            error: function (err) {
+                console.log("실패", err);
+            },
+        })
+    }
+	</script>
 </body>
 </html>
