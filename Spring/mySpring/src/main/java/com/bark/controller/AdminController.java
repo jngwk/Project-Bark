@@ -35,10 +35,17 @@ public class AdminController {
 	
 	@PostMapping(value="getUserType",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<User> getUserType(@RequestParam ("type") String type,Model model) {
+	public List<User> getUserType(@RequestParam ("filter") String filter,@RequestParam ("input") String input,@RequestParam ("type") String type,Model model) {
 		log.info("-------sheltername search mapping o--------");
 		log.info(type);
-		return userservice.getUserType(Integer.parseInt(type));
+		return userservice.getUserType(filter,input,Integer.parseInt(type));
+	}
+	
+	@PostMapping(value="getSearchUser",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<User> getSearchUser(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
+		log.info(filter); log.info(input);
+		return userservice.getSearchUser(filter,input);
 	}
 	
 	@GetMapping("/donationList")

@@ -12,9 +12,9 @@ import com.bark.domain.User;
 
 public interface UserMapper {
 	
-	@Select("select * from user where type != 3")
+	@Select("select * from user where type != 3 order by type,shelter_shelterno")
 	public List<User> getUserList();
-	@Select("select * from user where type = 3")
+	@Select("select * from user where type = 3 order by type,shelter_shelterno")
 	/*
 	 * public List<User> getAdminList();
 	 * 
@@ -37,7 +37,11 @@ public interface UserMapper {
     @Select("select count(id) from user where name = #{name} AND email = #{email}")
 	public int findAcc(@Param("name") String name, @Param("email") String email);
     
-    @Select("select * from user where type = #{type}")
-    public List<User> getUserType(int type);
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type,shelter_shelterno")
+    public List<User> getUserType(String filter,String input,int type);
+
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type,shelter_shelterno")
+    public List<User> getSearchUser(String filter,String input);
+
 	
 }
