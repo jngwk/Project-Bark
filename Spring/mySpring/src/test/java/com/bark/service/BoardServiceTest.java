@@ -110,12 +110,12 @@ public class BoardServiceTest {
 		Board board = new Board();
 		
 		//board.setBno(101);
-		board.setId("user01");
+		board.setUser_id("user01");
 		board.setTitle("강아지이야기");
 		board.setContent("강아지가 크면 개가 됩니다.");
 		//board.setRegDate(null);
 		board.setHit(0);
-		board.setLikea(0);
+		board.setVote(0);
 		board.setType(3);
 
 		log.info(service.write(board));
@@ -234,14 +234,14 @@ public class BoardServiceTest {
 		int cnt = idList.size();
 		if (cnt > 0) {
 			cnt = (cnt > 30)? 30 : cnt ;   			// user id가 30개가 넘을 경우 30개만 사용
-			for (int i = 0; i < 100; i++) {
+			for (int i = 0; i < 635; i++) {
 				//board.setBno(i);					// AUTO_INCREMENT
-				board.setId(idList.get(i % cnt));
+				board.setUser_id(idList.get(i % cnt));
 				board.setTitle("Title_" + i);
 				board.setContent("Content_" + i);
 				//board.setRegDate(null);			// default 현재일시
 				board.setHit(0);
-				board.setLikea(0);
+				board.setVote(0);
 				board.setType((i % 4)+1);
 
 				service.write(board);

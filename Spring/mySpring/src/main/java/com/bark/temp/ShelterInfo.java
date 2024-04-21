@@ -59,10 +59,8 @@ public class ShelterInfo {
 					&& jsonArray.getJSONObject(i).getDouble("lng") != 0) { // x,y좌표가 없거나 0이면 X
 				if (jsonArray.getJSONObject(i).getString("careAddr").contains("서울")
 						|| jsonArray.getJSONObject(i).getString("careAddr").contains("경기")) {	//서울과 경기만
-					if (!sMap.containsKey(Double.toString(jsonArray.getJSONObject(i).getDouble("lat")))) { // 키값이 같으면 넣지
-																											// 않음(키값:lat)
-																											// -> 중복제거
-						sMap.put(Double.toString(jsonArray.getJSONObject(i).getDouble("lat")),
+					if (!sMap.containsKey((jsonArray.getJSONObject(i).getString("careNm")))) { // 키값이 같으면 넣지	X -> 중복제거																			
+							sMap.put(jsonArray.getJSONObject(i).getString("careNm"),
 								new Shelter(jsonArray.getJSONObject(i).getString("careNm"),
 										jsonArray.getJSONObject(i).getString("careAddr"),
 										jsonArray.getJSONObject(i).getDouble("lat"),

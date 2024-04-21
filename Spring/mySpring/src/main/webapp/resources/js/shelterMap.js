@@ -45,6 +45,24 @@ window.onload = function () {
       console.log(opt.value);
     }
   };
+	
+	
+	//보호소 조회 메뉴 탭
+$(".shelter-name").on("click", function () {
+	$(this).removeClass('notselect');
+  	$(".shelter-area").removeClass('select');
+	$(this).addClass('select');
+  	$(".shelter-area").addClass('notselect');
+  	
+});
+
+$(".shelter-area").on("click", function () {
+	$(this).removeClass('notselect');
+  	$(".shelter-name").removeClass('select');
+	$(this).addClass('select');
+  	$(".shelter-name").addClass('notselect');
+});
+
 
 };
 
