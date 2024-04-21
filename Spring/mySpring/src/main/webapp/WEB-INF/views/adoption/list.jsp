@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -25,177 +27,43 @@
     </div>
     <div class="grid__container">
     <!-- <h1 class="adoption-list-header">입양 목록</h1> -->
-
-      <div class="card__container">
-        <article class="card__article">
-          <img
-            src="https://www.animal.go.kr/files/shelter/2024/03/202404051304148_s.jpg"
-            alt="image"
-            class="card__img"
-          />
-
-          <div class="card__data">
-            <span class="card__description">수원보호소</span>
-            <h2 class="card__title">불쌍해</h2>
-            <a href="${contextPath }/adoption/detail" class="card__button">입양하기</a>
-          </div>
-        </article>
-        <article class="card__article">
-          <img
-            src="${images}/dogs/dog1.jpg"
-            alt="image"
-            class="card__img dog1-small"
-          />
-
-          <div class="card__data">
-            <span class="card__description">안산보호소</span>
-            <h2 class="card__title">영철이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog2.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">안산보호소</span>
-            <h2 class="card__title">콩이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog3.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">안산보호소</span>
-            <h2 class="card__title">바둑이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog4.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">일산보호소</span>
-            <h2 class="card__title">인절미</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog5.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">일산보호소</span>
-            <h2 class="card__title">와와</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog6.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">일산보호소</span>
-            <h2 class="card__title">가을이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog7.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">일산보호소</span>
-            <h2 class="card__title">흰둥이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog8.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">서울보호소</span>
-            <h2 class="card__title">핫산이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog9.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">평택보호소</span>
-            <h2 class="card__title">쌀이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog10.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">평택보호소</span>
-            <h2 class="card__title">철수</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog11.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">평택보호소</span>
-            <h2 class="card__title">영숙이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog12.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">평택보호소</span>
-            <h2 class="card__title">낼름</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog13.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">수원보호소</span>
-            <h2 class="card__title">기명이</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog14.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">수원보호소</span>
-            <h2 class="card__title">노네임</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
-
-        <article class="card__article">
-          <img src="${images}/dogs/dog15.jpg" alt="image" class="card__img" />
-
-          <div class="card__data">
-            <span class="card__description">수원보호소</span>
-            <h2 class="card__title">이름없음</h2>
-            <a href="#" class="card__button">입양하기</a>
-          </div>
-        </article>
+		<div class="card__container">
+		<c:forEach var="dogList" items="${dogList}">
+			<article class="card__article">
+				<img
+					src="${dogList.imgUrl}"
+					alt="image" class="card__img" />
+				<div class="card__data">
+					<span class="card__description">${dogList.shelterName}</span>
+						<h2 class="card__title">
+							<c:choose>
+						        <c:when test="${not empty dogList.breed}">
+						            ${dogList.breed}
+						        </c:when>
+						        <c:otherwise>
+						            ${dogList.name}
+						        </c:otherwise>
+						    </c:choose>
+					 	</h2>
+					<a href="${contextPath }/adoption/detail?dogno=${dogList.dogno}" class="card__button">입양하기</a>
+				</div>
+			</article>
+		</c:forEach> 
       </div>
     </div>
-    <jsp:include page="${views }/include/pagination.jsp" flush="false"/>
+	<tfooter>
+		<c:forEach var="pageList" items="${pageList}">
+			<tr>
+				<td>${pageList.no}</td>
+				<td><a
+					href="/board/read?bno=${pageList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
+						${pageList.title}</a></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${pageList.regDate}" /></td>
+				<td>${pageList.hit}</td>
+			</tr>
+		</c:forEach>
+	</tfooter>
+	<jsp:include page="${views }/include/pagination.jsp" flush="false"/>
     <jsp:include page="${views }/include/footer.jsp" flush="false"/>
   </body>
 </html>

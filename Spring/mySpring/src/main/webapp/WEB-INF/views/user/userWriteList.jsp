@@ -9,18 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="${css }/root.css" />
-<link rel="stylesheet" href="${css }/noticeList.css" />
+<link rel="stylesheet" href="${css }/userWriteList.css" />
 </head>
 <body>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 	<section class="notice">
-		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
+		<p class="page-title">Written List</p><p class="page-subtitle">[작성내역]</p>
 
 		<!-- board seach area -->
-		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="/board/noticeWrite">글쓰기</a>
-		</div>
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
@@ -53,15 +50,13 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="bList" items="${bList}" >
 						<tr>
-							<td>${bList.no}</td>
-							<td><a href="/board/noticeRead?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
-							${bList.title}</a></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
-							<td>${bList.hit}</td>
+							<td>1</td>
+							<td><a href="#">
+							제목입니다</a></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>" /> </td>
+							<td>8</td>
 						</tr>
-					</c:forEach>
 					</tbody>
 				</table>
 			</div>
