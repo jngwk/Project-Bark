@@ -84,8 +84,10 @@
 										<button type="button" class="shelter-btn login-popup-btn">
 											보호소 회원</button>
 									</div>
+									<!-- 개인 회원가입 form -->
 									<form class="general-form" action="${contextPath }/user/join"
 										method="post" display="none">
+										<!-- 개인 아이디 비밀번호 -->
 										<div class="form-slide first-slide">
 											<input type="hidden" name="type" value="1" /> <label
 												class="popup-label"> <span>아이디</span> <input
@@ -102,6 +104,7 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
+										<!-- 개인 이름 전화번호 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>이름</span> <input
 												type="text" name="name" class="login-popup-input" />
@@ -113,6 +116,7 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
+										<!-- 개인 이메일 인증 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
@@ -127,8 +131,10 @@
 												이전</button>
 										</div>
 									</form>
+									<!-- 보호소 회원가입 form -->
 									<form class="shelter-form" action="${contextPath }/user/join"
 										method="post" display="none">
+										<!-- 보호소 선택 -->
 										<div class="form-slide first-slide">
 											<div class="search-wrapper">
 												<div class="popup-label">
@@ -136,7 +142,12 @@
 														<span>보호소 선택</span> <img
 															src="${icons }/chev-down-icon.png" alt="" />
 													</div>
-													<div class="content">
+													<label class="popup-label shelter-name-label hide">
+														<span>보호소 이름</span> <input type="text" name="name"
+														id="selectedShelterName" class="login-popup-input"/>
+													</label>
+													<input class="login-popup-input" id="selectedShelterAddr"name="addr" type="hidden"/>
+													<div class="shelter-name-content">
 														<div class="search">
 															<img src="${icons }/search-btn.png" alt="" /> <input
 																id="search-input" spellcheck="false" type="text"
@@ -149,6 +160,7 @@
 											<button type="button" class="next-btn login-popup-btn">다음</button>
 											<button type="button" class="prev-btn login-popup-btn">이전</button>
 										</div>
+										<!-- 보호소 선택 -->
 										<div class="form-slide ">
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>아이디</span> <input
@@ -165,7 +177,8 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
-										<div class="form-slide">
+										<!-- 보호소 전화번호 -->
+										<!-- <div class="form-slide">
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>보호소명</span> <input
 												type="text" name="name" class="login-popup-input" />
@@ -176,23 +189,26 @@
 												다음</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
-										</div>
-										<div class="form-slide">
+										</div> -->
+										<!-- 보호소 주소 -->
+										<div class="form-slide shelter-addr-slide">
 											<label class="popup-label"> <span>주소</span> <input
 												type="text" name="addr" class="login-popup-input" readonly /><img
 												class="search-btn-icon" src="${icons }/search-btn.png"
 												alt="검색" />
 											</label> <label class="popup-label"> <span>세부 주소</span> <input
 												type="text" name="addrDetail" class="login-popup-input" />
-											</label> <label class="popup-label"> <span>우편번호</span> <input
-												type="text" name="postcode" class="login-popup-input" />
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
+										<!-- 보호소 전화번호 이메일 인증 -->
 										<div class="form-slide">
+										<label class="popup-label"> <span>전화번호</span> <input
+												type="tel" name="phone" class="login-popup-input" />
+											</label>
 											<label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
 											</label> <label class="popup-label verify-label pending hide">
@@ -202,7 +218,7 @@
 											<button type="button"
 												class="submit-btn login-popup-btn email-verify-btn"
 												data-stage="get-code">이메일 인증</button>
-											<button type="button" class="prev-btn login-popup-btn">
+											<button type="button" onclick="authCheck()" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
 									</form>
@@ -229,75 +245,139 @@
 		</div>
 	</div>
 	<script>
+		// 주소 설정하기
 		const wrapper = document.querySelector(".search-wrapper"),
 		  selectBtn = wrapper.querySelector(".shelter-select-btn"),
 		  searchInp = wrapper.querySelector("#search-input"),
-		  options = wrapper.querySelector(".options");
+		  options = wrapper.querySelector(".options"),
+		  shelterNameInp = wrapper.querySelector("#selectedShelterName"),
+		  shelterNameLabel = wrapper.querySelector(".shelter-name-label"),
+		  shelterAddrSlide = document.querySelector(".shelter-addr-slide"),
+		  shelterAddrInp = wrapper.querySelector("#selectedShelterAddr");
+		
+		selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
+		
 		
 		$(".shelter-btn").on("click",function(){
 			getShelterList();
-			console.log("click");
 		})
-		var shelters = [];
+		
+		var shelterNames = [];
+		var sMap = new Map();
 		function getShelterList(){
-			console.log($(".sub-city").val());
 			$.ajax({
 				type: 'GET',
-				url : "/donation/map",
-/* 				data : {addr: $(".sub-city").val()}, */
-				success: function(shelters){
-					console.log(shelters);
-				    shelters = JSON.parse(words);
-				    for(var i = 0; i < 50; i++) {
-				        arrayen.push(shelters[i].en);
-				    }
-				    console.log(arrayen.length);
-
+				url : "/donation/shelterList",
+				success: function(items){
+				    items.forEach(item => {
+				    	shelterNames.push(item.shelterName);
+				    	sMap.set(item.shelterName, item.shelterAddr);
+				    	/* shelters.push(item); */
+				    })
+				    console.log(sMap.size);
+				    console.log(sMap.get("강현림동물병원"));
+				    addShelter();
 				},error: (error) => {
 				     console.log(JSON.stringify(error));
-				}
-				
+				}				
 			})
 		}
 
 		function addShelter(selectedShelter) {
 		  options.innerHTML = "";
-		  shelters.forEach((shelter) => {
-		    let isSelected = shelter == selectedShelter ? "selected" : "other";
-		    let li = `<li onclick="updateName(this)" class="\${isSelected}">\${shelter}</li>`;
+		  shelterNames.forEach((sName) => {
+		    let isSelected = sName == selectedShelter ? "selected" : "other";
+		    let li = `<li onclick="updateName(this); hideShelterNameLabel(this);" class="\${isSelected}">\${sName}</li>`;
 		    options.insertAdjacentHTML("beforeend", li);
 		  });
 		}
-		addShelter();
+		
 
 		function updateName(selectedLi) {
 		  searchInp.value = "";
 		  addShelter(selectedLi.innerText);
 		  wrapper.classList.remove("active");
 		  selectBtn.firstElementChild.innerText = selectedLi.innerText;
+		  selectBtn.firstElementChild.classList.add("font-dark");
 		}
 
-		searchInp.addEventListener("input", () => {
+		searchInp.addEventListener("keyup", () => {
 		  let arr = [];
 		  let searchWord = searchInp.value.toLowerCase();
-		  arr = shelters
+		  arr = shelterNames
 		    .filter((data) => {
 		      return data.toLowerCase().startsWith(searchWord);
 		    })
 		    .map((data) => {
 		      let isSelected =
 		        data == selectBtn.firstElementChild.innerText ? "selected" : "";
-		      return `<li onclick="updateName(this)" class="\${isSelected}">\${data}</li>`;
+		      return `<li onclick="updateName(this); hideShelterNameLabel(this);" class="\${isSelected}">\${data}</li>`;
 		    })
 		    .join("");
 		  options.innerHTML = arr
 		    ? arr
-		    : `<li onclick="updateName(this)">보호소 등록하기</li>`;
+		    : `<li onclick="updateName(this); showShelterNameLabel();">보호소 등록하기</li>`;
 		});
-
-		selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
-
+		
+		function showShelterNameLabel(){
+			/* selectBtn.firstElementChild.classList.remove("font-dark"); */
+			// hidden input에 이름 비우기
+			shelterNameInp.value = "";
+			// hidden input에 주소 비우기
+			shelterAddrInp.value = "";
+			// 주소 슬라이드 다시 작동하게 하기
+			enableShelterAddrSlide();
+			shelterNameLabel.classList.remove("hide");
+			shelterNameLabel.classList.add("show");
+		}
+		function hideShelterNameLabel(selectedLi){
+			selectBtn.firstElementChild.classList.add("font-dark");
+			// hidden input에 이름 넣지
+			shelterNameInp.value = selectedLi.innerText;
+			// 주소 슬라이드 숨기기
+			disableShelterAddrSlide();
+			// hidden input에 주소 넣기
+			shelterAddrInp.value = sMap.get(selectedLi.innerText);
+			console.log(shelterAddrInp.value);
+			// hidden input에 이름 받기
+			shelterNameLabel.classList.add("hide");
+			shelterNameLabel.classList.remove("show", "required");
+		}
+		
+		function disableShelterAddrSlide(){
+			shelterAddrSlide.classList.add("hide");
+			var inputs = shelterAddrSlide.querySelectorAll("input");
+			inputs.forEach(input => input.removeAttribute("name"));
+			shelterAddrInp.setAttribute("name", "addr");
+		}
+		function enableShelterAddrSlide(){
+			shelterAddrSlide.classList.remove("hide");
+			var inputs = shelterAddrSlide.querySelectorAll("input");
+			shelterAddrInp.removeAttribute("name", "addr");
+			inputs[0].setAttribute("name", "addr");
+			inputs[1].setAttribute("name", "addrDetail");
+		}
+		
+		
 	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
+	<script>
+	const authCheck = () => {
+        $.ajax({
+            // 요청방식: get
+            // 요청주소: /ex01
+            type: "get",
+            url: "/authCheck",
+            // 요청이 성공했을 때 실행되는 부분
+            success: function (res) {
+                console.log("성공", res)
+            },
+            // 요청이 실패했을 때 실행되는 부분
+            error: function (err) {
+                console.log("실패", err);
+            },
+        })
+    }
+	</script>
 </body>
 </html>

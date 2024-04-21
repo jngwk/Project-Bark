@@ -15,7 +15,7 @@
 <body>
 <%
 // ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
-	session.setAttribute("userid", "shelter");
+	session.setAttribute("userid", "gildong");
 %>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
@@ -56,10 +56,13 @@
 			</div>
 			<div class="read-button">
 				<div class="story-button">
-					<a class="large-btn brown-btn" href="history.back()">목록</a>
+					<a class="large-btn brown-btn" href='javascript:void(0);'onclick="btn3();">수정</a>
 				</div>
 				<div class="story-button">
-					<a class="large-btn brown-btn" href="#">추천</a>
+					<a class="large-btn brown-btn" href='javascript:void(0);'onclick="btn4();">삭제</a>
+				</div>
+				<div class="story-button">
+					<a class="large-btn brown-btn" href="/board/noticeList?pageNum=${page.cri.pageNum}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}">목록</a>
 				</div>
 			</div>
 			<div class="reply-container">
@@ -85,7 +88,7 @@
 				<div class="read-right">
 					<div class="read-info">
 						<p>작성자</p>
-						<p>${user.name}</p>
+						<p>${board.user_id}</p>
 					</div>
 					<div class="read-info">
 						<p>조회수</p>
@@ -107,10 +110,13 @@
 <script>
 //$(document).ready(function(){
 	let bnoValue = '<c:out value="${board.bno}"/>'; //현재 게시글에 댓글추가
+	let user_id = '<c:out value="${board.user_id}"/>'; //현재 게시글에 작성자
+	let commentCount = '<c:out value="${commentCount}"/>'; //현재 게시글에 댓글건 수 확인
 
 	let replyUL = $(".comment");
+
 	showList(1);
-	
+
  	// 댓글 리스트 조회
 	function showList(page) {
 		getList({
@@ -126,7 +132,7 @@
 				//let str2 = item.content..replace(/(?:\r\n|\r|\n)/g, '<br />');
 				let str2 = item.content;
 				//let str3 = str2.replace(/(?:\r\n|\r|\n)/g, '<br>');
-				str += `<li >
+				str += `<li name="contentList">
 					<div class="reply-profile">
 						<span>\${item.user_id}</span><span>\${displayTime(item.regDate)}</span>
 					</div>
@@ -152,8 +158,10 @@
 			});
 			replyUL.html(str);
 		});
+		
 	}
-	// <a href="#" id="removeBtn" class="font-dark">수정</a> 	
+
+ 	// <a href="#" id="removeBtn" class="font-dark">수정</a> 	
 	// <a href='javascript:void(0);' onclick="함수();">
 
 	function getList(param, callback, error) {
@@ -261,16 +269,18 @@
 		});
 	}
 	
-	function get(rno, callback, error) {
-		$.get("/replies/" + rno + ".json", function(result) {
-			if (callback) { callback(result);}
-		}).fail(function (xhr, status, err) {
-			if (error) { error();}
+	function boardremove(bnoValue, callback, error) {
+		$.ajax({
+			type:'delete',
+			url: '/board/noticeDelete' + bnoValue,
+			success: function (result, status, xhr) {
+			    if (callback) { callback(result); }
+			},
+			error: function (xhr, status, er) {
+			    if (error) { error(er); }
+			}
 		});
 	}
-
-
-	
 //});
 
 // 수정 -> 확인 변경 및 host 실행 처리
@@ -307,8 +317,6 @@ function btn1(obj) {
 			showList(1);
 
 		});
-
-		
 		
 	}
 }
@@ -347,6 +355,47 @@ function btn2(obj) {
 	}
 }
 
+// 게시판글 수정  
+function btn3() {
+
+	// 게시판 작성자  접속자 id 비교
+	if (user_id != idValue) {
+		alert("게시글 작성자가 아닙니다. 수정 할 수 없습니다.")
+		return;
+	}	
+	if (commentCount > 0) {
+		alert ("댓글이 존재하여 게시판글을 수정 할 수 없습니다.");
+	}
+	else {
+		//수정 화면으로 ㄱㄱㄱㄱㄱ
+	}
+}
+//게시판글 삭제
+function btn4() {
+
+	// 게시판 작성자  접속자 id 비교
+	if (user_id != idValue) {
+		alert("게시글 작성자가 아닙니다. 삭제 할 수 없습니다.")
+		return;
+	}	
+	if (commentCount > 0) {
+		alert ("댓글이 존재하여 게시판글을 삭제 할 수 없습니다.");
+	}
+	else {
+		if(confirm("삭제 하시겠습니까?")){
+			boardremove(bnoValue, function(result) {
+				alert(result);
+				
+
+			});
+//		window.location.href = 'http://localhost:9090/board/noticeDelete?bno=${bnoValue}';				
+		}else{
+			alert("취소 하셨습니다.");
+		}
+		
+	}
+}
+//});
 </script>
 </body>
 </html>

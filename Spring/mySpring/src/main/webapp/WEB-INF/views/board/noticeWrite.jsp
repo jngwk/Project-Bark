@@ -15,6 +15,10 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+<%
+// ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
+	session.setAttribute("userid", "gildong");
+%>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 
@@ -49,7 +53,7 @@
 						<p>게시글 쓰기</p>
 					</div>
 					<div class="write-read">
-						<form method="post" action="writeAction.jsp">
+						<form method="post" action="/board/noticeWrite">
 							<div class="form-bg">
 								<table class="write-table">
 									<thead>
@@ -66,17 +70,20 @@
 										</tr>
 									</tbody>
 								</table>
+<!-- 
 								<div class="write-imgUpload">
 									<input class="upload-name" value="첨부파일" placeholder="첨부파일"
 										readonly /> <label for="file" class="secondary-btn">파일찾기</label>
 									<input type="file" id="file" />
 								</div>
+ -->								
 							</div>
 							<div class="write-button">
 								<input type="button" data-ico="->" onclick="history.back()"
 									value="취소" class="btn brown-btn large-btn" /> <input
 									data-ico="->" type="submit" value="작성 완료"
 									class="btn brown-btn large-btn" />
+								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userid")%>" />
 							</div>
 
 						</form>

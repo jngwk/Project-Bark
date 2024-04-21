@@ -132,9 +132,10 @@ public class UserController {
 	
 	
 	
-	@GetMapping("/mail")
+	@GetMapping("/authCheck")
 	public void mail() {
-		
+		int authNumber = mailservice.makeRandomNumber();
+
 	}
 	
 	@GetMapping("/mailCheck")
