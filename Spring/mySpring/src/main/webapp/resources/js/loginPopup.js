@@ -89,7 +89,7 @@ function handleFormButtonClick(btn, callback) {
     console.log(input.value); // Debugging log
 
     const popupLabel = input.closest(".popup-label");
-    if (!popupLabel || popupLabel.classList.contains("hide")) {
+    if (!popupLabel || popupLabel.classList.contains("hide") || input.name == "" || input.closest(".form-slide").classList.contains("hide")) {
       return; // Skip this iteration as no related label was found
     }
 
@@ -116,14 +116,14 @@ function handleFormButtonClick(btn, callback) {
 // Function for handling next button
 function nextButtonAction(btn) {
   const parentSlides = btn.closest(".form-slides");
-  console.log(parentSlides);
+  // console.log(parentSlides);
   nextPopupSlide(parentSlides);
 }
 
 // Function for handling prev button
 function prevButtonAction(btn) {
   const parentSlides = btn.closest(".form-slides");
-  console.log(parentSlides);
+  // console.log(parentSlides);
   prevSlide(parentSlides);
   if (btn.closest(".form-slide").classList.contains("first-slide")) {
     parentSlides.addEventListener(
@@ -262,11 +262,11 @@ function checkId(e) {
 
   if (id.trim() === "") {
     $label.removeClass("invalid available duplicate required"); // Remove all related classes
-    console.log("Input cleared.");
+    // console.log("Input cleared.");
     return; // Exit the function early
   }
 
-  console.log(id);
+  // console.log(id);
 
   // Validate the ID locally first
   if (idValidChk($input)) {
@@ -304,11 +304,11 @@ function idValidChk($input) {
 
   // 4글자 이상 12글자 이하
   if (!pattern.test(id) || !(id.length >= 4 && id.length <= 12)) {
-    console.log("Invalid ID.");
+    // console.log("Invalid ID.");
     $label.removeClass("available duplicate").addClass("invalid"); // Adjust classes appropriately
     return false;
   } else {
-    console.log("Valid ID.");
+    // console.log("Valid ID.");
     $label.removeClass("invalid"); // Remove invalid class if present
     return true;
   }
@@ -342,10 +342,10 @@ function setupPasswordValidation(passwordSelector, confirmPasswordSelector) {
 
     // Check password against the regex pattern
     if (!passwordRegex.test(pwd)) {
-      console.log("Password does not meet security requirements.");
+      // console.log("Password does not meet security requirements.");
       pwdLabel.addClass("invalid-pwd");
     } else {
-      console.log("Password meets security requirements.");
+      // console.log("Password meets security requirements.");
       pwdLabel.addClass("valid-pwd");
     }
 
@@ -364,10 +364,10 @@ function setupPasswordValidation(passwordSelector, confirmPasswordSelector) {
     if (pwdCheck !== "") {
       // Only compare if the confirm password is not empty
       if (pwd === pwdCheck) {
-        console.log("Passwords match.");
+        // console.log("Passwords match.");
         pwdCheckLabel.addClass("match").removeClass("not-match");
       } else {
-        console.log("Passwords do not match.");
+        // console.log("Passwords do not match.");
         pwdCheckLabel.addClass("not-match").removeClass("match");
       }
     }
@@ -383,7 +383,7 @@ function login(e) {
   var id = $(".login-form").find('input[name="id"]').val(); // Correctly fetch the value of the ID input
   var pwd = $(".login-form").find('input[name="pwd"]').val(); // Fetch the password input value
   var $label = $(".login-form").find(".popup-label").last(); // This might need adjustment based on where you want the label changes to appear
-  console.log(id + ", " + pwd);
+  // console.log(id + ", " + pwd);
   $.ajax({
     url: "/user/login/", // Endpoint to check the ID
     type: "post", // Use POST method
@@ -421,16 +421,16 @@ function emailValidChk($input) {
   const email = $input.val().trim(); // Get the value, trim whitespace
   const $label = $input.closest(".popup-label");
 
-  console.log(email); // Log the cleaned email address
+  // console.log(email); // Log the cleaned email address
 
   $label.removeClass("required invalid");
 
   if (email !== "") {
     if (!pattern.test(email)) {
-      console.log("Invalid email address.");
+      // console.log("Invalid email address.");
       $label.addClass("invalid");
     } else {
-      console.log("Valid email address.");
+      // console.log("Valid email address.");
     }
   }
 }
