@@ -28,7 +28,7 @@
     <div class="grid__container">
     <!-- <h1 class="adoption-list-header">입양 목록</h1> -->
 		<div class="card__container">
-		<c:forEach var="dogList" items="${dogList}">
+		<c:forEach var="dogList" items="${dogList}" >
 			<article class="card__article">
 				<img
 					src="${dogList.imgUrl}"
@@ -50,20 +50,8 @@
 			</article>
 		</c:forEach> 
       </div>
-    </div>
-	<tfooter>
-		<c:forEach var="pageList" items="${pageList}">
-			<tr>
-				<td>${pageList.no}</td>
-				<td><a
-					href="/board/read?bno=${pageList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
-						${pageList.title}</a></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${pageList.regDate}" /></td>
-				<td>${pageList.hit}</td>
-			</tr>
-		</c:forEach>
-	</tfooter>
-	<jsp:include page="${views }/include/pagination.jsp" flush="false"/>
+    </div>	
+	<jsp:include page="${views }/include/adoptPagination.jsp" flush="false"/>
     <jsp:include page="${views }/include/footer.jsp" flush="false"/>
   </body>
 </html>
