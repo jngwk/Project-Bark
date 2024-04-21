@@ -1,21 +1,20 @@
 package com.bark.domain;
 
-import java.util.Date;
-import java.util.List;
+
 
 import lombok.Data;
 
 @Data
 public class Dog {
-	private Integer dogno;
-	private String shelterId;
-	private String name;
-	private String gender;
-	private String breed;
+
+	private int dogno;
+	private String gender;	//성별
+	private String breed;	//품종
 	private String age;
-	private Integer available;
-	private String desc;
-	private Date replyDate;
-	private Integer neuter;
-	private List<DogAttached> attachList;
+	private String feature;
+	private int neuter;
+	private int available;
+	private String shelterName;
+	private String imgUrl;
+
 }

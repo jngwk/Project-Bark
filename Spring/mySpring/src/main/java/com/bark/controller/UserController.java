@@ -132,9 +132,10 @@ public class UserController {
 	
 	
 	
-	@GetMapping("/mail")
+	@GetMapping("/authCheck")
 	public void mail() {
-		
+		int authNumber = mailservice.makeRandomNumber();
+
 	}
 	
 	@GetMapping("/mailCheck")
@@ -143,5 +144,10 @@ public class UserController {
 		System.out.println("이메일 인증 요청");
 		System.out.println("이메일 인증 이메일 : " + email);
 		return mailservice.joinEmail(email);
+	}
+	
+	@GetMapping("/userWriteList")
+	public void userWriteList() {
+		log.info("userWriteList...........");
 	}
 }
