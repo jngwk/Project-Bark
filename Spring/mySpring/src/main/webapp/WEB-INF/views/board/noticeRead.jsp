@@ -17,7 +17,7 @@
 // ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
 	session.setAttribute("userid", "gildong");
 %>
-	<jsp:include page="${views }/include/header.jsp" flush="false" />
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
 	<div class="board-read">
 		<div class="category-container">

@@ -13,7 +13,7 @@
 
   </head>
   <body>
-  <jsp:include page="${views }/include/header.jsp" flush="false" />
+  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
     <section class="notice">
       <p class="page-title">Donation</p>
       <p class="page-subtitle">[기부 내역]</p>

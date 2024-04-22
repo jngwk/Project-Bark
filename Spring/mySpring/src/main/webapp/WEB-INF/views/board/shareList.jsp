@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${css }/shareList.css" />
 </head>
 <body>
-	<jsp:include page="${views }/include/header.jsp" flush="false" />
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
 	<section class="notice">
 		<p class="page-title">Sharing Info</p><p class="page-subtitle">[정보공유]</p>
