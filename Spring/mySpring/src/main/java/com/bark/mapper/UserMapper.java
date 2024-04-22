@@ -46,6 +46,9 @@ public interface UserMapper {
 
     @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type,shelter_shelterno")
     public List<User> getSearchUser(String filter,String input);
+    
+    @Update("update user set available=#{param1} where id=#{param2}")
+	public int availableUpdate(String available,String id);
 
 	
 }
