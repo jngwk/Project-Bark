@@ -255,6 +255,7 @@
                 class="large-btn secondary-btn inactive submit-adoption-form"
                 type="submit"
                 value="입양하기"
+                onClick="location.href='${contextPath }/adoption/write'"
               />
             </div>
           </form>

@@ -2,11 +2,12 @@ package com.bark.domain;
 
 
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
 public class Dog {
-
 	private int dogno;
 	private String gender;	//성별
 	private String breed;	//품종
@@ -16,9 +17,5 @@ public class Dog {
 	private int available;
 	private String shelterName;
 	private String imgUrl;
-	public Object getAttachList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	private List<DogAttached> dogAttachedList; 
 }
