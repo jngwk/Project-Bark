@@ -16,8 +16,6 @@
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
-
-
 	<div class="board-write">
 		<div class="board-write-inner">
 			<div class="category-container">
@@ -76,7 +74,6 @@
 									data-ico="->" type="submit" value="작성 완료"
 									class="btn brown-btn large-btn" />
 							</div>
-
 						</form>
 					</div>
 				</div>

@@ -489,11 +489,50 @@ function emailValidChk($input) {
   }
 }
 
+$(subContSlides)
+  .find("input[name='email']")
+  .each(function () {
+    var $input = $(this);
+    $input.on("input", function () {
+      console.log("User is typing in: ", $input.val());
+      checkDuplicateEmail($input);
+    });
+  });
+
+// 회원가입 이메일 확인
+function checkDuplicateEmail($input) {
+  var email = $input.val();
+  var $label = $input.closest(".popup-label"); // Ensure class name is consistent
+  console.log(email);
+
+  $.ajax({
+    url: "/user/checkEmail", // Endpoint to check the email
+    type: "post", // Use POST method
+    data: { email: email }, // Send email to server
+    dataType: "json",
+    success: function (result) {
+      if (result == 0) {
+        // If result is 0, no account
+        $label.removeClass("required").addClass("available");
+      } else if (result == 1) {
+        // If result is 1, email exists
+        $label.removeClass("required available").addClass("duplicate");
+      } else {
+        alert("데이터베이스 오류");
+      }
+    },
+    error: function () {
+      alert("오류가 발생했습니다."); // Error handling
+    },
+  });
+}
+
 // 이메일 인증번호 받기
 function sendVerificationCode(btn) {
   const parentSlide = $(btn).closest(".form-slide");
   const $label = parentSlide.find(".verify-label");
   const $emailInput = parentSlide.find("input[name='email']");
+
   // 코드 보내기
   console.log("회원가입: 이메일 전송하기");
   $.ajax({
@@ -571,7 +610,7 @@ function join(btn) {
   });
 }
 
-// 계정 찾기 (미완)
+// 계정 찾기 이메일 확인
 function checkEmail(btn) {
   var email = $(".find-acc-form").find('input[name="email"]').val();
   var $label = $(".find-acc-form").find(".find-acc-label");

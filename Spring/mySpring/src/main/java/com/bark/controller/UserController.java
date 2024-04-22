@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bark.domain.Shelter;
 import com.bark.domain.User;
-import com.bark.service.MailService;
+import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +26,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class UserController {
 	private UserService service;
-	private MailService mailService;
+	private ShelterService shelterService;
 	
 	@GetMapping("/userList")
 	public void userList(Model model) {
@@ -70,8 +71,14 @@ public class UserController {
 	@ResponseBody
 	public boolean join(User user) {
 		log.info("join: " + user);
-		boolean result = service.join(user);
-		return result;
+		if(!service.join(user)) return false;
+		if(user.getType() == 2) {
+			Shelter shelter = new Shelter();
+			shelter.setShelterName(user.getName());
+			shelter.setShelterAddr(user.getAddr());
+			if(!shelterService.register(shelter)) return false;
+		}
+		return true;
 	}
 	
 	@GetMapping("/userDetail")
