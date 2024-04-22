@@ -35,6 +35,12 @@ public interface BoardMapper {
 				  + " ORDER BY no DESC LiMIT #{cri.pageSql}, #{cri.amount}")
 		public List<Board> searchList(@Param("cri") Criteria cri);
 		
+		@Select("SELECT ROW_NUMBER() OVER(ORDER BY b.bno ASC) AS no, b.*"
+				  + " FROM board b WHERE type = #{cri.type} "
+				  + " AND user_id = #{id}"
+				  + " ORDER BY no DESC LiMIT #{cri.pageSql}, #{cri.amount}")
+		public List<Board> searchListById(@Param("cri") Criteria cri,@Param("id") String id);
+		
 		// 게시글 등록
 		@Insert("INSERT INTO board VALUES(null, #{user_id}, #{title}, #{content}, now(), 0, 0, #{type})")
 		public int write(Board board);

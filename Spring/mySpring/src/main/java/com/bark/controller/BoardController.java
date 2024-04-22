@@ -171,7 +171,7 @@ public class BoardController {
 //		log.info("noticeUpdate : " + bno);
 //		return service.read(bno);
 //
-//	}
+	}
 	
 	@GetMapping("/noticeUpdate")
 	public void update(Model model, 

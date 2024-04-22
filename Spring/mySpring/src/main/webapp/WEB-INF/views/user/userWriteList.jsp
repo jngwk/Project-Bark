@@ -8,7 +8,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
+<link rel="stylesheet" href="${css }/root.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/userWriteList.css" />
 </head>
 <body>
@@ -47,16 +47,19 @@
 							<th scope="col" class="th-title">제목</th>
 							<th scope="col" class="th-exe">등록일</th>
 							<th scope="col" class="th-exe">조회수</th>
+							
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="bList" items="${bList}" >
 						<tr>
-							<td>1</td>
-							<td><a href="#">
-							제목입니다</a></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>" /> </td>
-							<td>8</td>
+							<td>${bList.no}</td>
+							<td><a href="/board/noticeRead?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
+							${bList.title}</a></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
+							<td>${bList.hit}</td>
 						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>

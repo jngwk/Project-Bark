@@ -51,7 +51,7 @@ public class AdoptionService {
 	public List<Adoption> getUserState(String filter, String input, int state) {
 		// TODO Auto-generated method stub
 		return mapper.getUserState(filter,input,state);
-
+	}
 	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
 	public List<Dog> searchList(Criteria cri) {
 		log.info("searchList : " + cri);
