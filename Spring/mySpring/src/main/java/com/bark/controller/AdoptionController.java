@@ -43,8 +43,8 @@ public class AdoptionController {
 		if (pageNum == null) {   		// 값이 없으면 0 Set
 			pageNum = 1; 
 		}
-		if (amount == null) {			// 값이 없으면 12 Set		
-			amount = 12;
+		if (amount == null) {			// 값이 없으면 16 Set		
+			amount = 16;
 		}
 
 		cri.setPageNum(pageNum);
@@ -88,7 +88,7 @@ public class AdoptionController {
 		}
 		service.write(dog);
 		rttr.addFlashAttribute("result", dog.getDogno());
-		return "redirect:/dog/list";
+		return "redirect:/adoption/list";
 	}
 	
 //	@GetMapping(value = "/getAttachList"
