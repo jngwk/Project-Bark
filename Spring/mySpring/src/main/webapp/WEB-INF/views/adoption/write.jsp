@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include
+		page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" />
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 		<!-- Page Heading -->
@@ -70,6 +72,7 @@
 		<!-- /.container-fluid -->
 		<jsp:include page="${views }/include/footer.jsp" flush="false"/>
 	<script>
+	
 $(document).ready(function() {
 	let formObj=$("form[role='form']");
 	$("button[type='submit']").on("click", function(e){
@@ -121,7 +124,7 @@ $(document).ready(function() {
 		   }
 		   console.log("files.length : "+files.length);
 		   $.ajax({
-		      url:'/adoption/write', 
+		      url:'/DogUploadAjaxAction', 
 		      processData: false, //전달할 데이터를 query string을 만들지 말 것
 		      contentType: false,
 		      data: formData,  //전달할 데이터

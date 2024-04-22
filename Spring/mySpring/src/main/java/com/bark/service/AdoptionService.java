@@ -34,6 +34,13 @@ public class AdoptionService {
 		return mapper.getDog(dogno);
 	}
 	
+	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
+	public List<Dog> searchList(Criteria cri) {
+		log.info("searchList : " + cri);
+		return mapper.searchList(cri);
+	}
+	
+	
 	//관리자페이지 입양내역 검색
 	public List<Adoption> getAdoptionList(){
 		log.info("getAdoptionList..................");
@@ -49,13 +56,9 @@ public class AdoptionService {
 		return mapper.getUserState(filter,input,state);
 	}
 	
-	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
-	public List<Dog> searchList(Criteria cri) {
-		log.info("searchList : " + cri);
-		return mapper.searchList(cri);
-	}
 	
-	public List<DogAttached> getAttachList(Integer dogno) {	//강아지 파일 업로드
+	//강아지 파일 업로드
+	public List<DogAttached> getAttachList(Integer dogno) {	
 		log.info("get Attach list by dogno" + dogno);
 		return attachMapper.findByDogno(dogno);
 	}
@@ -70,7 +73,6 @@ public class AdoptionService {
 		dog.getDogAttachedList().forEach(dogattach -> { // 첨부 파일이 있는 경우
 			System.out.println("dogAttach : " + dogattach);
 			dogattach.setDogno(dog.getDogno());
-			
 			attachMapper.insert(dogattach);
 		});
 	}
