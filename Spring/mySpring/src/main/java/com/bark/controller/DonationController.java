@@ -30,6 +30,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class DonationController {
 	private ShelterService service;
+	//private UserService userService;
 	
 	@GetMapping("/form")
 	public void form() {
