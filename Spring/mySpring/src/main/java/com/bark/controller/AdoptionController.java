@@ -75,7 +75,7 @@ public class AdoptionController {
 		return "adoption/detail";
 	}
 	
-	@GetMapping("/write")
+	@GetMapping("/dogAdd")
 	public void dogUploadAjax() {
 		log.info("dogUpload ajax");
 	}

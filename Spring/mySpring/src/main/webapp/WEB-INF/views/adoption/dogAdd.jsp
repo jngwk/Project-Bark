@@ -2,74 +2,88 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<!-- Begin Page Content -->
-	<div class="container-fluid">
-		<!-- Page Heading -->
-		<h1 class="h3 mb-2 text-gray-800">등록 페이지</h1>
-		<p class="mb-4"></p>
-		<form role="form"
-			action="${pageContext.request.contextPath}/adoption/write" method="post">
-			
-			<div class="form-group">
-				<label>보호소 이름</label>
-				<input class="form-control" name='shelterName'>
-			</div>
-			
-			<div class="form-group">
-				<label>강아지 이름</label>
-				<input class="form-control" name='name'>
-			</div>
-			
-			<div class="form-group">
-				<label>성별</label><input class="form-control" name='gender'>
-			</div>
-			<div class="form-group">
-				<label>견종</label><input class="form-control" name='breed'>
-			</div>
-			<div class="form-group">
-				<label>나이</label><input class="form-control" name='age'>
-			</div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>후원하기</title>
+    <link rel="stylesheet" href="${css}/dogAdd.css" />
+    <link rel="stylesheet" href="${css}/root.css" />
+    <script src="${js}/dogAdd.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
-			<div class="form-group">
-				<label>상세설명</label>
-				<textarea class="form-control" rows="5" name='feature'></textarea>
-			</div>
-			
-			<div class="form-group">
-			    <label>중성화 여부</label><br>
-			    <input type="radio" id="neutered" name="neuter" value="1">
-			    <label for="neutered">완료</label><br>
-			    <input type="radio" id="notNeutered" name="neuter" value="0">
-			    <label for="notNeutered">X</label>
-			</div>
-			<div class="card" style="width: 100%;">
-				<div class="card-header ">File Attach</div>
-				<div class="card-body">
-					<div class="form-group uploadDiv">
-						<input type="file" name='uploadFile' id='uploadFile' multiple>
-					</div>
-					<div class="uploadResult">
-						<ul></ul>
-					</div>
-					<div class="bigPictureWrapper">
-						<div class="bigPicture"></div>
-					</div>
-				</div>
-				<div class="card-footer d-flex">
-					<button type="submit" class="btn btn-success ml-auto">Submit</button>
-					<button type="reset" class="btn btn-warning ml-2">Reset</button>
-				</div>
-			</div>
-		</form>
+    <div class="dogAdd-container">
+      <div class="dogAdd-page slide-animation">
+        <form role="form"
+        action="${pageContext.request.contextPath}/adoption/write" method="post">
+        <img src="${images }/logo-brown.png" />
+          <div class="dogAdd-title">유기견 등록</div>
+        
+        <div class="form-group">
+          <label>보호소 이름</label>
+          <input class="form-control" name='shelterName'>
+        </div>
+        
+        <div class="form-group">
+          <label>강아지 이름</label>
+          <input class="form-control" name='name'>
+        </div>
+        
+        <div class="form-group">
+          <label>성별</label><input class="form-control" name='gender'>
+        </div>
+        <div class="form-group">
+          <label>견종</label><input class="form-control" name='breed'>
+        </div>
+        <div class="form-group">
+          <label>나이</label><input class="form-control" name='age'>
+        </div>
+  
+        <div class="form-group">
+          <label>상세설명</label>
+          <textarea class="form-control" rows="5" name='feature'></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label class="neuterTitle">중성화 여부</label><br>
+            <label for="neutered" class="neuter">완료</label>
+            <input type="radio" id="neutered" class="neuter" name="neuter" value="1">
+            <label for="notNeutered" class="neuter">X</label>
+            <input type="radio" id="notNeutered" class="neuter" name="neuter" value="0">
+            
+        </div>
+        <div class="card" style="width: 100%;">
+          <div class="card-header ">File Attach</div>
+          <div class="card-body">
+            <div class="form-group uploadDiv">
+              <input type="file" name='uploadFile' id='uploadFile' multiple>
+            </div>
+            <div class="uploadResult">
+              <ul></ul>
+            </div>
+            <div class="bigPictureWrapper">
+              <div class="bigPicture"></div>
+            </div>
+          </div>
+          <div class="card-footer d-flex">
+            <button type="submit" class="btn brown-btn large-btn ml-auto">등록</button>
+            <button type="reset" class="btn brown-btn large-btn ml-2">취소</button>
+          </div>
+        </div>
+      </form>
+      </div>
+    </div>
 		<!-- /.container-fluid -->
 		<jsp:include page="${views }/include/footer.jsp" flush="false"/>
-	<script>
+<script>
 $(document).ready(function() {
 	let formObj=$("form[role='form']");
 	$("button[type='submit']").on("click", function(e){
@@ -207,9 +221,6 @@ function showImage(filePath) {
 
 	} //showImage
 </script>
-
-	<jsp:include
-		page="${pageContext.request.contextPath}//WEB-INF/views/include/footer.jsp" />
 
 </body>
 </html>
