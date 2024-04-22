@@ -12,9 +12,9 @@ import com.bark.domain.User;
 
 public interface UserMapper {
 	
-	@Select("select * from user where type != 3 order by type,shelter_shelterno")
+	@Select("select * from user where type != 3 order by type,shelterno")
 	public List<User> getUserList();
-	@Select("select * from user where type != 3 and id = #{id} order by type,shelter_shelterno")
+	@Select("select * from user where type != 3 and id = #{id} order by type,shelterno")
 	public User getUser(String id);
 	@Insert("insert into user(id, pwd, name, phone, email, addr, available, type)\r\n"
 			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")

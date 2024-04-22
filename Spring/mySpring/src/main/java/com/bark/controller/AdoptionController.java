@@ -56,21 +56,21 @@ public class AdoptionController {
 		// 조회 조건에 따른 전게 건수 
 		int total = service.getDogList().size();	//201마리
 		Page page = new Page(cri, total);
-		
+	
 		model.addAttribute("page", page);
 		model.addAttribute("dogList", service.searchList(cri));
 	}
 		
 	@GetMapping("/detail")
 	public String detail(@RequestParam("dogno") int dogno, 
-						 @RequestParam("userId") String userId,
-						 @RequestParam("shelterno") String shelterno,
+						 @RequestParam("id") String id,
+						 @RequestParam("shelterno") int shelterno,
 						 Model model) {	//입양상세: 강아지 정보
 		log.info("detail...........");
 		
 		
-		model.addAttribute("dog", service.getDog(dogno));
-		model.addAttribute("user", userservice.getUser(userId));
+		model.addAttribute("dog", service.getDog(11));
+		model.addAttribute("user", userservice.getUser(id));
 		model.addAttribute("shelter", shelterservice.getShelter(shelterno));
 		return "adoption/detail";
 	}

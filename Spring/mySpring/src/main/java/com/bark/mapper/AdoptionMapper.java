@@ -16,33 +16,33 @@ import com.bark.domain.Dog;
 
 @Mapper
 public interface AdoptionMapper {
-	@Select("select d.dogno, d.breed, d.name, s.shelterName"
+	@Select("select d.dogno, d.breed, d.name, s.shelterName "
 			+ "from dog d "
 			+ "	join attach a "
-			+ "		on d.dogno = a.dog_dogno"
+			+ "		on d.dogno = a.dogno"
 			+ "	inner join shelter s"
-			+ "		on s.shelterno = d.shelter_shelterno;")
+			+ "		on s.shelterno = d.shelterno;")
 	public List<Dog> getDogList();
 	
-	@Select("select d.dogno, d.gender, d.age, d.breed, s.shelterName "
+	@Select("select d.dogno, d.gender, d.age, d.breed, s.shelterName   "
 			+ "	from dog d"
 			+ "		join attach a"
-			+ "			on d.dogno = a.dog_dogno"
+			+ "			on d.dogno = a.dogno"
 			+ "		inner join shelter s"
 			+ "			on s.shelterno = d.shelterno"
-			+ "		where dogno = #{dogno};")
+			+ "		where d.dogno = #{dogno};")
 	public Dog getDog(int dogno);
 	
 	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 		+ "	from adoption a join user u on a.user_id = u.id\r\n"
-		+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
-		+ "    join shelter s on s.shelterno = d.shelter_shelterno;")
+		+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
+		+ "    join shelter s on s.shelterno = d.shelterno;")
 	public List<Adoption> getAdoptionList();
 
 	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 			+ "	from adoption a join user u on a.user_id = u.id\r\n"
-			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
-			+ "    join shelter s on s.shelterno = d.shelter_shelterno\r\n"
+			+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "where ${param1} like concat('%',#{param2},'%')")
 	public List<Adoption> getSearchAdoption(String filter,String input);
 
@@ -50,14 +50,14 @@ public interface AdoptionMapper {
 	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 			+ "	from adoption a join user u on a.user_id = u.id\r\n"
 			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
-			+ "    join shelter s on s.shelterno = d.shelter_shelterno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
 	public List<Adoption> getUserState(String filter,String input,int state);
 		
-	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.* "
 			+ "FROM dog d "
 			+ "	join attach a "
-			+ "		on d.dogno = a.dog_dogno "
+			+ "		on d.dogno = a.dogno "
 			+ "ORDER BY dogno DESC "
 			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchList(@Param("cri") Criteria cri);

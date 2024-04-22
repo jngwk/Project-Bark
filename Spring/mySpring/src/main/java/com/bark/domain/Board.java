@@ -9,7 +9,7 @@ import lombok.Data;
 public class Board {
 	private Integer no;			// 게시판 화면 번호
 	private Integer	bno;		// 게시판번호                                                
-	private String	user_id;	// 회원ID                                     
+	private String	id;			// 회원ID                                     
 	private String	title;		// 제목                                   
 	private String	content;	// 내용                               
 	private Date	regDate;	// 등록일                       
