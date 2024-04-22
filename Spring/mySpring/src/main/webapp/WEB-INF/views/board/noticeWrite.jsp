@@ -16,7 +16,9 @@
 </head>
 <body>
 
+
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
+
 
 
 	<div class="board-write">
@@ -61,26 +63,28 @@
 									</thead>
 									<tbody>
 										<tr>
-											<td class="textarea" colspan="3"><textarea placeholder="내용을 작성하세요."
-													name="Content" maxlength="2048"></textarea>
+											<td class="textarea" colspan="3"><textarea
+													placeholder="내용을 작성하세요." name="Content" maxlength="2048"></textarea>
 											</td>
 										</tr>
 									</tbody>
 								</table>
-<!-- 
-								<div class="write-imgUpload">
-									<input class="upload-name" value="첨부파일" placeholder="첨부파일"
-										readonly /> <label for="file" class="secondary-btn">파일찾기</label>
-									<input type="file" id="file" />
-								</div>
- -->								
+								<!-- 
+<div class="write-imgUpload">
+<input class="upload-name" value="첨부파일" placeholder="첨부파일"
+readonly /> <label for="file" class="secondary-btn">파일찾기</label>
+<input type="file" id="file" />
+</div>
+ -->
 							</div>
 							<div class="write-button">
 								<input type="button" data-ico="->" onclick="history.back()"
 									value="취소" class="btn brown-btn large-btn" /> <input
 									data-ico="->" type="submit" value="작성 완료"
+
 									class="btn brown-btn large-btn" />
 								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userId")%>" />
+
 							</div>
 
 						</form>
