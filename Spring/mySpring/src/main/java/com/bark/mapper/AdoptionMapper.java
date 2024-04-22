@@ -47,22 +47,22 @@ public interface AdoptionMapper {
 
 	
 	//관리자 입양관리페이지
-	@Select("select a.adoptionno no, a.user_id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-		+ "	from adoption a join user u on a.user_id = u.id\r\n"
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+		+ "	from adoption a join user u on a.id = u.id\r\n"
 		+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
 		+ "    join shelter s on s.shelterno = d.shelterno;")
 	public List<Adoption> getAdoptionList();
 
-	@Select("select a.adoptionno no, a.user_id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-			+ "	from adoption a join user u on a.user_id = u.id\r\n"
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.id = u.id\r\n"
 			+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "where ${param1} like concat('%',#{param2},'%')")
 	public List<Adoption> getSearchAdoption(String filter,String input);
 
 	
-	@Select("select a.adoptionno no, a.user_id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-			+ "	from adoption a join user u on a.user_id = u.id\r\n"
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.id = u.id\r\n"
 			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
 
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"

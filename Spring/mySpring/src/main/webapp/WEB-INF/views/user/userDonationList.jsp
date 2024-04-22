@@ -17,9 +17,10 @@
     <section class="notice">
       <div class="page-title">
       	<p>Donation</p>
-      	<p class="page-subtitle">[기부 내역]</p>
+      	<p class="page-lefttitle">[기부 내역]</p>
       	<p class="slash">/</p>
-      	<a href="${contextPath }/user/userAdoptionList?id=${userId}">Adoption[입양 내역]</a>
+      	<a href="${contextPath }/user/userAdoptionList?id=${userId}">Adoption</a>
+      	<p class="page-righttitle">[입양 내역]</p>
       </div>
 
       <!-- board list area -->

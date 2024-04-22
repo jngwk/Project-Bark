@@ -64,7 +64,7 @@ public class AdoptionController {
 	@GetMapping("/detail")
 	public String detail(@RequestParam("dogno") int dogno, 
 						 @RequestParam("id") String id,
-						 @RequestParam("shelterno") int shelterno,
+						 @RequestParam("shelterno") String shelterno,
 						 Model model) {	//입양상세: 강아지 정보
 		log.info("detail...........");
 		

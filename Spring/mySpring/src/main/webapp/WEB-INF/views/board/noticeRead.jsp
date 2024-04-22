@@ -140,7 +140,7 @@
 						<span>\${item.id}</span><span>\${displayTime(item.regDate)}</span>
 					</div>
 					<div class="reply-content">
-					<p><textarea  style="border: none; width:100%;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>
+					<p><textarea  style="border: none; width:100%; resize: none;" id="area\${item.commentNo} " readonly>\${item.content}</textarea></p>
 
 					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
 					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>

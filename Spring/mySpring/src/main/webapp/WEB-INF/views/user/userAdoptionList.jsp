@@ -16,10 +16,11 @@
   <jsp:include page="${views }/include/header.jsp" flush="false" />
     <section class="notice">
       <div class="page-title">
-      	<a href="${contextPath }/user/userDonationList?id=${userId}">Donation[기부 내역]</a>
-      	<p class="slash">/</p>
       	<p>Adoption</p>
-      	<p class="page-subtitle">[입양 내역]</p>
+      	<p class="page-lefttitle">[입양 내역]</p>
+      	<p class="slash">/</p>
+      	<a href="${contextPath }/user/userDonationList?id=${userId}">donation</a>
+      	<p class="page-righttitle">[기부 내역]</p>
       </div>
 
       <!-- board list area -->

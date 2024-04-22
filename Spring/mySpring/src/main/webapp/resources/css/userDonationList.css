@@ -25,12 +25,18 @@ float: right;
 	display: flex;
 }
 .slash{
+	font-size: 25px;
 	padding:0 20px;
+	transform: translate(0px, 45px);
 }
-.page-subtitle,.page-title a{
+.page-lefttitle,.page-title a{
 	font-size: 25px;
     transform: translate(0px, 45px);
     color:var(--color-dark);
+}
+.page-righttitle{
+	font-size: 15px;
+    transform: translate(0px, 55px);
 }
 /* 테이블 */
 table {

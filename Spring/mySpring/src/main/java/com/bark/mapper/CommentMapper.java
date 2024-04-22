@@ -14,7 +14,7 @@ import com.bark.domain.Comment;
 @Mapper
 public interface CommentMapper {
 	
-	@Insert("INSERT INTO comment (bno, user_id, content) VALUES(#{bno}, #{user_id}, #{content})")
+	@Insert("INSERT INTO comment (bno, id, content) VALUES(#{bno}, #{id}, #{content})")
 	public int insert(Comment comment);
 	
 	@Select("SELECT * FROM comment WHERE commentNo=#{commentNo}")
