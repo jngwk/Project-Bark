@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Update;
 import com.bark.domain.User;
 
 public interface UserMapper {
-	
 	@Select("select * from user where type != 3 order by type, shelterno")
 	public List<User> getUserList();
 	@Select("select * from user where id = #{id}")
@@ -20,7 +19,7 @@ public interface UserMapper {
 			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")
 	public int insert(User user);
 	@Update("update user \r\n"
-			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}, available = #{available}\r\n"
+			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}\r\n"
 			+ "	where id = #{id}")
 	public int update(User user);
 	@Delete("delete from user where id=#{id}")

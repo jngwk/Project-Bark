@@ -30,8 +30,8 @@ public class CommentServiceTest {
 		Comment comment = new Comment();
 
 //		comment.setCommentNo(null);   // AUTO_INCREMENT
-		comment.setBoard_bno(100);
-		comment.setUser_id("user02");
+		comment.setBno(100);
+		comment.setId("user02");
 		comment.setContent("나도 댓글입니다.");
 //		comment.setRegDate(null);     // default now()
 
@@ -58,12 +58,12 @@ public class CommentServiceTest {
 		Comment comment = new Comment();
 
 //		comment.setCommentNo(1);   // AUTO_INCREMENT
-		comment.setBoard_bno(100);
+		comment.setBno(100);
 //		comment.setId("user01");
 //		comment.setContent("댓글입니다.");
 //		comment.setRegDate(null);     // default now()
 
-		log.info(service.list(comment.getBoard_bno()));
+		log.info(service.list(comment.getBno()));
 	}
 	
 	@Test
@@ -114,8 +114,8 @@ public class CommentServiceTest {
 			for (int i = 0; i < 100; i++) {
 
 				//comment.setCommentNo(i);					// AUTO_INCREMENT
-				comment.setBoard_bno(bnoList.get(i % cnt2));
-				comment.setUser_id(idList.get(i % cnt1));
+				comment.setBno(bnoList.get(i % cnt2));
+				comment.setId(idList.get(i % cnt1));
 				comment.setContent("Comment Content_" + i);
 				//comment.setRegDate(null);
 				

@@ -41,25 +41,26 @@ public interface AdoptionMapper {
 	
 	
 	//관리자 입양관리페이지
-	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state"
-		+ "	from adoption a join user u on a.id = u.id"
-		+ "    join dog d on d.dogno = a.dogno"
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+		+ "	from adoption a join user u on a.id = u.id\r\n"
+		+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
 		+ "    join shelter s on s.shelterno = d.shelterno;")
 	public List<Adoption> getAdoptionList();
 
-	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state"
-			+ "	from adoption a join user u on a.id = u.id"
-			+ "    join dog d on d.adoptionno = a.adoptionno"
-			+ "    join shelter s on s.shelterno = d.shelterno"
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.id = u.id\r\n"
+			+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "where ${param1} like concat('%',#{param2},'%')")
 	public List<Adoption> getSearchAdoption(String filter,String input);
 
 	
-	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state"
-			+ "	from adoption a join user u on a.id = u.id"
-			+ "    join dog d on d.adoptionno = a.adoptionno"
-			+ "    join shelter s on s.shelterno = d.shelterno"
-			+ "where ${param1} like concat('%',#{param2},'%') and state=${param3};")
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.id = u.id\r\n"
+			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
+
+			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
+			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
 	public List<Adoption> getUserState(String filter,String input,int state);
 		
 	
@@ -82,7 +83,20 @@ public interface AdoptionMapper {
 	public int delete(int i);
 	@Update("UPDATE board SET shelterId = #{shelterId}, name = #{name}, gender = #{gender}, breed = #{breed}, age = #{age}, desc = #{desc}, neuter = #{neuter} WHERE dogno = #{dogno}")
 	public int update(Dog dog);
-	
+
 	@Insert("")
 	public void insertAdoption();
+
+	//회원페이지 입양내역
+	@Select("select a.adoptionno no, s.shelterName,d.name dogName,a.adopt_date date ,a.state\r\n"
+			+ "	from adoption a join dog d on d.adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno where id = #{id}")
+	public List<Adoption> userAdoptionList(String id);
+	
+	@Select("select a.adoptionno no, s.shelterName,d.name dogName,a.adopt_date date ,a.state\r\n"
+			+ "	from adoption a join dog d on d.adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno where id = #{param1} and state = ${param2}")
+	public List<Adoption> getAState(String id,int state);
+	
+	
 }
