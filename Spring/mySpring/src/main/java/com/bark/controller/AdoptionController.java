@@ -80,6 +80,12 @@ public class AdoptionController {
 		log.info("dogUpload ajax");
 	}
 	
+	
+	@GetMapping("/write")
+	public void dogWrite() {
+		log.info("dogWrite");
+	}
+	
 	@PostMapping("/write") // 게시글저장
 	public String write(Dog dog, RedirectAttributes rttr) {
 		log.info("write :" + dog);
