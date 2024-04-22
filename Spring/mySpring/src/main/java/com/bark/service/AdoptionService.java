@@ -54,11 +54,6 @@ public class AdoptionService {
 		return mapper.searchAdoptionList(cri);
 	}
 	
-	public List<Adoption> searchDonationList(Criteria cri){	//한 페이지당 입양내역 리스트
-		log.info("searchAdoptionList: "+ cri);
-		return mapper.searchAdoptionList(cri);
-	}
-	
 
 	public List<Adoption> getSearchAdoption(String filter, String input) {
 		return mapper.getSearchAdoption(filter,input);

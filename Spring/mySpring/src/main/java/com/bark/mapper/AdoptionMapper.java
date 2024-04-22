@@ -37,7 +37,7 @@ public interface AdoptionMapper {
 			+ "		on d.dogno = a.dogno "
 			+ "ORDER BY dogno DESC "
 			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
-	public List<Dog> searchList(@Param("cri") Criteria cri);//한 페이지당 강아지 리스트
+	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
 	
 	
 	//관리자 입양관리페이지
@@ -46,6 +46,17 @@ public interface AdoptionMapper {
 		+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
 		+ "    join shelter s on s.shelterno = d.shelterno;")
 	public List<Adoption> getAdoptionList();
+	
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY a.adoptionno DESC) AS row_num, a.adoptionno no, a.id id, u.name userName, s.shelterName, d.name dogName, a.adopt_date date, a.state\r\n"
+			+ "			 from adoption a "
+			+ "			join user u "
+			+ "				on a.id = u.id"
+			+ "			join dog d "
+			+ "				on d.dogno = a.dogno"
+			+ "			join shelter s "
+			+ "				on s.shelterno = d.shelterno "
+			+ "			ORDER BY a.adoptionno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
+	public List<Adoption> searchAdoptionList(@Param("cri") Criteria cri);	//한 페이지당 입양내역 리스트
 
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 			+ "	from adoption a join user u on a.id = u.id\r\n"
