@@ -15,7 +15,7 @@ import com.bark.domain.Dog;
 
 @Mapper
 public interface AdoptionMapper {
-	@Select("select d.dogno, d.breed, d.name, s.shelterName, a.imgUrl "
+	@Select("select d.dogno, d.breed, d.name, s.shelterName"
 			+ "from dog d "
 			+ "	join attach a "
 			+ "		on d.dogno = a.dog_dogno"
@@ -23,12 +23,12 @@ public interface AdoptionMapper {
 			+ "		on s.shelterno = d.shelter_shelterno;")
 	public List<Dog> getDogList();
 	
-	@Select("select d.dogno, d.gender, d.age, d.breed, s.shelterName, a.imgUrl \r\n"
+	@Select("select d.dogno, d.gender, d.age, d.breed, s.shelterName "
 			+ "	from dog d"
 			+ "		join attach a"
 			+ "			on d.dogno = a.dog_dogno"
 			+ "		inner join shelter s"
-			+ "			on s.shelterno = d.shelter_shelterno"
+			+ "			on s.shelterno = d.shelterno"
 			+ "		where dogno = #{dogno};")
 	public Dog getDog(int dogno);
 		

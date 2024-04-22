@@ -12,6 +12,8 @@ import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.Page;
 import com.bark.service.AdoptionService;
+import com.bark.service.ShelterService;
+import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -22,6 +24,9 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdoptionController {
 	private AdoptionService service;
+	private UserService 	userservice;
+	private ShelterService 	shelterservice;
+	
 	
 	@GetMapping("/list")
 	public void list(Model model,
@@ -57,9 +62,16 @@ public class AdoptionController {
 	}
 		
 	@GetMapping("/detail")
-	public String detail(@RequestParam("dogno") int dogno, Model model) {	//입양상세: 강아지 정보
+	public String detail(@RequestParam("dogno") int dogno, 
+						 @RequestParam("userId") String userId,
+						 @RequestParam("shelterno") String shelterno,
+						 Model model) {	//입양상세: 강아지 정보
 		log.info("detail...........");
+		
+		
 		model.addAttribute("dog", service.getDog(dogno));
+		model.addAttribute("user", userservice.getUser(userId));
+		model.addAttribute("shelter", shelterservice.getShelter(shelterno));
 		return "adoption/detail";
 	}
 	
