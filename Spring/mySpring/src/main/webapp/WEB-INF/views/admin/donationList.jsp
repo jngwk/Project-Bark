@@ -7,8 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="${css }/donationList.css" />
-    <link rel="stylesheet" href="${css }/root.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/donationList.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
     <!-- <script src="../js/popup.js"></script> -->
 
   </head>

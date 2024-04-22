@@ -114,7 +114,8 @@
 										method="post" display="none">
 										<!-- 개인 아이디 비밀번호 -->
 										<div class="form-slide first-slide">
-											<input type="hidden" name="type" value="1" /> <label
+											<input type="hidden" name="type" value="1" /> 
+											<input type="hidden" name="available" value="1" /><label
 												class="popup-label"> <span>아이디</span> <input
 												type="text" name="id" class="login-popup-input id-input" />
 											</label> <label class="popup-label"> <span>비밀번호</span> <input
@@ -187,7 +188,7 @@
 										</div>
 										<!-- 보호소 선택 -->
 										<div class="form-slide ">
-											<input type="hidden" name="available" value=""/>
+											<input type="hidden" name="available" value="2"/>
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>아이디</span> <input
 												type="text" name="id" class="login-popup-input id-input" />

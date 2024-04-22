@@ -14,18 +14,13 @@ public interface UserMapper {
 	
 	@Select("select * from user where type != 3 order by type,shelter_shelterno")
 	public List<User> getUserList();
-	@Select("select * from user where type = 3 order by type,shelter_shelterno")
-	/*
-	 * public List<User> getAdminList();
-	 * 
-	 * @Select("select * from user where id = #{id}")
-	 */
+	@Select("select * from user where type != 3 and id = #{id} order by type,shelter_shelterno")
 	public User getUser(String id);
-	@Insert("insert into user(id, pwd, name, phone, email, addr, addrDetail, postcode, bank, bankAcc, type)\r\n"
+	@Insert("insert into user(id, pwd, name, phone, email, addr, available, type)\r\n"
 			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")
 	public int insert(User user);
 	@Update("update user \r\n"
-			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}\r\n"
+			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}, available = #{available}\r\n"
 			+ "	where id = #{id}")
 	public int update(User user);
 	@Delete("delete from user where id=#{id}")

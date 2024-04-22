@@ -6,8 +6,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/updateUser.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/updateUser.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 </head>
 <body>
 	<div class="update-popup-layer" id="update-popup-layer"

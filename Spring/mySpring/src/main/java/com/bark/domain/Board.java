@@ -15,8 +15,8 @@ public class Board {
 	private Date	regDate;	// 등록일                       
 	private Integer	hit;		// 조회수                                             
 	private Integer	vote;		// 추천수                                            
-	private Integer	type;		// 종류 1: 공지 2: 자유 3: 보호소 이야기 4: 문의하기'
-	//private List<Attached> attachList; 
+	private Integer	type;		
+	private List<Attached> attachList; 
 	
 }
 

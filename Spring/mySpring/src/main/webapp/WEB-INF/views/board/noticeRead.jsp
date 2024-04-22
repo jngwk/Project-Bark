@@ -8,15 +8,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/read.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/read.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<%
-// ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
-	session.setAttribute("userid", "gildong");
-%>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
 	<div class="board-read">
@@ -108,11 +104,18 @@
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 <script>
+
 //$(document).ready(function(){
+	
 	let bnoValue = '<c:out value="${board.bno}"/>'; //현재 게시글에 댓글추가
 	let user_id = '<c:out value="${board.user_id}"/>'; //현재 게시글에 작성자
 	let commentCount = '<c:out value="${commentCount}"/>'; //현재 게시글에 댓글건 수 확인
 
+	let pageNum = '<c:out value="${page.cri.pageNum}"/>'; 
+	let amount= '<c:out value="${page.cri.amount}"/>';
+ 	let searchField = '<c:out value="${page.cri.searchField}"/>';
+ 	let searchWord = '<c:out value="${page.cri.searchWord}"/>';
+	
 	let replyUL = $(".comment");
 
 	showList(1);
@@ -198,8 +201,8 @@
 	// 댓글 신규 등록 
 	let findtag = $(".reply-board");
 	let content = findtag.find("textarea[name='content']");
-	let idValue ='<%=(String)session.getAttribute("userid")%>';	// 접속자 id 
-	
+	let idValue ='<%=(String)session.getAttribute("userId")%>';	// 접속자 id 
+
 	let registerBtn = $("#reply-buttom");
 	
 	registerBtn.on("click", function(e) {
@@ -367,7 +370,10 @@ function btn3() {
 		alert ("댓글이 존재하여 게시판글을 수정 할 수 없습니다.");
 	}
 	else {
-		//수정 화면으로 ㄱㄱㄱㄱㄱ
+		window.location.href = 'http://localhost:9090/board/noticeUpdate?bno=' + bnoValue 
+				+ '&searchField=' + searchField + '&searchWord=' + searchWord 
+				+ '&pageNum=' + pageNum + '&amount=' + amount;
+		
 	}
 }
 //게시판글 삭제
@@ -383,16 +389,10 @@ function btn4() {
 	}
 	else {
 		if(confirm("삭제 하시겠습니까?")){
-			boardremove(bnoValue, function(result) {
-				alert(result);
-				
-
-			});
-//		window.location.href = 'http://localhost:9090/board/noticeDelete?bno=${bnoValue}';				
+	 		window.location.href = 'http://localhost:9090/board/noticeDelete?bno=' + bnoValue;				
 		}else{
 			alert("취소 하셨습니다.");
 		}
-		
 	}
 }
 //});

@@ -6,19 +6,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/write.css" />
-<link rel="stylesheet" href="${css }/root.css" />
-<script src="${js }/write.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
+<script src="${pageContext.request.contextPath}/resources/js/write.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<%
-// ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
-	session.setAttribute("userid", "gildong");
-%>
+
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
 
@@ -83,7 +80,7 @@
 									value="취소" class="btn brown-btn large-btn" /> <input
 									data-ico="->" type="submit" value="작성 완료"
 									class="btn brown-btn large-btn" />
-								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userid")%>" />
+								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userId")%>" />
 							</div>
 
 						</form>

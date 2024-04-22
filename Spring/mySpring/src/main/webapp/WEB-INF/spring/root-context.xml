@@ -11,10 +11,10 @@
 	<context:component-scan
 		base-package="com.bark.service" />
 	
-	
-	
+	<!-- Mubatis mapper -->
 	<mybatis-spring:scan base-package="com.bark.mapper" />
 
+	<!-- MySQL -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
@@ -23,6 +23,7 @@
 		<property name="username" value="bark"></property>
 		<property name="password" value="bark1234"></property>
 	</bean>
+	
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
@@ -33,14 +34,15 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	<!-- 이메일 인증 관련 빈 등록 -->
+	<!-- Google email -->
 	<bean id="mailSender"
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
 		<property name="port" value="587" />
 		<property name="username" value="jwlee20541@gmail.com" />
 		<property name="password" value="olkynnqbssbbuuvj" />
-		<!-- 보안연결 SSL과 관련된 설정 -->
+		
+		<!-- auth SSL -->
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.starttls.enable">true</prop>

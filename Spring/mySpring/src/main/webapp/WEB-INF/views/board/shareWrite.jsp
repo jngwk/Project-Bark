@@ -6,8 +6,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/shareWrite.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shareWrite.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 <script src="${js }/write.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"

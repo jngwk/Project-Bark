@@ -1,5 +1,9 @@
 package com.bark.domain;
 
+
+
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -13,4 +17,5 @@ public class Dog {
 	private int available;
 	private String shelterName;
 	private String imgUrl;
+	private List<DogAttached> dogAttachedList; 
 }
