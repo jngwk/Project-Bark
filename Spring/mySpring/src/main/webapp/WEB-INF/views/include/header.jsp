@@ -63,7 +63,7 @@
 								class="large-font hover-underline">정보공유</strong></a> <a
 								class="transition" href="#"><strong
 								class="large-font hover-underline">보호소 이야기</strong></a> <a
-								class="transition" href="${contextPath }/board/write"><strong
+								class="transition" href="${contextPath }/board/contactWrite"><strong
 								class="large-font hover-underline">문의하기</strong></a>
 						</div></li>
 					<li>

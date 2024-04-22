@@ -29,7 +29,7 @@ public class BoardController {
 	
 	private CommentMapper commentmapper;
 
-	@GetMapping("/noticeList")
+	@GetMapping("/noticeList")//다건
 	public void noticeList(Model model,
 						   @RequestParam(required=false, value="searchField") String searchField,
 						   @RequestParam(required=false, value="searchWord") String searchWord,
@@ -74,7 +74,7 @@ public class BoardController {
 		model.addAttribute("bList", service.searchList(cri));
 	}	
 	
-	@GetMapping("/noticeRead")
+	@GetMapping("/noticeRead")//단건
 	public void read(Model model, 
 					 @RequestParam("bno") Integer  bno,						   
 					 @RequestParam(required=false, value="searchField") String searchField,
@@ -152,6 +152,16 @@ public class BoardController {
 		return "redirect:/board/noticeList";
 	}
 	
+	@PostMapping("/contactWrite") // 04-22 추가한 부분 . 이게 있어야 문의하기 글 DB에 써짐
+	public String contactWrite(Board board, RedirectAttributes rttr) {
+		
+		log.info("write : " + board);
+		board.setType(4);				// 문의하기
+		service.write(board);
+		rttr.addFlashAttribute("result", board.getBno());
+		return "redirect:/board/noticeList";
+	}
+	
 	@GetMapping("/noticeUpate")
 	public void update() {
 
@@ -224,7 +234,7 @@ public class BoardController {
 	
 	@GetMapping("/contactWrite")
 	public void contactWrite() {
-		
+		log.info("contactWrite...........");
 	}
 	
 	@GetMapping("/shareWrite")
