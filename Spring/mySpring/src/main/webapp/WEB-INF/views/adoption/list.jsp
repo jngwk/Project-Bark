@@ -23,12 +23,13 @@
   <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"/>
   	   <div class="adoption-list-header">
     <p class="page-title">Adoption</p><p class="page-subtitle">[입양 목록]</p>
+         <div class="story-button">
+			<a class="large-btn brown-btn" href="${contextPath }/adoption/dogAdd">등록하기</a>
+		</div>
     </div>
+
     <div class="grid__container">
     <!-- <h1 class="adoption-list-header">입양 목록</h1> -->
-    		<div class="story-button">
-				<a class="large-btn brown-btn" href="${contextPath }/adoption/dogAdd">등록하기</a>
-			</div>
 		<div class="card__container">
 		<c:forEach var="dogList" items="${dogList}" >
 			<article class="card__article">
