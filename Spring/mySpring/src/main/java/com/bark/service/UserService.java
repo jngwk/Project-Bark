@@ -58,4 +58,8 @@ public class UserService {
 	public List<User> getSearchUser(String filter,String input) {
 		return mapper.getSearchUser(filter,input);
 	}
+
+	public boolean availableUpdate(String available,String id) {
+		return mapper.availableUpdate(available,id)==1;
+	}
 }

@@ -79,8 +79,18 @@
                 <td>${List.type }</td>
                 <c:choose>
                 	<c:when test = "${List.type== 2}">
-             		    <td><button class="shelterReceive-btn brown-btn" value="1">승인</button>
-			            <button class="shelterRefuse-btn brown-btn" value="2">거절</button></td>
+                		<c:choose>
+                			<c:when test="${List.available== 2}">
+             		    		<td><a href="${contextPath}/admin/available?available=1&id=${List.id }" class="shelterReceive-btn brown-btn">승인</a></td>
+             		    	</c:when>
+             		    	<c:when test="${List.available== 1}">
+			            		<td><a href="${contextPath}/admin/available?available=2&id=${List.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+			            	</c:when>
+			            	<c:otherwise>
+			            		<td><a href="${contextPath}/admin/available?available=1&id=${List.id }" class="shelterReceive-btn brown-btn">승인</a>
+			            		<a href="${contextPath}/admin/available?available=2&id=${List.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+			            	</c:otherwise>
+			            </c:choose>
               		</c:when>
               		<c:otherwise>
               			<td><td>
@@ -88,15 +98,6 @@
               	</c:choose>
               </tr>
               </c:forEach>
-              <tr>
-                <td>1</td>
-                <td>wlgus8846</td>
-                <td>김지현</td>
-                <td>2024-04-20</td>
-                <td>wlgus8846@daum.net</td>
-                <td>개인회원</td>
-                <td><a class="delete-btn brown-btn" href="${contextPath}/admin/available?available=0">삭제</a></td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -138,17 +139,46 @@
 					result.forEach(function(uList){
 						count--;
 						if(uList.type ==2){
-							str=`
-						          <tr>
-					                <td>\${count}</td>
-					                <td>\${uList.id }</td>
-					                <td>\${uList.name }</td>
-					                <td>\${uList.regDate }</td>
-					                <td>\${uList.email }</td>
-					                <td>\${uList.type }</td>
-				                	<td><button class="shelterReceive-btn brown-btn" value="1">승인</button>
-			                		<button class="shelterRefuse-btn brown-btn" value="2">거절</button></td>
-				              	</tr>`
+							if(uList.available ==2){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							           </td>
+					              	</tr>`
+							}else if(uList.available ==1){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							else{
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							
 						}else if(uList.type ==1){
 							str=`
 						          <tr>
@@ -192,17 +222,46 @@
 					result.forEach(function(uList){
 						count--;
 						if(uList.type ==2){
-							str=`
-						          <tr>
-					                <td>\${count}</td>
-					                <td>\${uList.id }</td>
-					                <td>\${uList.name }</td>
-					                <td>\${uList.regDate }</td>
-					                <td>\${uList.email }</td>
-					                <td>\${uList.type }</td>
-				                	<td><button class="shelterReceive-btn brown-btn" value="1">승인</button>
-			                		<button class="shelterRefuse-btn brown-btn" value="2">거절</button></td>
-				              	</tr>`
+							if(uList.available ==2){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							           </td>
+					              	</tr>`
+							}else if(uList.available ==1){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							else{
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							
 						}else if(uList.type ==1){
 							str=`
 						          <tr>
@@ -222,12 +281,8 @@
 		})
 	}
 	
-	//수정 삭제 버튼 클릭 이벤트
-	$(".shelterReceive-btn").on("click",function(){
-		console.log($(".shelterReceive-btn").val());
-	})
-	
 	</script>
 
   </body>
 </html>
+

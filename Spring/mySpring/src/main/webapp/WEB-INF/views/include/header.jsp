@@ -113,10 +113,9 @@
 												<h3>${userName}<br> <span>${userId}</span>
 												</h3>
 												<ul><li><img src="${icons }/post.png" /><a
-														href="${contextPath }/user/userWriteList">작성글
-															관리</a></li>
+														href="${contextPath }/admin/adminAdoptionList">입양 내역</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/admin/donationList">기부금 목록</a></li>
+														href="${contextPath }/admin/donationList">기부 내역</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
 														href="${contextPath }/admin/userList">회원 관리</a></li>
 													<li><img src="${icons }/logout.png" /><a
