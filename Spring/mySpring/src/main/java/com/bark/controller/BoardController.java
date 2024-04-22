@@ -1,9 +1,7 @@
 package com.bark.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +12,9 @@ import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Page;
 import com.bark.mapper.CommentMapper;
+import com.bark.service.AdoptionService;
 import com.bark.service.BoardService;
+import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -23,7 +23,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/board/*")
 @AllArgsConstructor
-
 public class BoardController {
 	private BoardService service;
 	
@@ -165,6 +164,8 @@ public class BoardController {
 	
 	@GetMapping("/noticeUpate")
 	public void update() {
+	
+	}
 
 //	@GetMapping("/noticeUpdate")
 //	public Board update(@RequestParam("bno") Integer  bno) {

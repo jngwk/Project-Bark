@@ -134,6 +134,7 @@ public class UploadController {
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	
 	// board 썸네일 표시 기능
 	@GetMapping("/display")
 	@ResponseBody
@@ -258,7 +259,6 @@ public class UploadController {
 	   }
 	   return new ResponseEntity<String>("deleted", HttpStatus.OK);
 	}
-
 
 	
 	private String getFolder() {

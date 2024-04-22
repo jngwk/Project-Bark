@@ -43,8 +43,8 @@ public class AdoptionController {
 		if (pageNum == null) {   		// 값이 없으면 0 Set
 			pageNum = 1; 
 		}
-		if (amount == null) {			// 값이 없으면 12 Set		
-			amount = 12;
+		if (amount == null) {			// 값이 없으면 16 Set		
+			amount = 16;
 		}
 
 		cri.setPageNum(pageNum);
@@ -54,7 +54,7 @@ public class AdoptionController {
 		cri.setType(type);				// 입양게시판 "5"
 		
 		// 조회 조건에 따른 전게 건수 
-		int total = service.getDogList().size();	//201마리
+		int total = service.getDogList().size();	//172마리
 		Page page = new Page(cri, total);
 		
 		model.addAttribute("page", page);
@@ -75,7 +75,7 @@ public class AdoptionController {
 		return "adoption/detail";
 	}
 	
-	@GetMapping("/write")
+	@GetMapping("/dogAdd")
 	public void dogUploadAjax() {
 		log.info("dogUpload ajax");
 	}
@@ -88,7 +88,7 @@ public class AdoptionController {
 		}
 		service.write(dog);
 		rttr.addFlashAttribute("result", dog.getDogno());
-		return "redirect:/dog/list";
+		return "redirect:/adoption/list";
 	}
 	
 //	@GetMapping(value = "/getAttachList"

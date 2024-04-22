@@ -15,61 +15,66 @@ import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 
 @Mapper
-public interface AdoptionMapper {
-	@Select("select d.dogno, d.breed, d.name, s.shelterName"
-			+ "from dog d "
-			+ "	join attach a "
-			+ "		on d.dogno = a.dog_dogno"
-			+ "	inner join shelter s"
-			+ "		on s.shelterno = d.shelter_shelterno;")
+public interface AdoptionMapper {	
+	
+	//입양목록 관련
+	@Select("select * from dog;")
 	public List<Dog> getDogList();
 	
-	@Select("select d.dogno, d.gender, d.age, d.breed, s.shelterName "
-			+ "	from dog d"
-			+ "		join attach a"
-			+ "			on d.dogno = a.dog_dogno"
-			+ "		inner join shelter s"
-			+ "			on s.shelterno = d.shelterno"
-			+ "		where dogno = #{dogno};")
-	public Dog getDog(int dogno);
+	@Select("select d.dogno, d.gender, d.age, d.breed, d.available, s.shelterName, a.imgUrl"
+			+ "			from dog d"
+			+ "				join attach a"
+			+ "						on d.dogno = a.dogno"
+			+ "					inner join shelter s"
+			+ "						on s.shelterno = d.shelterno"
+			+ "					where d.dogno = #{dogno};")
+	public Dog getDog(int dogno);	//특정 강아지 정보, detail
 	
-	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-		+ "	from adoption a join user u on a.user_id = u.id\r\n"
-		+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
-		+ "    join shelter s on s.shelterno = d.shelter_shelterno;")
+	
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
+			+ "FROM dog d "
+			+ "	join attach a "
+			+ "		on d.dogno = a.dogno "
+			+ "ORDER BY dogno DESC "
+			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
+	public List<Dog> searchList(@Param("cri") Criteria cri);//한 페이지당 강아지 리스트
+	
+	
+	//관리자 입양관리페이지
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state"
+		+ "	from adoption a join user u on a.id = u.id"
+		+ "    join dog d on d.dogno = a.dogno"
+		+ "    join shelter s on s.shelterno = d.shelterno;")
 	public List<Adoption> getAdoptionList();
 
-	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-			+ "	from adoption a join user u on a.user_id = u.id\r\n"
-			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
-			+ "    join shelter s on s.shelterno = d.shelter_shelterno\r\n"
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state"
+			+ "	from adoption a join user u on a.id = u.id"
+			+ "    join dog d on d.adoptionno = a.adoptionno"
+			+ "    join shelter s on s.shelterno = d.shelterno"
 			+ "where ${param1} like concat('%',#{param2},'%')")
 	public List<Adoption> getSearchAdoption(String filter,String input);
 
 	
-	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-			+ "	from adoption a join user u on a.user_id = u.id\r\n"
-			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
-			+ "    join shelter s on s.shelterno = d.shelter_shelterno\r\n"
-			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
+	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state"
+			+ "	from adoption a join user u on a.id = u.id"
+			+ "    join dog d on d.adoptionno = a.adoptionno"
+			+ "    join shelter s on s.shelterno = d.shelterno"
+			+ "where ${param1} like concat('%',#{param2},'%') and state=${param3};")
 	public List<Adoption> getUserState(String filter,String input,int state);
 		
-	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
-			+ "FROM dog d "
-			+ "	join attach a "
-			+ "		on d.dogno = a.dog_dogno "
-			+ "ORDER BY dogno DESC "
-			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
-	public List<Dog> searchList(@Param("cri") Criteria cri);
 	
-	@Insert("insert into dog(shelterId, name, gender, breed, age, feature, neuter)"
-			+ "values(#{shelterId}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter}) ")
-	public int insert(Dog dog);
+	//강아지 파일 관련
+	@Select("select shelterno from shelter where shelterName = #{shelterName}")
+	public int getSehterno(String shelterName);
 	
-	@Insert("insert into dog(shelterId, name, gender, breed, age, feature, neuter)"
-	        + "values(#{shelterId}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter})")
+	@Insert("insert into dog(shelterno, name, gender, breed, age, feature, neuter)"
+			+ "values(#{shelterno}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter}) ")
+	public int insert(Dog dog);	//이미지 파일 없는 강아지 
+	
+	@Insert("insert into dog(shelterno, name, gender, breed, age, feature, neuter)"
+	        + "values(#{shelterno}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter})")
 	@SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "dogno", before = false, resultType = int.class)
-	public void insertSelectKey(Dog dog);
+	public void insertSelectKey(Dog dog);	//이미지 파일 있는 강아지 
 	
 	@Select("SELECT * FROM dog WHERE dogno = #{dogno}")
 	public Dog read(int i);
@@ -77,4 +82,7 @@ public interface AdoptionMapper {
 	public int delete(int i);
 	@Update("UPDATE board SET shelterId = #{shelterId}, name = #{name}, gender = #{gender}, breed = #{breed}, age = #{age}, desc = #{desc}, neuter = #{neuter} WHERE dogno = #{dogno}")
 	public int update(Dog dog);
+	
+	@Insert("")
+	public void insertAdoption();
 }
