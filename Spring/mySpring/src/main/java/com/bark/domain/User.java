@@ -13,9 +13,6 @@ public class User {
 	private String email;
 	private String addr;
 	private String addrDetail;
-	private String postcode;
-	private String bank;
-	private String bankAcc;
 	private Date regDate;
 	private Integer available;
 	private Integer type;

@@ -31,11 +31,15 @@ if (openPopBtn != null) {
 closePopBtn.onclick = () => {
   document.querySelector("body").classList.remove("noscroll");
   closePop();
+  initSlide();
   initPop();
 };
 
 imgBtn.addEventListener("click", function () {
   document.querySelector(".cont").classList.toggle("s--signup");
+});
+
+imgBtn.addEventListener("transitionend", function () {
   initSlide();
 });
 
@@ -58,7 +62,8 @@ findAccountBtn.addEventListener("click", () => {
   nextPopupSlide(contSlides);
 });
 loginPrevBtn.addEventListener("click", () => {
-  prevSlide(contSlides);
+  // prevSlide(contSlides);
+  initSlide();
 });
 
 // Add event listener to each submit button
@@ -79,6 +84,10 @@ prevBtns.forEach((btn) => {
   btn.addEventListener("click", () => prevButtonAction(btn));
 });
 
+document.querySelectorAll(".init-btn").forEach((btn) => {
+  btn.addEventListener("click", () => initSlide());
+});
+
 // Utility function to handle form validation and button actions
 function handleFormButtonClick(btn, callback) {
   const parentSlide = btn.closest(".form-slide");
@@ -89,7 +98,12 @@ function handleFormButtonClick(btn, callback) {
     console.log(input.value); // Debugging log
 
     const popupLabel = input.closest(".popup-label");
-    if (!popupLabel || popupLabel.classList.contains("hide") || input.name == "") {
+    if (
+      !popupLabel ||
+      popupLabel.classList.contains("hide") ||
+      input.name == "" ||
+      input.closest(".form-slide").classList.contains("hide")
+    ) {
       return; // Skip this iteration as no related label was found
     }
 
@@ -116,19 +130,20 @@ function handleFormButtonClick(btn, callback) {
 // Function for handling next button
 function nextButtonAction(btn) {
   const parentSlides = btn.closest(".form-slides");
-  console.log(parentSlides);
+  // console.log(parentSlides);
   nextPopupSlide(parentSlides);
 }
 
 // Function for handling prev button
 function prevButtonAction(btn) {
   const parentSlides = btn.closest(".form-slides");
-  console.log(parentSlides);
+  // console.log(parentSlides);
   prevSlide(parentSlides);
   if (btn.closest(".form-slide").classList.contains("first-slide")) {
     parentSlides.addEventListener(
       "transitionend",
       () => {
+        initShelterSelector();
         removeAllInput();
         removeAllClassFromLabel();
         hideGeneralForm();
@@ -141,15 +156,29 @@ function prevButtonAction(btn) {
 
 // Define actions based on button type
 function submitButtonAction(btn) {
+  // 로그인
   if (btn.classList.contains("login-btn")) {
     login.call(btn);
-  } else if (btn.classList.contains("find-acc-btn")) {
-    findAcc.call(btn);
-  } else if (btn.classList.contains("email-verify-btn")) {
+  }
+  // 계정 찾기
+  else if (btn.classList.contains("find-acc-btn")) {
+    if (btn.dataset.stage == "get-code") {
+      console.log("Before: sendVerificationCode");
+      checkEmail(btn);
+    } else if (btn.dataset.stage == "verify-email") {
+      findAcc(btn);
+    }
+  }
+  // 비밀번호 변경
+  else if (btn.classList.contains("renew-pwd-btn")) {
+    renewPwd(btn);
+  }
+  // 회원가입
+  else if (btn.classList.contains("email-verify-btn")) {
     console.log("submitButtonAction");
     if (btn.dataset.stage == "get-code") {
-      console.log("Before: getVerificationCode");
-      getVerificationCode(btn);
+      console.log("Before: sendVerificationCode");
+      sendVerificationCode(btn);
     } else if (btn.dataset.stage == "verify-email") {
       verifyEmail(btn);
     } else {
@@ -167,14 +196,18 @@ function checkClass(labels) {
       $(label).hasClass("invalid") ||
       $(label).hasClass("duplicate") ||
       $(label).hasClass("not-match") ||
-      $(label).hasClass("invalid-pwd")
+      $(label).hasClass("invalid-pwd") ||
+      $(label).hasClass("duplicate-email")
   );
 }
 
 function removeAllClassFromLabel() {
   document.querySelectorAll(".popup-label").forEach((label) => {
+    if ($(label).hasClass("show")) {
+      $(label).removeClass("show").addClass("hide");
+    }
     $(label).removeClass(
-      "required invalid duplicate available not-match match not-user no-acc invalid-pwd valid-pwd"
+      "required duplicate available duplicate-email available-email not-match match not-user invalid invalid-pwd valid-pwd no-acc wrong-code valid-code"
     );
   });
 }
@@ -182,6 +215,9 @@ function removeAllClassFromLabel() {
 function removeAllInput() {
   document.querySelectorAll(".login-popup-input").forEach((input) => {
     input.value = "";
+    if (input.readOnly) {
+      input.readOnly = false;
+    }
   });
 }
 
@@ -198,17 +234,31 @@ function prevSlide(slides) {
   counter--;
   slides.style.transform = "translateX(" + (0 - slideWidth) * counter + "px)";
 }
-function initSlide() {
-  imgBtn.addEventListener("transitionend", () => {
-    counter = 0;
-    allPopupSlides.forEach((slides) => {
-      slides.style.transform = "translateX(0)";
-    });
-    removeAllInput();
-    removeAllClassFromLabel();
-    hideGeneralForm();
-    hideShelterForm();
+function initVerificationSlide() {
+  let joinBtns = document.querySelectorAll(".email-verify-btn");
+  joinBtns.forEach((btn) => {
+    if (btn.dataset.stage != "get-code") {
+      btn.innerText = "이메일 인증";
+      btn.dataset.stage = "get-code";
+    }
   });
+  let findAccBtn = document.querySelector(".find-acc-btn");
+  if (findAccBtn.dataset.stage != "get-code") {
+    findAccBtn.innerText = "이메일 인증";
+    findAccBtn.dataset.stage = "get-code";
+  }
+}
+function initSlide() {
+  counter = 0;
+  allPopupSlides.forEach((slides) => {
+    slides.style.transform = "translateX(0)";
+  });
+  initVerificationSlide();
+  initShelterSelector();
+  removeAllInput();
+  removeAllClassFromLabel();
+  hideGeneralForm();
+  hideShelterForm();
 }
 function initPop() {
   counter = 0;
@@ -262,11 +312,11 @@ function checkId(e) {
 
   if (id.trim() === "") {
     $label.removeClass("invalid available duplicate required"); // Remove all related classes
-    console.log("Input cleared.");
+    // console.log("Input cleared.");
     return; // Exit the function early
   }
 
-  console.log(id);
+  // console.log(id);
 
   // Validate the ID locally first
   if (idValidChk($input)) {
@@ -304,11 +354,11 @@ function idValidChk($input) {
 
   // 4글자 이상 12글자 이하
   if (!pattern.test(id) || !(id.length >= 4 && id.length <= 12)) {
-    console.log("Invalid ID.");
+    // console.log("Invalid ID.");
     $label.removeClass("available duplicate").addClass("invalid"); // Adjust classes appropriately
     return false;
   } else {
-    console.log("Valid ID.");
+    // console.log("Valid ID.");
     $label.removeClass("invalid"); // Remove invalid class if present
     return true;
   }
@@ -322,6 +372,11 @@ $("#pwd-shelter").on("input", function () {
 // Confirm password for general form
 $("#pwd-gen").on("input", function () {
   setupPasswordValidation("pwd-gen", "confirm-pwd-gen");
+});
+
+// Confirm password for renewal
+$("#pwd-new").on("input", function () {
+  setupPasswordValidation("pwd-new", "confirm-pwd-new");
 });
 
 function setupPasswordValidation(passwordSelector, confirmPasswordSelector) {
@@ -342,10 +397,10 @@ function setupPasswordValidation(passwordSelector, confirmPasswordSelector) {
 
     // Check password against the regex pattern
     if (!passwordRegex.test(pwd)) {
-      console.log("Password does not meet security requirements.");
+      // console.log("Password does not meet security requirements.");
       pwdLabel.addClass("invalid-pwd");
     } else {
-      console.log("Password meets security requirements.");
+      // console.log("Password meets security requirements.");
       pwdLabel.addClass("valid-pwd");
     }
 
@@ -364,10 +419,10 @@ function setupPasswordValidation(passwordSelector, confirmPasswordSelector) {
     if (pwdCheck !== "") {
       // Only compare if the confirm password is not empty
       if (pwd === pwdCheck) {
-        console.log("Passwords match.");
+        // console.log("Passwords match.");
         pwdCheckLabel.addClass("match").removeClass("not-match");
       } else {
-        console.log("Passwords do not match.");
+        // console.log("Passwords do not match.");
         pwdCheckLabel.addClass("not-match").removeClass("match");
       }
     }
@@ -383,7 +438,9 @@ function login(e) {
   var id = $(".login-form").find('input[name="id"]').val(); // Correctly fetch the value of the ID input
   var pwd = $(".login-form").find('input[name="pwd"]').val(); // Fetch the password input value
   var $label = $(".login-form").find(".popup-label").last(); // This might need adjustment based on where you want the label changes to appear
-  console.log(id + ", " + pwd);
+  // console.log(id + ", " + pwd);
+  $label.removeClass("required not-user pending-user");
+
   $.ajax({
     url: "/user/login/", // Endpoint to check the ID
     type: "post", // Use POST method
@@ -398,9 +455,12 @@ function login(e) {
         // If result is 1, login success
         $label.removeClass("required not-user");
         window.location.href = "/"; // Redirect on successful login
+      } else if (result == 2) {
+        // require admin approval
+        $label.removeClass("required not-user").addClass("pending-user");
       } else if (result == -1) {
         // If result is 0, wrong pwd
-        $label.removeClass("required").addClass("not-user");
+        $label.removeClass("required pending-user").addClass("not-user");
       } else {
         alert("데이터베이스 오류");
       }
@@ -421,27 +481,83 @@ function emailValidChk($input) {
   const email = $input.val().trim(); // Get the value, trim whitespace
   const $label = $input.closest(".popup-label");
 
-  console.log(email); // Log the cleaned email address
+  // console.log(email); // Log the cleaned email address
 
   $label.removeClass("required invalid");
 
   if (email !== "") {
     if (!pattern.test(email)) {
-      console.log("Invalid email address.");
+      // console.log("Invalid email address.");
       $label.addClass("invalid");
     } else {
-      console.log("Valid email address.");
+      // console.log("Valid email address.");
     }
   }
 }
 
-// 이메일 인증번호 받기 (미완)
-function getVerificationCode(btn) {
+$(subContSlides)
+  .find("input[name='email']")
+  .each(function () {
+    var $input = $(this);
+    $input.on("input", function () {
+      console.log("User is typing in: ", $input.val());
+      checkDuplicateEmail($input);
+    });
+  });
+
+// 회원가입 이메일 확인
+function checkDuplicateEmail($input) {
+  var email = $input.val();
+  var $label = $input.closest(".popup-label"); // Ensure class name is consistent
+  console.log(email);
+
+  if (email.trim() === "") {
+    $label.removeClass("invalid available-email duplicate-email required"); // Remove all related classes
+    // console.log("Input cleared.");
+    return; // Exit the function early
+  }
+
+  $.ajax({
+    url: "/user/checkEmail", // Endpoint to check the email
+    type: "post", // Use POST method
+    data: { email: email }, // Send email to server
+    dataType: "json",
+    success: function (result) {
+      if (result == 0) {
+        // If result is 0, no account
+        $label
+          .removeClass("required duplicate-email")
+          .addClass("available-email");
+      } else if (result == 1) {
+        // If result is 1, email exists
+        $label.removeClass("required available").addClass("duplicate-email");
+      } else {
+        alert("데이터베이스 오류");
+      }
+    },
+    error: function () {
+      alert("오류가 발생했습니다."); // Error handling
+    },
+  });
+}
+
+// 이메일 인증번호 받기
+function sendVerificationCode(btn) {
   const parentSlide = $(btn).closest(".form-slide");
   const $label = parentSlide.find(".verify-label");
   const $emailInput = parentSlide.find("input[name='email']");
-  // TODO 코드 보내기
-  console.log("계정 찾기: 이메일 전송하기");
+
+  // 코드 보내기
+  console.log("회원가입: 이메일 전송하기");
+  $.ajax({
+    type: "get",
+    url: "/mail/sendCode",
+    data: { email: $emailInput.val() },
+    success: function (result) {
+      console.log(result);
+    },
+  });
+
   // Slide label down and show
   $label.removeClass("hide").addClass("show");
   // Change button text
@@ -460,34 +576,36 @@ function getVerificationCode(btn) {
     { once: true }
   );
 }
-// 이메일 인증하기 (미완)
+// 이메일 인증하기
 function verifyEmail(btn) {
-  // TODO 코드 받아오기 Ajax?
-  const verficationCode = "1111";
   const parentSlide = $(btn).closest(".form-slide");
   const $label = parentSlide.find(".verify-label");
   const $codeInput = parentSlide.find("input[name='code']");
   const $emailInput = parentSlide.find("input[name='email']");
-  console.log("테스팅용 코드: " + verficationCode);
-  $label.removeClass("pending");
 
-  // match
-  if (verficationCode == $codeInput.val()) {
-    console.log("code match");
-    $(btn).text("가입하기");
-    btn.dataset.stage = "join";
-    $label.removeClass("wrong-code").addClass("valid-code");
-    $emailInput.prop("readOnly", true);
-    $codeInput.prop("readOnly", true);
-  }
-  // no-match
-  else {
-    $label.removeClass("");
-    $label.addClass("wrong-code");
-  }
+  $.ajax({
+    type: "get",
+    url: "/mail/verifyCode",
+    data: { email: $emailInput.val(), code: $codeInput.val() },
+    success: function (isVerified) {
+      console.log(isVerified);
+      // $label.removeClass("pending");
+      if (isVerified === true) {
+        console.log("code verified : " + isVerified);
+        $(btn).text("가입하기");
+        btn.dataset.stage = "join";
+        $label.removeClass("wrong-code").addClass("valid-code");
+        $emailInput.prop("readOnly", true);
+        $codeInput.prop("readOnly", true);
+      } else {
+        $label.removeClass("");
+        $label.addClass("wrong-code");
+      }
+    },
+  });
 }
 
-// 회원가입 (미완)
+// 회원가입
 function join(btn) {
   var parentSlides = btn.closest(".form-slides");
   console.log($(btn).closest("form").serialize());
@@ -506,16 +624,16 @@ function join(btn) {
   });
 }
 
-// 계정 찾기 (미완)
-function findAcc() {
-  var name = $(".find-acc-form").find('input[name="name"]').val();
+// 계정 찾기 이메일 확인
+function checkEmail(btn) {
   var email = $(".find-acc-form").find('input[name="email"]').val();
-  var $label = $(".find-acc-form").find(".popup-label").last();
+  var $label = $(".find-acc-form").find(".find-acc-label");
   console.log(name + ", " + email);
+  // $label.removeCLass("before-verify");
   $.ajax({
-    url: "/user/findAcc", // Endpoint to check the ID
+    url: "/user/checkEmail", // Endpoint to check the ID
     type: "post", // Use POST method
-    data: { name: name, email: email }, // Send ID and password to server
+    data: { email: email }, // Send ID and password to server
     dataType: "json",
     success: function (result) {
       if (result == 0) {
@@ -524,7 +642,8 @@ function findAcc() {
       } else if (result == 1) {
         // If result is 1, send email
         $label.removeClass("required no-acc");
-        console.log("계정 찾기: 이메일 전송하기");
+        // TODO
+        sendCodeAndId(btn);
       } else {
         alert("데이터베이스 오류");
       }
@@ -535,4 +654,93 @@ function findAcc() {
   });
 }
 
+function sendCodeAndId(btn) {
+  const parentSlide = $(btn).closest(".form-slide");
+  const $label = parentSlide.find(".verify-label");
+  const $emailInput = parentSlide.find("input[name='email']");
+  // 아이디와 코드 보내기
+  console.log("계정 찾기: 이메일 전송하기");
+  $.ajax({
+    type: "post",
+    url: "/mail/sendCodeAndId",
+    data: { email: $emailInput.val() },
+    success: function (id) {
+      console.log(result);
+    },
+  });
+
+  // Slide label down and show
+  $label.removeClass("hide").addClass("show");
+  // Change button text
+  btn.innerText = "인증하기";
+  btn.dataset.stage = "verify-email";
+
+  // Event listener on email input TODO
+  $emailInput.on(
+    "input",
+    function () {
+      $label.removeClass("show").addClass("hide");
+      $(btn).off("click"); // Remove event listener using jQuery
+      $(btn).text("이메일 인증"); // Change button text using jQuery
+      btn.dataset.stage = "get-code";
+    },
+    { once: true }
+  );
+}
+// 이메일 인증 후 계정 찾기
+function findAcc(btn) {
+  const parentSlides = $(btn).closest(".form-slides");
+  const parentSlide = $(btn).closest(".form-slide");
+  const $label = parentSlide.find(".verify-label");
+  const $codeInput = parentSlide.find("input[name='code']");
+  const $emailInput = parentSlide.find("input[name='email']");
+  const $emailInputVal = $emailInput.val();
+  const $userEmailInp = $("#renew-pwd-email");
+
+  $.ajax({
+    type: "get",
+    url: "/mail/verifyCode",
+    data: { email: $emailInputVal, code: $codeInput.val() },
+    success: function (isVerified) {
+      console.log(isVerified);
+      // $label.removeClass("pending");
+      if (isVerified === true) {
+        console.log("code verified : " + isVerified);
+        $label.removeClass("wrong-code");
+        $userEmailInp.val($emailInputVal);
+        nextPopupSlide(contSlides);
+        console.log("user email: " + $userEmailInp.val());
+        // initVerificationSlide();
+      } else {
+        $label.addClass("wrong-code");
+      }
+    },
+  });
+}
+
+// 비밀번호 변경
+function renewPwd(btn) {
+  const parentSlides = $(btn).closest(".form-slides");
+  const parentSlide = $(btn).closest(".form-slide");
+  // const $label = parentSlide.find(".verify-label");
+  const $pwdInput = parentSlide.find("input[name='pwd']");
+  const $emailInput = parentSlide.find("input[name='email']");
+
+  $.ajax({
+    type: "post",
+    url: "/user/updatePwd",
+    data: { email: $emailInput.val(), pwd: $pwdInput.val() },
+    success: function (result) {
+      console.log(result);
+      // $label.removeClass("pending");
+      if (result === 1) {
+        console.log("pwd changed successful");
+        nextPopupSlide(contSlides);
+        // initVerificationSlide();
+      } else {
+        alert("데이터베이스 오류");
+      }
+    },
+  });
+}
 // 회원정보 수정 ajax

@@ -39,16 +39,41 @@
 									</button>
 								</div>
 								<!-- 계정찾기 -->
-								<div class="form-slide find-acc-form">
-									<label class="popup-label"> <span>이름</span> <input
-										type="text" name="name" class="login-popup-input" />
-									</label> <label class="popup-label"> <span>이메일</span> <input
-										type="email" name="email" class="login-popup-input" />
+								<div class="form-slide first-slide find-acc-form">
+									<label class="popup-label find-acc-label"> <span>이메일</span>
+										<input type="email" name="email" class="login-popup-input" />
+									</label> <label class="popup-label verify-label hide"> <span>인증번호</span>
+										<input type="text" name="code"
+										class="login-popup-input code-input" />
 									</label>
 									<button type="button"
-										class="submit-btn find-acc-btn login-popup-btn">계정 찾기</button>
+										class="submit-btn find-acc-btn login-popup-btn"
+										data-stage="get-code">이메일 인증</button>
 									<button type="button" class="login-prev-btn login-popup-btn">
 										돌아가기</button>
+								</div>
+								<!-- 비밀번호 변경 -->
+								<div class="form-slide renew-pwd-slide">
+								<input type="hidden" id="renew-pwd-email" name="email"> 
+									<label class="popup-label"> <span>새로운 비밀번호</span> <input
+										type="password" name="pwd" class="login-popup-input"
+										id="pwd-new" />
+									</label> <label class="popup-label pwd-input"> <span>새로운 비밀번호
+											확인</span> <input type="password" class="login-popup-input"
+										id="confirm-pwd-new" />
+									</label>
+									<button type="button" class="submit-btn renew-pwd-btn login-popup-btn">
+										완료</button>
+									<button type="button" class="cancel-btn init-btn login-popup-btn">
+										취소</button>
+								</div>
+								<div class="form-slide final-slide">
+									<div class="text-wrap">
+										<p>비밀번호가 변경이 완료됐습니다.</p>
+										<p>로그인 후 이용해주세요.</p>
+									</div>
+									<button type="button" class="back-to-login-btn init-btn login-popup-btn">
+										로그인</button>
 								</div>
 							</div>
 						</div>
@@ -84,10 +109,13 @@
 										<button type="button" class="shelter-btn login-popup-btn">
 											보호소 회원</button>
 									</div>
+									<!-- 개인 회원가입 form -->
 									<form class="general-form" action="${contextPath }/user/join"
 										method="post" display="none">
+										<!-- 개인 아이디 비밀번호 -->
 										<div class="form-slide first-slide">
-											<input type="hidden" name="type" value="1" /> <label
+											<input type="hidden" name="type" value="1" /> 
+											<input type="hidden" name="available" value="1" /><label
 												class="popup-label"> <span>아이디</span> <input
 												type="text" name="id" class="login-popup-input id-input" />
 											</label> <label class="popup-label"> <span>비밀번호</span> <input
@@ -102,6 +130,7 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
+										<!-- 개인 이름 전화번호 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>이름</span> <input
 												type="text" name="name" class="login-popup-input" />
@@ -113,11 +142,12 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
+										<!-- 개인 이메일 인증 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
-											</label> <label class="popup-label verify-label pending hide">
-												<span>인증번호</span> <input type="text" name="code"
+											</label> <label class="popup-label verify-label hide"> <span>인증번호</span>
+												<input type="text" name="code"
 												class="login-popup-input code-input" />
 											</label>
 											<button type="button"
@@ -127,8 +157,10 @@
 												이전</button>
 										</div>
 									</form>
+									<!-- 보호소 회원가입 form -->
 									<form class="shelter-form" action="${contextPath }/user/join"
 										method="post" display="none">
+										<!-- 보호소 선택 -->
 										<div class="form-slide first-slide">
 											<div class="search-wrapper">
 												<div class="popup-label">
@@ -138,9 +170,9 @@
 													</div>
 													<label class="popup-label shelter-name-label hide">
 														<span>보호소 이름</span> <input type="text" name="name"
-														id="selectedShelterName" class="login-popup-input"/>
-													</label>
-
+														id="selectedShelterName" class="login-popup-input" />
+													</label> <input class="login-popup-input" id="selectedShelterAddr"
+														name="addr" type="hidden" />
 													<div class="shelter-name-content">
 														<div class="search">
 															<img src="${icons }/search-btn.png" alt="" /> <input
@@ -154,7 +186,9 @@
 											<button type="button" class="next-btn login-popup-btn">다음</button>
 											<button type="button" class="prev-btn login-popup-btn">이전</button>
 										</div>
+										<!-- 보호소 선택 -->
 										<div class="form-slide ">
+											<input type="hidden" name="available" value="2"/>
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>아이디</span> <input
 												type="text" name="id" class="login-popup-input id-input" />
@@ -170,7 +204,8 @@
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
-										<div class="form-slide">
+										<!-- 보호소 전화번호 -->
+										<!-- <div class="form-slide">
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>보호소명</span> <input
 												type="text" name="name" class="login-popup-input" />
@@ -181,7 +216,8 @@
 												다음</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
-										</div>
+										</div> -->
+										<!-- 보호소 주소 -->
 										<div class="form-slide shelter-addr-slide">
 											<label class="popup-label"> <span>주소</span> <input
 												type="text" name="addr" class="login-popup-input" readonly /><img
@@ -189,16 +225,17 @@
 												alt="검색" />
 											</label> <label class="popup-label"> <span>세부 주소</span> <input
 												type="text" name="addrDetail" class="login-popup-input" />
-											</label> <label class="popup-label"> <span>우편번호</span> <input
-												type="text" name="postcode" class="login-popup-input" />
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
 											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
+										<!-- 보호소 전화번호 이메일 인증 -->
 										<div class="form-slide">
-											<label class="popup-label"> <span>이메일</span> <input
+											<label class="popup-label"> <span>전화번호</span> <input
+												type="tel" name="phone" class="login-popup-input" />
+											</label> <label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
 											</label> <label class="popup-label verify-label pending hide">
 												<span>인증번호</span> <input type="text" name="code"
@@ -207,7 +244,7 @@
 											<button type="button"
 												class="submit-btn login-popup-btn email-verify-btn"
 												data-stage="get-code">이메일 인증</button>
-											<button type="button" onclick="authCheck()" class="prev-btn login-popup-btn">
+											<button type="button" class="prev-btn login-popup-btn">
 												이전</button>
 										</div>
 									</form>
@@ -241,19 +278,18 @@
 		  options = wrapper.querySelector(".options"),
 		  shelterNameInp = wrapper.querySelector("#selectedShelterName"),
 		  shelterNameLabel = wrapper.querySelector(".shelter-name-label"),
-		  shelterAddrSlide = wrapper.querySelector(".shelter-addr-slide")
-		  ;
+		  shelterAddrSlide = document.querySelector(".shelter-addr-slide"),
+		  shelterAddrInp = wrapper.querySelector("#selectedShelterAddr");
 		
 		selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
 		
 		
 		$(".shelter-btn").on("click",function(){
 			getShelterList();
-			console.log("click");
 		})
 		
-		var shelters = [];
 		var shelterNames = [];
+		var sMap = new Map();
 		function getShelterList(){
 			$.ajax({
 				type: 'GET',
@@ -261,12 +297,12 @@
 				success: function(items){
 				    items.forEach(item => {
 				    	shelterNames.push(item.shelterName);
-				    	shelters.push(item);
+				    	sMap.set(item.shelterName, item.shelterAddr);
+				    	/* shelters.push(item); */
 				    })
+				    console.log(sMap.size);
+				    console.log(sMap.get("강현림동물병원"));
 				    addShelter();
-				    console.log(shelterNames.length);
-				    console.log(shelters.length);
-				    console.log(shelters[0].shelterAddr);
 				},error: (error) => {
 				     console.log(JSON.stringify(error));
 				}				
@@ -307,43 +343,54 @@
 		  options.innerHTML = arr
 		    ? arr
 		    : `<li onclick="updateName(this); showShelterNameLabel();">보호소 등록하기</li>`;
-		    // onclick을 밑에 input 생기는 걸로 바꾸기
 		});
 		
 		function showShelterNameLabel(){
-			/* selectBtn.firstElementChild.classList.remove("font-dark"); */
+			// hidden input에 이름 비우기
 			shelterNameInp.value = "";
+			// hidden input에 주소 비우기
+			shelterAddrInp.value = "";
+			// 주소 슬라이드 다시 작동하게 하기
+			enableShelterAddrSlide();
 			shelterNameLabel.classList.remove("hide");
 			shelterNameLabel.classList.add("show");
 		}
 		function hideShelterNameLabel(selectedLi){
 			selectBtn.firstElementChild.classList.add("font-dark");
+			// hidden input에 이름 넣지
 			shelterNameInp.value = selectedLi.innerText;
+			// 주소 슬라이드 숨기기
+			disableShelterAddrSlide();
+			// hidden input에 주소 넣기
+			shelterAddrInp.value = sMap.get(selectedLi.innerText);
+			console.log(shelterAddrInp.value);
+			// hidden input에 이름 받기
 			shelterNameLabel.classList.add("hide");
 			shelterNameLabel.classList.remove("show", "required");
 		}
 		
-		
+		function disableShelterAddrSlide(){
+			shelterAddrSlide.classList.add("hide");
+			var inputs = shelterAddrSlide.querySelectorAll("input");
+			inputs.forEach(input => input.removeAttribute("name"));
+			shelterAddrInp.setAttribute("name", "addr");
+		}
+		function enableShelterAddrSlide(){
+			shelterAddrSlide.classList.remove("hide");
+			var inputs = shelterAddrSlide.querySelectorAll("input");
+			shelterAddrInp.removeAttribute("name", "addr");
+			inputs[0].setAttribute("name", "addr");
+			inputs[1].setAttribute("name", "addrDetail");
+		}
+		function initShelterSelector(){
+			wrapper.classList.remove("active")
+			enableShelterAddrSlide();
+			selectBtn.firstElementChild.classList.remove("font-dark");
+			searchInp.value = "";
+			selectBtn.firstElementChild.innerText = "보호소 선택";
+		}
 		
 	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
-	<script>
-	const authCheck = () => {
-        $.ajax({
-            // 요청방식: get
-            // 요청주소: /ex01
-            type: "get",
-            url: "/authCheck",
-            // 요청이 성공했을 때 실행되는 부분
-            success: function (res) {
-                console.log("성공", res)
-            },
-            // 요청이 실패했을 때 실행되는 부분
-            error: function (err) {
-                console.log("실패", err);
-            },
-        })
-    }
-	</script>
 </body>
 </html>

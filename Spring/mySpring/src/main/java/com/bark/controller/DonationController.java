@@ -30,37 +30,39 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class DonationController {
 	private ShelterService service;
-
+	//private UserService userService;
+	
 	@GetMapping("/form")
 	public void form() {
 		log.info("form...........");
 	}
-
 	@GetMapping("/map")
-	public String getShelterList(Model model)
-			throws ParserConfigurationException, SAXException, IOException, ServletException {
-		log.info("-------shelter/info mapping o--------");
+    public String getShelterList(Model model) throws ParserConfigurationException, SAXException, IOException, ServletException {
+        log.info("-------shelter/info mapping o--------");
 
-		ShelterInfo shelterinfo = new ShelterInfo();
-		log.info("-------shelter json--------");
+        ShelterInfo shelterinfo = new ShelterInfo();
+        log.info("-------shelter json--------");
+        
+        List<Shelter> sqlList = service.getShelterList();
+        log.info("-------get sqlshelter list--------");
+        
+        HashMap<String, Shelter> sMap = shelterinfo.getShelterInfo();		
+        if(sqlList.size()<=0) {
+	        for(Entry<String, Shelter> entrySet : sMap.entrySet()) {
+	        	service.putShelterInfo(entrySet.getValue());
+	        }
+        }
+        log.info("-------insert into HaspMap--------");
+        
+        List<Shelter> sList = service.getShelterList();
+        log.info("-------get shelter list--------");
+        
+    	model.addAttribute("sList", sList);
 
-		List<Shelter> sList = service.getShelterList();
-		log.info("-------get shelter list--------");
+        return "/donation/map";
 
-		HashMap<String, Shelter> sMap = shelterinfo.getShelterInfo();
-		if (sList.size() <= 0) {
-			for (Entry<String, Shelter> entrySet : sMap.entrySet()) {
-				service.putShelterInfo(entrySet.getValue());
-			}
-		}
-		log.info("-------insert into HaspMap--------");
-
-		model.addAttribute("sList", sList);
-
-		return "/donation/map";
-
-	}
-
+    }
+	
 	// 보호소 회원가입 설렉트 드롭다운 ajax
 	@GetMapping(value = "shelterList", produces = "application/json; charset=utf8")
 	@ResponseBody
@@ -91,23 +93,23 @@ public class DonationController {
 		return sList;
 
 	}
-
-	@GetMapping(value = "shelterSearchName", produces = "application/json; charset=utf8")
+	
+	@GetMapping(value="shelterSearchName",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<Shelter> shelterSearchName(@RequestParam("name") String name, Model model) {
+	public List<Shelter> shelterSearchName(@RequestParam ("name") String name,Model model) {
 		log.info("-------sheltername search mapping o--------");
 		log.info(name);
 		return service.searchShelterName(name);
 	}
-
-	@GetMapping(value = "shelterSearchAddr", produces = "application/json; charset=utf8")
+	
+	@GetMapping(value="shelterSearchAddr",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<Shelter> shelterSearchAddr(@RequestParam("addr") String addr, Model model) {
+	public List<Shelter> shelterSearchAddr(@RequestParam ("addr") String addr,Model model) {
 		log.info("-------shelteraddr search mapping o--------");
 		log.info(addr);
 		return service.searchShelterAddr(addr);
 	}
-
+	
 	@GetMapping("/campaign")
 	public void campaign() {
 		log.info("campaign...........");

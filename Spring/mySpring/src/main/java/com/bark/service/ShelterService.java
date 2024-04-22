@@ -6,14 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bark.domain.Shelter;
-import com.bark.mapper.ApiMapper;
+import com.bark.domain.User;
+import com.bark.mapper.ShelterMapper;
 
 import lombok.Setter;
 
 @Service
 public class ShelterService {
 	@Setter(onMethod_=@Autowired)
-	private ApiMapper mapper;
+	private ShelterMapper mapper;
 	
 	public void putShelterInfo(Shelter shelter) {
 		mapper.putShelter(shelter);
@@ -28,5 +29,14 @@ public class ShelterService {
 	}
 	public List<Shelter> searchShelterAddr(String addr) {
 		return mapper.searchShelterAddr(addr);
+	}
+
+	public boolean register(Shelter shelter) {
+		int result = mapper.register(shelter);
+		if(result == 1) {
+			return true;
+		}
+		return false;
+		
 	}
 }

@@ -8,13 +8,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/header.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/header.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath }" scope="application"/>
+<c:set var="views" value="${contextPath }/WEB-INF/views" scope="application"/>
+<c:set var="css" value="${contextPath }/resources/css" scope="application"/>
+<c:set var="images" value="${contextPath }/resources/images" scope="application"/>
+<c:set var="icons" value="${images }/icons" scope="application"/>
+<c:set var="js" value="${contextPath }/resources/js" scope="application"/>
 	<!-- header -->
 	<div class="header-container">
 		<div class="header-inner">
@@ -100,7 +106,7 @@
 													<li><img src="${icons }/user-detail.png" /><a
 														href="javascript:openUpdatePop()">내 정보 조회</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="../index.jsp?target=./include/userMyPostList">작성글
+														href="${contextPath }/user/userWriteList">작성글
 															관리</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
 														href="../index.jsp?target=./include/userManageAppList">기부/입양
@@ -112,9 +118,10 @@
 											<c:when test="${userType == '3' }">
 												<h3>${userName}<br> <span>${userId}</span>
 												</h3>
-												<ul>
+												<ul><li><img src="${icons }/post.png" /><a
+														href="${contextPath }/admin/adminAdoptionList">입양 내역</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/admin/donationList">기부금 목록</a></li>
+														href="${contextPath }/admin/donationList">기부 내역</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
 														href="${contextPath }/admin/userList">회원 관리</a></li>
 													<li><img src="${icons }/logout.png" /><a

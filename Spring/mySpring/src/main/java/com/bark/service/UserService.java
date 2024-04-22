@@ -47,8 +47,25 @@ public class UserService {
 		log.info("checkId..................");
 		return mapper.checkId(id);
 	}
-	public int findAcc(String name, String email) {
+	public int checkEmail(String email) {
 		log.info("findAcc..................");
-		return mapper.findAcc(name, email);
+		return mapper.checkEmail(email);
+	}
+	public String getUserId(String email) {
+		return mapper.getUserId(email);
+	}
+	public int updateUserPwd(String email, String pwd) {
+		return mapper.updateUserPwd(email, pwd);
+	}
+	public List<User> getUserType(String filter,String input,int type) {
+		return mapper.getUserType(filter,input,type);
+	}
+
+	public List<User> getSearchUser(String filter,String input) {
+		return mapper.getSearchUser(filter,input);
+	}
+
+	public boolean availableUpdate(String available,String id) {
+		return mapper.availableUpdate(available,id)==1;
 	}
 }

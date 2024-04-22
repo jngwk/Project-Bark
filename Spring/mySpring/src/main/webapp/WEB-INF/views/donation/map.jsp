@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>보호소 조회</title>
-<link rel="stylesheet" href="${css }/shelterMap.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shelterMap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 </head>
 <body>
-	<jsp:include page="${views }/include/header.jsp" flush="false"></jsp:include>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
 
 	<div class="map-container">
 
@@ -114,6 +114,12 @@
 				</li>`
 						$('.shelter-ul').append(str);
 	        		}) 
+				}else if(result.length == 0){
+					str=`
+					<div style="display:flex; align-items: center; justify-content: center; height: 100px;">
+						<p>검색 내용과 일치하는 보호소가 없습니다.</p>
+					</div>`
+					$('.shelter-ul').append(str);
 				}
 			}
 		})
@@ -156,7 +162,13 @@
 				</li>`
 						$('.shelter-ul').append(str);
 	        		}) 
-				}
+				}else if(result.length == 0){
+					str=`
+						<div style="display:flex; align-items: center; justify-content: center; height: 100px;">
+							<p>검색 내용과 일치하는 보호소가 없습니다.</p>
+						</div>`
+						$('.shelter-ul').append(str);
+					}
 			}
 		})
 	}

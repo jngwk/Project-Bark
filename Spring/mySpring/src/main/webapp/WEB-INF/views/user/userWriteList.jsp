@@ -9,29 +9,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/noticeList.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/userWriteList.css" />
 </head>
 <body>
-	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
+	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 	<section class="notice">
-		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
+		<p class="page-title">Written List</p><p class="page-subtitle">[작성내역]</p>
 
 		<!-- board seach area -->
-		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="/board/noticeWrite">글쓰기</a>
-		</div>
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
 					<form action="/board/noticeList" method="get">
 						<div class="search-wrap">
-							<label for="search" class="blind">공지사항 내용 검색</label> <select id="searchField" name="searchField" onchange="chageLangSelect()">
+							<label for="search" class="blind">공지사항 내용 검색</label> <select name="searchField">
 								<option value="" >카테고리</option>
 								<option value="content" <c:if test="${page.cri.searchField == 'content'}">selected</c:if>>내용</option>
 								<option value="title" <c:if test="${page.cri.searchField == 'title'}">selected</c:if>>제목</option>
-								<option value="user_id" <c:if test="${page.cri.searchField == 'user_id'}">selected</c:if>>작성자</option>
-							</select> <input id="searchWord" type="search" name="searchWord"
+								<option value="id" <c:if test="${page.cri.searchField == 'id'}">selected</c:if>>작성자</option>
+							</select> <input id="search" type="search" name="searchWord"
 								placeholder="검색어를 입력해주세요." value="${page.cri.searchWord}" />
 							<button type="submit" class="btn btn-dark">검색</button>
 						</div>
@@ -53,15 +50,13 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach var="bList" items="${bList}" >
 						<tr>
-							<td>${bList.no}</td>
-							<td><a href="/board/noticeRead?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
-							${bList.title}</a></td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
-							<td>${bList.hit}</td>
+							<td>1</td>
+							<td><a href="#">
+							제목입니다</a></td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="<%=new java.util.Date()%>" /> </td>
+							<td>8</td>
 						</tr>
-					</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -71,14 +66,5 @@
 	<!-- 페이지넘버 -->
 	<jsp:include page="${views }/include/pagination.jsp" flush="false" />
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
-<script>
-
-// 변경시 검색 단어 Clear
-function chageLangSelect(){
-
-	$("#searchWord").val("");
-    
-}
-</script>
 </body>
 </html>
