@@ -38,6 +38,17 @@ public class DonateService {
 		return mapper.getDonationState(filter,input,state);
 	}
 
+	//회원페이지 기부내역
+	public List<Donate> userDonationList(String id) {
+		return mapper.userDonationList(id);
+	}
+	
+	public List<Donate> getDState(String id,int state) {
+		// TODO Auto-generated method stub
+		return mapper.getDState(id,state);
+	}
+
+
 
 
 }

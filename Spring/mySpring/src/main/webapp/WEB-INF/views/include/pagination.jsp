@@ -14,29 +14,26 @@
 <!-- 페이지넘버 -->
       <div class="pagination">
         <span class="pagination__number-indicator"></span>
-        <button class="pagination__arrow pagination-btn" id="prev" onclick="location.href=
-        	'/board/noticeList?pageNum=${page.start-1}&amount=10&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">
+        <button class="pagination__arrow pagination-btn" id="prev" onclick="showPrev();">
           <span class="pagination__arrow-half"></span>
           <span class="pagination__arrow-half"></span>
         </button>
         <c:forEach var="num" begin="${page.start}" end="${page.end}">
         <c:choose>
         <c:when test="${num eq page.cri.pageNum}">
-        	 <button class="pagination__number pagination-btn pagination__number--active " onclick="location.href=
-				'/board/noticeList?pageNum=${num}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">${num}</button>
-        </c:when>
+<%--         	 <button class="pagination__number pagination-btn pagination__number--active " onclick="location.href=
+					'/board/noticeList?pageNum=${num}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">${num}</button>
+ --%>   
+ 			<button class="pagination__number pagination-btn pagination__number--active "  data-num="${num}" onclick="showNum(this);" >${num}</button>    
+ 		</c:when>
         <c:otherwise>
-        	<button class="pagination__number pagination-btn" onclick="location.href=
-				'/board/noticeList?pageNum=${num}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">${num}</button>
+     <%--    	<button class="pagination__number pagination-btn" onclick="location.href=
+					'/board/noticeList?pageNum=${num}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">${num}</button> --%>
+        	<button class="pagination__number pagination-btn" data-num="${num}" onclick="showNum(this);">${num}</button>
         </c:otherwise>
         </c:choose>
-        
-        <c:if test='${num} == 1'>
-			
-		</c:if>
         </c:forEach>
-        <button class="pagination__arrow pagination__arrow--right pagination-btn"  id="next" onclick="location.href=
-        	'/board/noticeList?pageNum=${page.end+1}&amount=${page.cri.amount}&searchfield=${page.cri.searchField}&searchWord=${page.cri.searchWord}'">
+        <button class="pagination__arrow pagination__arrow--right pagination-btn"  id="next" onclick="showNext();">
           <span class="pagination__arrow-half"></span>
           <span class="pagination__arrow-half"></span>
         </button>
@@ -58,6 +55,62 @@
 		document.getElementById('next').style.display = 'block';
 	} else {
 		document.getElementById('next').style.display = 'none';
+	}
+
+	let type = '<c:out value="${page.cri.type}"/>';
+
+	let pageNumPrev = '<c:out value="${page.start-1}"/>'; 
+	let pageNumNext = '<c:out value="${page.end+1}"/>';
+	let amount= '<c:out value="${page.cri.amount}"/>';
+
+	let searchField = '<c:out value="${page.cri.searchField}"/>';
+ 	let searchWord = '<c:out value="${page.cri.searchWord}"/>';
+
+	function  showPrev() {
+		
+		switch (type) {
+		case '1' : window.location.href='/board/noticeList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+        		 break;	
+		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+				 break;
+		case '3' : 
+				 break;	
+		case '4' :
+				 break;
+
+		}		 
+	}
+	
+	function  showNum(obj) {
+
+		let num=$(obj).data("num");
+
+		switch (type) {
+		case '1' : window.location.href='/board/noticeList?pageNum=' + num + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+        		 break;	
+		case '2' : window.location.href='/user/userWriteList?pageNum=' + num + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+				 break;
+		case '3' : 
+				 break;	
+		case '4' :
+				 break;
+			
+		}
+	}
+
+
+	function  showNext() {
+		switch (type) {
+		case '1' : window.location.href='/board/noticeList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+        		 break;	
+		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+				 break;
+		case '3' : 
+				 break;	
+		case '4' :
+				 break;
+			
+		}
 	}
 
 </script>
