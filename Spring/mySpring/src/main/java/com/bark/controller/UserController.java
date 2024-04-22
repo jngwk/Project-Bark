@@ -167,7 +167,7 @@ public class UserController {
 		log.info("userWriteList...........");
 	}
 
-	// 유저 페이지 관리
+	// 유저 페이지 기부 관리
 	@GetMapping("/userDonationList")
 	public String userDonationList(@RequestParam("id") String id,Model model) {
 
@@ -178,7 +178,16 @@ public class UserController {
 
 		return "/user/userDonationList";
 	}
+	
+	 @PostMapping(value="getDState",produces = "application/json; charset=utf8")
+	 @ResponseBody
+	 public List<Donate> getDState(@RequestParam("id") String id,@RequestParam ("state") String state,Model model) {
+		 log.info("-------Donation search mapping o--------");
+		 log.info(state);
+		 return donateservice.getDState(id,Integer.parseInt(state));
+	 }
 
+	// 유저 페이지 입양 관리
 	@GetMapping("/userAdoptionList")
 	public String userAdoptionList(@RequestParam("id") String id,Model model) {
 
@@ -189,4 +198,11 @@ public class UserController {
 
 		return "/user/userAdoptionList";
 	}
+	 @PostMapping(value="getAState",produces = "application/json; charset=utf8")
+	 @ResponseBody
+	 public List<Adoption> getAState(@RequestParam ("id") String id,@RequestParam ("state") String state,Model model) {
+		 log.info("-------sheltername search mapping o--------");
+		 log.info(state);
+		 return adoptionservice.getAState(id,Integer.parseInt(state));
+	 }
 }

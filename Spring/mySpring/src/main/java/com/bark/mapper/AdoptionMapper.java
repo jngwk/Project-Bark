@@ -97,4 +97,11 @@ public interface AdoptionMapper {
 			+ "	from adoption a join dog d on d.adoptionno = a.adoptionno\r\n"
 			+ "    join shelter s on s.shelterno = d.shelterno where id = #{id}")
 	public List<Adoption> userAdoptionList(String id);
+	
+	@Select("select a.adoptionno no, s.shelterName,d.name dogName,a.adopt_date date ,a.state\r\n"
+			+ "	from adoption a join dog d on d.adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno where id = #{param1} and state = ${param2}")
+	public List<Adoption> getAState(String id,int state);
+	
+	
 }

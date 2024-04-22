@@ -97,4 +97,8 @@ public class AdoptionService {
 		return mapper.userAdoptionList(id);
 	}
 
+	public List<Adoption> getAState(String id,int state) {
+		return mapper.getAState(id,state);
+	}
+
 }

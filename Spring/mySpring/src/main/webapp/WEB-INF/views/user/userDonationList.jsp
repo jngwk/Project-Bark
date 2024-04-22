@@ -64,108 +64,34 @@
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 	
 	<script>
-	//검색
-	$(".searchUserBtn").on("click",function(){
-		getSearchDonation();
-		console.log("click");
-	})
-	function getSearchDonation(){
-		console.log($(".searchfilter").val());
-		console.log($("#searchInput").val());
-		$.ajax({
-			type: 'POST',
-			url : "/admin/getSearchDonation",
-			data : {
-					filter: $(".searchfilter").val(),
-					input: $("#searchInput").val()
-				},
-			success : function(result){
-				$('.donationList').empty();
-				if(result.length>=1){
-					result.forEach(function(dList){
-						str=`
-				            <tr>
-				                <td>\${dList.no}</td>
-				                <td>\${dList.id}</td>
-				                <td>\${dList.userName}</td>
-				                <td>\${dList.shelterName}</td>`
-				                
-				        if(dList.dogName == null || dList.dogName == ""){
-					        str += `<td>이름없음</td>`
-				        }else{
-				        	str +=`<td>\${dList.dogName}</td>`
-				        }
-
-				        	str +=`<td>\${dList.date}</td>
-				                	<td>\${dList.state}</td>
-				            		</tr>`
-						$('.donationList').append(str);
-        			}) 
-				}
-			},
-			error:function(){
-				alert("ajax 에러")
-			}
-		})
-	}
-	
 	//state검색
 
 	$(".userState").change(function(){
-		getUserState();
+		getDState();
 	})
 
 
-	function getUserState(){
+	function getDState(){
 		console.log($(".userState").val());
 		$.ajax({
 			type: 'POST',
-			url : "/admin/getUserState",
+			url : "/user/getDState",
 			data : {
-				filter: $(".searchfilter").val(),
-				input: $("#searchInput").val(),
+				id: ${userId},
 				state: $(".userState").val()},
 			success : function(result){
 				//테이블 초기화
 				$('.donationList').empty();
 				if(result.length>=1){
 					result.forEach(function(dList){
-						if(dList.state ==1){
 							str=`
-					            <tr>
-					                <td>\${dList.no}</td>
-					                <td>\${dList.id}</td>
-					                <td>\${dList.userName}</td>
-					                <td>\${dList.shelterName}</td>`
-					                
-					        if(dList.dogName == null || dList.dogName == ""){
-						        str += `<td>이름없음</td>`
-					        }else{
-					        	str +=`<td>\${dList.dogName}</td>`
-					        }
-
-					        	str +=`<td>\${dList.date}</td>
-					                	<td>\${dList.state}</td>
-					            		</tr>`
-						}else if(dList.state ==2){
-							str=`
-					            <tr>
-					                <td>\${dList.no}</td>
-					                <td>\${dList.id}</td>
-					                <td>\${dList.userName}</td>
-					                <td>\${dList.shelterName}</td>`
-					                
-					        if(dList.dogName == null || dList.dogName == ""){
-						        str += `<td>이름없음</td>`
-					        }else{
-					        	str +=`<td>\${dList.dogName}</td>`
-					        }
-
-					        	str +=`<td>\${dList.date}</td>
-					                	<td>\${dList.state}</td>
-					            		</tr>`
-						}
-
+							<tr>
+				                <td>\${dList.no}</td>
+				                <td>\${dList.shelterName}</td>
+				                <td>\${dList.amount}</td>
+				                <td>\${dList.paymentDate}</td>
+				                <td>\${dList.state}</td>
+				                </tr>`
 						$('.donationList').append(str);
 	        		}) 
 				}
