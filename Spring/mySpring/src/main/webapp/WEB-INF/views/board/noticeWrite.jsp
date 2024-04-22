@@ -83,7 +83,7 @@ readonly /> <label for="file" class="secondary-btn">파일찾기</label>
 									data-ico="->" type="submit" value="작성 완료"
 
 									class="btn brown-btn large-btn" />
-								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userId")%>" />
+								<input type="hidden" name="id" value="<%=(String)session.getAttribute("userId")%>" />
 
 							</div>
 

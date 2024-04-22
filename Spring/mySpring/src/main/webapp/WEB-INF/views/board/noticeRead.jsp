@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				<div class="read-board">
-					<p>${board.content}</p>
+					<p><pre>${board.content}</pre></p>
 				</div>
 			</div>
 			<div class="read-button">
@@ -68,7 +68,7 @@
 <!-- 						<input class="reply-write" type="text" name="content"
 							placeholder="댓글을 입력하세요" cols="3"/>  -->
 						<textarea class="reply-write" name="content" placeholer="댓글을 입력하세요" style="width:100%;"></textarea>
-						<label for="reply-buttom"> <img	src="/images/icons/write-icon.png"></label> 
+						<label for="reply-buttom"> <img	src="/resources/images/icons/write-icon.png"></label> 
 					<input class="reply-button" id="reply-buttom" type="submit" />
 					</form> 
 					<div class="reply-list">
@@ -208,6 +208,10 @@
 	registerBtn.on("click", function(e) {
 		e.preventDefault();
 		
+		if (idValue == null || idValue  == "null") {
+			alert("로그인 후 댓글 등록이 가능합니다.");
+			return;	
+		}
 		if (content.val() <= 0) {
 			alert("내용을 입력하세요!!");
 			return;

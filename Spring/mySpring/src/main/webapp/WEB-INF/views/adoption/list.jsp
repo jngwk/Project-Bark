@@ -48,7 +48,7 @@
 						        </c:otherwise>
 						    </c:choose>
 					 	</h2>
-					<a href="${contextPath }/adoption/detail?dogno=${dogList.dogno}&userId=<%=(String)session.getAttribute("userId")%>&shelterno=${dogList.shelterno}" class="card__button">입양하기</a>
+					<a href="${contextPath }/adoption/detail?dogno=${dogList.dogno}" class="card__button">입양하기</a>
 				</div>
 			</article>
 		</c:forEach> 

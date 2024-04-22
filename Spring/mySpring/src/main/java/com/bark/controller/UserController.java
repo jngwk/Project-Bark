@@ -53,9 +53,11 @@ public class UserController {
 		User user = service.getUser(id);
 		log.info("id: " + id);
 		if(user == null) {
+			log.info("aaaid: " + id);
 			return 0;
 		}
 		else if(user.getAvailable() == 2) {
+			log.info("bbbid: " + id);
 			return 2;
 		}
 		else if(user.getPwd().equals(pwd)) {
@@ -63,11 +65,14 @@ public class UserController {
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userPhone", user.getPhone());
+			log.info("cccid: " + id);
 			return 1;
 		}
 		else if(!user.getPwd().equals(pwd)){
+			log.info("dddid: " + id);
 			return -1;
 		}
+		log.info("eeeid: " + id);
 		return -2;
 	}
 	
