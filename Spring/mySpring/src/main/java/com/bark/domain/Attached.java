@@ -1,11 +1,11 @@
 package com.bark.domain;
 
-import java.util.List;
 
 import lombok.Data;
 
 @Data
 public class Attached {
+	private String imgUrl;
 	private String uuid;
 	private String uploadPath;
 	private String fileName;

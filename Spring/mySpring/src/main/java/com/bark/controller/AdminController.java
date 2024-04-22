@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bark.domain.Adoption;
+import com.bark.domain.Dog;
 import com.bark.domain.User;
+import com.bark.service.AdoptionService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +26,9 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdminController {
 	private UserService userservice;
+	private AdoptionService adoptionservice;
 	
+	//회원조회
 	@GetMapping("/userList")
 	public String userList(Model model) {
 		log.info("userlist...........");
@@ -35,14 +41,60 @@ public class AdminController {
 	
 	@PostMapping(value="getUserType",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<User> getUserType(@RequestParam ("type") String type,Model model) {
+	public List<User> getUserType(@RequestParam ("filter") String filter,@RequestParam ("input") String input,@RequestParam ("type") String type,Model model) {
 		log.info("-------sheltername search mapping o--------");
 		log.info(type);
-		return userservice.getUserType(Integer.parseInt(type));
+		return userservice.getUserType(filter,input,Integer.parseInt(type));
 	}
 	
+	@PostMapping(value="getSearchUser",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<User> getSearchUser(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
+		log.info(filter); log.info(input);
+		return userservice.getSearchUser(filter,input);
+	}
+	
+	@GetMapping("/available")
+	public String availableUpdate(@RequestParam ("available") String available,@RequestParam ("id") String id, RedirectAttributes rttr) {
+		log.info("available");
+		boolean result = userservice.availableUpdate(available,id);
+		rttr.addFlashAttribute("result", result);
+
+		return "redirect:/admin/userList";
+	}
+	
+	//기부내역
 	@GetMapping("/donationList")
 	public void donationList() {
 		log.info("donationlist...........");
+	}
+	
+	//입양내역
+	@GetMapping("/adminAdoptionList")
+	public String adminAdoptionList(Model model) {
+		log.info("adminAdoptionList...........");
+		List<Adoption> aList = adoptionservice.getAdoptionList();
+		
+		model.addAttribute("aList",aList);
+		return "/admin/adminAdoptionList";
+		
+	}
+	
+	/*
+	 * @PostMapping(value="getUserState",produces =
+	 * "application/json; charset=utf8")
+	 * 
+	 * @ResponseBody public List<Adoption> getUserState(@RequestParam ("filter")
+	 * String filter,@RequestParam ("input") String input,@RequestParam ("state")
+	 * String state,Model model) {
+	 * log.info("-------sheltername search mapping o--------"); log.info(state);
+	 * return adoptionservice.getUserState(filter,input,Integer.parseInt(state)); }
+	 */
+	
+	@PostMapping(value="getSearchAdoption",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Adoption> getSearchAdoption(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
+		log.info(filter); log.info(input);
+		return adoptionservice.getSearchAdoption(filter,input);
 	}
 }

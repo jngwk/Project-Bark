@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import com.bark.domain.DogAttached;
 
 @Mapper
-public interface DogAttachMapper {
+public interface DogAttachMapper {	//강아지 파일 관련(Adoption에서 사용)
 	@Insert("insert into dogattach values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{dogno}) ")
 	public void insert(DogAttached vo);
 	@Delete("delete from dogattach where uuid=#{uuid}")

@@ -6,12 +6,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/campaign.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/campaign.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 
 </head>
 <body>
-	<jsp:include page="${views }/include/header.jsp" flush="false"></jsp:include>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
 	<div class="story-container">
 		<div class="story">
 			<p class="page-title">Campaign</p><p class="page-subtitle">[캠페인 둘러보기]</p>

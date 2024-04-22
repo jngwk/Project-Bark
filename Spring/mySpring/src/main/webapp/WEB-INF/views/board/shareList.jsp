@@ -8,11 +8,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/root.css" />
-<link rel="stylesheet" href="${css }/shareList.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shareList.css" />
 </head>
 <body>
-	<jsp:include page="${views }/include/header.jsp" flush="false" />
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
 	<section class="notice">
 		<p class="page-title">Sharing Info</p><p class="page-subtitle">[정보공유]</p>

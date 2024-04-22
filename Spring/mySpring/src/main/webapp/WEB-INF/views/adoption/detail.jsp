@@ -7,8 +7,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="${css }/root.css" />
-    <link rel="stylesheet" href="${css }/dogDetail.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/dogDetail.css" />
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -16,7 +16,7 @@
     ></script>
   </head>
   <body>
-  <jsp:include page="${views }/include/header.jsp" flush="false"/>
+  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"/>
     <div class="dog-desc-container">
     <p class="page-title">Detail</p><p class="page-subtitle">[상세보기]</p>
       <div class="dog-desc-inner">
@@ -255,6 +255,7 @@
                 class="large-btn secondary-btn inactive submit-adoption-form"
                 type="submit"
                 value="입양하기"
+                onClick="location.href='${contextPath }/adoption/write'"
               />
             </div>
           </form>

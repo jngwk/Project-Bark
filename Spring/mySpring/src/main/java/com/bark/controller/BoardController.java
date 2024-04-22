@@ -36,7 +36,7 @@ public class BoardController {
 						   @RequestParam(required=false, value="pageNum") Integer pageNum,
 						   @RequestParam(required=false, value="amount") Integer amount) {
 
-		Integer type = 2;   				// 공지사항
+		Integer type = 1;   				// 공지사항
 		System.out.println("noticeList [" + type +"-"+ searchField + "-" + searchWord + "-" + pageNum + "-" + amount + "]");
 
 		// pageNum, amount를 객체에 Set
@@ -82,7 +82,7 @@ public class BoardController {
 					 @RequestParam(required=false, value="pageNum") Integer pageNum,
 					 @RequestParam(required=false, value="amount") Integer amount) {
 		
-		Integer type = 2;   				// 공지사항
+		Integer type = 1;   				// 공지사항
 		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
 
 		// pageNum, amount를 객체에 Set
@@ -152,6 +152,7 @@ public class BoardController {
 		return "redirect:/board/noticeList";
 	}
 	
+
 	@PostMapping("/contactWrite") // 04-22 추가한 부분 . 이게 있어야 문의하기 글 DB에 써짐
 	public String contactWrite(Board board, RedirectAttributes rttr) {
 		
@@ -165,18 +166,70 @@ public class BoardController {
 	@GetMapping("/noticeUpate")
 	public void update() {
 
+//	@GetMapping("/noticeUpdate")
+//	public Board update(@RequestParam("bno") Integer  bno) {
+//		log.info("noticeUpdate : " + bno);
+//		return service.read(bno);
+//
+//	}
+	
+	@GetMapping("/noticeUpdate")
+	public void update(Model model, 
+						@RequestParam("bno") Integer  bno,
+			 			@RequestParam(required=false, value="searchField") String searchField,
+			 			@RequestParam(required=false, value="searchWord") String searchWord,
+			 			@RequestParam(required=false, value="pageNum") Integer pageNum,
+			 			@RequestParam(required=false, value="amount") Integer amount) {
+		log.info("noticeUpdate : " + bno);
+		
+		Integer type = 1;   				// 공지사항
+		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
+
+		
+		model.addAttribute("searchField", searchField);
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("amount", amount);
+		model.addAttribute("board", service.read(bno));
+
+
 	}
 	
 	@PostMapping("/noticeUpdate")
-	public String update(Board board, RedirectAttributes rttr) {
+//	public String modify(@RequestParam(required=false, value="bno") Integer bno,
+//						 @RequestParam(required=false, value="title") String title,
+//						 @RequestParam(required=false, value="content") String content,
+	public String modify(Board board,
+ 						 @RequestParam(required=false, value="searchField") String searchField,
+ 						 @RequestParam(required=false, value="searchWord") String searchWord,
+ 						 @RequestParam(required=false, value="pageNum") Integer pageNum,
+ 						 @RequestParam(required=false, value="amount") Integer amount) {
+
+		log.info("modify : " + searchField + "-" + searchWord + "-" + pageNum + "-" + amount);
+//		Board board = new Board();
+//		board.setBno(bno);
+//		board.setTitle(title);
+//		board.setContent(content);
 		
-		log.info("update : " + board);
-
+		log.info("modify : " + board);
+		
 		service.update(board);
-		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/list";
-	}
 
+		return "redirect:/board/noticeRead?bno=" + board.getBno() + "&searchField=" + searchField 
+				+ "&searchWord=" + searchWord + "&pageNum=" + pageNum + "&amount" + amount ;
+
+	}
+	
+	
+	
+	@GetMapping("/noticeDelete")
+	public String delete(@RequestParam("bno") Integer  bno) {
+		
+		log.info("delete : " + bno);
+		service.delete(bno);
+		return "redirect:/board/noticeList";
+	}	
+	
 	@PostMapping("/noticeDelete")
 	public String delete(@RequestParam("bno") Integer  bno, RedirectAttributes rttr) {
 		
@@ -187,6 +240,7 @@ public class BoardController {
 		return "redirect:/board/noticeList";
 	}
 	
+
 	@GetMapping("/shareList")
 	public void shareList(Model model,
 						   @RequestParam(required=false, value="searchField") String searchField,

@@ -12,20 +12,15 @@ import com.bark.domain.User;
 
 public interface UserMapper {
 	
-	@Select("select * from user where type != 3")
+	@Select("select * from user where type != 3 order by type,shelter_shelterno")
 	public List<User> getUserList();
-	@Select("select * from user where type = 3")
-	/*
-	 * public List<User> getAdminList();
-	 * 
-	 * @Select("select * from user where id = #{id}")
-	 */
+	@Select("select * from user where type != 3 and id = #{id} order by type,shelter_shelterno")
 	public User getUser(String id);
-	@Insert("insert into user(id, pwd, name, phone, email, addr, addrDetail, postcode, bank, bankAcc, type)\r\n"
-			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{addrDetail}, #{postcode}, #{bank}, #{bankAcc}, #{type})")
+	@Insert("insert into user(id, pwd, name, phone, email, addr, available, type)\r\n"
+			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")
 	public int insert(User user);
 	@Update("update user \r\n"
-			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}, addrDetail = #{addrDetail}, postcode = #{postcode}, bank = #{bank}, bankAcc = #{bankAcc}\r\n"
+			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}, available = #{available}\r\n"
 			+ "	where id = #{id}")
 	public int update(User user);
 	@Delete("delete from user where id=#{id}")
@@ -34,10 +29,21 @@ public interface UserMapper {
     public User findUser(String email);
     @Select("select count(id) from user where id = #{id}")
 	public int checkId(String id);
-    @Select("select count(id) from user where name = #{name} AND email = #{email}")
-	public int findAcc(@Param("name") String name, @Param("email") String email);
+    @Select("select count(id) from user where email = #{email}")
+	public int checkEmail(String email);
+    @Select("select id from user where email = #{email}")
+	public String getUserId(String email);
+    @Update("update user set pwd = #{pwd} where email = #{email}")
+	public int updateUserPwd(@Param("email") String email, @Param("pwd")String pwd);
     
-    @Select("select * from user where type = #{type}")
-    public List<User> getUserType(int type);
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type,shelter_shelterno")
+    public List<User> getUserType(String filter,String input,int type);
+
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type,shelter_shelterno")
+    public List<User> getSearchUser(String filter,String input);
+    
+    @Update("update user set available=#{param1} where id=#{param2}")
+	public int availableUpdate(String available,String id);
+
 	
 }
