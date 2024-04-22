@@ -120,6 +120,12 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@GetMapping(value="getUser",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public User getUser(@RequestParam("id") String id){
+		return service.getUser(id);
+	}
+	
 	@PostMapping(value="checkId",produces = "application/json; charset=utf8")
 	@ResponseBody
 	public int checkId(@RequestParam("id") String id){
