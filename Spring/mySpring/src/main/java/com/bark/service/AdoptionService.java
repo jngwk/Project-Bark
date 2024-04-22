@@ -49,6 +49,7 @@ public class AdoptionService {
 	@Transactional
 	public void write(Dog dog) {
 		log.info("write...." + dog.getDogno());
+		dog.setShelterno(mapper.getSehterno(dog.getShelterName()));
 		mapper.insertSelectKey(dog);
 		if (dog.getDogAttachedList() == null || dog.getDogAttachedList().size() <= 0) {
 			return;
@@ -56,6 +57,7 @@ public class AdoptionService {
 		dog.getDogAttachedList().forEach(dogattach -> { // 첨부 파일이 있는 경우
 			System.out.println("dogAttach : " + dogattach);
 			dogattach.setDogno(dog.getDogno());
+			
 			attachMapper.insert(dogattach);
 		});
 	}

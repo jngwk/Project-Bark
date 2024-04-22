@@ -18,36 +18,39 @@ public interface AdoptionMapper {
 	@Select("select d.dogno, d.breed, d.name, s.shelterName, a.imgUrl "
 			+ "from dog d "
 			+ "	join attach a "
-			+ "		on d.dogno = a.dog_dogno"
+			+ "		on d.dogno = a.dogno"
 			+ "	inner join shelter s"
-			+ "		on s.shelterno = d.shelter_shelterno;")
+			+ "		on s.shelterno = d.shelterno;")
 	public List<Dog> getDogList();
 	
 	@Select("select d.dogno, d.gender, d.age, d.breed, s.shelterName, a.imgUrl \r\n"
 			+ "	from dog d"
 			+ "		join attach a"
-			+ "			on d.dogno = a.dog_dogno"
+			+ "			on d.dogno = a.dogno"
 			+ "		inner join shelter s"
-			+ "			on s.shelterno = d.shelter_shelterno"
-			+ "		where dogno = #{dogno};")
+			+ "			on s.shelterno = d.shelterno"
+			+ "		where d.dogno = #{dogno};")
 	public Dog getDog(int dogno);
 		
 	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
 			+ "FROM dog d "
 			+ "	join attach a "
-			+ "		on d.dogno = a.dog_dogno "
+			+ "		on d.dogno = a.dogno "
 			+ "ORDER BY dogno DESC "
 			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchList(@Param("cri") Criteria cri);
 	
-	@Insert("insert into dog(shelterId, name, gender, breed, age, feature, neuter)"
-			+ "values(#{shelterId}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter}) ")
-	public int insert(Dog dog);
+	@Select("select shelterno from shelter where shelterName = #{shelterName}")
+	public int getSehterno(String shelterName);
 	
-	@Insert("insert into dog(shelterId, name, gender, breed, age, feature, neuter)"
-	        + "values(#{shelterId}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter})")
+	@Insert("insert into dog(shelterno, name, gender, breed, age, feature, neuter)"
+			+ "values(#{shelterno}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter}) ")
+	public int insert(Dog dog);	//이미지 파일 없는 강아지 
+	
+	@Insert("insert into dog(shelterno, name, gender, breed, age, feature, neuter)"
+	        + "values(#{shelterno}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter})")
 	@SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "dogno", before = false, resultType = int.class)
-	public void insertSelectKey(Dog dog);
+	public void insertSelectKey(Dog dog);	//이미지 파일 있는 강아지 
 	
 	@Select("SELECT * FROM dog WHERE dogno = #{dogno}")
 	public Dog read(int i);

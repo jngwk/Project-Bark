@@ -8,18 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 		<!-- Page Heading -->
 		<h1 class="h3 mb-2 text-gray-800">등록 페이지</h1>
 		<p class="mb-4"></p>
 		<form role="form"
-			action="${pageContext.request.contextPath}/dog/write" method="post">
+			action="${pageContext.request.contextPath}/adoption/write" method="post">
 			
 			<div class="form-group">
 				<label>보호소 이름</label>
-				<input class="form-control" name='shelterId'>
+				<input class="form-control" name='shelterName'>
 			</div>
 			
 			<div class="form-group">
@@ -39,7 +38,7 @@
 
 			<div class="form-group">
 				<label>상세설명</label>
-				<textarea class="form-control" rows="5" name='desc'></textarea>
+				<textarea class="form-control" rows="5" name='feature'></textarea>
 			</div>
 			
 			<div class="form-group">
@@ -50,23 +49,23 @@
 			    <label for="notNeutered">X</label>
 			</div>
 			<div class="card" style="width: 100%;">
-							<div class="card-header ">File Attach</div>
-							<div class="card-body">
-								<div class="form-group uploadDiv">
-									<input type="file" name='uploadFile' id='uploadFile' multiple>
-								</div>
-								<div class="uploadResult">
-									<ul></ul>
-								</div>
-								<div class="bigPictureWrapper">
-									<div class="bigPicture"></div>
-								</div>
-							</div>
-						<div class="card-footer d-flex">
-							<button type="submit" class="btn btn-success ml-auto">Submit</button>
-							<button type="reset" class="btn btn-warning ml-2">Reset</button>
-						</div>
-						
+				<div class="card-header ">File Attach</div>
+				<div class="card-body">
+					<div class="form-group uploadDiv">
+						<input type="file" name='uploadFile' id='uploadFile' multiple>
+					</div>
+					<div class="uploadResult">
+						<ul></ul>
+					</div>
+					<div class="bigPictureWrapper">
+						<div class="bigPicture"></div>
+					</div>
+				</div>
+				<div class="card-footer d-flex">
+					<button type="submit" class="btn btn-success ml-auto">Submit</button>
+					<button type="reset" class="btn btn-warning ml-2">Reset</button>
+				</div>
+			</div>
 		</form>
 		<!-- /.container-fluid -->
 		<jsp:include page="${views }/include/footer.jsp" flush="false"/>
@@ -122,7 +121,7 @@ $(document).ready(function() {
 		   }
 		   console.log("files.length : "+files.length);
 		   $.ajax({
-		      url:'/DogUploadAjaxAction', 
+		      url:'/adoption/write', 
 		      processData: false, //전달할 데이터를 query string을 만들지 말 것
 		      contentType: false,
 		      data: formData,  //전달할 데이터
