@@ -35,8 +35,18 @@
             <table>
               <tr>
                 <td><img src="${icons }/name.png" alt="icon" /></td>
-                <th>이름</th>
-                <td>영철이</td>
+                
+                <td>
+                	<c:choose>
+					    <c:when test="${not empty dog.breed}">
+					    <th>이름</th>
+						            ${dog.breed}
+						        </c:when>
+						        <c:otherwise>
+						            ${dog.name}
+						        </c:otherwise>
+					</c:choose>
+				</td>
               </tr>
               <tr>
                 <td><img src="${icons }/gender.png" alt="icon" /></td>
@@ -255,7 +265,7 @@
                 class="large-btn secondary-btn inactive submit-adoption-form"
                 type="submit"
                 value="입양하기"
-                onClick="location.href='${contextPath }/adoption/write'"
+                onClick="location.href='${contextPath }/main'"
               />
             </div>
           </form>

@@ -62,6 +62,7 @@ public class UserController {
 			session.setAttribute("userId", id);
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
+			session.setAttribute("userPhone", user.getPhone());
 			return 1;
 		}
 		else if(!user.getPwd().equals(pwd)){
