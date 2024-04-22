@@ -115,7 +115,7 @@
 															href="${contextPath }/user/userWriteList">작성글 관리</a></li>
 													</c:if>
 													<li><img src="${icons }/book-heart.png" /><a
-														href="../index.jsp?target=./include/userManageAppList">기부/입양
+														href="${contextPath }/user/userDonationList?id=${userId}">기부/입양
 															관리</a></li>
 													<li><img src="${icons }/post.png" /><a
 														href="${contextPath }/user/userWriteList">문의 내역</a></li>

@@ -37,4 +37,8 @@ public interface DonateMapper {
 			+" join shelter s on s.shelterno = d.shelter_shelterno"
 			+ "	where ${param1} like concat('%',#{param2},'%') and state=${param3};")
 	public List<Adoption> getDonationState(String filter, String input, int state);
+
+	//회원페이지 기부내역
+	@Select("select donationno no,shelterName,amount,paymentDate,state from donation natural join shelter where id=#{id} ")
+	public List<Donate> userDonationList(String id);
 }

@@ -10,5 +10,8 @@ public class Donate {
 	private String shelter_shelterNo;
 	private Integer state;
 	private Integer amount;
-
+	private Integer no;
+	private String shelterName; 
+	private String paymentDate;
+	
 }

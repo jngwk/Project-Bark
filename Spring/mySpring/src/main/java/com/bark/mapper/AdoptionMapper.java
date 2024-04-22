@@ -83,4 +83,10 @@ public interface AdoptionMapper {
 	public int delete(int i);
 	@Update("UPDATE board SET shelterId = #{shelterId}, name = #{name}, gender = #{gender}, breed = #{breed}, age = #{age}, desc = #{desc}, neuter = #{neuter} WHERE dogno = #{dogno}")
 	public int update(Dog dog);
+
+	//회원페이지 입양내역
+	@Select("select a.adoptionno no, s.shelterName,d.name dogName,a.adopt_date date ,a.state\r\n"
+			+ "	from adoption a join dog d on d.adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelterno where id = #{id}")
+	public List<Adoption> userAdoptionList(String id);
 }
