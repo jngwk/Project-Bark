@@ -44,7 +44,7 @@
 						            ${dogList.name}
 						        </c:when>
 						        <c:otherwise>
-						            이름없음
+						            ${dogList.breed }
 						        </c:otherwise>
 						    </c:choose>
 					 	</h2>

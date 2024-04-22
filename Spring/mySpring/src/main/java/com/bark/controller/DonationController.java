@@ -33,7 +33,7 @@ public class DonationController {
 	//private UserService userService;
 	@GetMapping("/form")
 	public void form(Model model, 
-			 @RequestParam(required=false, value="shelterNo") Integer selectedShelterNo) {
+			 @RequestParam(required=false, value="shelterno") Integer selectedShelterNo) {
 		log.info("form ===========");
 		log.info(selectedShelterNo);
 		

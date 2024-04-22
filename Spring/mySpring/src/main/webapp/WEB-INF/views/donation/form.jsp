@@ -70,23 +70,31 @@ input[type='radio']:checked+label {
 				<form class="userinfo">
 				<div class="user-info">
 					<div class="donate-subtitle">기본 정보</div>
-					<table class="donate-table">					
-						<tr>
-							<th>이름</th>
-<!-- 							<td><input type="text" name="userName" value="김지현" readonly /></td> -->
-							<td><input type="text" name="userName" value="${userName }" readonly /></td>
-						</tr>
-						<tr>
-							<th>휴대전화</th>
-<!-- 							<td><input type="text" name="userPhone" value="010-0000-0000" readonly /></td> -->
-							<td><input type="text" name="userPhone" value="${userPhone }" readonly /></td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-<!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
-							<td><input type="text" name="userId" value="${userId }" readonly /></td>
-
-						</tr>
+					<table class="donate-table">	
+						<c:choose>
+							<c:when test="${not empty userName }">				
+								<tr>
+									
+									<th>이름</th>
+		<!-- 							<td><input type="text" name="userName" value="김지현" readonly /></td> -->
+									<td><input type="text" name="userName" value="${userName }" readonly /></td>
+								</tr>
+								<tr>
+									<th>휴대전화</th>
+		<!-- 							<td><input type="text" name="userPhone" value="010-0000-0000" readonly /></td> -->
+									<td><input type="text" name="userPhone" value="${userPhone }" readonly /></td>
+								</tr>
+								<tr>
+									<th>이메일</th>
+		<!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
+									<td><input type="text" name="userId" value="${userId }" readonly /></td>
+										
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<th text-align="center">로그인 후 이용해주십시오.</th>
+							</c:otherwise>
+						</c:choose>
 					</table>
 				</div>
 				<div class="bank-info">
@@ -113,11 +121,13 @@ input[type='radio']:checked+label {
 						</form>
 					</table>
 				</div>
+				<c:if test="${not empty userName }">
 				<div class="donate-button">
 					<input class="large-btn green-btn" type="button"
 						onclick="history.back()" value="취소"> <input
 						class="large-btn green-btn" type="button" id="do" value="후원하기">
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

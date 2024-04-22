@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Shelter {
-	private Integer shelterNo; // db에서 shelterno
+	private Integer shelterno; // db에서 shelterno
 	private String shelterName;
 	private String shelterAddr;
 	private Double lat; //x좌표

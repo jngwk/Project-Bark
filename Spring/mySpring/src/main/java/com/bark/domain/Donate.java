@@ -7,7 +7,7 @@ import lombok.Data;
 public class Donate {
 
 	private String user_Id;
-	private String shelter_shelterNo;
+	private String shelter_shelterno;
 	private Integer state;
 	private Integer amount;
 	private Integer no;
