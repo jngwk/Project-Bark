@@ -69,4 +69,8 @@ public class UserService {
 		return mapper.availableUpdate(available,id)==1;
 	}
 
+	public int updateUser(User user) {
+		return mapper.update(user);
+	}
+
 }

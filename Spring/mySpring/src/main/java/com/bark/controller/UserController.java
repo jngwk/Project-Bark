@@ -147,6 +147,29 @@ public class UserController {
 		return result;
 	}
 	
+	@PostMapping(value="updateUser",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public int updateUser(
+			 @RequestParam("id") String id,
+			 @RequestParam("email") String email,						   
+			 @RequestParam("phone") String phone,
+			 @RequestParam("pwd") String pwd,
+			 @RequestParam("addr") String addr,
+			 @RequestParam("addrDetail") String addrDetail) {
+		log.info("update user =======================");
+		User user = service.getUser(id);
+		// 비밀번호 변경 x시 기존 비밀번호 저장
+		if(!pwd.equals("") && pwd != null) {
+			user.setPwd(pwd);
+		}
+		user.setEmail(email);
+		user.setPhone(phone);
+		user.setAddr(addr+addrDetail);
+		user.setAddrDetail(addrDetail);
+		return service.updateUser(user);
+	}
+	
+	
 	@PostMapping(value="updatePwd",produces = "application/json; charset=utf8")
 	@ResponseBody
 	public int updatePwd(@RequestParam("email") String email, @RequestParam("pwd") String pwd){
