@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
+import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 
@@ -31,6 +32,27 @@ public interface AdoptionMapper {
 			+ "			on s.shelterno = d.shelterno"
 			+ "		where dogno = #{dogno};")
 	public Dog getDog(int dogno);
+	
+	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+		+ "	from adoption a join user u on a.user_id = u.id\r\n"
+		+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
+		+ "    join shelter s on s.shelterno = d.shelter_shelterno;")
+	public List<Adoption> getAdoptionList();
+
+	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.user_id = u.id\r\n"
+			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelter_shelterno\r\n"
+			+ "where ${param1} like concat('%',#{param2},'%')")
+	public List<Adoption> getSearchAdoption(String filter,String input);
+
+	
+	@Select("select a.adoptionno no, a.user_id id, u.name, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.user_id = u.id\r\n"
+			+ "    join dog d on d.adoption_adoptionno = a.adoptionno\r\n"
+			+ "    join shelter s on s.shelterno = d.shelter_shelterno\r\n"
+			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
+	public List<Adoption> getUserState(String filter,String input,int state);
 		
 	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
 			+ "FROM dog d "

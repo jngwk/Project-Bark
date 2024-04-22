@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bark.domain.Adoption;
+import com.bark.domain.User;
+
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.DogAttached;
@@ -35,6 +38,20 @@ public class AdoptionService {
 		return mapper.getDog(dogno);
 	}
 	
+
+	public List<Adoption> getAdoptionList(){
+		log.info("getAdoptionList..................");
+		return mapper.getAdoptionList();
+	}
+
+	public List<Adoption> getSearchAdoption(String filter, String input) {
+		return mapper.getSearchAdoption(filter,input);
+	}
+
+	public List<Adoption> getUserState(String filter, String input, int state) {
+		// TODO Auto-generated method stub
+		return mapper.getUserState(filter,input,state);
+
 	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
 	public List<Dog> searchList(Criteria cri) {
 		log.info("searchList : " + cri);
@@ -73,5 +90,6 @@ public class AdoptionService {
 	public boolean remove(Integer dogno) {
 		log.info("remove...." + dogno);
 		return mapper.delete(dogno) == 1;
+
 	}
 }

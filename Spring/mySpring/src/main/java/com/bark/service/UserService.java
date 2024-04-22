@@ -68,4 +68,5 @@ public class UserService {
 	public boolean availableUpdate(String available,String id) {
 		return mapper.availableUpdate(available,id)==1;
 	}
+
 }
