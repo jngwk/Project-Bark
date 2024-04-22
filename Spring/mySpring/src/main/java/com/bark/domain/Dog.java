@@ -8,7 +8,8 @@ import lombok.Data;
 @Data
 public class Dog {
 	private Integer dogno; 
-	private Integer shelterno; 
+	private Integer shelterno;
+	private String shelterName;
 	private Integer bno; 
 	private Integer adoptionno;  
 	private String 	name; 
@@ -20,5 +21,6 @@ public class Dog {
 	private Date   	regDate; 
 	private Integer neuter; 
 	private String 	careTel;
+	private String imgUrl;
 	private List<DogAttached> dogAttachedList; 
 }

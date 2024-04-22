@@ -54,7 +54,7 @@ public class AdoptionController {
 		cri.setType(type);				// 입양게시판 "5"
 		
 		// 조회 조건에 따른 전게 건수 
-		int total = service.getDogList().size();	//201마리
+		int total = service.getDogList().size();	//172마리
 		Page page = new Page(cri, total);
 		
 		model.addAttribute("page", page);
