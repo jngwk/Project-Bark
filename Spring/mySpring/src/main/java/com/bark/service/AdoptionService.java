@@ -92,4 +92,9 @@ public class AdoptionService {
 
 	}
 
+	//회원페이지 입양내역
+	public List<Adoption> userAdoptionList(String id) {
+		return mapper.userAdoptionList(id);
+	}
+
 }
