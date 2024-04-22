@@ -8,8 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include
-		page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" />
+	
 	<!-- Begin Page Content -->
 	<div class="container-fluid">
 		<!-- Page Heading -->
@@ -70,6 +69,7 @@
 						
 		</form>
 		<!-- /.container-fluid -->
+		<jsp:include page="${views }/include/footer.jsp" flush="false"/>
 	<script>
 $(document).ready(function() {
 	let formObj=$("form[role='form']");
