@@ -34,8 +34,7 @@ public class AdoptionController {
 			 @RequestParam(required=false, value="amount") Integer amount) {	//입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
 		
-		Integer type = 5;	//입양 게시판
-		System.out.println("noticeList type-feild-pageNum-amount : " + type + "-" + pageNum + "-" + amount);
+		System.out.println("noticeList type-feild-pageNum-amount : " + pageNum + "-" + amount);
 		
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
@@ -51,10 +50,9 @@ public class AdoptionController {
 		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
 		cri.setPageSql((pageNum -1)* 10);
 		cri.setAmount(amount);
-		cri.setType(type);				// 입양게시판 "5"
 		
 		// 조회 조건에 따른 전게 건수 
-		int total = service.getDogList().size();	//172마리
+		int total = service.getDogList().size();	//201마리
 		Page page = new Page(cri, total);
 		
 		model.addAttribute("page", page);
