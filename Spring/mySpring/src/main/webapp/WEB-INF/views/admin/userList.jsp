@@ -13,7 +13,7 @@
 <%--     <script src="${js }/js/userList.js"></script> --%>
   </head>
   <body>
-<jsp:include page="${views }/include/header.jsp" flush="false" />
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
     <section class="notice">
       <p class="page-title">User Account</p>
@@ -26,19 +26,18 @@
             <form action="#" method="post">
               <div class="search-wrap">
                 <label for="search" class="blind">공지사항 내용 검색</label>
-                <select>
-                  <option>카테고리</option>
-                  <option>아이디</option>
-                  <option>이름</option>
+                <select class="searchfilter">
+                  <option value="phone">카테고리</option>
+                  <option value="id">아이디</option>
+                  <option value="name">이름</option>
                 </select>
                 <input
-                  id="search"
+                  id="searchInput"
                   type="search"
-                  name=""
+                  name="searchInput"
                   placeholder="검색어를 입력해주세요."
-                  value=""
                 />
-                <button type="submit" class="btn medium-btn btn-dark">검색</button>
+                <button type="button" class="searchUserBtn medium-btn btn-dark">검색</button>
                 <a href="#" class="total-btn medium-btn btn-dark">전체회원</a>
               </div>
             </form>
@@ -59,7 +58,7 @@
                 <th scope="col" class="th-email">이메일</th>
                 <th scope="col" class="th-exe">
                   <select class="userType" name="userType">
-                    <option valuer="">회원구분</option>
+                    <option value="">회원구분</option>
                     <option value="1">개인회원</option>
                     <option value="2">보호소회원</option>
                   </select>
@@ -68,26 +67,37 @@
               </tr>
             </thead>
             <tbody class="userList">
-           <c:forEach var="uList" items="${uList}">
+           <c:set var="count" value="${uList.size()+1}" />
+           <c:forEach var="List" items="${uList}">
+           <c:set var="count" value="${count-1}" />
               <tr>
-                <td>1</td>
-                <td>${uList.id }</td>
-                <td>${uList.name }</td>
-                <td>${uList.regDate }</td>
-                <td>${uList.email }</td>
-                <td>${uList.type }</td>
-                <td><a class="brown-btn" href="${contextPath}/admin/available?available=1">승인</a><a class="brown-btn" href="${contextPath}/admin/available?available=2">거절</a></td>
+                <td>${count}</td>
+                <td>${List.id }</td>
+                <td>${List.name }</td>
+                <td>${List.regDate }</td>
+                <td>${List.email }</td>
+                <td>${List.type }</td>
+                <c:choose>
+                	<c:when test = "${List.type== 2}">
+                		<c:choose>
+                			<c:when test="${List.available== 2}">
+             		    		<td><a href="${contextPath}/admin/available?available=1&id=${List.id }" class="shelterReceive-btn brown-btn">승인</a></td>
+             		    	</c:when>
+             		    	<c:when test="${List.available== 1}">
+			            		<td><a href="${contextPath}/admin/available?available=2&id=${List.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+			            	</c:when>
+			            	<c:otherwise>
+			            		<td><a href="${contextPath}/admin/available?available=1&id=${List.id }" class="shelterReceive-btn brown-btn">승인</a>
+			            		<a href="${contextPath}/admin/available?available=2&id=${List.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+			            	</c:otherwise>
+			            </c:choose>
+              		</c:when>
+              		<c:otherwise>
+              			<td><td>
+              		</c:otherwise>
+              	</c:choose>
               </tr>
               </c:forEach>
-              <tr>
-                <td>1</td>
-                <td>wlgus8846</td>
-                <td>김지현</td>
-                <td>2024-04-20</td>
-                <td>wlgus8846@daum.net</td>
-                <td>개인회원</td>
-                <td><a class="brown-btn" href="${contextPath}/admin/available?available=0">삭제</a></td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -100,33 +110,170 @@
 	
 	
 	<script>
-	$(".userType").change(function(){
-		
-		if(this.value == 1 || this.value == 2 ){
-			getUserType();
-		}
+	//type검색
+
+ 		$(".userType").change(function(){
+			if(this.value==1 || this.value==2){
+ 			getUserType();
+			}else{
+				getSearchUser();
+			}
+			
 	})
+
+
 	function getUserType(){
 		console.log($(".userType").val());
  		$.ajax({
 			type: 'POST',
 			url : "/admin/getUserType",
-			data : {type: $(".userType").val()},
+			data : {
+				filter: $(".searchfilter").val(),
+				input: $("#searchInput").val(),
+				type: $(".userType").val()},
 			success : function(result){
 				//테이블 초기화
 				$('.userList').empty();
 				if(result.length>=1){
+					let count=result.length+1;
 					result.forEach(function(uList){
-						str=`
-				          <tr>
-			                <td>1</td>
-			                <td>\${uList.id }</td>
-			                <td>\${uList.name }</td>
-			                <td>\${uList.regDate }</td>
-			                <td>\${uList.email }</td>
-			                <td>\${uList.type }</td>
-			                <td><a class="brown-btn" href="${contextPath}/admin/available?available=1">승인</a><a class="brown-btn" href="${contextPath}/admin/available?available=2">거절</a></td>
-			              </tr>`
+						count--;
+						if(uList.type ==2){
+							if(uList.available ==2){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							           </td>
+					              	</tr>`
+							}else if(uList.available ==1){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							else{
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							
+						}else if(uList.type ==1){
+							str=`
+						          <tr>
+					                <td>\${count}</td>
+					                <td>\${uList.id }</td>
+					                <td>\${uList.name }</td>
+					                <td>\${uList.regDate }</td>
+					                <td>\${uList.email }</td>
+					                <td>\${uList.type }</td>
+				              		<td><td>
+				              	</tr>`
+						}
+
+						$('.userList').append(str);
+	        		}) 
+				}
+			}
+		})
+	}
+	//검색
+		$(".searchUserBtn").on("click",function(){
+			if($(".searchfilter").val() != "phone"){
+				getSearchUser();
+			}else{$("#searchInput").val()==null; getSearchUser();}
+		console.log("click");
+	})
+		function getSearchUser(){
+			console.log($(".searchfilter").val());
+			console.log($("#searchInput").val());
+ 		$.ajax({
+			type: 'POST',
+			url : "/admin/getSearchUser",
+			data : {
+						filter: $(".searchfilter").val(),
+						input: $("#searchInput").val()
+					},
+			success : function(result){
+				$('.userList').empty();
+				if(result.length>=1){
+					let count=result.length+1;
+					result.forEach(function(uList){
+						count--;
+						if(uList.type ==2){
+							if(uList.available ==2){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							           </td>
+					              	</tr>`
+							}else if(uList.available ==1){
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							else{
+								str=`
+							         <tr>
+						               <td>\${count}</td>
+						               <td>\${uList.id }</td>
+						               <td>\${uList.name }</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
+							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
+							           </td>
+					              	</tr>`
+							}
+							
+						}else if(uList.type ==1){
+							str=`
+						          <tr>
+					                <td>\${count}</td>
+					                <td>\${uList.id }</td>
+					                <td>\${uList.name }</td>
+					                <td>\${uList.regDate }</td>
+					                <td>\${uList.email }</td>
+					                <td>\${uList.type }</td>
+				              		<td><td>
+				              	</tr>`
+						}
 						$('.userList').append(str);
 	        		}) 
 				}
@@ -138,3 +285,4 @@
 
   </body>
 </html>
+

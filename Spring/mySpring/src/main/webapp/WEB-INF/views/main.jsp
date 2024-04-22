@@ -22,11 +22,10 @@
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
       crossorigin="anonymous"
     ></script>
-    <!-- <script src="../js/transition.js"></script> -->
   </head>
   <body>
     <!-- header -->
-    <jsp:include page="${views }/include/header.jsp" flush="false"></jsp:include>
+    <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
     <!-- main -->
     <div class="slider-wrapper">
       <div class="slider">

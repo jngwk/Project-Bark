@@ -21,7 +21,7 @@
     </script>
   </head>
   <body>
-  <jsp:include page="${views }/include/header.jsp" flush="false"/>
+  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"/>
   	   <div class="adoption-list-header">
     <p class="page-title">Adoption</p><p class="page-subtitle">[입양 목록]</p>
     </div>

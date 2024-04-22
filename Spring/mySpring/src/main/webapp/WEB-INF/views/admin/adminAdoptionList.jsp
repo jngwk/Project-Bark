@@ -7,16 +7,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="${css }/donationList.css" />
+    <link rel="stylesheet" href="${css }/adminAdoptionList.css" />
     <link rel="stylesheet" href="${css }/root.css" />
     <!-- <script src="../js/popup.js"></script> -->
 
   </head>
   <body>
-  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
+  <jsp:include page="${views }/include/header.jsp" flush="false" />
     <section class="notice">
-      <p class="page-title">Donation</p>
-      <p class="page-subtitle">[기부 내역]</p>
+      <p class="page-title">Adoption</p>
+      <p class="page-subtitle">[입양 내역]</p>
 
       <!-- board seach area -->
       <div id="board-search">
@@ -52,13 +52,13 @@
               <tr>
                 <th scope="col" class="th-num">번호</th>
                 <th scope="col" class="th-userId">아이디</th>
-                <th scope="col" class="th-username">이름</th>
-                <th scope="col" class="th-regDate">보호소</th>
-                <th scope="col" class="th-email">기부액</th>
-                <th scope="col" class="th-email">기부날짜</th>
+                <th scope="col" class="th-userName">이름</th>
+                <th scope="col" class="th-shelterName">보호소</th>
+                <th scope="col" class="th-dogName">강아지명</th>
+                <th scope="col" class="th-regDate">입양일</th>
                 <th scope="col" class="th-exe">
                   <select>
-                    <option>기부상태</option>
+                    <option>입양상태</option>
                     <option>처리중</option>
                     <option>처리완료</option>
                     <option>처리실패</option>
@@ -67,15 +67,15 @@
               </tr>
             </thead>
             <tbody>
-            <c:forEach var="dList" items="${dList}">
+            <c:forEach var="aList" items="${aList}">
               <tr>
-                <td>${dList.no}</td>
-                <td>${dList.id}</td>
-                <td>${dList.name}</td>
-                <td>${dList.shelterName}</td>
-                <td>${dList.amount}</td>
-                <td>${dList.paymentDate}</td>
-                <td>${dList.state}</td>
+                <td>${aList.no}</td>
+                <td>${aList.id}</td>
+                <td>${aList.name}</td>
+                <td>${aList.shelterName}</td>
+                <td>${aList.dogName}</td>
+                <td>${aList.adopt_date}</td>
+                <td>${aList.state}</td>
               </tr>
               </c:forEach>
             </tbody>
