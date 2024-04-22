@@ -291,7 +291,7 @@ body {
 }
 .popup-label.verify-label::after{
   	content: "이메일로 발송 된 인증번호를 확인해주세요.";
-    color: green;
+    color: #000;
 }
 .popup-label.required::after {
   content: "* 필수 입력 사항입니다.";
@@ -309,6 +309,17 @@ body {
   content: "사용 가능한 아이디입니다.";
     color: green;
 }
+.popup-label.duplicate-email::after {
+ 
+  content: "이미 가입된 이메일입니다.";
+  color: red;
+}
+
+.popup-label.available-email::after {
+
+  content: "사용 가능한 이메일입니다.";
+    color: green;
+}
 .popup-label.not-match::after{
 	  content: "비밀번호가 일치하지 않습니다.";
 	    color: red;
@@ -319,6 +330,10 @@ body {
 }
 .popup-label.not-user::after{
 	  content: "아이디 또는 비밀번호를 확인해주세요.";
+	    color: red;
+}
+.popup-label.pending-user::after{
+	  content: "관리자 승인 후 이용이 가능합니다.";
 	    color: red;
 }
 .popup-label.invalid::after{
@@ -476,7 +491,7 @@ body {
     transform: translateY(-10%);
 }
 .form-slide.final-slide.shelter-slide > .text-wrap {
-    transform: translateY(20%);
+    transform: translateY(60%);
 }
 .form-slide.final-slide.shelter-slide > .text-wrap > .sub-text {
 	transform: translateY(65px);

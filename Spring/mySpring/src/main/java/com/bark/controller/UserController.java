@@ -55,6 +55,9 @@ public class UserController {
 		if(user == null) {
 			return 0;
 		}
+		else if(user.getAvailable() == 2) {
+			return 2;
+		}
 		else if(user.getPwd().equals(pwd)) {
 			session.setAttribute("userId", id);
 			session.setAttribute("userType", user.getType());

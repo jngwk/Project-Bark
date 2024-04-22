@@ -16,7 +16,7 @@ public interface UserMapper {
 	public List<User> getUserList();
 	@Select("select * from user where type != 3 and id = #{id} order by type,shelter_shelterno")
 	public User getUser(String id);
-	@Insert("insert into user(id, pwd, name, phone, email, addr, addrDetail, postcode, bank, bankAcc, type)\r\n"
+	@Insert("insert into user(id, pwd, name, phone, email, addr, available, type)\r\n"
 			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")
 	public int insert(User user);
 	@Update("update user \r\n"

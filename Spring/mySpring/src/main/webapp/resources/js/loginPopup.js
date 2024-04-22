@@ -196,7 +196,8 @@ function checkClass(labels) {
       $(label).hasClass("invalid") ||
       $(label).hasClass("duplicate") ||
       $(label).hasClass("not-match") ||
-      $(label).hasClass("invalid-pwd")
+      $(label).hasClass("invalid-pwd") ||
+      $(label).hasClass("duplicate-email")
   );
 }
 
@@ -206,7 +207,7 @@ function removeAllClassFromLabel() {
       $(label).removeClass("show").addClass("hide");
     }
     $(label).removeClass(
-      "required duplicate available not-match match not-user invalid invalid-pwd valid-pwd no-acc wrong-code valid-code"
+      "required duplicate available duplicate-email available-email not-match match not-user invalid invalid-pwd valid-pwd no-acc wrong-code valid-code"
     );
   });
 }
@@ -438,6 +439,8 @@ function login(e) {
   var pwd = $(".login-form").find('input[name="pwd"]').val(); // Fetch the password input value
   var $label = $(".login-form").find(".popup-label").last(); // This might need adjustment based on where you want the label changes to appear
   // console.log(id + ", " + pwd);
+  $label.removeClass("required not-user pending-user");
+
   $.ajax({
     url: "/user/login/", // Endpoint to check the ID
     type: "post", // Use POST method
@@ -452,9 +455,12 @@ function login(e) {
         // If result is 1, login success
         $label.removeClass("required not-user");
         window.location.href = "/"; // Redirect on successful login
+      } else if (result == 2) {
+        // require admin approval
+        $label.removeClass("required not-user").addClass("pending-user");
       } else if (result == -1) {
         // If result is 0, wrong pwd
-        $label.removeClass("required").addClass("not-user");
+        $label.removeClass("required pending-user").addClass("not-user");
       } else {
         alert("데이터베이스 오류");
       }
@@ -505,6 +511,12 @@ function checkDuplicateEmail($input) {
   var $label = $input.closest(".popup-label"); // Ensure class name is consistent
   console.log(email);
 
+  if (email.trim() === "") {
+    $label.removeClass("invalid available-email duplicate-email required"); // Remove all related classes
+    // console.log("Input cleared.");
+    return; // Exit the function early
+  }
+
   $.ajax({
     url: "/user/checkEmail", // Endpoint to check the email
     type: "post", // Use POST method
@@ -513,10 +525,12 @@ function checkDuplicateEmail($input) {
     success: function (result) {
       if (result == 0) {
         // If result is 0, no account
-        $label.removeClass("required").addClass("available");
+        $label
+          .removeClass("required duplicate-email")
+          .addClass("available-email");
       } else if (result == 1) {
         // If result is 1, email exists
-        $label.removeClass("required available").addClass("duplicate");
+        $label.removeClass("required available").addClass("duplicate-email");
       } else {
         alert("데이터베이스 오류");
       }
