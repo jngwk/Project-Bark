@@ -106,7 +106,7 @@
 													<li><img src="${icons }/user-detail.png" /><a
 														href="javascript:openUpdatePop()">내 정보 조회</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="../index.jsp?target=./include/userMyPostList">작성글
+														href="${contextPath }/user/userWriteList">작성글
 															관리</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
 														href="../index.jsp?target=./include/userManageAppList">기부/입양
@@ -118,7 +118,9 @@
 											<c:when test="${userType == '3' }">
 												<h3>${userName}<br> <span>${userId}</span>
 												</h3>
-												<ul>
+												<ul><li><img src="${icons }/post.png" /><a
+														href="${contextPath }/user/userWriteList">작성글
+															관리</a></li>
 													<li><img src="${icons }/post.png" /><a
 														href="${contextPath }/admin/donationList">기부금 목록</a></li>
 													<li><img src="${icons }/book-heart.png" /><a

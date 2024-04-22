@@ -11,9 +11,10 @@ import org.apache.ibatis.annotations.Update;
 import com.bark.domain.User;
 
 public interface UserMapper {
-	@Select("select * from user where type != 3")
+	
+	@Select("select * from user where type != 3 order by type,shelter_shelterno")
 	public List<User> getUserList();
-	@Select("select * from user where type = 3")
+	@Select("select * from user where type = 3 order by type,shelter_shelterno")
 	/*
 	 * public List<User> getAdminList();
 	 * 
@@ -39,5 +40,12 @@ public interface UserMapper {
 	public String getUserId(String email);
     @Update("update user set pwd = #{pwd} where email = #{email}")
 	public int updateUserPwd(@Param("email") String email, @Param("pwd")String pwd);
+    
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type,shelter_shelterno")
+    public List<User> getUserType(String filter,String input,int type);
+
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type,shelter_shelterno")
+    public List<User> getSearchUser(String filter,String input);
+
 	
 }

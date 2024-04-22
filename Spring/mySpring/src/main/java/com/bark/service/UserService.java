@@ -57,4 +57,11 @@ public class UserService {
 	public int updateUserPwd(String email, String pwd) {
 		return mapper.updateUserPwd(email, pwd);
 	}
+	public List<User> getUserType(String filter,String input,int type) {
+		return mapper.getUserType(filter,input,type);
+	}
+
+	public List<User> getSearchUser(String filter,String input) {
+		return mapper.getSearchUser(filter,input);
+	}
 }

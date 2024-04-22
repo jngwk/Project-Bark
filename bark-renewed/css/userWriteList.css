@@ -1,15 +1,5 @@
-@charset "UTF-8";
-.header-container{
-	background-color: var(--color-brown);
-}
-.header-container strong{
-	color: var(--main-font-color) !important;
-}
-
 .notice{
-	padding-top: 140px;
-    min-height: 100dvh;
-    background:var(--color-bright);
+    height: 780px;
 }
 
 /* 버튼 */
@@ -25,13 +15,12 @@ float: right;
 	font-size: 25px;
     width: 60%;
     margin: 0 auto;
-    transform: translate(380px,-90px);
+    transform: translate(330px,-90px);
 }
 /* 테이블 */
 table {
     border-collapse: collapse;
     border-spacing: 0;
-
   }
   
   #board-search .search-window {
@@ -66,17 +55,13 @@ table {
     outline: 0;
     border-width: 1px;
   }
-  #board-search .search-window .search-wrap .searchUserBtn {
+  #board-search .search-window .search-wrap .btn {
     position: absolute;
-    right: 45px;
-    top: -5px;
-    font-size: 16px;
-  }
-  #board-search .search-window .search-wrap .total-btn {
-    position: absolute;
-    right: -50px;
-    top: -5px;
+    right: 0;
+    top: 0;
     bottom: 0;
+    width: 108px;
+    padding: 0;
     font-size: 16px;
   }
   
@@ -96,7 +81,7 @@ table {
       box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
   }
 
-  .board-table button {
+  .board-table a {
     color: #333;
     vertical-align: middle;
     padding: 3px 10px;
@@ -104,8 +89,8 @@ table {
     border-radius: 5px;
     color: var(--color-bright);
   }
-  .board-table .th-exe{
-    width: 150px;
+  .board-table .th-exe {
+    width: 110px;
   }
 
   .board-table th {
@@ -195,5 +180,74 @@ button {
     align-items: flex-end;
     gap: 8px;
     justify-content: center;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 24px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 8px 0px rgba(31, 41, 55, 0.14);
+    background-color: #fff;
+    position: relative;
+  }
+  .pagination__number-indicator {
+    position: absolute;
+    height: 2px;
+    background-color: var(--color-light-brown);
+    opacity: 0;
+    bottom: 38px;
+    transition: all 0.2s ease;
+  }
+  .pagination__number {
+    font-weight: 600;
+    font-size: 16px;
+    color: #D1D5DB;
+  }
+  .pagination__number--active {
+    color: var(--color-brown);
+    position: relative;
+  }
+  .pagination__number, .pagination__arrow {
+    padding: 16px;
+  }
+  .pagination__arrow--right {
+    transform: scaleX(-1);
+  }
+  .pagination__arrow:hover .pagination__arrow-half:first-child {
+    transform: translateY(0.5px) rotate(-30deg);
+  }
+  .pagination__arrow:hover .pagination__arrow-half:last-child {
+    transform: translateY(-0.5px) rotate(30deg);
+  }
+  .pagination__arrow:active .pagination__arrow-half:first-child, .pagination__arrow--disabled .pagination__arrow-half:first-child {
+    transform: translateY(0) rotate(0);
+  }
+  .pagination__arrow:active .pagination__arrow-half:last-child, .pagination__arrow--disabled .pagination__arrow-half:last-child {
+    transform: translateY(0) rotate(0);
+  }
+  .pagination__arrow--disabled .pagination__arrow-half:last-child, .pagination__arrow--disabled .pagination__arrow-half:first-child {
+    opacity: 0.2;
+  }
+  .pagination__arrow--disabled {
+    pointer-events: none;
+  }
+  .pagination__arrow-half {
+    width: 9px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: var(--color-light-brown);
+    display: inline-block;
+    position: absolute;
+    transform-origin: 0px;
+    opacity: 1;
+    transition: transform 0.1s ease-in-out, opacity 0.2s ease-in-out;
+  }
+  .pagination__arrow-half:first-child {
+    transform: translateY(0.5px) rotate(-45deg);
+  }
+  .pagination__arrow-half:last-child {
+    transform: translateY(-0.5px) rotate(45deg);
   }
 /* 페이지 버튼 */

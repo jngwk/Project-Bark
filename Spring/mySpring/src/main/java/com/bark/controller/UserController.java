@@ -137,4 +137,9 @@ public class UserController {
 		log.info("result: " + result);
 		return result;
 	}
+	
+	@GetMapping("/userWriteList")
+	public void userWriteList() {
+		log.info("userWriteList...........");
+	}
 }

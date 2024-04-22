@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/userWriteList.css" />
+    <link rel="stylesheet" href="../css/root.css" />
+    <!-- <script src="../js/popup.js"></script> -->
+    <script src="../js/userWriteList.js"></script>
+  </head>
+  <body>
+    <header
+      style="
+        display: block;
+        background-color: var(--color-brown);
+        height: 140px;
+      "
+    >
+      헤더
+    </header>
+
+    <section class="notice">
+      <p class="page-title">Written List</p>
+      <p class="page-subtitle">[작성 내역]</p>
+
+      <!-- board seach area -->
+      <div id="board-search">
+        <div class="container">
+          <div class="search-window">
+            <form action="#" method="post">
+              <div class="search-wrap">
+                <label for="search" class="blind">공지사항 내용 검색</label>
+                <select>
+                  <option>카테고리</option>
+                  <option>제목</option>
+                  <option>내용</option>
+                </select>
+                <input
+                  id="search"
+                  type="search"
+                  name=""
+                  placeholder="검색어를 입력해주세요."
+                  value=""
+                />
+                <button type="submit" class="btn btn-dark">검색</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- board list area -->
+      <div id="board-list">
+        <div class="container">
+          <table class="board-table">
+            <thead>
+              <tr>
+                <th scope="col" class="th-exe">번호</th>
+                <th scope="col" class="th-title">제목</th>
+                <th scope="col" class="th-exe">등록일</th>
+                <th scope="col" class="th-exe">조회수</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>제목입니다</td>
+                <td>2024-04-20</td>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 페이지넘버 -->
+    <div class="story-page">
+      <div class="pagination">
+        <span class="pagination__number-indicator"></span>
+        <button class="pagination__arrow">
+          <span class="pagination__arrow-half"></span>
+          <span class="pagination__arrow-half"></span>
+        </button>
+        <button class="pagination__number">1</button>
+        <button class="pagination__number">2</button>
+        <button class="pagination__number">3</button>
+        <button class="pagination__number pagination__number--active">4</button>
+        <button class="pagination__number">5</button>
+        <button class="pagination__number">6</button>
+        <button class="pagination__number">7</button>
+        <button class="pagination__arrow pagination__arrow--right">
+          <span class="pagination__arrow-half"></span>
+          <span class="pagination__arrow-half"></span>
+        </button>
+      </div>
+      <!-- <div class="page-number">
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#">3</a>
+            </div>
+            <div class="page-btn">
+              <div class="prev-btn">
+                <a href="#">이전</a>
+              </div>
+              <div class="next-btn">
+                <a href="#">다음</a>
+              </div>
+            </div> -->
+    </div>
+  </body>
+</html>
