@@ -156,7 +156,7 @@ public class BoardController {
 	public String contactWrite(Board board, RedirectAttributes rttr) {
 		
 		log.info("write : " + board);
-		board.setType(4);				// 문의하기
+		board.setType(2);				// 문의하기는 2로
 		service.write(board);
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/noticeList";
