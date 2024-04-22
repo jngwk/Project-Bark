@@ -1,9 +1,7 @@
 package com.bark.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +12,9 @@ import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Page;
 import com.bark.mapper.CommentMapper;
+import com.bark.service.AdoptionService;
 import com.bark.service.BoardService;
+import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -23,13 +23,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/board/*")
 @AllArgsConstructor
-
 public class BoardController {
 	private BoardService service;
 	
 	private CommentMapper commentmapper;
 
-	@GetMapping("/noticeList")
+	@GetMapping("/noticeList")//다건
 	public void noticeList(Model model,
 						   @RequestParam(required=false, value="searchField") String searchField,
 						   @RequestParam(required=false, value="searchWord") String searchWord,
@@ -74,7 +73,7 @@ public class BoardController {
 		model.addAttribute("bList", service.searchList(cri));
 	}	
 	
-	@GetMapping("/noticeRead")
+	@GetMapping("/noticeRead")//단건
 	public void read(Model model, 
 					 @RequestParam("bno") Integer  bno,						   
 					 @RequestParam(required=false, value="searchField") String searchField,
@@ -152,6 +151,22 @@ public class BoardController {
 		return "redirect:/board/noticeList";
 	}
 	
+
+	@PostMapping("/contactWrite") // 04-22 추가한 부분 . 이게 있어야 문의하기 글 DB에 써짐
+	public String contactWrite(Board board, RedirectAttributes rttr) {
+		
+		log.info("write : " + board);
+		board.setType(2);				// 문의하기는 2로
+		service.write(board);
+		rttr.addFlashAttribute("result", board.getBno());
+		return "redirect:/board/noticeList";
+	}
+	
+	@GetMapping("/noticeUpate")
+	public void update() {
+	
+	}
+
 //	@GetMapping("/noticeUpdate")
 //	public Board update(@RequestParam("bno") Integer  bno) {
 //		log.info("noticeUpdate : " + bno);
@@ -177,6 +192,7 @@ public class BoardController {
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("amount", amount);
 		model.addAttribute("board", service.read(bno));
+
 
 	}
 	
@@ -273,7 +289,7 @@ public class BoardController {
 	
 	@GetMapping("/contactWrite")
 	public void contactWrite() {
-		
+		log.info("contactWrite...........");
 	}
 	
 	@GetMapping("/shareWrite")

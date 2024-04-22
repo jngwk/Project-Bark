@@ -62,6 +62,7 @@ public class UserController {
 			session.setAttribute("userId", id);
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
+			session.setAttribute("userPhone", user.getPhone());
 			return 1;
 		}
 		else if(!user.getPwd().equals(pwd)){
@@ -118,6 +119,12 @@ public class UserController {
 		session.removeAttribute("userType");
 		session.removeAttribute("userName");
 		return "redirect:/";
+	}
+	
+	@GetMapping(value="getUser",produces = "application/json; charset=utf8")
+	@ResponseBody
+	public User getUser(@RequestParam("id") String id){
+		return service.getUser(id);
 	}
 	
 	@PostMapping(value="checkId",produces = "application/json; charset=utf8")

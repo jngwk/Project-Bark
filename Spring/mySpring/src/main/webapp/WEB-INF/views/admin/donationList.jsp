@@ -13,7 +13,7 @@
 
   </head>
   <body>
-  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
+  <jsp:include page="${views }/include/header.jsp" flush="false" />
     <section class="notice">
       <p class="page-title">Donation</p>
       <p class="page-subtitle">[기부 내역]</p>
@@ -26,10 +26,9 @@
               <div class="search-wrap">
                 <label for="search" class="blind">공지사항 내용 검색</label>
                 <select class="searchfilter">
-                  <option value="">카테고리</option>
+                  <option value="phone">카테고리</option>
                   <option value="id">아이디</option>
-                  <option value="userName">이름</option>
-                  <option value="shelterName">보호소</option>
+                  <option value="u.name">이름</option>
                 </select>
                 <input
                   id="searchInput"
@@ -37,7 +36,7 @@
                   name="searchInput"
                   placeholder="검색어를 입력해주세요."
                 />
-                <button type="submit" class="searchUserBtn btn-dark">검색</button>
+                <button type="button" class="searchUserBtn medium-btn btn-dark">검색</button>
               </div>
             </form>
           </div>
@@ -52,29 +51,36 @@
               <tr>
                 <th scope="col" class="th-num">번호</th>
                 <th scope="col" class="th-userId">아이디</th>
-                <th scope="col" class="th-username">이름</th>
-                <th scope="col" class="th-regDate">보호소</th>
-                <th scope="col" class="th-email">기부액</th>
-                <th scope="col" class="th-email">기부날짜</th>
+                <th scope="col" class="th-userName">이름</th>
+                <th scope="col" class="th-shelterName">보호소</th>
+                <th scope="col" class="th-dogName">기부금액</th>
+                <th scope="col" class="th-regDate">기부날짜</th>
                 <th scope="col" class="th-exe">
-                  <select>
-                    <option>기부상태</option>
-                    <option>처리중</option>
-                    <option>처리완료</option>
-                    <option>처리실패</option>
+                  <select class="userState">
+                    <option>입양상태</option>
+                    <option value="1">처리중</option>
+                    <option value="2">처리완료</option>
+                    <option value="0">처리실패</option>
                   </select>
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="donationList">
             <c:forEach var="dList" items="${dList}">
               <tr>
                 <td>${dList.no}</td>
                 <td>${dList.id}</td>
-                <td>${dList.name}</td>
+                <td>${dList.userName}</td>
                 <td>${dList.shelterName}</td>
-                <td>${dList.amount}</td>
-                <td>${dList.paymentDate}</td>
+                <c:choose>
+                	<c:when test="${dList.dogName== null || dList.dogName ==''}">
+                		<td>이름없음</td>
+                	</c:when>
+                	<c:otherwise>
+                		<td>${dList.dogName}</td>
+                	</c:otherwise>
+                </c:choose>
+                <td>${dList.date}</td>
                 <td>${dList.state}</td>
               </tr>
               </c:forEach>
@@ -91,180 +97,113 @@
 	<script>
 	//검색
 	$(".searchUserBtn").on("click",function(){
-		if($(".searchfilter").val() != ""){
-			getSearchUser();
-		}else{$("#searchInput").val()==null;
-			getSearchUser();}
-			console.log("click");
-		})
-	function getSearchUser(){
+		getSearchDonation();
+		console.log("click");
+	})
+	function getSearchDonation(){
 		console.log($(".searchfilter").val());
 		console.log($("#searchInput").val());
 		$.ajax({
-		type: 'POST',
-		url : "/admin/getSearchUser",
-		data : {
+			type: 'POST',
+			url : "/admin/getSearchDonation",
+			data : {
 					filter: $(".searchfilter").val(),
 					input: $("#searchInput").val()
 				},
-		success : function(result){
-			$('.userList').empty();
-			if(result.length>=1){
-				let count=result.length+1;
-				result.forEach(function(uList){
-					count--;
-					if(uList.type ==2){
-						if(uList.available ==2){
-							str=`
-						         <tr>
-					               <td>\${count}</td>
-					               <td>\${uList.id }</td>
-					               <td>\${uList.name }</td>
-					               <td>\${uList.regDate }</td>
-					               <td>\${uList.email }</td>
-					               <td>\${uList.type }</td>
-			            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
-						           </td>
-				              	</tr>`
-						}else if(uList.available ==1){
-							str=`
-						         <tr>
-					               <td>\${count}</td>
-					               <td>\${uList.id }</td>
-					               <td>\${uList.name }</td>
-					               <td>\${uList.regDate }</td>
-					               <td>\${uList.email }</td>
-					               <td>\${uList.type }</td>
-			            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
-						           </td>
-				              	</tr>`
-						}
-						else{
-							str=`
-						         <tr>
-					               <td>\${count}</td>
-					               <td>\${uList.id }</td>
-					               <td>\${uList.name }</td>
-					               <td>\${uList.regDate }</td>
-					               <td>\${uList.email }</td>
-					               <td>\${uList.type }</td>
-					               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
-						            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
-						           </td>
-				              	</tr>`
-						}
-						
-					}else if(uList.type ==1){
+			success : function(result){
+				$('.donationList').empty();
+				if(result.length>=1){
+					result.forEach(function(dList){
 						str=`
-					          <tr>
-				                <td>\${count}</td>
-				                <td>\${uList.id }</td>
-				                <td>\${uList.name }</td>
-				                <td>\${uList.regDate }</td>
-				                <td>\${uList.email }</td>
-				                <td>\${uList.type }</td>
-			              		<td><td>
-			              	</tr>`
-					}
-					$('.userList').append(str);
-        		}) 
+				            <tr>
+				                <td>\${dList.no}</td>
+				                <td>\${dList.id}</td>
+				                <td>\${dList.userName}</td>
+				                <td>\${dList.shelterName}</td>`
+				                
+				        if(dList.dogName == null || dList.dogName == ""){
+					        str += `<td>이름없음</td>`
+				        }else{
+				        	str +=`<td>\${dList.dogName}</td>`
+				        }
+
+				        	str +=`<td>\${dList.date}</td>
+				                	<td>\${dList.state}</td>
+				            		</tr>`
+						$('.donationList').append(str);
+        			}) 
+				}
+			},
+			error:function(){
+				alert("ajax 에러")
 			}
-		}
-	})
-}
+		})
+	}
 	
-	//type검색
+	//state검색
 
- 		$(".userType").change(function(){
-			if(this.value==1 || this.value==2){
- 			getUserType();
-			}else{
-				getSearchUser();
-			}
-			
+	$(".userState").change(function(){
+		getUserState();
 	})
 
 
-	function getUserType(){
-		console.log($(".userType").val());
- 		$.ajax({
+	function getUserState(){
+		console.log($(".userState").val());
+		$.ajax({
 			type: 'POST',
-			url : "/admin/getUserType",
+			url : "/admin/getUserState",
 			data : {
 				filter: $(".searchfilter").val(),
 				input: $("#searchInput").val(),
-				type: $(".userType").val()},
+				state: $(".userState").val()},
 			success : function(result){
 				//테이블 초기화
-				$('.userList').empty();
+				$('.donationList').empty();
 				if(result.length>=1){
-					let count=result.length+1;
-					result.forEach(function(uList){
-						count--;
-						if(uList.type ==2){
-							if(uList.available ==2){
-								str=`
-							         <tr>
-						               <td>\${count}</td>
-						               <td>\${uList.id }</td>
-						               <td>\${uList.name }</td>
-						               <td>\${uList.regDate }</td>
-						               <td>\${uList.email }</td>
-						               <td>\${uList.type }</td>
-				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
-							           </td>
-					              	</tr>`
-							}else if(uList.available ==1){
-								str=`
-							         <tr>
-						               <td>\${count}</td>
-						               <td>\${uList.id }</td>
-						               <td>\${uList.name }</td>
-						               <td>\${uList.regDate }</td>
-						               <td>\${uList.email }</td>
-						               <td>\${uList.type }</td>
-				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
-							           </td>
-					              	</tr>`
-							}
-							else{
-								str=`
-							         <tr>
-						               <td>\${count}</td>
-						               <td>\${uList.id }</td>
-						               <td>\${uList.name }</td>
-						               <td>\${uList.regDate }</td>
-						               <td>\${uList.email }</td>
-						               <td>\${uList.type }</td>
-						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
-							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
-							           </td>
-					              	</tr>`
-							}
-							
-						}else if(uList.type ==1){
+					result.forEach(function(dList){
+						if(dList.state ==1){
 							str=`
-						          <tr>
-					                <td>\${count}</td>
-					                <td>\${uList.id }</td>
-					                <td>\${uList.name }</td>
-					                <td>\${uList.regDate }</td>
-					                <td>\${uList.email }</td>
-					                <td>\${uList.type }</td>
-				              		<td><td>
-				              	</tr>`
+					            <tr>
+					                <td>\${dList.no}</td>
+					                <td>\${dList.id}</td>
+					                <td>\${dList.userName}</td>
+					                <td>\${dList.shelterName}</td>`
+					                
+					        if(dList.dogName == null || dList.dogName == ""){
+						        str += `<td>이름없음</td>`
+					        }else{
+					        	str +=`<td>\${dList.dogName}</td>`
+					        }
+
+					        	str +=`<td>\${dList.date}</td>
+					                	<td>\${dList.state}</td>
+					            		</tr>`
+						}else if(dList.state ==2){
+							str=`
+					            <tr>
+					                <td>\${dList.no}</td>
+					                <td>\${dList.id}</td>
+					                <td>\${dList.userName}</td>
+					                <td>\${dList.shelterName}</td>`
+					                
+					        if(dList.dogName == null || dList.dogName == ""){
+						        str += `<td>이름없음</td>`
+					        }else{
+					        	str +=`<td>\${dList.dogName}</td>`
+					        }
+
+					        	str +=`<td>\${dList.date}</td>
+					                	<td>\${dList.state}</td>
+					            		</tr>`
 						}
 
-						$('.userList').append(str);
+						$('.donationList').append(str);
 	        		}) 
 				}
 			}
 		})
 	}
 
-	
-	</script>
-
-	</script>
+</script>
   </body>
 </html>

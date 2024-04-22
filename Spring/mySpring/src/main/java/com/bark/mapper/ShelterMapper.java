@@ -26,10 +26,10 @@ public interface ShelterMapper {
 	
 	@Select("select * from shelter where shelterAddr like concat('%',#{addr},'%')")
 	public List<Shelter> searchShelterAddr(String addr);
-	
-	// kyw : 20240422-16:22  입양신청서(adoptiondetail.jsp) 처리시 조회 내용  
-	@Select("select * from shelter where shelterno = #{shelterno}")
-	public Shelter getShelter(@Param("shelterno") Integer shelterno);
+
+	// kyw : 20240422-16:22  입양신청서(adoptiondetail.jsp) 처리시 조회 내용 
+	@Select("select * from shelter where shelterno = #{shleterno}")
+	public Shelter getShelter(@Param("shleterno") String shleterno);
 	//--------------------------------
 	
 }
