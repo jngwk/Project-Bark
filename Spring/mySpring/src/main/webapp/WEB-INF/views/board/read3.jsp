@@ -6,8 +6,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/read.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/read.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />

@@ -7,10 +7,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="${css }/userList.css" />
-    <link rel="stylesheet" href="${css }/root.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/userList.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
     <!-- <script src="../js/popup.js"></script> -->
-<%--     <script src="${js }/js/userList.js"></script> --%>
+<%--     <script src="resources/js/js/userList.js"></script> --%>
   </head>
   <body>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />

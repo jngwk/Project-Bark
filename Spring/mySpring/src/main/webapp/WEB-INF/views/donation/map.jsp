@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>보호소 조회</title>
-<link rel="stylesheet" href="${css }/shelterMap.css" />
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shelterMap.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 </head>
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
