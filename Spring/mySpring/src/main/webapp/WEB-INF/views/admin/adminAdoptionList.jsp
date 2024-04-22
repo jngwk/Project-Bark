@@ -28,7 +28,7 @@
                 <select class="searchfilter">
                   <option value="phone">카테고리</option>
                   <option value="id">아이디</option>
-                  <option value="name">이름</option>
+                  <option value="u.name">이름</option>
                 </select>
                 <input
                   id="searchInput"
@@ -56,7 +56,7 @@
                 <th scope="col" class="th-dogName">강아지명</th>
                 <th scope="col" class="th-regDate">입양일</th>
                 <th scope="col" class="th-exe">
-                  <select>
+                  <select class="userState">
                     <option>입양상태</option>
                     <option value="1">처리중</option>
                     <option value="2">처리완료</option>
@@ -70,9 +70,16 @@
               <tr>
                 <td>${aList.no}</td>
                 <td>${aList.id}</td>
-                <td>${aList.name}</td>
+                <td>${aList.userName}</td>
                 <td>${aList.shelterName}</td>
-                <td>${aList.dogName}</td>
+                <c:choose>
+                	<c:when test="${aList.dogName== null || aList.dogName ==''}">
+                		<td>이름없음</td>
+                	</c:when>
+                	<c:otherwise>
+                		<td>${aList.dogName}</td>
+                	</c:otherwise>
+                </c:choose>
                 <td>${aList.date}</td>
                 <td>${aList.state}</td>
               </tr>
@@ -109,20 +116,78 @@
 					result.forEach(function(aList){
 						str=`
 				            <tr>
-				                <td>${aList.no}</td>
-				                <td>${aList.id}</td>
-				                <td>${aList.name}</td>
-				                <td>${aList.shelterName}</td>
-					            <td>${aList.dogName}</td>
-								<td>${aList.date}</td>
-				                <td>${aList.state}</td>
-				            </tr>`
+				                <td>\${aList.no}</td>
+				                <td>\${aList.id}</td>
+				                <td>\${aList.userName}</td>
+				                <td>\${aList.shelterName}</td>`
+				                
+				        if(aList.dogName == null || aList.dogName == ""){
+					        str += `<td>이름없음</td>`
+				        }else{
+				        	str +=`<td>\${aList.dogName}</td>`
+				        }
+
+				        	str +=`<td>\${aList.date}</td>
+				                	<td>\${aList.state}</td>
+				            		</tr>`
 						$('.adoptionList').append(str);
         			}) 
 				}
 			},
 			error:function(){
 				alert("ajax 에러")
+			}
+		})
+	}
+	
+	//state검색
+
+	$(".userState").change(function(){
+		getUserState();
+	})
+
+
+	function getUserState(){
+		console.log($(".userState").val());
+		$.ajax({
+			type: 'POST',
+			url : "/admin/getUserState",
+			data : {
+				filter: $(".searchfilter").val(),
+				input: $("#searchInput").val(),
+				state: $(".userState").val()},
+			success : function(result){
+				//테이블 초기화
+				$('.adoptionList').empty();
+				if(result.length>=1){
+					result.forEach(function(aList){
+						if(aList.state ==1){
+							str=`
+					            <tr>
+				                <td>\${aList.no}</td>
+				                <td>\${aList.id}</td>
+				                <td>\${aList.userName}</td>
+				                <td>\${aList.shelterName}</td>
+				                <td>\${aList.dogName}</td>
+				                <td>\${aList.date}</td>
+				                <td>\${aList.state}</td>
+				              </tr>`
+						}else if(aList.state ==2){
+							str=`
+					            <tr>
+				                <td>\${aList.no}</td>
+				                <td>\${aList.id}</td>
+				                <td>\${aList.userName}</td>
+				                <td>\${aList.shelterName}</td>
+				                <td>\${aList.dogName}</td>
+				                <td>\${aList.date}</td>
+				                <td>\${aList.state}</td>
+				              </tr>`
+						}
+
+						$('.adoptionList').append(str);
+	        		}) 
+				}
 			}
 		})
 	}
