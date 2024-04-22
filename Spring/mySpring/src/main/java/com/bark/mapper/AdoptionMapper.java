@@ -88,4 +88,7 @@ public interface AdoptionMapper {
 	public int delete(int i);
 	@Update("UPDATE board SET shelterId = #{shelterId}, name = #{name}, gender = #{gender}, breed = #{breed}, age = #{age}, desc = #{desc}, neuter = #{neuter} WHERE dogno = #{dogno}")
 	public int update(Dog dog);
+	
+	@Insert("")
+	public void insertAdoption();
 }
