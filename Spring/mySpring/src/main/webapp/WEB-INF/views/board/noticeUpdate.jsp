@@ -7,7 +7,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/csswrite.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
 <script src="${pageContext.request.contextPath}/resources/js/write.js"></script>
 <script
@@ -56,13 +56,13 @@
 									<thead>
 										<tr>
 											<th>제목</th>
-											<th><input type="text" name="Title" maxlength="50" value="${board.title}" }/></th>
+											<th><input type="text" name="Title" maxlength="50" value="${board.title}"/></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td class="textarea" colspan="3"><textarea placeholder="내용을 작성하세요."
-													name="Content" maxlength="2048">"${board.content}"</textarea>
+													name="Content" maxlength="2048">${board.content}</textarea>
 													<input type="hidden" name="bno" value="${board.bno}" />
 													<input type="hidden" name="searchField" value="${searchField}" />
 													<input type="hidden" name="searchWord" value="${searchWord}" />
@@ -100,7 +100,7 @@ let amount= '<c:out value="${amount}"/>';
 let searchField = '<c:out value="${searchField}"/>';
 let searchWord = '<c:out value="${searchWord}"/>';
 
-alert (pageNum + ":" + amount + ":" + searchField + ":" + searchWord);
+//alert (pageNum + ":" + amount + ":" + searchField + ":" + searchWord);
 
 	
 </script>

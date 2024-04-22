@@ -35,16 +35,15 @@
             <table>
               <tr>
                 <td><img src="${icons }/name.png" alt="icon" /></td>
-                
+                <th>이름</th>
                 <td>
                 	<c:choose>
-					    <c:when test="${not empty dog.breed}">
-					    <th>이름</th>
-						            ${dog.breed}
-						        </c:when>
-						        <c:otherwise>
-						            ${dog.name}
-						        </c:otherwise>
+					    <c:when test="${not empty dog.name}">
+						    ${dog.name}
+						</c:when>
+						<c:otherwise>
+						    이름없음
+						</c:otherwise>
 					</c:choose>
 				</td>
               </tr>
@@ -75,7 +74,7 @@
               <tr>
                 <td><img src="${icons }/shelter.png" alt="icon" /></td>
                 <th>보호소</th>
-                <td>${shelter.shelterName}</td>
+                <td>${dog.shelterName}</td>
               </tr>
               <tr>
                 <td><img src="${icons }/neut.png" alt="icon" /></td>
@@ -112,13 +111,13 @@
         <div class="more">
           <p>
           	${dog.feature}
-          	<br>
+<!--           	<br>
             영철이는 중앙동 거리에서 피부병과 각종 질병등을 보유한 상태로 발견
             보호소에서 다른 강아질과 잘 어울리며 평소에 차분하고 의젓한 모습을
             보입니다. 터그와 공놀이를 좋아하며 활동량이 많은 강아지로 잦은
             산책과 활동을 필요로 합니다. 영철이와 함께 활동적인 생활을 해주실 수
             있는 견주님을 찾습니다. 
-          </p>
+          </p> -->
           <button class="large-btn brown-btn expand-btn">입양하기</button>
           <!-- <button class="prev-btn secondary-btn font-bright">목록</button> -->
         </div>
@@ -130,8 +129,10 @@
         <div class="form-page">
           <form action="#" method="post">
             <img src="${images }/logo-brown.png" />
-            <div class="form-title">영철이의 가족이 되어 주세요</div>
+            <!-- <div class="form-title">영철이의 가족이 되어 주세요</div> -->
+            
             <div class="shelter-info form-section">
+              <div >&nbsp;<br>&nbsp;<br>&nbsp;</div>
               <div class="form-subtitle">보호소 정보</div>
               <table class="form-table">
                 <tr>
@@ -140,7 +141,7 @@
                     <input
                       type="text"
                       name="shelterName"
-                      value="${dog.sheltername}"
+                      value="${dog.shelterName}"
                       readonly
                     />
                   </td>
@@ -151,7 +152,7 @@
                     <input
                       type="text"
                       name="shelterNumber"
-                      value="${shelter.careTel}"
+                      value="${dog.careTel}"
                       readonly
                     />
                   </td>
@@ -162,7 +163,7 @@
                     <input
                       type="text"
                       name="shelterAddr"
-                      value="${shelter.shelterAddr }"
+                      value="${dog.shelterAddr }"
                       readonly
                     />
                   </td>
@@ -235,12 +236,12 @@
                     <input type="text" name="addrDetail" id="addrDetail" value=""/>
                   </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <th>우편번호</th>
                   <td>
                     <input type="text" name="postcode" id="postcode" value="" readonly />
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td class="consent-checkbox" colspan="2">
                     <input

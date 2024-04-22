@@ -189,7 +189,7 @@ public class UploadController {
 	   } catch (UnsupportedEncodingException e) {
 	      e.printStackTrace();
 	   } 
-   return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	   return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 
 	}
 	// dog 다운로드
@@ -214,7 +214,7 @@ public class UploadController {
 	   } catch (UnsupportedEncodingException e) {
 	      e.printStackTrace();
 	   } 
-   return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	   return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 
 	}
 	// board 삭제

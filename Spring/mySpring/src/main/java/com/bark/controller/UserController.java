@@ -73,6 +73,7 @@ public class UserController {
 		} else if (!user.getPwd().equals(pwd)) {
 			return -1;
 		}
+		log.info("eeeid: " + id);
 		return -2;
 	}
 

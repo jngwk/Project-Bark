@@ -40,15 +40,15 @@
 					<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
 							<c:choose>
-						        <c:when test="${not empty dogList.breed}">
-						            ${dogList.breed}
+						        <c:when test="${not empty dogList.name}">
+						            ${dogList.name}
 						        </c:when>
 						        <c:otherwise>
-						            ${dogList.name}
+						            이름없음
 						        </c:otherwise>
 						    </c:choose>
 					 	</h2>
-					<a href="${contextPath }/adoption/detail?dogno=${dogList.dogno}&userId=<%=(String)session.getAttribute("userId")%>&shelterno=${dogList.shelterno}" class="card__button">입양하기</a>
+					<a href="${contextPath }/adoption/detail?dogno=${dogList.dogno}" class="card__button">입양하기</a>
 				</div>
 			</article>
 		</c:forEach> 

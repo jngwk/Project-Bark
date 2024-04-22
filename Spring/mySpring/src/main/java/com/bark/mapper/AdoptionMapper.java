@@ -18,8 +18,10 @@ import com.bark.domain.Dog;
 public interface AdoptionMapper {	
 	
 	//입양목록 관련
-		
-	@Select("select d.dogno, d.gender, d.age, d.breed, d.available, s.shelterName, a.imgUrl"
+	@Select("select * from dog;")
+	public List<Dog> getDogList();
+	
+	@Select("select d.dogno, d.gender, d.age, d.breed, d.available, s.shelterName, a.imgUrl, s.careTel, s.shelterAddr"
 			+ "			from dog d"
 			+ "				join attach a"
 			+ "						on d.dogno = a.dogno"
@@ -27,15 +29,7 @@ public interface AdoptionMapper {
 			+ "						on s.shelterno = d.shelterno"
 			+ "					where d.dogno = #{dogno};")
 	public Dog getDog(int dogno);	//특정 강아지 정보, detail
-
 	
-	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
-			+ "FROM dog d "
-			+ "	join attach a "
-			+ "		on d.dogno = a.dogno"
-			+ "	inner join shelter s"
-			+ "		on s.shelterno = d.shelterno;")
-	public List<Dog> getDogList();
 	
 	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl "
 			+ "FROM dog d "
@@ -43,8 +37,8 @@ public interface AdoptionMapper {
 			+ "		on d.dogno = a.dogno "
 			+ "ORDER BY dogno DESC "
 			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
-	public List<Dog> searchList(@Param("cri") Criteria cri);//한 페이지당 강아지 리스트
-
+	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
+	
 	
 	//관리자 입양관리페이지
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
@@ -52,6 +46,17 @@ public interface AdoptionMapper {
 		+ "    join dog d on d.adoptionno = a.adoptionno\r\n"
 		+ "    join shelter s on s.shelterno = d.shelterno;")
 	public List<Adoption> getAdoptionList();
+	
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY a.adoptionno DESC) AS row_num, a.adoptionno no, a.id id, u.name userName, s.shelterName, d.name dogName, a.adopt_date date, a.state\r\n"
+			+ "			 from adoption a "
+			+ "			join user u "
+			+ "				on a.id = u.id"
+			+ "			join dog d "
+			+ "				on d.dogno = a.dogno"
+			+ "			join shelter s "
+			+ "				on s.shelterno = d.shelterno "
+			+ "			ORDER BY a.adoptionno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
+	public List<Adoption> searchAdoptionList(@Param("cri") Criteria cri);	//한 페이지당 입양내역 리스트
 
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 			+ "	from adoption a join user u on a.id = u.id\r\n"
@@ -68,10 +73,11 @@ public interface AdoptionMapper {
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
 	public List<Adoption> getUserState(String filter,String input,int state);
+		
 	
+	//강아지 파일 관련
 	@Select("select shelterno from shelter where shelterName = #{shelterName}")
 	public int getSehterno(String shelterName);
-
 	
 	@Insert("insert into dog(shelterno, name, gender, breed, age, feature, neuter)"
 			+ "values(#{shelterno}, #{name}, #{gender}, #{breed}, #{age}, #{feature}, #{neuter}) ")
