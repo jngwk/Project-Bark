@@ -75,13 +75,12 @@
   text-align: end;
 }
 
-
-
-
-
-
-
-
+.card-header{
+  margin-top: 20px;
+}
+#uploadFile{
+  width:100%;
+}
 
 .dogAdd-table td a {
   float: left;
