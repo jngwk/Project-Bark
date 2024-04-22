@@ -12,7 +12,7 @@
     <script src="${js }/js/userList.js"></script>
   </head>
   <body>
-<jsp:include page="${views }/include/header.jsp" flush="false" />
+<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
 
     <section class="notice">
       <p class="page-title">User Account</p>

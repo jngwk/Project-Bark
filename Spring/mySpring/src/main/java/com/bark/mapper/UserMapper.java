@@ -21,10 +21,10 @@ public interface UserMapper {
 	 */
 	public User getUser(String id);
 	@Insert("insert into user(id, pwd, name, phone, email, addr, addrDetail, postcode, bank, bankAcc, type)\r\n"
-			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{addrDetail}, #{postcode}, #{bank}, #{bankAcc}, #{type})")
+			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")
 	public int insert(User user);
 	@Update("update user \r\n"
-			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}, addrDetail = #{addrDetail}, postcode = #{postcode}, bank = #{bank}, bankAcc = #{bankAcc}\r\n"
+			+ "	set pwd = #{pwd}, phone = #{phone}, email = #{email}, addr = #{addr}\r\n"
 			+ "	where id = #{id}")
 	public int update(User user);
 	@Delete("delete from user where id=#{id}")

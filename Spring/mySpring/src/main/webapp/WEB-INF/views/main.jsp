@@ -7,12 +7,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <%-- <c:set var="contextPath" value="${pageContext.request.contextPath }" scope="application"/>
+    <c:set var="contextPath" value="${pageContext.request.contextPath }" scope="application"/>
     <c:set var="views" value="${contextPath }/WEB-INF/views" scope="application"/>
     <c:set var="css" value="${contextPath }/resources/css" scope="application"/>
     <c:set var="images" value="${contextPath }/resources/images" scope="application"/>
     <c:set var="icons" value="${images }/icons" scope="application"/>
-    <c:set var="js" value="${contextPath }/resources/js" scope="application"/> --%>
+    <c:set var="js" value="${contextPath }/resources/js" scope="application"/>
     <link rel="stylesheet" href="${css }/root.css" />
     <link rel="stylesheet" href="${css }/main.css" />
     <link rel="stylesheet" href="${css }/transition.css" />

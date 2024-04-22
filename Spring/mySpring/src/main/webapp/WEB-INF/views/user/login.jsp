@@ -187,6 +187,7 @@
 										</div>
 										<!-- 보호소 선택 -->
 										<div class="form-slide ">
+											<input type="hidden" name="available" value=""/>
 											<input type="hidden" name="type" value="2" /> <label
 												class="popup-label"> <span>아이디</span> <input
 												type="text" name="id" class="login-popup-input id-input" />

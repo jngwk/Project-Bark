@@ -16,7 +16,7 @@
     ></script>
   </head>
   <body>
-  <jsp:include page="${views }/include/header.jsp" flush="false"/>
+  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"/>
     <div class="dog-desc-container">
     <p class="page-title">Detail</p><p class="page-subtitle">[상세보기]</p>
       <div class="dog-desc-inner">
