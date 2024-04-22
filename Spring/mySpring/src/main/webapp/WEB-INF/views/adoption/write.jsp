@@ -82,10 +82,10 @@ $(document).ready(function() {
 	   $(".uploadResult ul li").each(function(i, obj){
 	       var obj = $(obj);
 	       console.dir(obj);
-	       str += `<input type='hidden' name='attachList[\${i}].fileName' value='\${obj.data("filename")}'>
-	       <input type='hidden' name='attachList[\${i}].uuid' value='\${obj.data("uuid")}'>
-	       <input type='hidden' name='attachList[\${i}].uploadPath' value='\${obj.data("path")}'>
-	       <input type='hidden' name='attachList[\${i}].fileType' value='\${obj.data("type")}'>`;   });
+	       str += `<input type='hidden' name='dogAttachedList[\${i}].fileName' value='\${obj.data("filename")}'>
+	       <input type='hidden' name='dogAttachedList[\${i}].uuid' value='\${obj.data("uuid")}'>
+	       <input type='hidden' name='dogAttachedList[\${i}].uploadPath' value='\${obj.data("path")}'>
+	       <input type='hidden' name='dogAttachedList[\${i}].fileType' value='\${obj.data("type")}'>`;   });
 	   formObj.append(str).submit();
 
 	}); //sumbit button event

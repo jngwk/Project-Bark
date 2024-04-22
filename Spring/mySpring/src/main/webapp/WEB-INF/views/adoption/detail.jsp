@@ -35,16 +35,15 @@
             <table>
               <tr>
                 <td><img src="${icons }/name.png" alt="icon" /></td>
-                
+                <th>이름</th>
                 <td>
                 	<c:choose>
-					    <c:when test="${not empty dog.breed}">
-					    <th>이름</th>
-						            ${dog.breed}
-						        </c:when>
-						        <c:otherwise>
-						            ${dog.name}
-						        </c:otherwise>
+					    <c:when test="${not empty dog.name}">
+						    ${dog.name}
+						</c:when>
+						<c:otherwise>
+						    이름없음
+						</c:otherwise>
 					</c:choose>
 				</td>
               </tr>
