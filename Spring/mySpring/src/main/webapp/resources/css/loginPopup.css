@@ -289,7 +289,7 @@ body {
 	opacity: 1;
 	pointer-events: initial;
 }
-.popup-label.pending::after{
+.popup-label.verify-label::after{
   	content: "이메일로 발송 된 인증번호를 확인해주세요.";
     color: green;
 }
@@ -345,9 +345,9 @@ body {
 	content: "인증이 완료 되었습니다.";
 	    color: green;
 }
-
-.login-popup-input.required {
-  animation: shake 0.2s ease-in-out 0s 2;
+.popup-label.find-acc-label.inform::after{
+	content: "가입시 등록하신 이메일을 입력해주세요.";
+	color: #000;
 }
 
 @keyframes shake {
@@ -374,7 +374,8 @@ body {
 .submit-btn,
 .general-btn,
 .next-btn,
-.find-account-btn {
+.find-account-btn,
+.back-to-login-btn {
   margin-top: 40px;
   margin-bottom: 20px;
   background: var(--color-brown);
@@ -388,7 +389,8 @@ body {
 .to-login-btn,
 .shelter-btn,
 .prev-btn,
-.login-prev-btn {
+.login-prev-btn,
+.cancel-btn {
   border: 2px solid #ccc5b8;
   color: var(--color-brown);
 }
