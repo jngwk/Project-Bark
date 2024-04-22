@@ -16,7 +16,7 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-	<jsp:include page="${views }/include/header.jsp" flush="false"></jsp:include>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
 	<div class="donate-container">
 		<div class="donate-page slide-animation">
 			<form action="" method="post">

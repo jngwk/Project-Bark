@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<jsp:include page="${views }/include/header.jsp" flush="false"></jsp:include>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
 	<div class="story-container">
 		<div class="story">
 			<p class="page-title">Campaign</p><p class="page-subtitle">[캠페인 둘러보기]</p>
