@@ -31,8 +31,9 @@ public interface CommentMapper {
 
 	// 게시판 read 에서 댓글 존재 여부 확인 
 	// 댓글이 존재하면 게시판 수정 불가
-	@Select("SELECT count(1) FROM comment WHERE bno=#{bno}")
-	public int getCount(@Param("bno") Integer bno);
+	@Select("SELECT count(1) FROM comment WHERE board_bno=#{bno}")
+	public int getCount(@Param("bno") Integer board_bno);
+
 	// dummy 게시판 Data 생성시 필요 ------TEST--------------
 	// User 테이블의 회원 Id List 추출 
 	@Select("SELECT id FROM user ")

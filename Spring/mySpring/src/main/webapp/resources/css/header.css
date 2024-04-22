@@ -80,7 +80,9 @@
 .profile:hover{
 	cursor: pointer;
 }
-
+.profile > img{
+	width: 48px;
+}
 .profile-menu{
   position: absolute;
   padding: 10px 20px;

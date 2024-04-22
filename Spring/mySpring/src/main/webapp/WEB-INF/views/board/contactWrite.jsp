@@ -42,10 +42,10 @@
 			<div class="write-container">
 				<div class="write-board">
 					<div class="write-title">
-						<p>게시글 쓰기</p>
+						<p>문의 하기</p>
 					</div>
 					<div class="write-read">
-						<form method="post" action="writeAction.jsp">
+						<form method="post" action="/board/contactWrite">
 							<div class="form-bg">
 								<table class="write-table">
 									<thead>
@@ -73,6 +73,8 @@
 									value="취소" class="btn brown-btn large-btn" /> <input
 									data-ico="->" type="submit" value="작성 완료"
 									class="btn brown-btn large-btn" />
+									<input type="hidden" name="user_id" value="<%=(String) session.getAttribute("userId")%>" />
+<!-- 									<input type="hidden" name="user_id" value="jihyeon2368" /> -->
 							</div>
 						</form>
 					</div>

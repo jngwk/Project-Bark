@@ -16,8 +16,9 @@
   position: relative;
   top: 50%;
   left: 50%;
-  height: 800px;
+  height: 720px;
   width: 700px;
+  transition: height 1s ease-in-out;
   transform: translate(-50%, -50%);
   z-index: 1002;
   box-sizing: border-box;
@@ -26,15 +27,19 @@
   -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
+
+.update-popupbox.expand{
+	height: 840px;
+}
 /*컨텐츠 영역*/
 .update-popupbox .update-popup-content {
-  overflow-y: scroll;
+/*   overflow-y: scroll; */
   height: 100%;
   line-height: 1.4rem;
   font-size: 16px;
 }
 /* content 스크롤 */
-.update-popup-content::-webkit-scrollbar {
+/* .update-popup-content::-webkit-scrollbar {
   width: 10px;
 }
 .update-popup-content::-webkit-scrollbar-thumb {
@@ -45,18 +50,18 @@
 }
 .update-popup-content::-webkit-scrollbar-track {
   background-color: transparent;
-}
+} */
 
 /*title*/
 .update-popup-content > .update-title {
   position: absolute;
   top: 0;
-  width: 684px;
+  width: 100%;
   background: var(--color-bright);
   
 }
 .update-popup-content > .update-title > p {
-  padding: 20px;
+  padding: 32px;
   text-align: center;
   color: var(--color-bark);
 }
@@ -82,7 +87,7 @@
 }
 .update-popup-content label p {
   width: 48%;
-  padding: px;
+  padding: 10px 0;
 }
 .update-popup-content label input,.update-popup-content label button {
   border: none;
@@ -91,6 +96,7 @@
 }
 
 .update-popup-content label input {
+	height: 30px;
   display: block;
   width: 45%;
   margin-top: 5px;
@@ -103,15 +109,10 @@
 
 /*비밀번호변경*/
 .update-popup-content .pwd-btn {
-  display: inline-block;
-  text-align: center;
-  margin-left: 100px;
-  font-size: 12px;
-  width: 100px;
-  border-radius: 3px;
-  background: var(--color-light-brown);
-  color: #fff;
-  padding: 0;
+	width: 100px;
+    font-size: 14px;
+    position: absolute;
+    right: 140px;
 }
 .update-popup-content:hover .pwd-btn:hover{
   background: var(--color-brown);
@@ -120,7 +121,7 @@
 .update-popup-content .pwd-mainmenu {
   overflow: hidden;
   height: 0px;
-  transition: height 1s;
+  transition: height 1s ease-in-out;
 }
 
 .update-popup-content .expand {
@@ -133,22 +134,28 @@
 
 /* 데이터 초기화 버튼 */
 .update-popup-content label button > img {
+	    transform: translate(-20px, 2px);
   width: 20px;
+  cursor: pointer;
 }
 .update-popup-content .reset-btn{
-  visibility: hidden
+  visibility: hidden;
 }
-
 /* 하단버튼 */
 .update-completeBtn {
   display: flex;
   justify-content: center;
-  width: 660px;
+  width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 40px;
   background-color: var(--color-bright);
 }
 .update-cancel-btn,
+.update-save-btn{
+	width: 120px;
+	height: 52px;
+}
+/* .update-cancel-btn,
 .update-save-btn {
   display: inline-block;
   text-align: center;
@@ -162,6 +169,6 @@
   background: var(--color-light-brown);
   border: 0px;
 }
-
+ */
 .update-cancel-btn:hover,.update-save-btn:hover{
   background-color: var(--color-brown);}

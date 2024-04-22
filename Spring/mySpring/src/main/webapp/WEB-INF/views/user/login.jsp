@@ -310,6 +310,10 @@
 		}
 
 		function addShelter(selectedShelter) {
+			if(shelterNames.length <= 0){
+				// 가져오지 못하면 다시 가져와!
+				getShelterList();
+			}
 		  options.innerHTML = "";
 		  shelterNames.forEach((sName) => {
 		    let isSelected = sName == selectedShelter ? "selected" : "other";

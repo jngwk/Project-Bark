@@ -79,6 +79,9 @@
   line-height: 45px;
   width: 100px;
 }
+.summary-cont td{
+	width: fit-content;
+}
 .summary-cont th {
   display: inline-block;
   text-align: left;

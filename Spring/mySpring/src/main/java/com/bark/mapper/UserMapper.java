@@ -12,9 +12,10 @@ import com.bark.domain.User;
 
 public interface UserMapper {
 	
-	@Select("select * from user where type != 3 order by type,shelterno")
+
+	@Select("select * from user where type != 3 order by type, shelterno")
 	public List<User> getUserList();
-	@Select("select * from user where type != 3 and id = #{id} order by type,shelterno")
+	@Select("select * from user where id = #{id}")
 	public User getUser(String id);
 	@Insert("insert into user(id, pwd, name, phone, email, addr, available, type)\r\n"
 			+ "	values(#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{addr}, #{available}, #{type})")
@@ -36,10 +37,10 @@ public interface UserMapper {
     @Update("update user set pwd = #{pwd} where email = #{email}")
 	public int updateUserPwd(@Param("email") String email, @Param("pwd")String pwd);
     
-    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type,shelter_shelterno")
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type, shelterno")
     public List<User> getUserType(String filter,String input,int type);
 
-    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type,shelter_shelterno")
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type, shelterno")
     public List<User> getSearchUser(String filter,String input);
     
     @Update("update user set available=#{param1} where id=#{param2}")
