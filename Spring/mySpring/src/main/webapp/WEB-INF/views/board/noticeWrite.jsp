@@ -15,10 +15,7 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<%
-// ------------ 테스트 후 꼭 지우세요!!!!!!!!!!
-	session.setAttribute("userid", "gildong");
-%>
+
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 
@@ -83,7 +80,7 @@
 									value="취소" class="btn brown-btn large-btn" /> <input
 									data-ico="->" type="submit" value="작성 완료"
 									class="btn brown-btn large-btn" />
-								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userid")%>" />
+								<input type="hidden" name="user_id" value="<%=(String)session.getAttribute("userId")%>" />
 							</div>
 
 						</form>
