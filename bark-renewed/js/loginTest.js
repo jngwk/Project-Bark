@@ -477,6 +477,12 @@ function login(e) {
   });
 }
 
+$(".login-form").keypress(function (e) {
+  if (e.keyCode === 13) {
+    login();
+  }
+});
+
 // 이메일 유효성
 $("input[name='email']").on("input", function () {
   emailValidChk($(this)); // Pass the jQuery object itself
