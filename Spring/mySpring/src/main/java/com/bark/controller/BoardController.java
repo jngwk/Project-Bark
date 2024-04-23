@@ -32,9 +32,9 @@ public class BoardController {
 
 	@GetMapping("/noticeList")//다건
 	public void noticeList(Model model,
+			     		   @RequestParam(required=false, value="pageNum") Integer pageNum,
+			   			   @RequestParam(required=false, value="searchWord") String searchWord,
 						   @RequestParam(required=false, value="searchField") String searchField,
-						   @RequestParam(required=false, value="searchWord") String searchWord,
-						   @RequestParam(required=false, value="pageNum") Integer pageNum,
 						   @RequestParam(required=false, value="amount") Integer amount) {
 
 		Integer type = 1;   				// 공지사항
