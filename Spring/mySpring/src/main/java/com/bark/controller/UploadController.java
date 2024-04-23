@@ -91,7 +91,7 @@ public class UploadController {
 	
 	@PostMapping(value="/DogUploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public ResponseEntity<List<DogAttached>>  dogUploadAjaxPost(MultipartFile[] uploadFile) {
+	public ResponseEntity<List<DogAttached>> dogUploadAjaxPost(MultipartFile[] uploadFile) {
 		String uploadFolder="d:/upload/dog/";
 		List<DogAttached> list = new ArrayList<DogAttached>();
 		//파일을 upload 지정 폴더 내부에 새로운 폴더를 생성하여 저장하기로 

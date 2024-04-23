@@ -21,7 +21,7 @@ public interface AdoptionMapper {
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
 	
-	@Select("select d.dogno, d.gender, d.age, d.breed, d.available, s.shelterName, a.imgUrl, s.careTel, s.shelterAddr"
+	@Select("select d.dogno, d.gender,d.feature, d.neuter, d.age, d.breed, d.available, s.shelterName, a.imgUrl, s.careTel, s.shelterAddr"
 			+ "			from dog d"
 			+ "				join attach a"
 			+ "						on d.dogno = a.dogno"
@@ -31,13 +31,13 @@ public interface AdoptionMapper {
 	public Dog getDog(int dogno);	//특정 강아지 정보, detail
 	
 	
-	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, s.shelterName "
-			+ "FROM dog d "
-			+ "	join attach a "
-			+ "		on d.dogno = a.dogno "
-			+ "	join shelter s "
-			+ "		on s.shelterno = d.shelterno "
-			+ "ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, a.uuid, s.shelterName\r\n"
+			+ "			FROM dog d "
+			+ "			join attach a "
+			+ "				on d.dogno = a.dogno "
+			+ "			join shelter s "
+			+ "				on d.shelterno = s.shelterno "
+			+ "				ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
 	
 	// 입양 상세 -> 입양 신청 등록
@@ -47,6 +47,9 @@ public interface AdoptionMapper {
 	// 입양 상세 -> 입양 신청 등록 (dog 입양 상테 Set)
 	@Update("UPDATE dog SET available = #{available} where dogno = #{dogno}")
 	public void adoptionUpdateDog(@Param("dogno") Integer dogno, @Param("available") Integer available);
+	
+	@Select("select shelterno from shelter where shelterName = #{shelterName}")
+	public int getShelterno(String shelterName);
 	
 	//관리자 입양관리페이지
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"

@@ -24,7 +24,7 @@
   	   <div class="adoption-list-header">
     <p class="page-title">Adoption</p><p class="page-subtitle">[입양 목록]</p>
          <div class="story-button">
-			<a class="large-btn brown-btn" href="${contextPath }/adoption/dogAdd">등록하기</a>
+			<a class="large-btn brown-btn" href="${contextPath }/adoption/write">등록하기</a>
 		</div>
     </div>
 
@@ -33,9 +33,7 @@
 		<div class="card__container">
 		<c:forEach var="dogList" items="${dogList}" >
 			<article class="card__article">
-				<img
-					src="${dogList.imgUrl}"
-					alt="image" class="card__img" />
+				<img src="${dogList.imgUrl}" alt="image" class="card__img" />
 				<div class="card__data">
 					<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
