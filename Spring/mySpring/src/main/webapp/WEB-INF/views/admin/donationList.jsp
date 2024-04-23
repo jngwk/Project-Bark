@@ -26,7 +26,7 @@
               <div class="search-wrap">
                 <label for="search" class="blind">공지사항 내용 검색</label>
                 <select class="searchfilter">
-                  <option value="phone">카테고리</option>
+                  <option value="phone">선택</option>
                   <option value="u.id">아이디</option>
                   <option value="u.name">이름</option>
                 </select>
@@ -124,8 +124,17 @@
 			                <td>\${dList.shelterName}</td>
 			                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
 			                <td>\${dList.paymentDate}</td>
-			                <td>\${dList.state}</td>
-			              </tr>`
+			                `
+				             if(dList.state==0){
+				            	 str+= `<td>처리중</td>
+						                </tr>`
+				             }else if(dList.state==1){
+				            	 str+= `<td>처리완료</td>
+						                </tr>`
+				             }else{
+				            	 str+= `<td>처리실패</td>
+						                </tr>`
+                                }
 						$('.donationList').append(str);
         			}) 
 				}

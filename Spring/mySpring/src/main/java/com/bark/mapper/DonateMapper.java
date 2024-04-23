@@ -27,19 +27,19 @@ public interface DonateMapper {
 	//관리자페이지 기부내역 전체
 	@Select("select d.donationno, d.id id, u.name userName, s.shelterName,d.amount amount,d.paymentDate,d.state\r\n"
 			+" from donation d join user u on d.id = u.id\r\n"
-			+" join shelter s on s.shelterno = d.shelterno;")
+			+" join shelter s on s.shelterno = d.shelterno order by d.paymentDate desc;")
 	public List<Donate> donationList();
 	//관리자페이지 검색창
 	@Select("select d.donationno, d.id id, u.name userName, s.shelterName,d.amount,d.paymentDate,d.state\r\n"
 			+" from donation d join user u on d.id = u.id\r\n"
 			+" join shelter s on s.shelterno = d.shelterno\r\n"
-			+ " where ${param1} like concat('%',#{param2},'%')")
+			+ " where ${param1} like concat('%',#{param2},'%') order by d.paymentDate desc")
 	public List<Donate> getSearchDonation(String filter, String input);
 	//관리자페이지 state
 	@Select("select d.donationno, d.id id, u.name userName, s.shelterName,d.amount,d.paymentDate,d.state\r\n"
 			+" from donation d join user u on d.id = u.id\r\n"
 			+" join shelter s on s.shelterno = d.shelterno"
-			+ "	where ${param1} like concat('%',#{param2},'%') and state=${param3};")
+			+ "	where ${param1} like concat('%',#{param2},'%') and state=${param3} order by d.paymentDate desc;")
 	public List<Donate> getDonationState(String filter, String input, int state);
 
 	//회원페이지 기부내역 전체
