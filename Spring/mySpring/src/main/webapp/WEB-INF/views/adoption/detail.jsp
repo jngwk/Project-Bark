@@ -151,7 +151,7 @@
                   <td>
                     <input
                       type="text"
-                      name="shelterNumber"
+                      name="careTel"
                       value="${dog.careTel}"
                       readonly
                     />
@@ -163,9 +163,10 @@
                     <input
                       type="text"
                       name="shelterAddr"
-                      value="${dog.shelterAddr }"
+                      value="${dog.shelterAddr}"
                       readonly
                     />
+                    <input type="hidden"  name="dogno"  value="${dog.dogno}" />
                   </td>
                 </tr>
               </table>
@@ -178,8 +179,8 @@
                   <td>
                     <input
                       type="text"
-                      name="userName"
-                      value="${user.name }"
+                      name="name"
+                      value="${user.name}"
                       readonly
                     />
                   </td>
@@ -189,7 +190,7 @@
                   <td>
                     <input
                       type="text"
-                      name="userName"
+                      name="phone"
                       value="${user.phone }"
                       readonly
                     />
@@ -200,7 +201,7 @@
                   <td>
                     <input
                       type="text"
-                      name="emailName"
+                      name="email"
                       value="${user.email }"
                       readonly
                     />
