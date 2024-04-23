@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
+import com.bark.domain.Donate;
 import com.bark.domain.Page;
 import com.bark.domain.User;
 import com.bark.service.AdoptionService;
@@ -70,7 +71,7 @@ public class AdminController {
 	@GetMapping("/donationList")
 	public String donationList(Model model) {
 		log.info("donationlist...........");
-		List<Adoption> dList = donateservice.donationList();
+		List<Donate> dList = donateservice.donationList();
 		
 		model.addAttribute("dList",dList);
 		return "/admin/donationList";
@@ -78,14 +79,14 @@ public class AdminController {
 	
 	@PostMapping(value="getSearchDonation",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<Adoption> getSearchDonation(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
+	public List<Donate> getSearchDonation(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
 		log.info(filter); log.info(input);
 		return donateservice.getSearchDonation(filter,input);
 	}
 	
 	 @PostMapping(value="getDonationState",produces = "application/json; charset=utf8")
 	 @ResponseBody
-	 public List<Adoption> getDonationState(@RequestParam ("filter") String filter,@RequestParam ("input") String input,
+	 public List<Donate> getDonationState(@RequestParam ("filter") String filter,@RequestParam ("input") String input,
 			 @RequestParam ("state") String state,Model model) {
 		 log.info("-------Donation search mapping o--------");
 		 log.info(state);

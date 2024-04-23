@@ -23,17 +23,17 @@ public class DonateService {
 	}
 
 	//관리자페이지 기부내역
-	public List<Adoption> donationList() {
+	public List<Donate> donationList() {
 		// TODO Auto-generated method stub
 		return mapper.donationList();
 	}
 	
-	public List<Adoption> getSearchDonation(String filter, String input) {
+	public List<Donate> getSearchDonation(String filter, String input) {
 		// TODO Auto-generated method stub
 		return mapper.getSearchDonation(filter,input);
 	}
 
-	public List<Adoption> getDonationState(String filter, String input, int state) {
+	public List<Donate> getDonationState(String filter, String input, int state) {
 		// TODO Auto-generated method stub
 		return mapper.getDonationState(filter,input,state);
 	}
