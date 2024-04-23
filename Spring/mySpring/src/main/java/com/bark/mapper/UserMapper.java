@@ -36,8 +36,13 @@ public interface UserMapper {
     @Update("update user set pwd = #{pwd} where email = #{email}")
 	public int updateUserPwd(@Param("email") String email, @Param("pwd")String pwd);
     
-    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type, shelterno")
-    public List<User> getUserType(String filter,String input,int type);
+	/*
+	 * @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by type, shelterno"
+	 * ) public List<User> getUserType(String filter,String input,int type);
+	 */
+    
+    @Select("select * from user where type = #{type} order by regDate")
+    public List<User> getUserType(int type);
 
     @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type, shelterno")
     public List<User> getSearchUser(String filter,String input);

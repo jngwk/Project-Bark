@@ -196,4 +196,12 @@ button {
     gap: 8px;
     justify-content: center;
   }
+  
+  .mailto{
+  	color: var(--color-dark) !important;
+  }
+  .mailto:hover{
+  	pointer: cursor;
+  	text-decoration: underline;
+  }
 /* 페이지 버튼 */

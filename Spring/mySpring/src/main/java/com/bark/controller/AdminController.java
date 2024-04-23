@@ -112,10 +112,11 @@ public class AdminController {
 		
 	@PostMapping(value="getUserType",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<User> getUserType(@RequestParam ("filter") String filter,@RequestParam ("input") String input,@RequestParam ("type") String type,Model model) {
-		log.info("-------sheltername search mapping o--------");
+	public List<User> getUserType(@RequestParam ("type") String type, Model model) {
+		log.info("-------get user by type--------");
 		log.info(type);
-		return userservice.getUserType(filter,input,Integer.parseInt(type));
+		log.info(userservice.getUserType(Integer.parseInt(type)));
+		return userservice.getUserType(Integer.parseInt(type));
 	}
 	
 	@PostMapping(value="getSearchUser",produces = "application/json; charset=utf8")
