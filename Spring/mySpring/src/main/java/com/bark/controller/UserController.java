@@ -176,12 +176,6 @@ public class UserController {
 		return result;
 	}
 
-	// 문의하기 목록
-	@GetMapping("/userWriteList")
-	public void userWriteList() {
-		log.info("userWriteList...........");
-	}
-
 	// 유저 페이지 기부 관리
 	@GetMapping("/userDonationList")
 	public String userDonationList(@RequestParam("id") String id,Model model, HttpSession session) {

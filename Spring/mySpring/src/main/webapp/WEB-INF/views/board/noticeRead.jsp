@@ -121,7 +121,7 @@
 	showList(1);
 
  	// 댓글 리스트 조회
-	function showList(page) {
+/* 	function showList(page) {
 		getList({
 			bno : bnoValue,
 			page : page || 1
@@ -162,7 +162,43 @@
 			replyUL.html(str);
 		});
 		
-	}
+	} */
+	
+	  function showList(page) {
+	    getList(
+	      {
+	        bno: bnoValue,
+	        page: page || 1,
+	      },
+	      function (list) {
+	        let str = "";
+	        if (list == null || list.length == 0) {
+	          replyUL.html("");
+	          return;
+	        }
+	        list.forEach(function (item) {
+	          //let str2 = item.content..replace(/(?:\r\n|\r|\n)/g, '<br />');
+	          let str2 = item.content;
+	          //let str3 = str2.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	          str += `<li name="contentList">
+						<div class="reply-profile">
+							<span>\${item.id}</span><span>\${displayTime(item.regDate)}</span>
+						</div>
+						<div class="reply-content">
+						<p><textarea  style="border: none; width:100%; resize: none;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>`;
+	          if ('${ userId }' == item.id) {
+
+	            str += `<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
+							<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>`;
+	          }
+	          str += `</div>	
+						</li>
+						`;
+	        });
+	        replyUL.html(str);
+	      }
+	    );
+	  }
 
  	// <a href="#" id="removeBtn" class="font-dark">수정</a> 	
 	// <a href='javascript:void(0);' onclick="함수();">
