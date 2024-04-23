@@ -135,7 +135,6 @@ input[type='radio']:checked + label {
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </body>
-</html>
 
 <script>
 IMP.init("imp60737432");
@@ -260,7 +259,7 @@ button.addEventListener("click", onClickPay); */
 	            console.log(err);
 	          }
 	        }); //ajax
-	        location.href ="${contextPath}/user/userDonationList?id=${userId}"; 
+	        location.href ="${contextPath}/donation/formCompelete"; 
 	      } else {
 	          var msg = '결제 실패';
 	          msg += '\n에러내용 : ' + rsp.error_msg;
