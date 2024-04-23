@@ -70,11 +70,11 @@
 							class="xlarge-font hover-underline">게시판</strong></a>
 						<div class="dropdown-content">
 							<a class="transition" href="${contextPath }/board/noticeList"><strong
-								class="large-font hover-underline">공지사항</strong></a> <a
+								class="large-font hover-underline">공지사항</strong></a> <%-- <a
 								class="transition" href="${contextPath }/board/shareList"><strong
 								class="large-font hover-underline">정보공유</strong></a> <a
 								class="transition" href="#"><strong
-								class="large-font hover-underline">보호소 이야기</strong></a> <a
+								class="large-font hover-underline">보호소 이야기</strong></a> --%> <a
 								class="transition" href="${contextPath }/board/contactWrite"><strong
 								class="large-font hover-underline">문의하기</strong></a>
 						</div></li>
@@ -110,10 +110,10 @@
 												<ul>
 													<li><img src="${icons }/user-detail.png" /><a
 														href="javascript:openUpdatePop()">내 정보 조회</a></li>
-													<c:if test="${userType == '2'}">
+													<%-- <c:if test="${userType == '2'}">
 														<li><img src="${icons }/post.png" /><a
 															href="${contextPath }/user/userWriteList">작성글 관리</a></li>
-													</c:if>
+													</c:if> --%>
 													<li><img src="${icons }/book-heart.png" /><a
 														href="${contextPath }/user/userDonationList?id=${userId}">기부/입양
 															관리</a></li>
@@ -134,7 +134,7 @@
 													<li><img src="${icons }/book-heart.png" /><a
 														href="${contextPath }/admin/userList">회원 관리</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/user/userWriteList">문의 내역</a></li>
+														href="${contextPath}/admin/userWriteList">문의 내역</a></li>
 													<li><img src="${icons }/logout.png" /><a
 														href="${contextPath }/user/logout">로그아웃</a></li>
 												</ul>

@@ -12,8 +12,8 @@ import com.bark.domain.Donate;
 
 @Mapper
 public interface DonateMapper {
-	@Insert("insert into donation (Id,shelterno,state,amount)"
-			+ "values(#{Id},#{shelterno},#{state},#{amount})")
+	@Insert("insert into donation "
+			+ "values(null, #{id}, #{shelterno}, #{state}, #{amount}, now())")
 	public int insert(Donate donate);
 	
 	@Select("select * from donation where donationNo > 0")

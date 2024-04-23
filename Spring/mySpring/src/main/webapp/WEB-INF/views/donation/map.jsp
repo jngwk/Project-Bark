@@ -58,7 +58,7 @@
 								</div>
 								<div class="shelter-buttons">
 									<div class="detail-box">
-										<a href="${contextPath }/donation/form?shelterNo=${list.shelterNo}" class="donate green-btn large-btn">후원하기</a> <a
+										<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> <a
 											href="#" class="shelter-story green-btn large-btn">보호소
 											이야기</a> <a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인
 											둘러보기</a>

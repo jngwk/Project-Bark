@@ -127,7 +127,7 @@
     <div class="adoption-form">
       <div class="form-container">
         <div class="form-page">
-          <form action="#" method="post">
+          <form action="/adoption/adoptionWrite" method="post">
             <img src="${images }/logo-brown.png" />
             <!-- <div class="form-title">영철이의 가족이 되어 주세요</div> -->
             
@@ -151,7 +151,7 @@
                   <td>
                     <input
                       type="text"
-                      name="shelterNumber"
+                      name="careTel"
                       value="${dog.careTel}"
                       readonly
                     />
@@ -163,9 +163,10 @@
                     <input
                       type="text"
                       name="shelterAddr"
-                      value="${dog.shelterAddr }"
+                      value="${dog.shelterAddr}"
                       readonly
                     />
+                    <input type="hidden"  name="dogno"  value="${dog.dogno}" />
                   </td>
                 </tr>
               </table>
@@ -178,8 +179,8 @@
                   <td>
                     <input
                       type="text"
-                      name="userName"
-                      value="${user.name }"
+                      name="name"
+                      value="${user.name}"
                       readonly
                     />
                   </td>
@@ -189,7 +190,7 @@
                   <td>
                     <input
                       type="text"
-                      name="userName"
+                      name="phone"
                       value="${user.phone }"
                       readonly
                     />
@@ -200,7 +201,7 @@
                   <td>
                     <input
                       type="text"
-                      name="emailName"
+                      name="email"
                       value="${user.email }"
                       readonly
                     />
@@ -266,8 +267,9 @@
                 class="large-btn secondary-btn inactive submit-adoption-form"
                 type="submit"
                 value="입양하기"
-                onClick="location.href=/adoption/write"
-              />
+              />                
+                <!-- onClick="location.href=/adoption/adoptionWrite" -->
+
             </div>
           </form>
         </div>

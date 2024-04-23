@@ -74,9 +74,14 @@ public class AdoptionController {
 		return "adoption/detail";
 	}
 	
-	@GetMapping("/dogAdd")
+	@GetMapping("/dogUpload ajax")
 	public void dogUploadAjax() {
 		log.info("dogUpload ajax");
+	}
+	
+	@GetMapping("/write")
+	public void dogAdd() {
+		log.info("write");
 	}
 	
 	@PostMapping("/write") // 게시글저장
@@ -86,7 +91,7 @@ public class AdoptionController {
 			dog.getDogAttachedList().forEach(attach -> log.info(attach));
 		}
 		service.write(dog);
-		rttr.addFlashAttribute("result", dog.getDogno());
+		rttr.addFlashAttribute("result", dog);
 		return "redirect:/adoption/list";
 	}
 	

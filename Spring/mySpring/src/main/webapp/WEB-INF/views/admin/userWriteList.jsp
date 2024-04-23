@@ -9,24 +9,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
 <link rel="stylesheet" href="${css }/root.css" />
-<link rel="stylesheet" href="${css }/noticeList.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminUserWriteList.css" />
 </head>
 <body>
 	<jsp:include page="${views }/include/header.jsp" flush="false" />
 
 	<section class="notice">
-		<p class="page-title">contact</p><p class="page-subtitle">[문의사항]</p>
+		<p class="page-title">Contact</p><p class="page-subtitle">[문의하기]</p>
 
 		<!-- board seach area -->
-		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="/board/noticeWrite">글쓰기</a>
-		</div>
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
-					<form action="/board/noticeList" method="get">
+					<form action="/admin/userWriteList" method="get">
 						<div class="search-wrap">
-							<label for="search" class="blind">공지사항 내용 검색</label> <select name="searchField">
+							<label for="search" class="blind">문의하기 내용 검색</label> <select name="searchField">
 								<option value="" >카테고리</option>
 								<option value="content" <c:if test="${page.cri.searchField == 'content'}">selected</c:if>>내용</option>
 								<option value="title" <c:if test="${page.cri.searchField == 'title'}">selected</c:if>>제목</option>
@@ -47,22 +44,23 @@
 					<thead>
 						<tr>
 							<th scope="col" class="th-num">번호</th>
+							<th scope="col" class="th-id">작성자</th>
 							<th scope="col" class="th-title">제목</th>
 							<th scope="col" class="th-exe">등록일</th>
 							<th scope="col" class="th-exe">조회수</th>
+							
 						</tr>
 					</thead>
 					<tbody>
 					<c:forEach var="bList" items="${bList}" >
-					<c:if test="${bList.user_id==sessionScope.userId && bList.type == 2}">
 						<tr>
 							<td>${bList.no}</td>
+							<td>${bList.id}</td>
 							<td><a href="/board/noticeRead?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
 							${bList.title}</a></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
 							<td>${bList.hit}</td>
 						</tr>
-						</c:if>
 					</c:forEach>
 					</tbody>
 				</table>

@@ -1,5 +1,7 @@
 package com.bark.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +14,8 @@ import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Page;
 import com.bark.mapper.CommentMapper;
-import com.bark.service.AdoptionService;
 import com.bark.service.BoardService;
-import com.bark.service.UserService;
+import com.bark.service.SecurityService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,6 +26,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardController {
 	private BoardService service;
+	private SecurityService securityService;
 	
 	private CommentMapper commentmapper;
 
@@ -137,7 +139,11 @@ public class BoardController {
 	}
  
 	@GetMapping("/noticeWrite")
-	public void write() {
+	public String write(HttpSession session) {
+		if(securityService.hasRole(3, session)) {
+			return "/board/noticeWrite";
+		}
+		return "main";
 
 	}
 	
@@ -159,12 +165,15 @@ public class BoardController {
 		board.setType(2);				// 문의하기는 2로
 		service.write(board);
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/noticeList";
+		return "redirect:/user/userWriteList";
 	}
 	
 	@GetMapping("/noticeUpate")
-	public void update() {
-	
+	public String update(HttpSession session) {
+		if(securityService.hasRole(3, session)) {
+			return "/board/noticeWrite";
+		}
+		return "main";
 	}
 
 //	@GetMapping("/noticeUpdate")
@@ -175,25 +184,24 @@ public class BoardController {
 //	}
 	
 	@GetMapping("/noticeUpdate")
-	public void update(Model model, 
+	public String update(Model model, 
 						@RequestParam("bno") Integer  bno,
 			 			@RequestParam(required=false, value="searchField") String searchField,
 			 			@RequestParam(required=false, value="searchWord") String searchWord,
 			 			@RequestParam(required=false, value="pageNum") Integer pageNum,
-			 			@RequestParam(required=false, value="amount") Integer amount) {
+			 			@RequestParam(required=false, value="amount") Integer amount, HttpSession session) {
 		log.info("noticeUpdate : " + bno);
-		
-		Integer type = 1;   				// 공지사항
-		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
-
-		
-		model.addAttribute("searchField", searchField);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("amount", amount);
-		model.addAttribute("board", service.read(bno));
-
-
+		if(securityService.hasRole(3, session)) {
+			Integer type = 1;   				// 공지사항
+			System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
+			model.addAttribute("searchField", searchField);
+			model.addAttribute("searchWord", searchWord);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("amount", amount);
+			model.addAttribute("board", service.read(bno));
+			return "/board/noticeUpdate";
+		}
+		return "main";
 	}
 	
 	@PostMapping("/noticeUpdate")
@@ -224,11 +232,13 @@ public class BoardController {
 	
 	
 	@GetMapping("/noticeDelete")
-	public String delete(@RequestParam("bno") Integer  bno) {
-		
-		log.info("delete : " + bno);
-		service.delete(bno);
-		return "redirect:/board/noticeList";
+	public String delete(@RequestParam("bno") Integer  bno, HttpSession session) {
+		if(securityService.hasRole(3, session)) {
+			log.info("delete : " + bno);
+			service.delete(bno);
+			return "redirect:/board/noticeList";
+		}
+		return "main";
 	}	
 	
 	@PostMapping("/noticeDelete")

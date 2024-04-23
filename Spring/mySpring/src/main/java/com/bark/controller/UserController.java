@@ -14,12 +14,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.bark.domain.Adoption;
 import com.bark.domain.Donate;
+
+import com.bark.domain.Criteria;
+import com.bark.domain.Page;
+
 import com.bark.domain.Shelter;
 import com.bark.domain.User;
+
 import com.bark.service.AdoptionService;
 import com.bark.service.DonateService;
+
+import com.bark.service.BoardService;
+
+import com.bark.service.SecurityService;
 import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
@@ -31,28 +41,12 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/user/*")
 @AllArgsConstructor
 public class UserController {
+	private BoardService boardservice;
 	private UserService service;
 	private ShelterService shelterService;
 	private DonateService donateservice;
 	private AdoptionService adoptionservice;
-
-	@GetMapping("/userList")
-	public void userList(Model model) {
-		log.info("userList");
-		model.addAttribute("uList", service.getUserList());
-	}
-
-	/*
-	 * @GetMapping("/adminList") public void adminList(Model model) {
-	 * log.info("adminList"); model.addAttribute("aList", service.getAdminList()); }
-	 */
-	/*
-	 * @PostMapping("/login") public String login(String id, String pwd, HttpSession
-	 * session) { log.info("login"); User user = service.getUser(id);
-	 * if(user.getPwd().equals(pwd)) { session.setAttribute("userId", id);
-	 * session.setAttribute("userType", user.getType());
-	 * session.setAttribute("userName", user.getName()); } return "redirect:/"; }
-	 */
+	private SecurityService securityService;
 
 	@RequestMapping(value = "login", produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@ResponseBody
@@ -94,30 +88,25 @@ public class UserController {
 	}
 
 	@GetMapping("/userDetail")
-	public void userDetail(@RequestParam("id") String id, Model model, HttpSession session) {
-		log.info("userDetail");
-		model.addAttribute("user", service.getUser(id));
+	public String userDetail(@RequestParam("id") String id, Model model, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("userDetail");
+			model.addAttribute("user", service.getUser(id));
+			return "/user/userDetail";
+		}
+		return "main";
+		
 	}
 
 	@PostMapping("/modify")
-	public String modify(User user, RedirectAttributes rttr) {
-		log.info("modify");
-		boolean result = service.modify(user);
-		rttr.addFlashAttribute("result", result);
-		return "redirect:/user/userDetail";
-	}
-
-	@PostMapping("/delete")
-	public String delete(User user, RedirectAttributes rttr) {
-		log.info("delete");
-		boolean result = service.delete(user);
-		rttr.addFlashAttribute("result", result);
-		if (user.getType() == 3) {
-//			관리자일 경우, 직원 관리 페이지로 이동
-			return "redirect:/adminList";
-		} else {
-			return "redirect:/";
+	public String modify(User user, RedirectAttributes rttr, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("modify");
+			boolean result = service.modify(user);
+			rttr.addFlashAttribute("result", result);
+			return "redirect:/user/userDetail";
 		}
+		return "main";
 	}
 
 	@GetMapping("/logout")
@@ -126,6 +115,7 @@ public class UserController {
 		session.removeAttribute("userId");
 		session.removeAttribute("userType");
 		session.removeAttribute("userName");
+		session.removeAttribute("userPhone");
 		return "redirect:/";
 	}
 
@@ -186,21 +176,19 @@ public class UserController {
 		return result;
 	}
 
-	@GetMapping("/userWriteList")
-	public void userWriteList() {
-		log.info("userWriteList...........");
-	}
-
 	// 유저 페이지 기부 관리
 	@GetMapping("/userDonationList")
-	public String userDonationList(@RequestParam("id") String id,Model model) {
+	public String userDonationList(@RequestParam("id") String id,Model model, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("userDonationList...........");
+			List<Donate> dList = donateservice.userDonationList(id);
+	
 
-		log.info("userDonationList...........");
-		List<Donate> dList = donateservice.userDonationList(id);
-
-		model.addAttribute("dList", dList);
-
-		return "/user/userDonationList";
+			model.addAttribute("dList", dList);
+	
+			return "/user/userDonationList";
+		}
+		return "main";
 	}
 	
 	 @PostMapping(value="getDState",produces = "application/json; charset=utf8")
@@ -213,14 +201,16 @@ public class UserController {
 
 	// 유저 페이지 입양 관리
 	@GetMapping("/userAdoptionList")
-	public String userAdoptionList(@RequestParam("id") String id,Model model) {
-
-		log.info("userAdoptionList...........");
-		List<Adoption> aList = adoptionservice.userAdoptionList(id);
-
-		model.addAttribute("aList", aList);
-
-		return "/user/userAdoptionList";
+	public String userAdoptionList(@RequestParam("id") String id,Model model, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("userAdoptionList...........");
+			List<Adoption> aList = adoptionservice.userAdoptionList(id);
+	
+			model.addAttribute("aList", aList);
+	
+			return "/user/userAdoptionList";
+		}
+		return "main";
 	}
 	 @PostMapping(value="getAState",produces = "application/json; charset=utf8")
 	 @ResponseBody
@@ -229,4 +219,54 @@ public class UserController {
 		 log.info(state);
 		 return adoptionservice.getAState(id,Integer.parseInt(state));
 	 }
+
+	@GetMapping("/userWriteList")//다건
+	public void noticeList(Model model,
+	   @RequestParam(required=false, value="searchField") String searchField,
+	   @RequestParam(required=false, value="searchWord") String searchWord,
+	   @RequestParam(required=false, value="pageNum") Integer pageNum,
+	   @RequestParam(required=false, value="amount") Integer amount,
+	   HttpSession session) {
+
+		Integer type = 2;   				// 문의사항
+		String id = (String)session.getAttribute("userId");
+		System.out.println("contactList [" + type +"-"+ searchField + "-" + searchWord + "-" + pageNum + "-" + amount + "]");
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 0 Set
+			pageNum = 1; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null || searchField == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
+			searchWord = "";
+		}
+
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+		// 조회 조건에 따른 전게 건수 
+		int total = boardservice.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("bList", boardservice.searchListById(cri,id));
+	}	
+	
+	
+
 }
