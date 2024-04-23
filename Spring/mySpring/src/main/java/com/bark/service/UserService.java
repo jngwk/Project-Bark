@@ -72,5 +72,11 @@ public class UserService {
 	public int updateUser(User user) {
 		return mapper.update(user);
 	}
+	
+	// 입양상세 -> 입양 신청시 회원 주소 update
+	public int updateAddr(String id, String address) {
+		return mapper.updateAddr(id, address);
+	}
+	
 
 }

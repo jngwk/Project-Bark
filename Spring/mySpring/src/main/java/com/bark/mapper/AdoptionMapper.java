@@ -39,6 +39,9 @@ public interface AdoptionMapper {
 			+ "LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchList(@Param("cri") Criteria cri);//한 페이지당 강아지 리스트
 	
+	@Insert("INSERT INTO adoption VALUES(null, #{id}, #{userName}, #{shelterName}, #{dogName}, now(), #{state} );")
+	public void adoptionWrite(@Param("adoption") Adoption adoption);
+	
 	
 	//관리자 입양관리페이지
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"

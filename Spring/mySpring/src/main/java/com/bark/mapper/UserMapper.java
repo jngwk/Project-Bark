@@ -44,5 +44,9 @@ public interface UserMapper {
     @Update("update user set available=#{param1} where id=#{param2}")
 	public int availableUpdate(String available,String id);
 
+    @Update("update user "
+			+ "	set addr = #{address} "
+			+ "	where id = #{id};")
+	public int updateAddr(String id, String address);
 	
 }

@@ -40,6 +40,13 @@ public class AdoptionService {
 		return mapper.searchList(cri);
 	}
 	
+	// 입양 상세 -> 입양 신청 처리
+	public void adoptionWrite(Adoption adoption) {
+		log.info("adoptionWrite : " + adoption);
+		mapper.adoptionWrite(adoption);
+		return;
+	}
+	
 	
 	//관리자페이지 입양내역 검색
 	public List<Adoption> getAdoptionList(){

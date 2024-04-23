@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.Page;
+import com.bark.domain.User;
 import com.bark.service.AdoptionService;
-import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -28,8 +29,6 @@ import lombok.extern.log4j.Log4j;
 public class AdoptionController {
 	private AdoptionService service;
 	private UserService 	userservice;
-	private ShelterService 	shelterservice;
-	
 	
 	@GetMapping("/list")
 	public void list(Model model,
@@ -74,6 +73,29 @@ public class AdoptionController {
 		model.addAttribute("dog", service.getDog(dogno));
 		model.addAttribute("user", userservice.getUser(id));
 		return "adoption/detail";
+	}
+	
+	// 입양 상세 -> 입양 신청 등록
+	@PostMapping("/adoptionWrite")
+	public String adoptionWrite(Dog dog,
+								User user,
+								HttpSession session) {	
+		log.info("adoptionWrite...........");
+		
+		Adoption adoption = new Adoption();
+		
+		adoption.setId(user.getId());   
+		adoption.setUserName(user.getName());
+		adoption.setShelterName(dog.getShelterName());
+		adoption.setDogName(dog.getName());
+		//adoption.setDate(null);	// default 시스테일자 처리
+		adoption.setState("0");		// 0: 입양 신청 1: 입양 완료  2: 입양 거절
+		
+		service.adoptionWrite(adoption);
+		
+		String address = user.getAddr() + user.getAddrDetail();
+		userservice.updateAddr(user.getId(),  address);
+		return "redirect:/adoption/list";
 	}
 	
 	@GetMapping("/dogAdd")
