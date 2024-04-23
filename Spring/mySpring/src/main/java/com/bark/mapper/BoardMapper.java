@@ -16,7 +16,7 @@ public interface BoardMapper {
 	@Select("SELECT COUNT(1) FROM board WHERE type = #{cri.type} "
 			  + " AND ((#{cri.searchField} = 'title' AND title LIKE #{cri.searchWordSql}) "
 			  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
-			  + " OR   (#{cri.searchField} = 'user_id' AND user_id LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
 			  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) ")
 		public int totalPage(@Param("cri") Criteria cri);
 		
@@ -30,7 +30,7 @@ public interface BoardMapper {
 				  + " FROM board b WHERE type = #{cri.type} "
 				  + " AND ((#{cri.searchField} = 'title' AND title LIKE #{cri.searchWordSql}) "
 				  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
-				  + " OR   (#{cri.searchField} = 'user_id' AND user_id LIKE #{cri.searchWordSql}) "
+				  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
 				  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) "
 				  + " ORDER BY no DESC LiMIT #{cri.pageSql}, #{cri.amount}")
 		public List<Board> searchList(@Param("cri") Criteria cri);
@@ -42,7 +42,7 @@ public interface BoardMapper {
 		public List<Board> searchListById(@Param("cri") Criteria cri,@Param("id") String id);
 		
 		// 게시글 등록
-		@Insert("INSERT INTO board VALUES(null, #{user_id}, #{title}, #{content}, now(), 0, 0, #{type})")
+		@Insert("INSERT INTO board VALUES(null, #{id}, #{title}, #{content}, now(), 0, 0, #{type})")
 		public int write(Board board);
 		
 		// 단건 조회

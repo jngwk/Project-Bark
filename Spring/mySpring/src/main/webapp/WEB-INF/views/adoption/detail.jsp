@@ -75,7 +75,7 @@
               <tr>
                 <td><img src="${icons }/shelter.png" alt="icon" /></td>
                 <th>보호소</th>
-                <td>${dog.shelterName}</td>
+                <td>${shelter.shelterName}</td>
               </tr>
               <tr>
                 <td><img src="${icons }/neut.png" alt="icon" /></td>
@@ -140,7 +140,7 @@
                     <input
                       type="text"
                       name="shelterName"
-                      value="2조보호소"
+                      value="${dog.sheltername}"
                       readonly
                     />
                   </td>
@@ -151,7 +151,7 @@
                     <input
                       type="text"
                       name="shelterNumber"
-                      value="02-0000-0000"
+                      value="${shelter.careTel}"
                       readonly
                     />
                   </td>
@@ -162,7 +162,7 @@
                     <input
                       type="text"
                       name="shelterAddr"
-                      value="서울특별시 강남구"
+                      value="${shelter.shelterAddr }"
                       readonly
                     />
                   </td>
@@ -178,7 +178,7 @@
                     <input
                       type="text"
                       name="userName"
-                      value="김지현"
+                      value="${user.name }"
                       readonly
                     />
                   </td>
@@ -189,7 +189,7 @@
                     <input
                       type="text"
                       name="userName"
-                      value="010-0000-0000"
+                      value="${user.phone }"
                       readonly
                     />
                   </td>
@@ -200,7 +200,7 @@
                     <input
                       type="text"
                       name="emailName"
-                      value="jihyeon2368@naver.com"
+                      value="${user.email }"
                       readonly
                     />
                   </td>
@@ -265,7 +265,7 @@
                 class="large-btn secondary-btn inactive submit-adoption-form"
                 type="submit"
                 value="입양하기"
-                onClick="location.href='${contextPath }/main'"
+                onClick="location.href=/adoption/write"
               />
             </div>
           </form>

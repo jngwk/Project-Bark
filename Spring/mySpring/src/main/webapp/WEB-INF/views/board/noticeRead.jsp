@@ -52,10 +52,10 @@
 			</div>
 			<div class="read-button">
 				<div class="story-button">
-					<a class="large-btn brown-btn" href='javascript:void(0);'onclick="btn3();">수정</a>
+					<a class="large-btn brown-btn" href='javascript:void(0);' onclick="btn3();">수정</a>
 				</div>
 				<div class="story-button">
-					<a class="large-btn brown-btn" href='javascript:void(0);'onclick="btn4();">삭제</a>
+					<a class="large-btn brown-btn" href='javascript:void(0);' onclick="btn4();">삭제</a>
 				</div>
 				<div class="story-button">
 					<a class="large-btn brown-btn" href="/board/noticeList?pageNum=${page.cri.pageNum}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}">목록</a>
@@ -84,7 +84,7 @@
 				<div class="read-right">
 					<div class="read-info">
 						<p>작성자</p>
-						<p>${board.user_id}</p>
+						<p>${board.id}</p>
 					</div>
 					<div class="read-info">
 						<p>조회수</p>
@@ -108,7 +108,7 @@
 //$(document).ready(function(){
 	
 	let bnoValue = '<c:out value="${board.bno}"/>'; //현재 게시글에 댓글추가
-	let user_id = '<c:out value="${board.user_id}"/>'; //현재 게시글에 작성자
+	let id = '<c:out value="${board.id}"/>'; //현재 게시글에 작성자
 	let commentCount = '<c:out value="${commentCount}"/>'; //현재 게시글에 댓글건 수 확인
 
 	let pageNum = '<c:out value="${page.cri.pageNum}"/>'; 
@@ -123,7 +123,7 @@
  	// 댓글 리스트 조회
 	function showList(page) {
 		getList({
-			board_bno : bnoValue,
+			bno : bnoValue,
 			page : page || 1
 		}, function(list) {
 			let str="";
@@ -137,13 +137,13 @@
 				//let str3 = str2.replace(/(?:\r\n|\r|\n)/g, '<br>');
 				str += `<li name="contentList">
 					<div class="reply-profile">
-						<span>\${item.user_id}</span><span>\${displayTime(item.regDate)}</span>
+						<span>\${item.id}</span><span>\${displayTime(item.regDate)}</span>
 					</div>
 					<div class="reply-content">
 					<p><textarea  style="border: none; width:100%;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>
 
-					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.user_id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
-					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.user_id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>
+					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
+					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>
 <!--
 					<button class="font-dark" id="updateBtn\${item.commentNo}" data-commentno="\${item.commentNo}">수정</button>
 					<button class="font-dark" id="removeBtn\${item.commentNo}" data-commentno="\${item.commentNo}">삭제</button>
@@ -168,9 +168,9 @@
 	// <a href='javascript:void(0);' onclick="함수();">
 
 	function getList(param, callback, error) {
-		let board_bno = param.board_bno;
+		let bno = param.bno;
 		let page = param.page || 1;
-		$.getJSON("/comment/pages/" + board_bno + "/" + page + ".json",
+		$.getJSON("/comment/pages/" + bno + "/" + page + ".json",
 			function(data) {
 				if (callback) { callback(data);}
 			
@@ -215,8 +215,8 @@
 		
 		let comment={
 				content: content.val(),
-				user_id: idValue,
-				board_bno: bnoValue
+				id: idValue,
+				bno: bnoValue
 		};
 		add(comment, function(result) {
 			alert(result);
@@ -313,7 +313,7 @@ function btn1(obj) {
 		$(area).focusout();
 		let content = $(area).val();
 
-		let comment={commentNo: commentNo, board_bno: bnoValue, user_id: idValue, content: content };
+		let comment={commentNo: commentNo, bno: bnoValue, id: idValue, content: content };
 		
 		update(comment, function(result) {
 			alert(result);
@@ -362,7 +362,7 @@ function btn2(obj) {
 function btn3() {
 
 	// 게시판 작성자  접속자 id 비교
-	if (user_id != idValue) {
+	if (id != idValue) {
 		alert("게시글 작성자가 아닙니다. 수정 할 수 없습니다.")
 		return;
 	}	
@@ -370,7 +370,7 @@ function btn3() {
 		alert ("댓글이 존재하여 게시판글을 수정 할 수 없습니다.");
 	}
 	else {
-		window.location.href = 'http://localhost:9090/board/noticeUpdate?bno=' + bnoValue 
+		window.location.href = '/board/noticeUpdate?bno=' + bnoValue 
 				+ '&searchField=' + searchField + '&searchWord=' + searchWord 
 				+ '&pageNum=' + pageNum + '&amount=' + amount;
 		
@@ -380,7 +380,7 @@ function btn3() {
 function btn4() {
 
 	// 게시판 작성자  접속자 id 비교
-	if (user_id != idValue) {
+	if (id != idValue) {
 		alert("게시글 작성자가 아닙니다. 삭제 할 수 없습니다.")
 		return;
 	}	
@@ -389,7 +389,7 @@ function btn4() {
 	}
 	else {
 		if(confirm("삭제 하시겠습니까?")){
-	 		window.location.href = 'http://localhost:9090/board/noticeDelete?bno=' + bnoValue;				
+	 		window.location.href = '/board/noticeDelete?bno=' + bnoValue;				
 		}else{
 			alert("취소 하셨습니다.");
 		}
