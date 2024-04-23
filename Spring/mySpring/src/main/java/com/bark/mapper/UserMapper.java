@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.bark.domain.Criteria;
 import com.bark.domain.User;
 
 public interface UserMapper {
@@ -47,6 +48,6 @@ public interface UserMapper {
     @Update("update user "
 			+ "	set addr = #{address} "
 			+ "	where id = #{id};")
-	public int updateAddr(String id, String address);
+	public int updateAddr(@Param("id") String id, @Param("address") String address);
 	
 }

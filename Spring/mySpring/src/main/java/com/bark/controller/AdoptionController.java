@@ -3,6 +3,7 @@ package com.bark.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,30 +75,32 @@ public class AdoptionController {
 	}
 	
 	// 입양 상세 -> 입양 신청 등록
+	@Transactional
 	@PostMapping("/adoptionWrite")
 	public String adoptionWrite(@RequestParam(required=false, value="dogno") Integer dogno,
-//								@RequestParam(required=false, value="id") String id,
-//								@RequestParam(required=false, value="addr") String Addr,
-//								@RequestParam(required=false, value="addrDetail") String AddrDetail,
-//								User user,
-								RedirectAttributes rttr) {
-//								HttpSession session) {	
+								@RequestParam(required=false, value="addr") String addr,
+								@RequestParam(required=false, value="addrDetail") String addrDetail,
+								RedirectAttributes rttr,
+								HttpSession session) {	
 		log.info("adoptionWrite...........");
+		String address = null;
 		
 		Adoption adoption = new Adoption();
-		
-//		adoption.setId(user.getId());   
-//		adoption.setUserName(user.getName());
-//		adoption.setShelterName(dog.getShelterName());
-//		adoption.setDogName(dog.getName());
-		//adoption.setDate(null);	// default 시스테일자 처리
+		String id = (String)session.getAttribute("userId");
+		adoption.setDogno(dogno);
+		adoption.setId(id);
+		//adoption.getAdopt_date(null);
+		//adoption.getRegDate(null); 		// default 시스템 일자 
+		adoption.setState(0);				// 0: 입양 신청 1: 입양 완료  2: 입양 거절
+		service.adoptionWrite(adoption);
 
-//		adoption.setState(0);		// 0: 입양 신청 1: 입양 완료  2: 입양 거절
-	
-//		service.adoptionWrite(adoption);
+		address = (addr + " " +  addrDetail.trim()).trim();
+		// 주소가 들어올 경우에만 수정 처리
+		if (!address.trim().equals(null) && address.trim() != "")  {
+				userservice.updateAddr(id,  address);
+		}
 		
-//		String address = user.getAddr() + user.getAddrDetail();
-//		userservice.updateAddr(user.getId(),  address);
+		service.adoptionUpdateDog(dogno, 0);    // 0: 입양불가, 1:입양가능
 		rttr.addFlashAttribute("result", dogno);
 		return "redirect:/adoption/list";
 	}
