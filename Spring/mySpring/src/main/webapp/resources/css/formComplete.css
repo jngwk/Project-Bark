@@ -11,6 +11,7 @@
 	justify-content: center;
 	background-color: var(--color-honeydew);
 	padding-block: 140px 50px;
+	min-height:100dvh;
 }
 
 .donate-page {
@@ -33,7 +34,7 @@
 .donate-title {
 	font-size: 32px;
 	text-align: center;
-	margin: 50px;
+	margin: 100px;
 }
 
 .donate-subtitle {
