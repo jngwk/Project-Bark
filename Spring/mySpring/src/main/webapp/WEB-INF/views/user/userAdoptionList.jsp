@@ -37,16 +37,16 @@
 							<th scope="col" class="th-regDate">입양일</th>
 							<th scope="col" class="th-exe"><select class="userState">
 									<option>입양상태</option>
-									<option value="1">처리중</option>
-									<option value="2">처리완료</option>
-									<option value="0">처리실패</option>
+									<option value="0">처리중</option>
+									<option value="1">처리완료</option>
+									<option value="2">처리실패</option>
 							</select></th>
 						</tr>
 					</thead>
 					<tbody class="adoptionList">
 						<c:forEach var="aList" items="${aList}">
 							<tr>
-								<td>${aList.no}</td>
+								<td>${aList.adoptionno}</td>
 								<td>${aList.shelterName}</td>
 								<c:choose>
 									<c:when test="${aList.dogName== null || aList.dogName ==''}">
@@ -56,8 +56,18 @@
 										<td>${aList.dogName}</td>
 									</c:otherwise>
 								</c:choose>
-								<td>${aList.date}</td>
-								<td>${aList.state}</td>
+								<td>${aList.adopt_date}</td>
+								<c:choose>
+									<c:when test="${aList.state== 0}">
+										<td>처리중</td>
+									</c:when>
+									<c:when test="${aList.state== 0}">
+										<td>처리완료</td>
+									</c:when>
+									<c:otherwise>
+										<td>처리실패</td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -79,13 +89,13 @@
 
 
 	function getAState(){
-		console.log(${userId});
+		console.log("${userId}");
 		console.log($(".userState").val());
 		$.ajax({
 			type: 'POST',
 			url : "/user/getAState",
 			data : {
-				id: ${userId},
+				id: "${userId}",
 				state: $(".userState").val()},
 			success : function(result){
 				//테이블 초기화
@@ -93,7 +103,7 @@
 				if(result.length>=1){
 					result.forEach(function(aList){
 							str=`<tr>
-				                <td>\${aList.no}</td>
+				                <td>\${aList.adoptionno}</td>
 				                <td>\${aList.shelterName}</td>`
 				                
 						        if(aList.dogName == null || aList.dogName == ""){
@@ -101,9 +111,20 @@
 					        	}else{
 					        	str +=`<td>\${aList.dogName}</td>`
 					        	}
-				                str += `<td>\${aList.date}</td>
-				                <td>\${aList.state}</td>
-				              </tr>`
+				                if(aList.state == 0){
+				                	str += `<td>\${aList.adopt_date}</td>
+						                <td>처리중</td>
+						              </tr>`
+				                }else if(aList.state == 1){
+				                	str += `<td>\${aList.adopt_date}</td>
+						                <td>처리완료</td>
+						              </tr>`
+				                }else{
+				                	str += `<td>\${aList.adopt_date}</td>
+						                <td>처리실패</td>
+						              </tr>`
+				                }
+
 						$('.adoptionList').append(str);
 	        		}) 
 				}
