@@ -48,6 +48,12 @@ public class DonationController {
 			model.addAttribute("selectedShelterno", selectedShelterno);
 		}
 	}
+	
+	@GetMapping("/formCompelete")
+	public String formCompelete(Model model) {
+		return "/donation/formCompelete";
+	}
+	
 
 	/*
 	 * @GetMapping("/form") public void form() { log.info("form..........."); }
@@ -110,6 +116,7 @@ public class DonationController {
 
 	}
 	
+	//보호소 이름으로 검색
 	@GetMapping(value="shelterSearchName",produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Shelter> shelterSearchName(@RequestParam ("name") String name,Model model) {
@@ -117,7 +124,7 @@ public class DonationController {
 		log.info(name);
 		return service.searchShelterName(name);
 	}
-	
+	//보호소 주소로 검색
 	@GetMapping(value="shelterSearchAddr",produces = "application/json; charset=utf8")
 	@ResponseBody
 	public List<Shelter> shelterSearchAddr(@RequestParam ("addr") String addr,Model model) {
