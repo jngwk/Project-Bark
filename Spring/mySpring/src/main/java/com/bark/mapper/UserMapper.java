@@ -41,8 +41,9 @@ public interface UserMapper {
 	 * ) public List<User> getUserType(String filter,String input,int type);
 	 */
     
-    @Select("select * from user where type = #{type} order by regDate DESC")
-    public List<User> getUserType(int type);
+    //user type별 검색
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type like concat('%',#{param3},'%') and type !=3 order by regDate DESC")
+    public List<User> getUserType(String filter,String input,int type);
 
     @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type, regDate DESC")
     public List<User> getSearchUser(String filter,String input);

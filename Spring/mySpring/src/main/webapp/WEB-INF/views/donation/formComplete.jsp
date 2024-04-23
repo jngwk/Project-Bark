@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>후원하기</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/formCompelete.css" />
+	href="${pageContext.request.contextPath}/resources/css/formComplete.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/root.css" />
 </head>
@@ -30,8 +30,8 @@
 							<div class="donate-button">
 								<input class="large-btn green-btn" type="button"
 									onclick="location.href='${contextPath }/donation/map'"
-									value="목록"> <input
-									onclick="location.href='${contextPath }/user/userDonationList'"
+									value="보호소 조회"> <input
+									onclick="location.href='${contextPath }/user/userDonationList?id=${userId}'"
 									class="large-btn green-btn" type="button" value="기부내역">
 							</div>
 						</div>

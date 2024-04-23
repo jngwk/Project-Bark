@@ -49,9 +49,9 @@ public class DonationController {
 		}
 	}
 	
-	@GetMapping("/formCompelete")
-	public String formCompelete(Model model) {
-		return "/donation/formCompelete";
+	@GetMapping("/formComplete")
+	public String formComplete(Model model) {
+		return "/donation/formComplete";
 	}
 	
 
