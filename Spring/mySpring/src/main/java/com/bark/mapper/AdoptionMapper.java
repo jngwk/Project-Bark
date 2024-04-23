@@ -40,6 +40,14 @@ public interface AdoptionMapper {
 			+ "				ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
 	
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, a.uuid, s.shelterName, s.shelterno\r\n"
+			+ "			FROM dog d "
+			+ "			join attach a "
+			+ "				on d.dogno = a.dogno "
+			+ "			join shelter s "
+			+ "				on d.shelterno = s.shelterno where s.shelterno = #{shelterno}"
+			+ "				ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
+	public List<Dog> searchDogListByShelterno(@Param("cri") Criteria cri, @Param("shelterno") Integer shelterno);
 	// 입양 상세 -> 입양 신청 등록
 	@Insert("INSERT INTO adoption VALUES(null, #{adoption.id}, #{adoption.dogno}, null, now(), #{adoption.state} )")
 	public void adoptionWrite(@Param("adoption") Adoption adoption);
@@ -119,6 +127,8 @@ public interface AdoptionMapper {
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "    where id = #{param1} and state = ${param2}")
 	public List<Adoption> getAState(String id,int state);
+
+	
 	
 	
 }

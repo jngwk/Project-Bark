@@ -39,6 +39,7 @@ public class AdoptionController {
 	
 	@GetMapping("/list")
 	public void list(Model model,
+			@RequestParam(required=false, value="shelterno") Integer shelterno,	// 보호소 조회에서 넘어올 때 보호소 번호 가져오기
 			 @RequestParam(required=false, value="pageNum") Integer pageNum,
 			 @RequestParam(required=false, value="amount") Integer amount) {	//입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
@@ -65,7 +66,14 @@ public class AdoptionController {
 		Page page = new Page(cri, total);
 		
 		model.addAttribute("page", page);
-		model.addAttribute("dogList", service.searchList(cri));
+		if(shelterno == null) {
+			model.addAttribute("dogList", service.searchList(cri));
+		}
+		else {
+			log.info(service.searchListByShelterno(cri, shelterno).size());
+			model.addAttribute("dogList", service.searchListByShelterno(cri, shelterno));
+			
+		}
 	}
 		
 	@GetMapping("/detail")
