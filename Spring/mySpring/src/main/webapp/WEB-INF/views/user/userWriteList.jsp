@@ -21,13 +21,13 @@
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
-					<form action="/board/noticeList" method="get">
+					<form action="/user/userWriteList" method="get">
 						<div class="search-wrap">
-							<label for="search" class="blind">공지사항 내용 검색</label> <select name="searchField">
+							<label for="search" class="blind">문의하기 내용 검색</label> <select name="searchField">
 								<option value="" >카테고리</option>
 								<option value="content" <c:if test="${page.cri.searchField == 'content'}">selected</c:if>>내용</option>
 								<option value="title" <c:if test="${page.cri.searchField == 'title'}">selected</c:if>>제목</option>
-								<option value="id" <c:if test="${page.cri.searchField == 'id'}">selected</c:if>>작성자</option>
+<%-- 								<option value="id" <c:if test="${page.cri.searchField == 'id'}">selected</c:if>>작성자</option> --%>
 							</select> <input id="search" type="search" name="searchWord"
 								placeholder="검색어를 입력해주세요." value="${page.cri.searchWord}" />
 							<button type="submit" class="btn btn-dark">검색</button>

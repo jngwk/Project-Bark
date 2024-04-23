@@ -37,7 +37,10 @@ public interface BoardMapper {
 		
 		@Select("SELECT ROW_NUMBER() OVER(ORDER BY b.bno ASC) AS no, b.*"
 				  + " FROM board b WHERE type = #{cri.type} "
-				  + " AND user_id = #{id}"
+				  + " AND id = #{id}"
+				  + " AND ((#{cri.searchField} = 'title' AND title LIKE #{cri.searchWordSql}) "
+				  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
+				  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) "
 				  + " ORDER BY no DESC LiMIT #{cri.pageSql}, #{cri.amount}")
 		public List<Board> searchListById(@Param("cri") Criteria cri,@Param("id") String id);
 		
