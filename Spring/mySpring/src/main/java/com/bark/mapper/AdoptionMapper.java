@@ -86,7 +86,7 @@ public interface AdoptionMapper {
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 		+ "	from adoption a join user u on a.id = u.id\r\n"
 		+ "    join dog d on d.dogno = a.dogno\r\n"
-		+ "    join shelter s on s.shelterno = d.shelterno;")
+		+ "    join shelter s on s.shelterno = d.shelterno order by a.regDate;")
 	public List<Adoption> getAdoptionList();
 	//관리자 입양관리페이지 페이지
 	@Select("SELECT ROW_NUMBER() OVER (ORDER BY a.adoptionno DESC) AS row_num, a.adoptionno no, a.id id, u.name userName, s.shelterName, d.name dogName, a.adopt_date date, a.state\r\n"
