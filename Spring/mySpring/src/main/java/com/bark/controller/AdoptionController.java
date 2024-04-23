@@ -3,7 +3,6 @@ package com.bark.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.Page;
-import com.bark.domain.User;
 import com.bark.service.AdoptionService;
+import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +28,8 @@ import lombok.extern.log4j.Log4j;
 public class AdoptionController {
 	private AdoptionService service;
 	private UserService 	userservice;
+	private ShelterService 	shelterservice;
+	
 	
 	@GetMapping("/list")
 	public void list(Model model,
@@ -37,7 +37,7 @@ public class AdoptionController {
 			 @RequestParam(required=false, value="amount") Integer amount) {	//입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
 		
-		System.out.println("adoption list pageNum-amount : " + pageNum + "-" + amount);
+		System.out.println("noticeList type-feild-pageNum-amount : " + pageNum + "-" + amount);
 		
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
@@ -74,46 +74,14 @@ public class AdoptionController {
 		return "adoption/detail";
 	}
 	
-	// 입양 상세 -> 입양 신청 등록
-	@Transactional
-	@PostMapping("/adoptionWrite")
-	public String adoptionWrite(@RequestParam(required=false, value="dogno") Integer dogno,
-								@RequestParam(required=false, value="addr") String addr,
-								@RequestParam(required=false, value="addrDetail") String addrDetail,
-								RedirectAttributes rttr,
-								HttpSession session) {	
-		log.info("adoptionWrite...........");
-		String address = null;
-		
-		Adoption adoption = new Adoption();
-		String id = (String)session.getAttribute("userId");
-		adoption.setDogno(dogno);
-		adoption.setId(id);
-		//adoption.getAdopt_date(null);
-		//adoption.getRegDate(null); 		// default 시스템 일자 
-		adoption.setState(0);				// 0: 입양 신청 1: 입양 완료  2: 입양 거절
-		service.adoptionWrite(adoption);
-
-		address = (addr + " " +  addrDetail.trim()).trim();
-		// 주소가 들어올 경우에만 수정 처리
-		if (!address.trim().equals(null) && address.trim() != "")  {
-				userservice.updateAddr(id,  address);
-		}
-		
-		service.adoptionUpdateDog(dogno, 0);    // 0: 입양불가, 1:입양가능
-		rttr.addFlashAttribute("result", dogno);
-		return "redirect:/adoption/list";
-	}
-	
-	@GetMapping("/dogAdd")
+	@GetMapping("/dogUpload ajax")
 	public void dogUploadAjax() {
 		log.info("dogUpload ajax");
 	}
 	
-	
 	@GetMapping("/write")
-	public void dogWrite() {
-		log.info("dogWrite");
+	public void dogAdd() {
+		log.info("write");
 	}
 	
 	@PostMapping("/write") // 게시글저장
@@ -123,7 +91,7 @@ public class AdoptionController {
 			dog.getDogAttachedList().forEach(attach -> log.info(attach));
 		}
 		service.write(dog);
-		rttr.addFlashAttribute("result", dog.getDogno());
+		rttr.addFlashAttribute("result", dog);
 		return "redirect:/adoption/list";
 	}
 	
