@@ -12,7 +12,7 @@ public class Donate {
 	private Integer no;
 	private String shelterName; 
 	private String paymentDate;
-	private int donationno;
+	private Integer donationno;
 	private String userName;
 	
 }
