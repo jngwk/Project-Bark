@@ -160,11 +160,6 @@ public class UserController {
 		return result;
 	}
 	
-//	@GetMapping("/userWriteList")
-//	public void userWriteList() {
-//		log.info("userWriteList...........");
-//	}
-	
 	@GetMapping("/userWriteList")//다건
 	public void noticeList(Model model,
 	   @RequestParam(required=false, value="searchField") String searchField,
