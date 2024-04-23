@@ -33,17 +33,46 @@ input[type='radio']:checked + label {
 				<div class="shelter-info">
 					<div class="donate-subtitle">보호소 정보</div>
 					<table class="donate-table">
-						<tr>
+<%-- 양식 1						<tr>
 							<th>보호소명</th>
 							<td>
 							<select name = "shelter">
-								<option value="1" selected>1보호소</option>
-								<option value="2">2보호소</option>
-								<option value="3">3보호소</option>
-								<option value="4">4보호소</option>
+								<option value="0" selected>보호소를 선택하세요</option>
+								<c:forEach var="sList" items="${sList}" >
+								<option value="${sList.shelterno}">${sList.shelterName}</option>
+								</c:forEach>
 							</select>
 							</td>
-						</tr>
+						</tr> --%>
+					<tr>
+							<th>보호소명</th>
+							<td>
+							<select id = "shelter">
+								<c:choose>
+									<c:when test="${empty selectedShelterno }">
+										<c:forEach items="${sList }" var="shelter">
+											<option value="${shelter.shelterno }">${shelter.shelterName }</option>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${sList }" var="shelter">
+											<c:choose>
+												<c:when test="${shelter.shelterno eq selectedShelterno}">
+													<option selected value="${shelter.shelterno }">${shelter.shelterName }</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${shelter.shelterno }">${shelter.shelterName }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</select>
+							</td>
+						</tr>	
+						
+						
+						
 					</table>			
 				</div>
 				
@@ -148,7 +177,58 @@ const onClickPay = async() => {
 		buyer_name: userName,
 		buyer_id: userId
 
-	}, function (rsp) { // callback
+/* 	싱크 테스트용}, async function (rsp) {
+        if (rsp.success) {
+            const result = {
+                id: userId,
+                shelterno: shelterno,
+                state: rsp.status === "paid" ? 1 : 2,
+                amount: selectAmount  
+            };
+
+            try {
+                const response = await fetch('/donate/new', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(result)
+                });
+
+                if (response.ok) {
+                    const data = await response.json(); // 여기서 원래 url 받아서 밑에 넣어주는거 같아요..
+                    loaction.href = "${contextPath}/user/userDonationList?id=${userId}";
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                console.error('Error during the fetch operation:', error);
+                alert('There was a problem with the payment information submission.');
+            }
+        } else {
+            alert(`결제 실패: ${rsp.error_msg}`);
+        }
+    });
+};
+
+button.addEventListener("click", onClickPay); */
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+ 	}, function (rsp) { // callback
 	      console.log(rsp);
 			var t = 0;
 			if(rsp.status == "paid"){
