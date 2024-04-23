@@ -107,11 +107,9 @@ public interface AdoptionMapper {
 			+ "where ${param1} like concat('%',#{param2},'%')")
 	public List<Adoption> getSearchAdoption(String filter,String input);
 	//관리자 입양관리페이지 state검색
-	@Select("select a.adoptionno, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-			+ "	from adoption a join user u on a.id = u.id\r\n"
-			+ "    join dog d on d.dogno = a.dogno\r\n"
-			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
-			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
+	@Select("select a.adoptionno,u.id,u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on u.id=a.id join dog d on d.dogno=a.dogno join shelter s on s.shelterno=d.shelterno"
+			+ "	where ${param1} like concat('%',#{param2},'%') and a.state=#{param3};")
 	public List<Adoption> getUserState(String filter,String input,int state);
 	
 

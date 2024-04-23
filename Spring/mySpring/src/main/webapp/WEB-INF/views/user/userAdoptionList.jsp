@@ -61,7 +61,7 @@
 									<c:when test="${aList.state== 0}">
 										<td>처리중</td>
 									</c:when>
-									<c:when test="${aList.state== 0}">
+									<c:when test="${aList.state== 1}">
 										<td>처리완료</td>
 									</c:when>
 									<c:otherwise>

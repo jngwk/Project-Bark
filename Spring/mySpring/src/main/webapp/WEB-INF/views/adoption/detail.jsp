@@ -20,9 +20,9 @@
     <div class="dog-desc-container">
     <p class="page-title">Detail</p><p class="page-subtitle">[상세보기]</p>
       <div class="dog-desc-inner">
-        <a href="${contextPath }/adoption/list"
-          ><img class="arrow" src="${icons }/arrow-back.png" alt="arrow"
-        /></a>
+        <a href="javascript:history.back()">
+        <img class="arrow" src="${icons }/arrow-back.png" alt="arrow"/>
+        </a>
         <div class="summary">
           <div class="img-wrapper">
             <img

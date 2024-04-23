@@ -35,7 +35,7 @@
                 <th scope="col" class="th-regDate">기부날짜</th>
                 <th scope="col" class="th-exe">
                   <select class="userState">
-                    <option>입양상태</option>
+                    <option value="">입양상태</option>
                     <option value="0">처리중</option>
                     <option value="1">처리완료</option>
                     <option value="2">처리실패</option>
@@ -50,7 +50,17 @@
                 <td>${dList.shelterName}</td>
                 <td>${dList.amount}</td>
                 <td>${dList.paymentDate}</td>
-                <td>${dList.state}</td>
+				<c:choose>
+					<c:when test="${dList.state == 0}">
+							<td>처리중</td>
+					</c:when>
+					<c:when test="${dList.state == 1}">
+						<td>처리완료</td>
+					</c:when>
+					<c:otherwise>
+						<td>처리실패</td>
+					</c:otherwise>
+				</c:choose>
               </tr>
               </c:forEach>
             </tbody>
@@ -91,7 +101,7 @@
 				             if(dList.state==0){
 				            	 str+= `<td>처리중</td>
 						                </tr>`
-				             }else if(dList.state==0=1){
+				             }else if(dList.state==1){
 				            	 str+= `<td>처리완료</td>
 						                </tr>`
 				             }else{
@@ -102,6 +112,7 @@
 	        		}) 
 				}
 			}
+				
 		})
 	}
 

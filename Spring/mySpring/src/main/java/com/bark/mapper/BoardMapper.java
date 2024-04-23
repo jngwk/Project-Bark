@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 
@@ -79,8 +80,10 @@ public interface BoardMapper {
 		@Select("SELECT bno FROM board ORDER BY bno DESC ")
 		public List<Integer> getBno();
 		
-		
-		
-		
+		// 캠페인 리스트의 첨부파일 추출 
+		@Select("SELECT imgno, bno, dogno, imgUrl, uploadpath, filename, filetype, uuid "
+			  + " FROM  attach "
+			  + " WHERE bno = #{bno} " ) 
+		public List<Attached> getAttachList(@Param("bno") Integer bno);
 
 }

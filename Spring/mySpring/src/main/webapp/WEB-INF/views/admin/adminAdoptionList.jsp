@@ -27,7 +27,7 @@
                 <label for="search" class="blind">공지사항 내용 검색</label>
                 <select class="searchfilter">
                   <option value="phone">카테고리</option>
-                  <option value="id">아이디</option>
+                  <option value="u.id">아이디</option>
                   <option value="u.name">이름</option>
                 </select>
                 <input
@@ -58,9 +58,9 @@
                 <th scope="col" class="th-exe">
                   <select class="userState">
                     <option>입양상태</option>
-                    <option value="1">처리중</option>
-                    <option value="2">처리완료</option>
-                    <option value="0">처리실패</option>
+                    <option value="0">처리중</option>
+                    <option value="1">처리완료</option>
+                    <option value="2">처리실패</option>
                   </select>
                 </th>
               </tr>
@@ -81,7 +81,17 @@
                 	</c:otherwise>
                 </c:choose>
                 <td>${aList.adopt_date}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
-                <td>${aList.state}</td>
+                <c:choose>
+					<c:when test="${aList.state== 0}">
+						<td>처리중</td>
+					</c:when>
+					<c:when test="${aList.state== 1}">
+						<td>처리완료</td>
+					</c:when>
+					<c:otherwise>
+						<td>처리실패</td>
+					</c:otherwise>
+				</c:choose>
               </tr>
               </c:forEach>
             </tbody>
@@ -126,10 +136,19 @@
 				        }else{
 				        	str +=`<td>\${aList.dogName}</td>`
 				        }
-
-				        	str +=`<td>\${aList.adopt_date}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
-				                	<td>\${aList.state}</td>
-				            		</tr>`
+				        if(aList.state == 0){
+		                	str += `<td>\${aList.adopt_date}</td>
+				                <td>처리중</td>
+				              </tr>`
+		                }else if(aList.state == 1){
+		                	str += `<td>\${aList.adopt_date}</td>
+				                <td>처리완료</td>
+				              </tr>`
+		                }else{
+		                	str += `<td>\${aList.adopt_date}</td>
+				                <td>처리실패</td>
+				              </tr>`
+		                }
 						$('.adoptionList').append(str);
         			}) 
 				}
@@ -161,31 +180,32 @@
 				$('.adoptionList').empty();
 				if(result.length>=1){
 					result.forEach(function(aList){
-						if(aList.state ==1){
 							str=`
 					            <tr>
-				                <td>\${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
-				                <td>\${aList.id}</td>
-				                <td>\${aList.userName}</td>
-				                <td>\${aList.shelterName}</td>
-				                <td>\${aList.dogName}</td>
-				                <td>\${aList.adopt_date}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
-				                <td>\${aList.state}</td>
-				              </tr>`
-						}else if(aList.state ==2){
-							str=`
-					            <tr>
-				                <td>\${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
-				                <td>\${aList.id}</td>
-				                <td>\${aList.userName}</td>
-				                <td>\${aList.shelterName}</td>
-				                <td>\${aList.dogName}</td>
-				                <td>\${aList.adopt_date}</td>
-				                <td>\${aList.state}</td>
-				              </tr>`
-						}
-
-						$('.adoptionList').append(str);
+					                <td>\${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
+					                <td>\${aList.id}</td>
+					                <td>\${aList.userName}</td>
+					                <td>\${aList.shelterName}</td>`	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
+					                
+					        if(aList.dogName == null || aList.dogName == ""){
+						        str += `<td>이름없음</td>`
+					        }else{
+					        	str +=`<td>\${aList.dogName}</td>`
+					        }
+					        if(aList.state == 0){
+			                	str += `<td>\${aList.adopt_date}</td>
+					                <td>처리중</td>
+					              </tr>`
+			                }else if(aList.state == 1){
+			                	str += `<td>\${aList.adopt_date}</td>
+					                <td>처리완료</td>
+					              </tr>`
+			                }else{
+			                	str += `<td>\${aList.adopt_date}</td>
+					                <td>처리실패</td>
+					              </tr>`
+			                }
+							$('.adoptionList').append(str);
 	        		}) 
 				}
 			}
