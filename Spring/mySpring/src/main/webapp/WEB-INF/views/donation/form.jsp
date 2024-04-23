@@ -33,21 +33,10 @@ input[type='radio']:checked + label {
 				<div class="shelter-info">
 					<div class="donate-subtitle">보호소 정보</div>
 					<table class="donate-table">
-<%-- 양식 1						<tr>
-							<th>보호소명</th>
-							<td>
-							<select name = "shelter">
-								<option value="0" selected>보호소를 선택하세요</option>
-								<c:forEach var="sList" items="${sList}" >
-								<option value="${sList.shelterno}">${sList.shelterName}</option>
-								</c:forEach>
-							</select>
-							</td>
-						</tr> --%>
 					<tr>
 							<th>보호소명</th>
 							<td>
-							<select id = "shelter">
+							<select name = "shelter">
 								<c:choose>
 									<c:when test="${empty selectedShelterno }">
 										<c:forEach items="${sList }" var="shelter">
