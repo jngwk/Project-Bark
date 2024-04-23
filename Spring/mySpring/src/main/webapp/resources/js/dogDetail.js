@@ -24,8 +24,9 @@ $("#consent").on("change", function () {
 });
 
 $(".submit-adoption-form").on("click", function (e) {
-  e.preventDefault();
   if ($(".submit-adoption-form").hasClass("inactive")) {
+    e.preventDefault();
     $(".consent-msg").css("display", "block");
+    
   }
 });

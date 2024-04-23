@@ -64,12 +64,20 @@ input[type='radio']:checked + label {
 						<tr>
 							<th>이메일</th>
 <!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
+							<td><input type="text" name="userName" value="<%=(String) session.getAttribute("userName")%>" readonly /></td>
+						</tr>
+						<tr>
+							<th>휴대전화</th>
+							<td><input type="text" name="userPhone" value="<%=(String) session.getAttribute("userPhone")%>" readonly /></td>
+						</tr>
+						<tr>
+							<th>아이디</th>
 							<td><input type="text" name="userId" value="<%=(String) session.getAttribute("userId")%>" readonly /></td>
 						</tr>
 					</table>
 				</div>
 				</form>
-				
+
 				<div class="bank-info">
 					<div class="donate-subtitle">후원 정보</div>
 					<table class="donate-table">
@@ -156,9 +164,9 @@ const onClickPay = async() => {
 	      console.log(rsp);
 			var t = 0;
 			if(rsp.status == "paid"){
-				t = 200;
+				t = 1;
 			}else{
-				t = 404;
+				t = 2;
 			}
 	      if ( rsp.success ) { //결제 성공시
 	        var msg = '결제가 완료되었습니다.';
@@ -183,6 +191,7 @@ const onClickPay = async() => {
 	            console.log(err);
 	          }
 	        }); //ajax
+	        location.href ="${contextPath}/user/userDonationList?id=${userId}"; 
 	      } else {
 	          var msg = '결제 실패';
 	          msg += '\n에러내용 : ' + rsp.error_msg;

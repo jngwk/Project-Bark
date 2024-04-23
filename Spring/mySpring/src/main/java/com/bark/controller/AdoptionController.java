@@ -10,12 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.Page;
-import com.bark.domain.User;
 import com.bark.service.AdoptionService;
+import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +28,12 @@ import lombok.extern.log4j.Log4j;
 public class AdoptionController {
 	private AdoptionService service;
 	private UserService 	userservice;
+	private ShelterService 	shelterservice;
+	
+	@GetMapping("/adoptionInfo")
+	public void adoptionInfo() {
+		log.info("adoptionInfo");
+	}
 	
 	@GetMapping("/list")
 	public void list(Model model,
@@ -36,7 +41,7 @@ public class AdoptionController {
 			 @RequestParam(required=false, value="amount") Integer amount) {	//입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
 		
-		System.out.println("adoption list pageNum-amount : " + pageNum + "-" + amount);
+		System.out.println("noticeList type-feild-pageNum-amount : " + pageNum + "-" + amount);
 		
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
@@ -73,44 +78,14 @@ public class AdoptionController {
 		return "adoption/detail";
 	}
 	
-	// 입양 상세 -> 입양 신청 등록
-	@PostMapping("/adoptionWrite")
-	public String adoptionWrite(@RequestParam(required=false, value="dogno") Integer dogno,
-//								@RequestParam(required=false, value="id") String id,
-//								@RequestParam(required=false, value="addr") String Addr,
-//								@RequestParam(required=false, value="addrDetail") String AddrDetail,
-//								User user,
-								RedirectAttributes rttr) {
-//								HttpSession session) {	
-		log.info("adoptionWrite...........");
-		
-		Adoption adoption = new Adoption();
-		
-//		adoption.setId(user.getId());   
-//		adoption.setUserName(user.getName());
-//		adoption.setShelterName(dog.getShelterName());
-//		adoption.setDogName(dog.getName());
-		//adoption.setDate(null);	// default 시스테일자 처리
-
-//		adoption.setState(0);		// 0: 입양 신청 1: 입양 완료  2: 입양 거절
-	
-//		service.adoptionWrite(adoption);
-		
-//		String address = user.getAddr() + user.getAddrDetail();
-//		userservice.updateAddr(user.getId(),  address);
-		rttr.addFlashAttribute("result", dogno);
-		return "redirect:/adoption/list";
-	}
-	
-	@GetMapping("/dogAdd")
+	@GetMapping("/dogUpload ajax")
 	public void dogUploadAjax() {
 		log.info("dogUpload ajax");
 	}
 	
-	
 	@GetMapping("/write")
-	public void dogWrite() {
-		log.info("dogWrite");
+	public void dogAdd() {
+		log.info("write");
 	}
 	
 	@PostMapping("/write") // 게시글저장
@@ -120,7 +95,7 @@ public class AdoptionController {
 			dog.getDogAttachedList().forEach(attach -> log.info(attach));
 		}
 		service.write(dog);
-		rttr.addFlashAttribute("result", dog.getDogno());
+		rttr.addFlashAttribute("result", dog);
 		return "redirect:/adoption/list";
 	}
 	

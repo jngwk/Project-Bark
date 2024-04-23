@@ -48,6 +48,13 @@ public class AdoptionService {
 		mapper.adoptionWrite(adoption);
 		return;
 	}
+	// 입양 상세 -> 입양 신청 처리
+	public void adoptionUpdateDog(Integer dogno, Integer available) {
+		log.info("adoptionUpdateDog : " + dogno);
+		mapper.adoptionUpdateDog(dogno, available);
+		return;
+	}
+	
 	
 	
 	//관리자페이지 입양내역 검색
@@ -82,8 +89,10 @@ public class AdoptionService {
 	
 	@Transactional
 	public void write(Dog dog) {
-		log.info("write...." + dog.getDogno());
+		
+		dog.setShelterno(mapper.getShelterno(dog.getShelterName()));	//입력받은 보호소이름으로 보홋소 번호 가져와서 해당 강아지에 추가
 		mapper.insertSelectKey(dog);
+		log.info("write...." + dog.getDogno());
 		if (dog.getDogAttachedList() == null || dog.getDogAttachedList().size() <= 0) {
 			return;
 		}
