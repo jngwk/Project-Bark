@@ -40,9 +40,13 @@ public interface AdoptionMapper {
 			+ "ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
 	
-	@Insert("INSERT INTO adoption VALUES(null, #{id}, #{userName}, #{shelterName}, #{dogName}, now(), #{state} );")
+	// 입양 상세 -> 입양 신청 등록
+	@Insert("INSERT INTO adoption VALUES(null, #{adoption.id}, #{adoption.dogno}, null, now(), #{adoption.state} )")
 	public void adoptionWrite(@Param("adoption") Adoption adoption);
-	
+
+	// 입양 상세 -> 입양 신청 등록 (dog 입양 상테 Set)
+	@Update("UPDATE dog SET available = #{available} where dogno = #{dogno}")
+	public void adoptionUpdateDog(@Param("dogno") Integer dogno, @Param("available") Integer available);
 	
 	//관리자 입양관리페이지
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"

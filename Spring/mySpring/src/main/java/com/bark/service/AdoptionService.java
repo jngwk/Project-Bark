@@ -48,6 +48,13 @@ public class AdoptionService {
 		mapper.adoptionWrite(adoption);
 		return;
 	}
+	// 입양 상세 -> 입양 신청 처리
+	public void adoptionUpdateDog(Integer dogno, Integer available) {
+		log.info("adoptionUpdateDog : " + dogno);
+		mapper.adoptionUpdateDog(dogno, available);
+		return;
+	}
+	
 	
 	
 	//관리자페이지 입양내역 검색
