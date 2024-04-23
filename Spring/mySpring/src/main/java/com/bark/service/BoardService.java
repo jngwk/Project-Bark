@@ -36,6 +36,11 @@ public class BoardService {
 		log.info("searchList : " + cri);
 		return mapper.searchList(cri);
 	}
+	
+	public List<Board> searchListById(Criteria cri,String id) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
+		log.info("searchListById : " + cri);
+		return mapper.searchListById(cri,id);
+	}
 
 	public Board read(Integer bno) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
 		Board board = new Board();

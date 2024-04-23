@@ -14,12 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.bark.domain.Adoption;
 import com.bark.domain.Donate;
+
+import com.bark.domain.Criteria;
+import com.bark.domain.Page;
+
 import com.bark.domain.Shelter;
 import com.bark.domain.User;
+
 import com.bark.service.AdoptionService;
 import com.bark.service.DonateService;
+
+import com.bark.service.BoardService;
+
 import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
@@ -31,6 +40,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/user/*")
 @AllArgsConstructor
 public class UserController {
+	private BoardService boardservice;
 	private UserService service;
 	private ShelterService shelterService;
 	private DonateService donateservice;
@@ -126,6 +136,7 @@ public class UserController {
 		session.removeAttribute("userId");
 		session.removeAttribute("userType");
 		session.removeAttribute("userName");
+		session.removeAttribute("userPhone");
 		return "redirect:/";
 	}
 
@@ -186,6 +197,7 @@ public class UserController {
 		return result;
 	}
 
+
 	@GetMapping("/userWriteList")
 	public void userWriteList() {
 		log.info("userWriteList...........");
@@ -229,4 +241,55 @@ public class UserController {
 		 log.info(state);
 		 return adoptionservice.getAState(id,Integer.parseInt(state));
 	 }
+
+	
+	@GetMapping("/userWriteList")//다건
+	public void noticeList(Model model,
+	   @RequestParam(required=false, value="searchField") String searchField,
+	   @RequestParam(required=false, value="searchWord") String searchWord,
+	   @RequestParam(required=false, value="pageNum") Integer pageNum,
+	   @RequestParam(required=false, value="amount") Integer amount,
+	   HttpSession session) {
+
+		Integer type = 2;   				// 문의사항
+		String id = (String)session.getAttribute("userId");
+		System.out.println("contactList [" + type +"-"+ searchField + "-" + searchWord + "-" + pageNum + "-" + amount + "]");
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 0 Set
+			pageNum = 1; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null || searchField == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
+			searchWord = "";
+		}
+
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+		// 조회 조건에 따른 전게 건수 
+		int total = boardservice.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("bList", boardservice.searchListById(cri,id));
+	}	
+	
+	
+
 }

@@ -159,7 +159,7 @@ public class BoardController {
 		board.setType(2);				// 문의하기는 2로
 		service.write(board);
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/noticeList";
+		return "redirect:/user/userWriteList";
 	}
 	
 	@GetMapping("/noticeUpate")
