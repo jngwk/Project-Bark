@@ -26,9 +26,13 @@ import com.bark.domain.User;
 
 import com.bark.service.AdoptionService;
 import com.bark.service.DonateService;
+<<<<<<< HEAD
 
 import com.bark.service.BoardService;
 
+=======
+import com.bark.service.SecurityService;
+>>>>>>> refs/heads/jngwk
 import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
@@ -45,24 +49,7 @@ public class UserController {
 	private ShelterService shelterService;
 	private DonateService donateservice;
 	private AdoptionService adoptionservice;
-
-	@GetMapping("/userList")
-	public void userList(Model model) {
-		log.info("userList");
-		model.addAttribute("uList", service.getUserList());
-	}
-
-	/*
-	 * @GetMapping("/adminList") public void adminList(Model model) {
-	 * log.info("adminList"); model.addAttribute("aList", service.getAdminList()); }
-	 */
-	/*
-	 * @PostMapping("/login") public String login(String id, String pwd, HttpSession
-	 * session) { log.info("login"); User user = service.getUser(id);
-	 * if(user.getPwd().equals(pwd)) { session.setAttribute("userId", id);
-	 * session.setAttribute("userType", user.getType());
-	 * session.setAttribute("userName", user.getName()); } return "redirect:/"; }
-	 */
+	private SecurityService securityService;
 
 	@RequestMapping(value = "login", produces = "application/json; charset=utf8", method = RequestMethod.POST)
 	@ResponseBody
@@ -104,30 +91,25 @@ public class UserController {
 	}
 
 	@GetMapping("/userDetail")
-	public void userDetail(@RequestParam("id") String id, Model model, HttpSession session) {
-		log.info("userDetail");
-		model.addAttribute("user", service.getUser(id));
+	public String userDetail(@RequestParam("id") String id, Model model, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("userDetail");
+			model.addAttribute("user", service.getUser(id));
+			return "/user/userDetail";
+		}
+		return "main";
+		
 	}
 
 	@PostMapping("/modify")
-	public String modify(User user, RedirectAttributes rttr) {
-		log.info("modify");
-		boolean result = service.modify(user);
-		rttr.addFlashAttribute("result", result);
-		return "redirect:/user/userDetail";
-	}
-
-	@PostMapping("/delete")
-	public String delete(User user, RedirectAttributes rttr) {
-		log.info("delete");
-		boolean result = service.delete(user);
-		rttr.addFlashAttribute("result", result);
-		if (user.getType() == 3) {
-//			관리자일 경우, 직원 관리 페이지로 이동
-			return "redirect:/adminList";
-		} else {
-			return "redirect:/";
+	public String modify(User user, RedirectAttributes rttr, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("modify");
+			boolean result = service.modify(user);
+			rttr.addFlashAttribute("result", result);
+			return "redirect:/user/userDetail";
 		}
+		return "main";
 	}
 
 	@GetMapping("/logout")
@@ -197,7 +179,7 @@ public class UserController {
 		return result;
 	}
 
-
+	// 문의하기 목록
 	@GetMapping("/userWriteList")
 	public void userWriteList() {
 		log.info("userWriteList...........");
@@ -205,14 +187,16 @@ public class UserController {
 
 	// 유저 페이지 기부 관리
 	@GetMapping("/userDonationList")
-	public String userDonationList(@RequestParam("id") String id,Model model) {
-
-		log.info("userDonationList...........");
-		List<Donate> dList = donateservice.userDonationList(id);
-
-		model.addAttribute("dList", dList);
-
-		return "/user/userDonationList";
+	public String userDonationList(@RequestParam("id") String id,Model model, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("userDonationList...........");
+			List<Donate> dList = donateservice.userDonationList(id);
+	
+			model.addAttribute("dList", dList);
+	
+			return "/user/userDonationList";
+		}
+		return "main";
 	}
 	
 	 @PostMapping(value="getDState",produces = "application/json; charset=utf8")
@@ -225,14 +209,16 @@ public class UserController {
 
 	// 유저 페이지 입양 관리
 	@GetMapping("/userAdoptionList")
-	public String userAdoptionList(@RequestParam("id") String id,Model model) {
-
-		log.info("userAdoptionList...........");
-		List<Adoption> aList = adoptionservice.userAdoptionList(id);
-
-		model.addAttribute("aList", aList);
-
-		return "/user/userAdoptionList";
+	public String userAdoptionList(@RequestParam("id") String id,Model model, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			log.info("userAdoptionList...........");
+			List<Adoption> aList = adoptionservice.userAdoptionList(id);
+	
+			model.addAttribute("aList", aList);
+	
+			return "/user/userAdoptionList";
+		}
+		return "main";
 	}
 	 @PostMapping(value="getAState",produces = "application/json; charset=utf8")
 	 @ResponseBody
