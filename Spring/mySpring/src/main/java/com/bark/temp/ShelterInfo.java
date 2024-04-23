@@ -64,7 +64,8 @@ public class ShelterInfo {
 								new Shelter(jsonArray.getJSONObject(i).getString("careNm"),
 										jsonArray.getJSONObject(i).getString("careAddr"),
 										jsonArray.getJSONObject(i).getDouble("lat"),
-										jsonArray.getJSONObject(i).getDouble("lng")));
+										jsonArray.getJSONObject(i).getDouble("lng"),
+										jsonArray.getJSONObject(i).getString("careTel")));
 					}
 				}
 			}
