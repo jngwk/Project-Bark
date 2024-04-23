@@ -26,13 +26,10 @@ import com.bark.domain.User;
 
 import com.bark.service.AdoptionService;
 import com.bark.service.DonateService;
-<<<<<<< HEAD
 
 import com.bark.service.BoardService;
 
-=======
 import com.bark.service.SecurityService;
->>>>>>> refs/heads/jngwk
 import com.bark.service.ShelterService;
 import com.bark.service.UserService;
 
