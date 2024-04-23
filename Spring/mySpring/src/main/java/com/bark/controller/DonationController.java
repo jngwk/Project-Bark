@@ -1,7 +1,6 @@
 package com.bark.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -17,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.xml.sax.SAXException;
 
+import com.bark.domain.Criteria;
+import com.bark.domain.Page;
 import com.bark.domain.Shelter;
+import com.bark.service.BoardService;
 import com.bark.service.ShelterService;
 import com.bark.temp.ShelterInfo;
 
@@ -31,6 +33,8 @@ import lombok.extern.log4j.Log4j;
 public class DonationController {
 	private ShelterService service;
 	//private UserService userService;
+	private BoardService boardservice;
+	
 	@GetMapping("/form")
 	public void form(Model model, 
 			 @RequestParam(required=false, value="shelterno") Integer selectedShelterno) {
@@ -122,9 +126,40 @@ public class DonationController {
 		return service.searchShelterAddr(addr);
 	}
 	
+	// board 테이블에서 캠페인(type=3) 리스트를 가져온다.
 	@GetMapping("/campaign")
-	public void campaign() {
+	public void campaignAjax(Model model,
+  		   				 @RequestParam(required=false, value="pageNum") Integer pageNum,
+  		   				 @RequestParam(required=false, value="amount") Integer amount) {
 		log.info("campaign...........");
+		
+		Integer type = 3;   				// 캠페인
+		System.out.println("noticeList [" + type +"-"+ pageNum + "-" + amount + "]");
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 0 Set
+			pageNum = 1; 
+		}
+		if (amount == null) {			// 값이 없으면 12 Set		
+			amount = 12;
+		}
+
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 3: 캠페인
+
+		// 조회 조건에 따른 전게 건수 
+		int total = boardservice.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("bList", boardservice.searchList(cri));
+
+		
 	}
 
 }

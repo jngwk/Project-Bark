@@ -1,11 +1,13 @@
 package com.bark.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.mapper.BoardMapper;
@@ -34,6 +36,35 @@ public class BoardService {
 	// 게시판 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
 	public List<Board> searchList(Criteria cri) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
 		log.info("searchList : " + cri);
+		
+		// 캠페인인 경우 저장된 이미지를 포함하여 가져온다.
+		if (cri.getType() == 3) {
+			List <Board> bList = new ArrayList<Board>();
+			
+			// 캠페인 리스트 GET 
+			bList = mapper.searchList(cri);
+			
+			// 첨부파일 리스트 GET
+			bList.forEach(board -> 
+			{	
+				List<Attached> attachList = new ArrayList<Attached>();
+				attachList = mapper.getAttachList(board.getBno());
+				board.setAttachList(attachList);
+				
+				// 첫 이미지를 캠페인 대표 이미지로 Keep 
+				attachList.forEach(attach -> 
+				{
+					// 첨부파일 타입이 1(true)이면 이미지 0(false)이면 첨부파일 
+					if (attach.isFileType()) {
+//					 	board 도메인에 신규 컬럼 추가 필요 (캠페인 이미지 경로/파일 등등)
+//						board.setXXX = attach.getUploadPath(); 
+//						board.setXXX = attach.getFileName();
+					}
+				});
+			});
+			
+		}
+		
 		return mapper.searchList(cri);
 	}
 	
