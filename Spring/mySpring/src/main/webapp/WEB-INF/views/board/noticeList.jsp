@@ -18,9 +18,11 @@
 		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
 
 		<!-- board seach area -->
+		<c:if test="${userType == 3 }">
 		<div class="notice-button">
 			<a class="medium-btn brown-btn" onclick="writebtn();">글쓰기</a>
 		</div>
+		</c:if>
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
