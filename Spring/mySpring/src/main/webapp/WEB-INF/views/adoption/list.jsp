@@ -40,11 +40,11 @@
 					<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
 							<c:choose>
-						        <c:when test="${not empty dogList.breed}">
-						            ${dogList.breed}
+						        <c:when test="${not empty dogList.name}">
+						            ${dogList.name}
 						        </c:when>
 						        <c:otherwise>
-						            ${dogList.name}
+						            ${dogList.breed }
 						        </c:otherwise>
 						    </c:choose>
 					 	</h2>

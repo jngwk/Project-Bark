@@ -31,11 +31,23 @@ import lombok.extern.log4j.Log4j;
 public class DonationController {
 	private ShelterService service;
 	//private UserService userService;
-	
 	@GetMapping("/form")
-	public void form() {
-		log.info("form...........");
+	public void form(Model model, 
+			 @RequestParam(required=false, value="shelterno") Integer selectedShelterNo) {
+		log.info("form ===========");
+		log.info(selectedShelterNo);
+		
+		List<Shelter> sList = service.getShelterList();
+		log.info(sList.size());
+		model.addAttribute("sList", sList);
+		if(selectedShelterNo != null) {
+			model.addAttribute("selectedShelterNo", selectedShelterNo);
+		}
 	}
+
+	/*
+	 * @GetMapping("/form") public void form() { log.info("form..........."); }
+	 */
 	@GetMapping("/map")
     public String getShelterList(Model model) throws ParserConfigurationException, SAXException, IOException, ServletException {
         log.info("-------shelter/info mapping o--------");

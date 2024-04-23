@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bark.domain.Adoption;
+import com.bark.domain.Criteria;
+import com.bark.domain.Donate;
+import com.bark.domain.Page;
 import com.bark.domain.User;
 import com.bark.service.AdoptionService;
 import com.bark.service.DonateService;
@@ -68,7 +71,7 @@ public class AdminController {
 	@GetMapping("/donationList")
 	public String donationList(Model model) {
 		log.info("donationlist...........");
-		List<Adoption> dList = donateservice.donationList();
+		List<Donate> dList = donateservice.donationList();
 		
 		model.addAttribute("dList",dList);
 		return "/admin/donationList";
@@ -76,14 +79,14 @@ public class AdminController {
 	
 	@PostMapping(value="getSearchDonation",produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<Adoption> getSearchDonation(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
+	public List<Donate> getSearchDonation(@RequestParam ("filter") String filter,@RequestParam ("input") String input,Model model) {
 		log.info(filter); log.info(input);
 		return donateservice.getSearchDonation(filter,input);
 	}
 	
 	 @PostMapping(value="getDonationState",produces = "application/json; charset=utf8")
 	 @ResponseBody
-	 public List<Adoption> getDonationState(@RequestParam ("filter") String filter,@RequestParam ("input") String input,
+	 public List<Donate> getDonationState(@RequestParam ("filter") String filter,@RequestParam ("input") String input,
 			 @RequestParam ("state") String state,Model model) {
 		 log.info("-------Donation search mapping o--------");
 		 log.info(state);
@@ -91,15 +94,49 @@ public class AdminController {
 	 }
 	 
 	 
-	//입양내역
+	//입양내역( +페이징 추가) - 기존의 adminAdoptionList메소드에서 페이징 처리 추가
 	@GetMapping("/adminAdoptionList")
-	public String adminAdoptionList(Model model) {
+	public void adminAdoptionList(Model model,
+				@RequestParam(required=false, value="searchField") String searchField,
+				@RequestParam(required=false, value="searchWord") String searchWord,
+				@RequestParam(required=false, value="pageNum") Integer pageNum,
+				@RequestParam(required=false, value="amount") Integer amount) {
+		
 		log.info("adminAdoptionList...........");
 		List<Adoption> aList = adoptionservice.getAdoptionList();
-		
-		model.addAttribute("aList",aList);
-		return "/admin/adminAdoptionList";
-		
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 0 Set
+			pageNum = 1;
+		}
+		if (amount == null) { // 값이 없으면 10 Set
+			amount = 10;
+		}
+		if (searchField == null || searchField == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
+			searchWord = "";
+		}
+
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리
+		cri.setPageSql((pageNum - 1) * 10);
+		cri.setAmount(amount);
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%");
+
+		// 조회 조건에 따른 전게 건수
+		int total = aList.size(); // 입양내역 전체
+		Page page = new Page(cri, total);
+
+		model.addAttribute("page", page);
+		model.addAttribute("aList", adoptionservice.searchAdoptionList(cri));
 	}
 	
 	 @PostMapping(value="getUserState",produces = "application/json; charset=utf8")
@@ -118,4 +155,5 @@ public class AdminController {
 		log.info(filter); log.info(input);
 		return adoptionservice.getSearchAdoption(filter,input);
 	}
+	
 }
