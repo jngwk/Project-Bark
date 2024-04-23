@@ -30,6 +30,10 @@ public class AdoptionController {
 	private UserService 	userservice;
 	private ShelterService 	shelterservice;
 	
+	@GetMapping("/adoptionInfo")
+	public void adoptionInfo() {
+		log.info("adoptionInfo");
+	}
 	
 	@GetMapping("/list")
 	public void list(Model model,
