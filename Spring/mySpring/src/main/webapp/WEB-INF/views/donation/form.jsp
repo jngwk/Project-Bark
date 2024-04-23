@@ -44,19 +44,19 @@ input[type='radio']:checked+label {
 							<td>
 							<select id = "shelter">
 								<c:choose>
-									<c:when test="${empty selectedShelterNo }">
+									<c:when test="${empty selectedShelterno }">
 										<c:forEach items="${sList }" var="shelter">
-											<option value="${shelter.shelterNo }">${shelter.shelterName }</option>
+											<option value="${shelter.shelterno }">${shelter.shelterName }</option>
 										</c:forEach>
 									</c:when>
 									<c:otherwise>
 										<c:forEach items="${sList }" var="shelter">
 											<c:choose>
-												<c:when test="${shelter.shelterNo eq selectedShelterNo}">
-													<option selected value="${shelter.shelterNo }">${shelter.shelterName }</option>
+												<c:when test="${shelter.shelterno eq selectedShelterno}">
+													<option selected value="${shelter.shelterno }">${shelter.shelterName }</option>
 												</c:when>
 												<c:otherwise>
-													<option value="${shelter.shelterNo }">${shelter.shelterName }</option>
+													<option value="${shelter.shelterno }">${shelter.shelterName }</option>
 												</c:otherwise>
 											</c:choose>
 										</c:forEach>

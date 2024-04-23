@@ -110,10 +110,10 @@
 												<ul>
 													<li><img src="${icons }/user-detail.png" /><a
 														href="javascript:openUpdatePop()">내 정보 조회</a></li>
-													<c:if test="${userType == '2'}">
+													<%-- <c:if test="${userType == '2'}">
 														<li><img src="${icons }/post.png" /><a
 															href="${contextPath }/user/userWriteList">작성글 관리</a></li>
-													</c:if>
+													</c:if> --%>
 													<li><img src="${icons }/book-heart.png" /><a
 														href="${contextPath }/user/userDonationList?id=${userId}">기부/입양
 															관리</a></li>

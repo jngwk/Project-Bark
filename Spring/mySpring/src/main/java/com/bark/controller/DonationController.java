@@ -33,15 +33,15 @@ public class DonationController {
 	//private UserService userService;
 	@GetMapping("/form")
 	public void form(Model model, 
-			 @RequestParam(required=false, value="shelterno") Integer selectedShelterNo) {
+			 @RequestParam(required=false, value="shelterno") Integer selectedShelterno) {
 		log.info("form ===========");
-		log.info(selectedShelterNo);
+		log.info(selectedShelterno);
 		
 		List<Shelter> sList = service.getShelterList();
 		log.info(sList.size());
 		model.addAttribute("sList", sList);
-		if(selectedShelterNo != null) {
-			model.addAttribute("selectedShelterNo", selectedShelterNo);
+		if(selectedShelterno != null) {
+			model.addAttribute("selectedShelterno", selectedShelterno);
 		}
 	}
 
