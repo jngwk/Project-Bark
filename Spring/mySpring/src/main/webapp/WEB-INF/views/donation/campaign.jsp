@@ -23,7 +23,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/many-dogs.jpg" />
+								<img class="banner-img" src="${images}/many-dogs.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -34,18 +34,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -55,7 +55,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -66,18 +66,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -87,7 +87,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -98,18 +98,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -119,7 +119,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -130,18 +130,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -151,7 +151,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -162,18 +162,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -183,7 +183,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -194,18 +194,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -215,7 +215,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -226,18 +226,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -247,7 +247,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -258,18 +258,18 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
@@ -279,7 +279,7 @@
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="../images/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>제목입니다</p>
@@ -290,25 +290,24 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="../images/icons/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="../images/icons/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" />234
 										</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</li>
-
 				</div>
 			</ul>
 		</div>

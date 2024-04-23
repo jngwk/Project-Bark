@@ -22,5 +22,6 @@ public class Dog {
 	private Integer neuter; 
 	private String 	careTel;
 	private String imgUrl;
+	private String shelterAddr;
 	private List<DogAttached> dogAttachedList; 
 }

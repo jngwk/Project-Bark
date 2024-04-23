@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				<div class="read-board">
-					<p>${board.content}</p>
+					<p><pre>${board.content}</pre></p>
 				</div>
 			</div>
 			<div class="read-button">
@@ -68,7 +68,7 @@
 <!-- 						<input class="reply-write" type="text" name="content"
 							placeholder="댓글을 입력하세요" cols="3"/>  -->
 						<textarea class="reply-write" name="content" placeholer="댓글을 입력하세요" style="width:100%;"></textarea>
-						<label for="reply-buttom"> <img	src="/images/icons/write-icon.png"></label> 
+						<label for="reply-buttom"> <img	src="/resources/images/icons/write-icon.png"></label> 
 					<input class="reply-button" id="reply-buttom" type="submit" />
 					</form> 
 					<div class="reply-list">
@@ -90,10 +90,10 @@
 						<p>조회수</p>
 						<p>${board.hit}</p>
 					</div>
-					<div class="read-info">
+<%-- 					<div class="read-info">
 						<p>추천수</p>
 						<p>${board.vote}</p>
-					</div>
+					</div> --%>
 					<div class="read-info">
 						<p>작성일</p>
 						<p><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${board.regDate}" /></p>
@@ -121,7 +121,7 @@
 	showList(1);
 
  	// 댓글 리스트 조회
-	function showList(page) {
+/* 	function showList(page) {
 		getList({
 			bno : bnoValue,
 			page : page || 1
@@ -140,7 +140,7 @@
 						<span>\${item.id}</span><span>\${displayTime(item.regDate)}</span>
 					</div>
 					<div class="reply-content">
-					<p><textarea  style="border: none; width:100%;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>
+					<p><textarea  style="border: none; width:100%; resize: none;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>
 
 					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
 					<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>
@@ -162,7 +162,43 @@
 			replyUL.html(str);
 		});
 		
-	}
+	} */
+	
+	  function showList(page) {
+	    getList(
+	      {
+	        bno: bnoValue,
+	        page: page || 1,
+	      },
+	      function (list) {
+	        let str = "";
+	        if (list == null || list.length == 0) {
+	          replyUL.html("");
+	          return;
+	        }
+	        list.forEach(function (item) {
+	          //let str2 = item.content..replace(/(?:\r\n|\r|\n)/g, '<br />');
+	          let str2 = item.content;
+	          //let str3 = str2.replace(/(?:\r\n|\r|\n)/g, '<br>');
+	          str += `<li name="contentList">
+						<div class="reply-profile">
+							<span>\${item.id}</span><span>\${displayTime(item.regDate)}</span>
+						</div>
+						<div class="reply-content">
+						<p><textarea  style="border: none; width:100%; resize: none;" id="area\${item.commentNo}" readonly>\${item.content}</textarea></p>`;
+	          if ('${ userId }' == item.id) {
+
+	            str += `<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn1\${item.commentNo}" onclick="btn1(this);">수정</a>
+							<a href='javascript:void(0);' class="font-dark" data-commentno="\${item.commentNo}" data-userid="\${item.id}" id="btn2\${item.commentNo}" onclick="btn2(this);">삭제</a>`;
+	          }
+	          str += `</div>	
+						</li>
+						`;
+	        });
+	        replyUL.html(str);
+	      }
+	    );
+	  }
 
  	// <a href="#" id="removeBtn" class="font-dark">수정</a> 	
 	// <a href='javascript:void(0);' onclick="함수();">
@@ -208,6 +244,10 @@
 	registerBtn.on("click", function(e) {
 		e.preventDefault();
 		
+		if (idValue == null || idValue  == "null") {
+			alert("로그인 후 댓글 등록이 가능합니다.");
+			return;	
+		}
 		if (content.val() <= 0) {
 			alert("내용을 입력하세요!!");
 			return;
@@ -299,7 +339,7 @@ function btn1(obj) {
 	
 	let area = "#area" + commentNo;
 	let btn2 = "#btn2" + commentNo;
-	
+
 	if ("수정" ==  $(obj).text()) {
 		$(obj).text("확인");
 		$(btn2).text("취소");

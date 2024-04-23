@@ -1,36 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<style>
+input[type='radio'] {
+  display: none;
+}
+input[type='radio']:checked + label {
+    background: rgb(226, 220, 205);
+}
+</style>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>후원하기</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/donationForm.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/root.css" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/transition.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/donationForm.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/transition.css" />
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
 	integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
 	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<style>
-input[type='radio'] {
-	display: none;
-}
-
-input[type='radio']:checked+label {
-	background: rgb(226, 220, 205);
-}
-</style>
 </head>
 <body>
-	<jsp:include
-		page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp"
-		flush="false"></jsp:include>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false"></jsp:include>
 	<div class="donate-container">
 		<div class="donate-page slide-animation">
 			<div class="paymentForm">
@@ -41,7 +35,6 @@ input[type='radio']:checked+label {
 					<table class="donate-table">
 						<tr>
 							<th>보호소명</th>
-
 							<td>
 							<select name = "shelter">
 								<option value="1" selected>1보호소</option>
@@ -65,19 +58,19 @@ input[type='radio']:checked+label {
 						<tr>
 							<th>휴대전화</th>
 							<td><input type="text" name="userPhone" value="<%=(String) session.getAttribute("userPhone")%>" readonly /></td>
+
 						</tr>
 						<tr>
 							<th>이메일</th>
 							<td><input type="text" name="userId" value="<%=(String) session.getAttribute("userId")%>" readonly /></td>
-
 						</tr>
 					</table>
 				</div>
-
+				</form>
 				<div class="bank-info">
 					<div class="donate-subtitle">후원 정보</div>
 					<table class="donate-table">
-						<form class="paymentAmount">
+						<form  class="paymentAmount">
 							<tr>
 								<th>후원금액</th>
 								<td><input type="text" name="amount" id="price"
@@ -85,22 +78,26 @@ input[type='radio']:checked+label {
 							</tr>
 						</form>
 						<form class="paymentForm1">
-							<tr>
-								<th>후원방법</th>
-								<td><input type="radio" id="kakaopay" name="pg"
-									value="kakaopay"> <label for="kakaopay">KakaoPay</label>
-
-									<input type="radio" id="uplus" name="pg" value="uplus">
-									<label for="uplus">토스페이</label> <input type="radio"
-									id="html5_inicis" name="pg" value="html5_inicis"> <label
-									for="html5_inicis">KG이니시스</label></td>
-							</tr>
+						<tr>
+							<th>후원방법</th>
+							<td>	
+								<input type="radio" id="kakaopay" name="pg" value="kakaopay">
+								<label for="kakaopay">KakaoPay</label> 
+						
+								<input type="radio" id="uplus" name="pg" value="uplus">
+								<label for="uplus">토스페이</label>
+								
+								<input type="radio" id="html5_inicis" name="pg" value="html5_inicis">
+								<label for="html5_inicis">KG이니시스</label>
+							</td>
+						</tr>
 						</form>
 					</table>
 				</div>
 				<div class="donate-button">
 					<input class="large-btn green-btn" type="button"
-						onclick="history.back()" value="취소"> <input
+						onclick="history.back()" value="취소">
+					<input
 						class="large-btn green-btn" type="button" id="do" value="후원하기">
 				</div>
 			</div>
@@ -140,7 +137,7 @@ const onClickPay = async() => {
 	const userName = Info.userName.value;
 	const userPhone = Info.userPhone.value;
 	const userId = Info.userId.value;
-	const shelterNo = Shelter.value;
+	const shelterno = Shelter.value;
 	
 	IMP.request_pay({
 		pg:selectedValue,
@@ -163,8 +160,8 @@ const onClickPay = async() => {
 	      if ( rsp.success ) { //결제 성공시
 	        var msg = '결제가 완료되었습니다.';
 	        var result = {
-	          "user_Id" : userId, //회원아이디
-	          "shelter_shelterNo" :shelterNo, //보호소번호
+	          "id" : userId, //회원아이디
+	          "shelterno" :shelterno, //보호소번호
 	          "state":t, //결제수단
 	          "amount":selectAmount // 결제금액  
 	        }

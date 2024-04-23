@@ -57,7 +57,7 @@
                 <th scope="col" class="th-regDate">기부날짜</th>
                 <th scope="col" class="th-exe">
                   <select class="userState">
-                    <option>입양상태</option>
+                    <option>기부상태</option>
                     <option value="1">처리중</option>
                     <option value="2">처리완료</option>
                     <option value="0">처리실패</option>
@@ -68,19 +68,12 @@
             <tbody class="donationList">
             <c:forEach var="dList" items="${dList}">
               <tr>
-                <td>${dList.no}</td>
+                <td>${dList.donationno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
                 <td>${dList.id}</td>
                 <td>${dList.userName}</td>
                 <td>${dList.shelterName}</td>
-                <c:choose>
-                	<c:when test="${dList.dogName== null || dList.dogName ==''}">
-                		<td>이름없음</td>
-                	</c:when>
-                	<c:otherwise>
-                		<td>${dList.dogName}</td>
-                	</c:otherwise>
-                </c:choose>
-                <td>${dList.date}</td>
+                <td>${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
+                <td>${dList.paymentDate}</td>
                 <td>${dList.state}</td>
               </tr>
               </c:forEach>
@@ -89,9 +82,8 @@
         </div>
       </div>
     </section>
-
     	<!-- 페이지넘버 -->
-	<jsp:include page="${views }/include/pagination.jsp" flush="false" />
+	<%-- <jsp:include page="${views }/include/donationPagination.jsp" flush="false" /> --%>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 	
 	<script>
@@ -116,20 +108,14 @@
 					result.forEach(function(dList){
 						str=`
 				            <tr>
-				                <td>\${dList.no}</td>
-				                <td>\${dList.id}</td>
-				                <td>\${dList.userName}</td>
-				                <td>\${dList.shelterName}</td>`
-				                
-				        if(dList.dogName == null || dList.dogName == ""){
-					        str += `<td>이름없음</td>`
-				        }else{
-				        	str +=`<td>\${dList.dogName}</td>`
-				        }
-
-				        	str +=`<td>\${dList.date}</td>
-				                	<td>\${dList.state}</td>
-				            		</tr>`
+			                <td>\${dList.donationno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
+			                <td>\${dList.id}</td>
+			                <td>\${dList.userName}</td>
+			                <td>\${dList.shelterName}</td>
+			                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
+			                <td>\${dList.paymentDate}</td>
+			                <td>\${dList.state}</td>
+			              </tr>`
 						$('.donationList').append(str);
         			}) 
 				}
@@ -164,37 +150,25 @@
 						if(dList.state ==1){
 							str=`
 					            <tr>
-					                <td>\${dList.no}</td>
-					                <td>\${dList.id}</td>
-					                <td>\${dList.userName}</td>
-					                <td>\${dList.shelterName}</td>`
-					                
-					        if(dList.dogName == null || dList.dogName == ""){
-						        str += `<td>이름없음</td>`
-					        }else{
-					        	str +=`<td>\${dList.dogName}</td>`
-					        }
-
-					        	str +=`<td>\${dList.date}</td>
-					                	<td>\${dList.state}</td>
-					            		</tr>`
+				                <td>\${dList.donationno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
+				                <td>\${dList.id}</td>
+				                <td>\${dList.userName}</td>
+				                <td>\${dList.shelterName}</td>
+				                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
+				                <td>\${dList.paymentDate}</td>
+				                <td>\${dList.state}</td>
+				              </tr>`
 						}else if(dList.state ==2){
 							str=`
 					            <tr>
-					                <td>\${dList.no}</td>
-					                <td>\${dList.id}</td>
-					                <td>\${dList.userName}</td>
-					                <td>\${dList.shelterName}</td>`
-					                
-					        if(dList.dogName == null || dList.dogName == ""){
-						        str += `<td>이름없음</td>`
-					        }else{
-					        	str +=`<td>\${dList.dogName}</td>`
-					        }
-
-					        	str +=`<td>\${dList.date}</td>
-					                	<td>\${dList.state}</td>
-					            		</tr>`
+				                <td>\${dList.donationno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
+				                <td>\${dList.id}</td>
+				                <td>\${dList.userName}</td>
+				                <td>\${dList.shelterName}</td>
+				                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
+				                <td>\${dList.paymentDate}</td>
+				                <td>\${dList.state}</td>
+				              </tr>`
 						}
 
 						$('.donationList').append(str);

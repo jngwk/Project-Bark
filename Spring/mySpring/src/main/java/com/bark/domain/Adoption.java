@@ -4,12 +4,13 @@ import lombok.Data;
 
 @Data
 public class Adoption {
-	private int no;
+	private int adoptionno;
 	private String id;
+	private int dogno;
 	private String userName;
 	private String shelterName;
 	private String dogName;
-	private String date;
-	private String state;
+	private String adopt_date;
+	private int state;
 	
 }

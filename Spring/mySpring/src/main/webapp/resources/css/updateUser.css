@@ -16,7 +16,7 @@
   position: relative;
   top: 50%;
   left: 50%;
-  height: 720px;
+  height: 830px;
   width: 700px;
   transition: height 1s ease-in-out;
   transform: translate(-50%, -50%);
@@ -27,9 +27,12 @@
   -webkit-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 2px 5px 10px 0px rgba(0, 0, 0, 0.35);
 }
-
+.reset-btn{
+	width: 30px;
+	height: 30px;
+}
 .update-popupbox.expand{
-	height: 840px;
+	height: 950px;
 }
 /*컨텐츠 영역*/
 .update-popupbox .update-popup-content {
@@ -54,7 +57,7 @@
 
 /*title*/
 .update-popup-content > .update-title {
-  position: absolute;
+  position: relative;
   top: 0;
   width: 100%;
   background: var(--color-bright);
@@ -72,14 +75,19 @@
   margin: 30px 0;
   font-size: 14px;
   font-weight: bold;
-  padding-top: 60px;
+  padding-top: 20px;
 }
-.update-popup-content .update-content {
+/* .update-popup-content .update-content {
   padding-top: 40px;
-}
+} */
 .update-popup-content label {
   display: flex;
-  justify-content: center;
+  justify-content: start;
+  margin: 12px 0;
+      transform: translateX(-40%);
+    left: 50%;
+    width: 95%;
+    position: relative;
 }
 .update-popup-content span {
   width: 130px;
@@ -89,13 +97,13 @@
   width: 48%;
   padding: 10px 0;
 }
-.update-popup-content label input,.update-popup-content label button {
+.update-popup-content label .input-text,.update-popup-content label button {
   border: none;
   outline: none;
   background: none;
 }
 
-.update-popup-content label input {
+.update-popup-content label .input-text {
 	height: 30px;
   display: block;
   width: 45%;
@@ -104,15 +112,12 @@
   border-bottom: 1px solid var(--color-dark);
 }
 
-
-
-
 /*비밀번호변경*/
-.update-popup-content .pwd-btn {
+.update-popup-content .pwd-btn, .update-popup-content .verify-btn {
 	width: 100px;
     font-size: 14px;
     position: absolute;
-    right: 140px;
+    right: 188px;
 }
 .update-popup-content:hover .pwd-btn:hover{
   background: var(--color-brown);
@@ -125,7 +130,8 @@
 }
 
 .update-popup-content .expand {
-  height: 130px;
+	overflowY: initial;
+  height: 190px;
 }
 
 .update-popup-content .pwd-mainmenu > .pwd-sub label {
@@ -171,4 +177,83 @@
 }
  */
 .update-cancel-btn:hover,.update-save-btn:hover{
-  background-color: var(--color-brown);}
+  background-color: var(--color-brown);
+  }
+.update-content label::after{
+  position: absolute;
+  transform: translate(128px, 36px);
+}
+.update-content label::after{
+	 	font-size: 12px;
+	}
+.update-content label.required::after {
+	  content: "* 필수 입력 사항입니다.";
+	    color: red;
+	}
+.update-content label.duplicate-email::after {
+	  content: "이미 사용중인 이메일입니다.";
+	  color: red;
+	}
+.update-content label.available-email::after {
+	
+	  content: "사용 가능한 아이디입니다.";
+	    color: green;
+	}
+.update-content label.wrong-pwd::after{
+		  content: "비밀번호를 확인해주세요.";
+		    color: red;
+	}
+.update-content label.not-match::after{
+		  content: "비밀번호가 일치하지 않습니다.";
+		    color: red;
+	}
+.update-content label.match::after{
+		  content: "비밀번호가 일치합니다.";
+		    color: green;
+	}
+.update-content label.invalid-pwd::after{
+		content: "영문자, 숫자 및 특수문자를 포함해 8자리 이상 입력하세요.";
+		    color: red;
+	}
+.update-content label.valid-pwd::after{
+		content: "사용 가능한 비밀번호입니다.";
+		    color: green;
+	}
+.update-content label.wrong-code::after{
+		content: "인증번호가 일치하지 않습니다.";
+		    color: red;
+	}
+.update-content label.valid-code::after{
+		content: "인증이 완료 되었습니다.";
+		    color: green;
+	}
+.update-content label.invalid::after{
+		content: "올바르지 않은 형식입니다.";
+		    color: red;
+	}
+.update-content label.verify-label{
+		transition: 1s;
+		transform: translate(-40%, -100%);
+		opacity: 0;
+		pointer-events: none;
+	}
+.update-content label.verify-label.show{
+		transform: translateY(-40%, 0);
+		opacity: 1;
+		pointer-events: initial;
+	}
+
+.update-content a.send-code{
+	color: var(--color-brown);
+    align-self: center;
+    height: fit-content;
+    cursor: pointer;
+    font-size: 12px;
+	}
+.update-content a.send-code:hover{
+	text-decoration: underline var(--color-brown);
+}
+#update-addr{
+	pointer-events: none;
+	user-select: none;
+}

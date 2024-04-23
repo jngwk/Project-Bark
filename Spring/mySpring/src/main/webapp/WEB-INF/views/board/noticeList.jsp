@@ -18,9 +18,11 @@
 		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
 
 		<!-- board seach area -->
+		<c:if test="${userType == 3 }">
 		<div class="notice-button">
-			<a class="medium-btn brown-btn" href="/board/noticeWrite">글쓰기</a>
+			<a class="medium-btn brown-btn" onclick="writebtn();">글쓰기</a>
 		</div>
+		</c:if>
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
@@ -78,6 +80,21 @@ function chageLangSelect(){
 
 	$("#searchWord").val("");
     
+}
+
+let idValue ='<%=(String)session.getAttribute("userId")%>';	// 접속자 id
+
+
+function writebtn() {
+ 	
+	//alert(idValue.length);
+	if (idValue == null || idValue  == "null") {
+		alert("로그인 후 글쓰기 가능합니다.");
+		return;		
+
+	} 
+	window.location.href = "/board/noticeWrite";
+
 }
 </script>
 </body>

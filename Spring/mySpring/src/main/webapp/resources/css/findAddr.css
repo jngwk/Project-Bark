@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.find-addr-layer {
+	top: 0;
+	left: 0;
+	z-index: 10002 !important;
+	width: 100dvh;
+	height: 100dvh;
+	background-color: rgba(0, 0, 0, 0.4) !important;
+	display: none;
+	position: fixed;
+	overflow: hidden;
+	z-index: 1;
+	/* border: 2px solid var(--color-brown); */
+}
+
+.find-addr-layer>img {
+	width: 30px;
+	cursor: pointer;
+	position: absolute;
+	right: -3px;
+	top: -3px;
+	z-index: 10003 !important;
+}
