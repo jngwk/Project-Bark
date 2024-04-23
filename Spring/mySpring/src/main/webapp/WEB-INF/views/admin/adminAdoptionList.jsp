@@ -68,19 +68,19 @@
             <tbody class="adoptionList">
             <c:forEach var="aList" items="${aList}">
               <tr>
-                <td>${aList.no}</td>
-                <td>${aList.id}</td>
+                <td>${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
+                <td>${aList.id}</td>			
                 <td>${aList.userName}</td>
                 <td>${aList.shelterName}</td>
                 <c:choose>
-                	<c:when test="${aList.dogName== null || aList.dogName ==''}">
-                		<td>이름없음</td>
+                	<c:when test="${not empty aList.dogName}">
+                		<td>${aList.dogName}</td>
                 	</c:when>
                 	<c:otherwise>
-                		<td>${aList.dogName}</td>
+                		<td>이름없음</td>
                 	</c:otherwise>
                 </c:choose>
-                <td>${aList.date}</td>
+                <td>${aList.adopt_date}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
                 <td>${aList.state}</td>
               </tr>
               </c:forEach>
@@ -90,8 +90,8 @@
       </div>
     </section>
 
-    	<!-- 페이지넘버 -->
-	<jsp:include page="${views }/include/pagination.jsp" flush="false" />
+    <!-- 페이지넘버 -->
+	<jsp:include page="${views }/include/adminAdoptionListPagination.jsp" flush="false"/>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 	
 	<script>
@@ -116,10 +116,10 @@
 					result.forEach(function(aList){
 						str=`
 				            <tr>
-				                <td>\${aList.no}</td>
+				                <td>\${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
 				                <td>\${aList.id}</td>
 				                <td>\${aList.userName}</td>
-				                <td>\${aList.shelterName}</td>`
+				                <td>\${aList.shelterName}</td>`	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
 				                
 				        if(aList.dogName == null || aList.dogName == ""){
 					        str += `<td>이름없음</td>`
@@ -127,7 +127,7 @@
 				        	str +=`<td>\${aList.dogName}</td>`
 				        }
 
-				        	str +=`<td>\${aList.date}</td>
+				        	str +=`<td>\${aList.adopt_date}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
 				                	<td>\${aList.state}</td>
 				            		</tr>`
 						$('.adoptionList').append(str);
@@ -164,23 +164,23 @@
 						if(aList.state ==1){
 							str=`
 					            <tr>
-				                <td>\${aList.no}</td>
+				                <td>\${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
 				                <td>\${aList.id}</td>
 				                <td>\${aList.userName}</td>
 				                <td>\${aList.shelterName}</td>
 				                <td>\${aList.dogName}</td>
-				                <td>\${aList.date}</td>
+				                <td>\${aList.adopt_date}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
 				                <td>\${aList.state}</td>
 				              </tr>`
 						}else if(aList.state ==2){
 							str=`
 					            <tr>
-				                <td>\${aList.no}</td>
+				                <td>\${aList.adoptionno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
 				                <td>\${aList.id}</td>
 				                <td>\${aList.userName}</td>
 				                <td>\${aList.shelterName}</td>
 				                <td>\${aList.dogName}</td>
-				                <td>\${aList.date}</td>
+				                <td>\${aList.adopt_date}</td>
 				                <td>\${aList.state}</td>
 				              </tr>`
 						}

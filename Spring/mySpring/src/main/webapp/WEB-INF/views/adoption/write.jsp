@@ -69,6 +69,7 @@
 				</div>
 			</div>
 		</form>
+	</div>
 		<!-- /.container-fluid -->
 		<jsp:include page="${views }/include/footer.jsp" flush="false"/>
 	<script>
@@ -82,10 +83,10 @@ $(document).ready(function() {
 	   $(".uploadResult ul li").each(function(i, obj){
 	       var obj = $(obj);
 	       console.dir(obj);
-	       str += `<input type='hidden' name='attachList[\${i}].fileName' value='\${obj.data("filename")}'>
-	       <input type='hidden' name='attachList[\${i}].uuid' value='\${obj.data("uuid")}'>
-	       <input type='hidden' name='attachList[\${i}].uploadPath' value='\${obj.data("path")}'>
-	       <input type='hidden' name='attachList[\${i}].fileType' value='\${obj.data("type")}'>`;   });
+	       str += `<input type='hidden' name='dogAttachedList[\${i}].fileName' value='\${obj.data("filename")}'>
+	       <input type='hidden' name='dogAttachedList[\${i}].uuid' value='\${obj.data("uuid")}'>
+	       <input type='hidden' name='dogAttachedList[\${i}].uploadPath' value='\${obj.data("path")}'>
+	       <input type='hidden' name='dogAttachedList[\${i}].fileType' value='\${obj.data("type")}'>`;   });
 	   formObj.append(str).submit();
 
 	}); //sumbit button event
@@ -138,6 +139,7 @@ $(document).ready(function() {
 		      }
 		   }); //$.ajax
 	    });
+	
 	//썸네일 표시 부분
 	   let uploadResult = $(".uploadResult ul");
 	   function showUploadedFile(uploadResultArr){
@@ -146,26 +148,17 @@ $(document).ready(function() {
 	      let str ="";
 	      $(uploadResultArr).each(function(i, item){
 			   if(!item.fileType){ //이미지가 아닌 경우
-				   //  str += `<li><img  src='/resources/images/attach.png'>\${item.fileName}</li>`;
 				   let filePath = item.uploadPath+ "/"+ item.uuid+ "_"+ item.fileName;
 				   filePath = filePath.replace(new RegExp(/\\/g),"/"); //폴더 구분자인 경우 '/'로 통일
-				//   str += `<li><a href='/download?fileName=\${filePath}'><img src='/resources/images/attach.png'>\${item.fileName}</a>
-				//	   <span data-file='\${filePath}' data-type='file'>x</span></li>`;
 				   str += `<li data-path='\${item.uploadPath}' data-uuid='\${item.uuid}' data-filename='\${item.fileName}' data-type='\${item.fileType}'><a href='/dogdownload?fileName=\${filePath}'><img src='/resources/images/attach.png'>\${item.fileName}</a>
 					   <span data-file='\${filePath}' data-type='file'>x</span></li>`;
-
-
 				   }
 				   else{  					   
-					  // str += `<li>\${item.fileName}</li>`;  
 					    let filePath = item.uploadPath+ "/s_"+ item.uuid+ "_"+ item.fileName;
 					    let originPath = item.uploadPath+ "/"+ item.uuid+ "_"+ item.fileName;
 					    filePath = filePath.replace(new RegExp(/\\/g),"/"); //폴더 구분자인 경우 '/'로 통일
 					    originPath = originPath.replace(new RegExp(/\\/g),"/"); //폴더 구분자인 경우 '/'로 통일
 					    console.log('originPath : ', originPath);
-					    //str += `<li><a href="#" onclick="showImage('\${originPath}'); return false;"><img src='/display?fileName=\${filePath}'></a></li>`;
-					 //   str += `<li><a href="#" onclick="showImage('\${originPath}'); return false;"><img src='/display?fileName=\${filePath}'></a>
-					   // 	<span data-file='\${filePath}' data-type='image'>x</span></li>`;
 					    str += `<li data-path='\${item.uploadPath}' data-uuid='\${item.uuid}' data-filename='\${item.fileName}' data-type='\${item.fileType}'><a href="#" onclick="showImage('\${originPath}'); return false;"><img src='/dogdisplay?fileName=\${filePath}'></a>
 					    	<span data-file='\${filePath}' data-type='image'>x</span></li>`;
 

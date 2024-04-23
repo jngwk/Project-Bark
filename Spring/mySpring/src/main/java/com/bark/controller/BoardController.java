@@ -143,9 +143,9 @@ public class BoardController {
 	
 	@PostMapping("/noticeWrite")
 	public String write(Board board, RedirectAttributes rttr) {
-		
+		Integer type = 1;   
 		log.info("write : " + board);
-		board.setType(2);				// 공지사항
+		board.setType(type);				// 공지사항
 		service.write(board);
 		rttr.addFlashAttribute("result", board.getBno());
 		return "redirect:/board/noticeList";

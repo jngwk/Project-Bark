@@ -29,7 +29,7 @@ public interface ShelterMapper {
 
 	// kyw : 20240422-16:22  입양신청서(adoptiondetail.jsp) 처리시 조회 내용 
 	@Select("select * from shelter where shelterno = #{shleterno}")
-	public Shelter getShelter(@Param("shleterno") String shleterno);
+	public Shelter getShelter(@Param("shleterno") Integer shleterno);
 	//--------------------------------
 	
 }

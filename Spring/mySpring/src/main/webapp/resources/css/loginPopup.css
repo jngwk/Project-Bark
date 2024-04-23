@@ -488,7 +488,7 @@ body {
     text-align: center;
 }
 .form-slide.final-slide.general-slide > .text-wrap {
-    transform: translateY(-10%);
+    transform: translateY(120%);
 }
 .form-slide.final-slide.shelter-slide > .text-wrap {
     transform: translateY(60%);

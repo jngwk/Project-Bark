@@ -41,64 +41,62 @@ input[type='radio']:checked+label {
 					<table class="donate-table">
 						<tr>
 							<th>보호소명</th>
-
 							<td>
-							<select name = "shelter">
-								<option value="1" selected>1보호소</option>
-								<option value="2">2보호소</option>
-								<option value="3">3보호소</option>
-								<option value="4">4보호소</option>
+							<select id = "shelter">
+								<c:choose>
+									<c:when test="${empty selectedShelterNo }">
+										<c:forEach items="${sList }" var="shelter">
+											<option value="${shelter.shelterNo }">${shelter.shelterName }</option>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach items="${sList }" var="shelter">
+											<c:choose>
+												<c:when test="${shelter.shelterNo eq selectedShelterNo}">
+													<option selected value="${shelter.shelterNo }">${shelter.shelterName }</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${shelter.shelterNo }">${shelter.shelterName }</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 							</select>
 							</td>
 						</tr>
 					</table>			
 				</div>
-				
 				<form class="userinfo">
 				<div class="user-info">
 					<div class="donate-subtitle">기본 정보</div>
-					<table class="donate-table">					
-						<tr>
-							<th>이름</th>
-<!-- 							<td><input type="text" name="userName" value="김지현" readonly /></td> -->
-							<td><input type="text" name="userName" value="<%=(String) session.getAttribute("userName")%>" readonly /></td>
-						</tr>
-						<tr>
-							<th>휴대전화</th>
-<!-- 							<td><input type="text" name="userPhone" value="010-0000-0000" readonly /></td> -->
-							<td><input type="text" name="userPhone" value="<%=(String) session.getAttribute("userPhone")%>" readonly /></td>
-						</tr>
-						<tr>
-							<th>이메일</th>
-<!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
-							<td><input type="text" name="userId" value="<%=(String) session.getAttribute("userId")%>" readonly /></td>
-
-						</tr>
+					<table class="donate-table">	
+						<c:choose>
+							<c:when test="${not empty userName }">				
+								<tr>
+									
+									<th>이름</th>
+		<!-- 							<td><input type="text" name="userName" value="김지현" readonly /></td> -->
+									<td><input type="text" name="userName" value="${userName }" readonly /></td>
+								</tr>
+								<tr>
+									<th>휴대전화</th>
+		<!-- 							<td><input type="text" name="userPhone" value="010-0000-0000" readonly /></td> -->
+									<td><input type="text" name="userPhone" value="${userPhone }" readonly /></td>
+								</tr>
+								<tr>
+									<th>이메일</th>
+		<!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
+									<td><input type="text" name="userId" value="${userId }" readonly /></td>
+										
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<th text-align="center">로그인 후 이용해주십시오.</th>
+							</c:otherwise>
+						</c:choose>
 					</table>
 				</div>
-
-				<form class="userinfo">
-					<div class="user-info">
-						<div class="donate-subtitle">기본 정보</div>
-						<table class="donate-table">
-							<tr>
-								<th>이름</th>
-								<td><input type="text" name="userName" value="김지현" readonly /></td>
-							</tr>
-							<tr>
-								<th>휴대전화</th>
-								<td><input type="text" name="userPhone"
-									value="010-0000-0000" readonly /></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td><input type="text" name="userId" value="jihyeon2368"
-									readonly /></td>
-							</tr>
-						</table>
-					</div>
-				</form>
-
 				<div class="bank-info">
 					<div class="donate-subtitle">후원 정보</div>
 					<table class="donate-table">
@@ -123,19 +121,19 @@ input[type='radio']:checked+label {
 						</form>
 					</table>
 				</div>
+				<c:if test="${not empty userName }">
 				<div class="donate-button">
 					<input class="large-btn green-btn" type="button"
 						onclick="history.back()" value="취소"> <input
 						class="large-btn green-btn" type="button" id="do" value="후원하기">
 				</div>
+				</c:if>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </body>
-</html>
-
 <script>
 IMP.init("imp60737432");
 
@@ -220,4 +218,5 @@ button.addEventListener("click",onClickPay);
 
 
 </script>
+</html>
 </html>

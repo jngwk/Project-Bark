@@ -2,6 +2,7 @@ package com.bark.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,8 @@ public class AdoptionService {
 	@Setter(onMethod_=@Autowired)
 	private DogAttachMapper attachMapper;
 	
+	
+	//입양목록 및 상세보기 관련
 	public List<Dog> getDogList(){	//입양하기 -> 강아지 리스트
 		return mapper.getDogList();
 	}
@@ -34,10 +37,16 @@ public class AdoptionService {
 		return mapper.getDog(dogno);
 	}
 	
-	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
-	public List<Dog> searchList(Criteria cri) {
+	public List<Dog> searchList(Criteria cri) {	// 강아지 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
 		log.info("searchList : " + cri);
-		return mapper.searchList(cri);
+		return mapper.searchDogList(cri);
+	}
+	
+	// 입양 상세 -> 입양 신청 처리
+	public void adoptionWrite(Adoption adoption) {
+		log.info("adoptionWrite : " + adoption);
+		mapper.adoptionWrite(adoption);
+		return;
 	}
 	
 	
@@ -46,6 +55,12 @@ public class AdoptionService {
 		log.info("getAdoptionList..................");
 		return mapper.getAdoptionList();
 	}
+	
+	public List<Adoption> searchAdoptionList(Criteria cri){	//한 페이지당 입양내역 리스트
+		log.info("searchAdoptionList: "+ cri);
+		return mapper.searchAdoptionList(cri);
+	}
+	
 
 	public List<Adoption> getSearchAdoption(String filter, String input) {
 		return mapper.getSearchAdoption(filter,input);
@@ -55,6 +70,9 @@ public class AdoptionService {
 		// TODO Auto-generated method stub
 		return mapper.getUserState(filter,input,state);
 	}
+	
+	
+	
 	
 	//강아지 파일 업로드
 	public List<DogAttached> getAttachList(Integer dogno) {	
@@ -90,6 +108,15 @@ public class AdoptionService {
 		log.info("remove...." + dogno);
 		return mapper.delete(dogno) == 1;
 
+	}
+
+	//회원페이지 입양내역
+	public List<Adoption> userAdoptionList(String id) {
+		return mapper.userAdoptionList(id);
+	}
+
+	public List<Adoption> getAState(String id,int state) {
+		return mapper.getAState(id,state);
 	}
 
 }
