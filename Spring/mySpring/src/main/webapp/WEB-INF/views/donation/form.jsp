@@ -259,7 +259,7 @@ button.addEventListener("click", onClickPay); */
 	            console.log(err);
 	          }
 	        }); //ajax
-	        location.href ="${contextPath}/donation/formCompelete"; 
+	        location.href ="${contextPath}/donation/formComplete"; 
 	      } else {
 	          var msg = '결제 실패';
 	          msg += '\n에러내용 : ' + rsp.error_msg;

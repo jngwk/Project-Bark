@@ -134,6 +134,8 @@
 			type: 'POST',
 			url : "/admin/getUserType",
 			data : {
+				filter: $(".searchfilter").val(),
+				input: $("#searchInput").val(),
 				type: $(".userType").val()},
 			success : function(result){
 				//테이블 초기화
