@@ -183,6 +183,7 @@ public class UserController {
 			log.info("userDonationList...........");
 			List<Donate> dList = donateservice.userDonationList(id);
 	
+
 			model.addAttribute("dList", dList);
 	
 			return "/user/userDonationList";
@@ -219,7 +220,6 @@ public class UserController {
 		 return adoptionservice.getAState(id,Integer.parseInt(state));
 	 }
 
-	
 	@GetMapping("/userWriteList")//다건
 	public void noticeList(Model model,
 	   @RequestParam(required=false, value="searchField") String searchField,

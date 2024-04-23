@@ -134,7 +134,7 @@
 													<li><img src="${icons }/book-heart.png" /><a
 														href="${contextPath }/admin/userList">회원 관리</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/user/userWriteList">문의 내역</a></li>
+														href="${contextPath}/admin/userWriteList">문의 내역</a></li>
 													<li><img src="${icons }/logout.png" /><a
 														href="${contextPath }/user/logout">로그아웃</a></li>
 												</ul>
