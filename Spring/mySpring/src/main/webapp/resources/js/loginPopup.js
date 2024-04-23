@@ -530,7 +530,7 @@ function checkDuplicateEmail($input) {
           .addClass("available-email");
       } else if (result == 1) {
         // If result is 1, email exists
-        $label.removeClass("required available").addClass("duplicate-email");
+        $label.removeClass("required available-email").addClass("duplicate-email");
       } else {
         alert("데이터베이스 오류");
       }
