@@ -61,7 +61,7 @@
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">입양</strong></a>
 						<div class="dropdown-content">
-							<a class="transition" href="#"><strong
+							<a class="transition" href="${contextPath }/adoption/adoptionInfo"><strong
 								class="large-font hover-underline">입양 안내</strong></a> <a
 								class="transition" href="${contextPath }/adoption/list"><strong
 								class="large-font hover-underline">입양하기</strong></a>
