@@ -1,8 +1,7 @@
 package com.bark.domain;
 
-import java.util.Date;
-
 import lombok.Data;
+
 @Data
 public class Donate {
 
@@ -13,5 +12,7 @@ public class Donate {
 	private Integer no;
 	private String shelterName; 
 	private String paymentDate;
+	private int donationno;
+	private String userName;
 	
 }

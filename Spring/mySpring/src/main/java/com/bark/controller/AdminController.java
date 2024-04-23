@@ -55,6 +55,7 @@ public class AdminController {
 		if(securityService.hasRole(3, session)) {
 			log.info("donationlist...........");
 			List<Donate> dList = donateservice.donationList();
+			log.info(dList);
 			model.addAttribute("dList",dList);
 			return "/admin/donationList";
 		}

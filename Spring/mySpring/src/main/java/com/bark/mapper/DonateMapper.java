@@ -21,7 +21,7 @@ public interface DonateMapper {
 	
 	
 	//관리자페이지 기부내역
-	@Select("select d.donationno no, d.id id, u.name userName, s.shelterName,d.amount,d.paymentDate,d.state\r\n"
+	@Select("select d.donationno donationno, d.id id, u.name userName, s.shelterName,d.amount amount,d.paymentDate,d.state\r\n"
 			+" from donation d join user u on d.id = u.id\r\n"
 			+" join shelter s on s.shelterno = d.shelterno;")
 	public List<Donate> donationList();
