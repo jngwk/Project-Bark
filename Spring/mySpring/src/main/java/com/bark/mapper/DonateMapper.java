@@ -48,4 +48,17 @@ public interface DonateMapper {
 	//회원페이지 기부내역 state검색
 	@Select("select donationno no,shelterName,amount,paymentDate,state from donation natural join shelter where id=#{param1} and state=${param2} ")
 	public List<Donate> getDState(String id,int state);
+
+	//관리자페이지 기부내역 전체
+	@Select(" select d.donationno, d.id id, u.name userName,d.amount amount,d.paymentDate,d.state\r\n"
+			+ "	from donation d join user u on d.id = u.id\r\n"
+			+ "		join shelter s on s.shelterno = d.shelterno\r\n"
+			+ "where s.sheltername = (select name from user where id=#{id}) order by d.paymentDate desc")
+	public List<Donate> shelterDonationList(String id);
+	//보호소페이지 기부내역 state검색
+	@Select(" select d.donationno, d.id id, u.name userName,d.amount amount,d.paymentDate,d.state\r\n"
+			+ "	from donation d join user u on d.id = u.id\r\n"
+			+ "		join shelter s on s.shelterno = d.shelterno\r\n"
+			+ "where s.sheltername = (select name from user where id=#{param1}) and state=${param2} order by d.paymentDate desc")
+	public List<Donate> getSDState(String id, int state);
 }

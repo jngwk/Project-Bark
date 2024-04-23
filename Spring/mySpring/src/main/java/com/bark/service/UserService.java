@@ -63,7 +63,7 @@ public class UserService {
 	public List<User> getSearchUser(String filter,String input) {
 		return mapper.getSearchUser(filter,input);
 	}
-
+	//관리자페이지 보호소승인
 	public boolean availableUpdate(String available,String id) {
 		return mapper.availableUpdate(available,id)==1;
 	}
@@ -79,5 +79,9 @@ public class UserService {
 	
 	public int updateShelterno(String id, Integer shelterno) {
 		return mapper.updateShelterno(id, shelterno);
+	}
+	//보호소페이지 입양승인
+	public boolean adoptionState(String state, String id) {
+		return mapper.adoptionState(state,id)==1;
 	}
 }

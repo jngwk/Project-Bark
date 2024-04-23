@@ -135,5 +135,10 @@ public class AdoptionService {
 		return mapper.getAState(id,state);
 	}
 	
+	//보호소페이지 입양내역
+	public List<Adoption> shelterAdoptionList(String id) {
+		return mapper.shelterAdoptionList(id);
+	}
+	
 
 }
