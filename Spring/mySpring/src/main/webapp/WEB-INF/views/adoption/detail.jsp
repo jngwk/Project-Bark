@@ -118,8 +118,10 @@
             산책과 활동을 필요로 합니다. 영철이와 함께 활동적인 생활을 해주실 수
             있는 견주님을 찾습니다. 
           </p> -->
-          <button class="large-btn brown-btn expand-btn">입양하기</button>
+          <c:if test="${userType == 1 || userType == 3 }">
+          	<button class="large-btn brown-btn expand-btn">입양하기</button>
           <!-- <button class="prev-btn secondary-btn font-bright">목록</button> -->
+          </c:if>
         </div>
       </div>
     </div>

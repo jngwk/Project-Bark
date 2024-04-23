@@ -24,7 +24,9 @@
   	   <div class="adoption-list-header">
     <p class="page-title">Adoption</p><p class="page-subtitle">[입양 목록]</p>
          <div class="story-button">
+         <c:if test="${userType == 2 }">
 			<a class="large-btn brown-btn" href="${contextPath }/adoption/write">등록하기</a>
+			</c:if>
 		</div>
     </div>
 

@@ -16,6 +16,7 @@ import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.Page;
 import com.bark.service.AdoptionService;
+import com.bark.service.SecurityService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ import lombok.extern.log4j.Log4j;
 public class AdoptionController {
 	private AdoptionService service;
 	private UserService 	userservice;
+	private SecurityService securityService;
 	
 	@GetMapping("/adoptionInfo")
 	public void adoptionInfo() {
@@ -114,8 +116,12 @@ public class AdoptionController {
 	}
 	
 	@GetMapping("/write")
-	public void dogAdd() {
+	public String dogAdd(HttpSession session) {
 		log.info("write");
+		if(securityService.hasRole(2, session)) {
+			return "/adoption/write";
+		}
+		return "main";
 	}
 	
 	@PostMapping("/write") // 게시글저장
