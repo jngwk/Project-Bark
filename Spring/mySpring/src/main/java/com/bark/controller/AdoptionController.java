@@ -87,7 +87,7 @@ public class AdoptionController {
 		adoption.setShelterName(dog.getShelterName());
 		adoption.setDogName(dog.getName());
 		//adoption.setDate(null);	// default 시스테일자 처리
-		adoption.setState("0");		// 0: 입양 신청 1: 입양 완료  2: 입양 거절
+		adoption.setState(0);		// 0: 입양 신청 1: 입양 완료  2: 입양 거절
 		
 		service.adoptionWrite(adoption);
 		
