@@ -57,7 +57,7 @@
                 <th scope="col" class="th-regDate">기부날짜</th>
                 <th scope="col" class="th-exe">
                   <select class="userState">
-                    <option>입양상태</option>
+                    <option>기부상태</option>
                     <option value="1">처리중</option>
                     <option value="2">처리완료</option>
                     <option value="0">처리실패</option>
@@ -90,7 +90,7 @@
       </div>
     </section>
     	<!-- 페이지넘버 -->
-	<jsp:include page="${views }/include/donationPagination.jsp" flush="false" />
+	<%-- <jsp:include page="${views }/include/donationPagination.jsp" flush="false" /> --%>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 	
 	<script>
