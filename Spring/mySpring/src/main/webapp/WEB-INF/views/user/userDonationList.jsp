@@ -36,9 +36,9 @@
                 <th scope="col" class="th-exe">
                   <select class="userState">
                     <option>입양상태</option>
-                    <option value="1">처리중</option>
-                    <option value="2">처리완료</option>
-                    <option value="0">처리실패</option>
+                    <option value="0">처리중</option>
+                    <option value="1">처리완료</option>
+                    <option value="2">처리실패</option>
                   </select>
                 </th>
               </tr>
@@ -69,15 +69,13 @@
 	$(".userState").change(function(){
 		getDState();
 	})
-
-
 	function getDState(){
 		console.log($(".userState").val());
 		$.ajax({
 			type: 'POST',
 			url : "/user/getDState",
 			data : {
-				id: ${userId},
+				id: "${userId}",
 				state: $(".userState").val()},
 			success : function(result){
 				//테이블 초기화
@@ -89,9 +87,17 @@
 				                <td>\${dList.no}</td>
 				                <td>\${dList.shelterName}</td>
 				                <td>\${dList.amount}</td>
-				                <td>\${dList.paymentDate}</td>
-				                <td>\${dList.state}</td>
-				                </tr>`
+				                <td>\${dList.paymentDate}</td>`
+				             if(dList.state==0){
+				            	 str+= `<td>처리중</td>
+						                </tr>`
+				             }else if(dList.state==0=1){
+				            	 str+= `<td>처리완료</td>
+						                </tr>`
+				             }else{
+				            	 str+= `<td>처리실패</td>
+						                </tr>`
+				             }
 						$('.donationList').append(str);
 	        		}) 
 				}
