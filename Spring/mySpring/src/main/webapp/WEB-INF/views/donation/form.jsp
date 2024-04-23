@@ -60,44 +60,19 @@ input[type='radio']:checked+label {
 					<table class="donate-table">					
 						<tr>
 							<th>이름</th>
-<!-- 							<td><input type="text" name="userName" value="김지현" readonly /></td> -->
 							<td><input type="text" name="userName" value="<%=(String) session.getAttribute("userName")%>" readonly /></td>
 						</tr>
 						<tr>
 							<th>휴대전화</th>
-<!-- 							<td><input type="text" name="userPhone" value="010-0000-0000" readonly /></td> -->
 							<td><input type="text" name="userPhone" value="<%=(String) session.getAttribute("userPhone")%>" readonly /></td>
 						</tr>
 						<tr>
 							<th>이메일</th>
-<!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
 							<td><input type="text" name="userId" value="<%=(String) session.getAttribute("userId")%>" readonly /></td>
 
 						</tr>
 					</table>
 				</div>
-
-				<form class="userinfo">
-					<div class="user-info">
-						<div class="donate-subtitle">기본 정보</div>
-						<table class="donate-table">
-							<tr>
-								<th>이름</th>
-								<td><input type="text" name="userName" value="김지현" readonly /></td>
-							</tr>
-							<tr>
-								<th>휴대전화</th>
-								<td><input type="text" name="userPhone"
-									value="010-0000-0000" readonly /></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td><input type="text" name="userId" value="jihyeon2368"
-									readonly /></td>
-							</tr>
-						</table>
-					</div>
-				</form>
 
 				<div class="bank-info">
 					<div class="donate-subtitle">후원 정보</div>
