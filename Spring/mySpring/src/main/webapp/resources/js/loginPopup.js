@@ -457,7 +457,13 @@ function login(e) {
         window.location.href = "/"; // Redirect on successful login
       } else if (result == 2) {
         // require admin approval
-        $label.removeClass("required not-user").addClass("pending-user");
+        $label
+          .removeClass("required not-user rejected")
+          .addClass("pending-user");
+      } else if (result == 3) {
+        $label
+          .removeClass("required not-user pending-user")
+          .addClass("rejected-user");
       } else if (result == -1) {
         // If result is 0, wrong pwd
         $label.removeClass("required pending-user").addClass("not-user");
@@ -530,7 +536,9 @@ function checkDuplicateEmail($input) {
           .addClass("available-email");
       } else if (result == 1) {
         // If result is 1, email exists
-        $label.removeClass("required available-email").addClass("duplicate-email");
+        $label
+          .removeClass("required available-email")
+          .addClass("duplicate-email");
       } else {
         alert("데이터베이스 오류");
       }
@@ -615,10 +623,12 @@ function join(btn) {
     data: $(btn).closest("form").serialize(),
     success: function (result) {
       // show slide
-      if (result == true) {
+      if (result == 1) {
         nextPopupSlide(parentSlides);
-      } else {
+      } else if (result == 0) {
         alert("데이터베이스 오류");
+      } else {
+        alert("예상치 못한 오류가 발생했습니다. 관리자에게 문의하세요.");
       }
     },
   });

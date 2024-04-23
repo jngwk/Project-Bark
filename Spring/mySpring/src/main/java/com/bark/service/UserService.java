@@ -31,7 +31,6 @@ public class UserService {
 		return mapper.getUser(id);
 	}
 	public boolean join(User user) {
-		user.setAddr(user.getAddr() + user.getAddrDetail());
 		log.info("insert..................");
 		return mapper.insert(user)==1;
 	}
@@ -78,5 +77,7 @@ public class UserService {
 		return mapper.updateAddr(id, address);
 	}
 	
-
+	public int updateShelterno(String id, Integer shelterno) {
+		return mapper.updateShelterno(id, shelterno);
+	}
 }

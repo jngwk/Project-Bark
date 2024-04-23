@@ -308,7 +308,21 @@
 				}				
 			})
 		}
-
+		
+		function checkRegisteredShelter(shelterName){ // 원래는 shelterno으로 검사하는게 맞지만..
+			$.ajax({
+				type: 'GET',
+				url : "/user/check-regi-shelter",
+				success: function(isRegistered){
+				    if(isRegistered){
+				    	// add class "duplicate-shelter"
+				    }
+				},error: (error) => {
+				     console.log(JSON.stringify(error));
+				}				
+			})
+		}
+		
 		function addShelter(selectedShelter) {
 			if(shelterNames.length <= 0){
 				// 가져오지 못하면 다시 가져와!
@@ -329,6 +343,7 @@
 		  wrapper.classList.remove("active");
 		  selectBtn.firstElementChild.innerText = selectedLi.innerText;
 		  selectBtn.firstElementChild.classList.add("font-dark");
+		  /* checkRegisteredShelter(selectedLi.innerText); */
 		}
 
 		searchInp.addEventListener("keyup", () => {

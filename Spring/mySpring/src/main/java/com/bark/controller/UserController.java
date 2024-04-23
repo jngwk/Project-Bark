@@ -56,9 +56,11 @@ public class UserController {
 		log.info("id: " + id);
 		if (user == null) {
 			return 0;
-		} else if (user.getAvailable() == 2) {
+		} else if (user.getAvailable() == 0) { // 처리중
 			return 2;
-		} else if (user.getPwd().equals(pwd)) {
+		} else if (user.getAvailable() == 2) { // 처리중
+			return 3;
+		}else if (user.getPwd().equals(pwd)) {
 			session.setAttribute("userId", id);
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
@@ -73,18 +75,46 @@ public class UserController {
 
 	@PostMapping(value = "join", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public boolean join(User user) {
+	public int join(User user) {
 		log.info("join: " + user);
-		if (!service.join(user))
-			return false;
-		if (user.getType() == 2) {
-			Shelter shelter = new Shelter();
-			shelter.setShelterName(user.getName());
-			shelter.setShelterAddr(user.getAddr());
-			if (!shelterService.register(shelter))
-				return false;
+		if(user.getAddrDetail() != null) {
+			user.setAddr(user.getAddr() + user.getAddrDetail()); // 주소 한줄로 만들기
 		}
-		return true;
+		
+		if (!service.join(user)) { // 일단 user db에 삽입
+			return 0; // user 테이블 삽입 오류
+		}
+		
+		if (user.getType() == 2) { // 보호소 회원이면
+			if(user.getAddrDetail() != null) { // 세부 주소가 있으면 신규 보호소
+				Shelter shelter = new Shelter();
+				shelter.setShelterName(user.getName());
+				shelter.setShelterAddr(user.getAddr());
+				shelter.setShelterno(shelterService.register(shelter));
+				service.updateShelterno(user.getId(), shelter.getShelterno());
+				log.info("신규 보호소: " + shelter.getShelterno() + "======");
+				return 1;
+			}
+			else { // 주소가 있으면 등록된 보호소
+				log.info("이미 등록된 보호소 ===========================");
+				List<Shelter> sList = shelterService.getShelterList();
+				if(sList.size() > 1) { 
+					for(Shelter s : sList) {
+						if(s.getShelterAddr().equals(user.getAddr())) { // 이름 중복 있으면 주소 맞는거 찾아서 shelterno 반환
+							service.updateShelterno(user.getId(), s.getShelterno());
+							return 1;
+						}
+					}
+				}
+				else {
+					service.updateShelterno(user.getId(), sList.get(0).getShelterno());
+					return 1;
+				}
+				
+			}
+		}
+		
+		return 0;
 	}
 
 	@GetMapping("/userDetail")
@@ -124,7 +154,7 @@ public class UserController {
 	public User getUser(@RequestParam("id") String id) {
 		return service.getUser(id);
 	}
-
+	
 	@PostMapping(value = "checkId", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public int checkId(@RequestParam("id") String id) {

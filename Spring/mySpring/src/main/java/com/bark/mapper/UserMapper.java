@@ -12,7 +12,7 @@ import com.bark.domain.Criteria;
 import com.bark.domain.User;
 
 public interface UserMapper {
-	@Select("select * from user where type != 3 order by type, shelterno")
+	@Select("select * from user where type != 3 order by regDate DESC, type")
 	public List<User> getUserList();
 	@Select("select * from user where id = #{id}")
 	public User getUser(String id);
@@ -41,10 +41,10 @@ public interface UserMapper {
 	 * ) public List<User> getUserType(String filter,String input,int type);
 	 */
     
-    @Select("select * from user where type = #{type} order by regDate")
+    @Select("select * from user where type = #{type} order by regDate DESC")
     public List<User> getUserType(int type);
 
-    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type, shelterno")
+    @Select("select * from user where ${param1} like concat('%',#{param2},'%') and type !=3 order by type, regDate DESC")
     public List<User> getSearchUser(String filter,String input);
     
     @Update("update user set available=#{param1} where id=#{param2}")
@@ -54,5 +54,10 @@ public interface UserMapper {
 			+ "	set addr = #{address} "
 			+ "	where id = #{id};")
 	public int updateAddr(@Param("id") String id, @Param("address") String address);
+	
+    @Update("update user "
+			+ "	set shelterno = #{shelterno} "
+			+ "	where id = #{id};")
+    public int updateShelterno(@Param("id") String id, @Param("shelterno")Integer shelterno);
 	
 }
