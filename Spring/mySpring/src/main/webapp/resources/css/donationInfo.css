@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .header-container {
-	background-color: var(--color-brown);
+	background-color: var(--color-olive);
 }
 
 .header-container strong {
@@ -26,7 +26,7 @@
 }
 
 .adoptionInfo-title {
-	font-size: 26px;
+	font-size: 20px;
 }
 
 .page-title {
@@ -48,11 +48,10 @@
 .adoptionInfo-content {
 	padding: 30px;
 	line-height: 40px;
-	font-size: 20px;
 }
 
 .donationInfo-dog {
-	width: 500px;
-	height: 600px;
+	width: 400px;
+	height: 500px;
 	object-fit: cover;
 }
