@@ -3,8 +3,6 @@ package com.bark.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -52,7 +50,7 @@ public class UploadController {
 	@PostMapping(value="/uploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public ResponseEntity<List<Attached>>  uploadAjaxPost(MultipartFile[] uploadFile) {
-		String uploadFolder=context.getRealPath("/resources/data");
+		String uploadFolder=context.getRealPath("/resources/images/dogs");
 		log.info("uploadFolder " + uploadFolder);
 		List<Attached> list = new ArrayList<Attached>();
 		
@@ -60,8 +58,8 @@ public class UploadController {
 			Attached attached = new Attached();
 			
 			log.info("---------------------------------------");
-			log.info("uploadAjaxAction Upload File Name : "+multipartFile.getOriginalFilename());
-			log.info("uploadAjaxAction Upload File Size : "+multipartFile.getSize());
+			log.info("Upload File Name : "+multipartFile.getOriginalFilename());
+			log.info("Upload File Size : "+multipartFile.getSize());
 
 			UUID uuid = UUID.randomUUID();
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -73,10 +71,10 @@ public class UploadController {
 			File saveFile = new File(uploadFolder, uploadFileName);
 			try { 
 				multipartFile.transferTo(saveFile); 
-				attached.setUuid(uuid.toString()); attached.setUploadPath(uploadFolder);
+				attached.setUuid(uuid.toString()); attached.setUploadPath(getFolder());
 
 				if(checkImageType(saveFile)) {
-					attached.setFileType(true);
+					attached. setFileType(true);
 
 					FileOutputStream thumbnail 
 					= new FileOutputStream(new File(uploadFolder, "s_"+uploadFileName));
@@ -114,7 +112,7 @@ public class UploadController {
 			try { 
 				multipartFile.transferTo(saveFile); 
 				dogAttached.setUuid(uuid.toString()); 
-				dogAttached.setUploadPath(uploadFolder);
+				dogAttached.setUploadPath(uploadFileName);
 
 				if(checkImageType(saveFile)) {
 					dogAttached. setFileType(true);
@@ -137,7 +135,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]>getFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File(fileName);
+	   File file = new File(context.getRealPath("/resources/images/dogs")+fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
@@ -154,7 +152,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]>dogGetFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File(fileName);
+	   File file = new File(context.getRealPath("/resources/images/dogs")+fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
@@ -182,27 +180,6 @@ public class UploadController {
 			e.printStackTrace();
 		}
 		return false;
-	}
-	
-	@PostMapping("/deleteFile")
-	@ResponseBody
-	public ResponseEntity<String> deleteFile(String fileName, String type) {
-		log.info("deleteFile : " + fileName);
-		File file;
-		try {
-			file = new File("c:/upload/" + URLDecoder.decode(fileName, "UTF-8"));
-			file.delete();
-			if (type.equals("image")) {
-				String largeFileName = file.getAbsolutePath().replace("s_", "");
-				log.info("largeFileNa: " + largeFileName);
-				file = new File(largeFileName);
-				file.delete();
-			}
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<String>("deleted", HttpStatus.OK); 
 	}
 
 }

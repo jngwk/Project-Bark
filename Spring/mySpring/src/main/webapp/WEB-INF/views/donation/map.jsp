@@ -53,8 +53,6 @@
 								<div class="shelter-detail">
 									<p>${list.shelterName}</p>
 									<span>${list.shelterAddr}</span>
-									<p style="display: none;">${list.lat}</p>
-									<p style="display: none;">${list.lng}</p>
 								</div>
 								<div class="shelter-buttons">
 									<div class="detail-box">
@@ -102,8 +100,6 @@
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
-							<p style="display: none;">\${item.lat}</p>
-						<p style="display: none;">\${item.lng}</p>
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
@@ -149,8 +145,6 @@
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
-							<p style="display: none;">\${item.lat}</p>
-						<p style="display: none;">\${item.lng}</p>
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">

@@ -12,7 +12,7 @@ import com.bark.domain.Shelter;
 
 @Mapper
 public interface ShelterMapper {
-	@Insert("insert into shelter (shelterName, shelterAddr, lat, lng,careTel) values(#{shelterName},#{shelterAddr},#{lat},#{lng},#{careTel})")
+	@Insert("insert into shelter (shelterName, shelterAddr, careTel) values(#{shelterName},#{shelterAddr},#{careTel})")
 	public void putShelter(Shelter shelter);
 	
 //	@Insert("insert into shelter (shelterName, shelterAddr) values(#{shelterName},#{shelterAddr})")

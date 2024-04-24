@@ -74,6 +74,7 @@ public class BoardService {
 						if (board.getUploadPath() == null || board.getFileName() == null) {
 							board.setUploadPath(attach.getUploadPath()); 
 							board.setFileName(attach.getFileName());
+							board.setUuid(attach.getUuid());
 							System.out.println("attach.getUploadPath() : " + attach.getUploadPath());
 							System.out.println("attach.getFileName() : " + attach.getFileName());
 						}
