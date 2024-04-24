@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bark.domain.Adoption;
+import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Donate;
 import com.bark.domain.Page;
 import com.bark.domain.User;
+import com.bark.mapper.CommentMapper;
 import com.bark.service.AdoptionService;
 import com.bark.service.BoardService;
 import com.bark.service.DonateService;
@@ -37,6 +39,7 @@ public class AdminController {
 	private DonateService donateservice;
 	private SecurityService securityService;
 	private BoardService service;
+	private CommentMapper commentmapper;
 	
 	// 회원조회
 	@GetMapping("/userList")
@@ -183,6 +186,8 @@ public class AdminController {
 		log.info(adoptionservice.getUserState(filter, input, Integer.parseInt(state)));
 		return adoptionservice.getUserState(filter, input, Integer.parseInt(state));
 	}
+	
+	//--------------------------------------------------------------------------------------------------------
 	// 관리자가 유저 들의 문의사항 전체 조회
 	@GetMapping("/userWriteList")//다건
 	public void noticeList(Model model,
@@ -230,4 +235,57 @@ public class AdminController {
 		model.addAttribute("page", page);
 		model.addAttribute("bList", service.searchList(cri));
 	}	
+	//문의사항 read
+	@GetMapping("/contactRead")//단건
+	public void contactRead(Model model, 
+					 @RequestParam("bno") Integer  bno,						   
+					 @RequestParam(required=false, value="searchField") String searchField,
+					 @RequestParam(required=false, value="searchWord") String searchWord,
+					 @RequestParam(required=false, value="pageNum") Integer pageNum,
+					 @RequestParam(required=false, value="amount") Integer amount) {
+		
+		Integer type = 2;   				// 공지사항
+		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 1 Set
+			pageNum = 1; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null || searchField == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+		// 조회 조건에 따른 전게 건수 
+		int total = service.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		Board board = new Board();
+		board = service.read(bno);
+		
+		// 조회 수(hit) 증가
+		service.updateHit(bno);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("board", service.read(bno));
+		model.addAttribute("commentCount", commentmapper.getCount(bno));
+	}
 }

@@ -42,6 +42,11 @@ public class DonationController {
 	private SecurityService securityService;
 	
 	private CommentMapper commentmapper;
+	//후원안내
+	@GetMapping("/donationInfo")
+	public void adoptionInfo() {
+		log.info("donationInfo");
+	}
 	
 	@GetMapping("/form")
 	public void form(Model model, 

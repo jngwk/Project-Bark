@@ -34,7 +34,7 @@ public class AdoptionController {
 	private AdoptionService service;
 	private UserService userservice;
 	private SecurityService securityService;
-
+	//입양안내
 	@GetMapping("/adoptionInfo")
 	public void adoptionInfo() {
 		log.info("adoptionInfo");
