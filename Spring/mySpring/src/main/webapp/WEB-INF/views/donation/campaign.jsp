@@ -23,10 +23,10 @@
 			<ul>
 				<div class="story-list">
 				<c:forEach var="bList" items="${bList}" >
-					<li><a href="/donation/read?bno=${bList.bno}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
+					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="" />
+								<a href="/donation/read?bno=${bList.bno}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}"><img class="banner-img" src="${pageContext.request.contextPath}/resources/data/${bList.uuid}_${bList.fileName}" /></a>
 							</div>
 							<div class="story-title xlarge-font">
 								<p>${bList.title}</p> 
@@ -54,7 +54,7 @@
 								</div>
 							</div>
 						</div>
-					</a></li>
+					</li>
 				</c:forEach>	
 				</div>
 			</ul>

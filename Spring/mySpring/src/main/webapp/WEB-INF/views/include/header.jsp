@@ -57,7 +57,7 @@
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">보호소 및 후원</strong></a>
 						<div class="dropdown-content">
-							<a class="transition" href="#"><strong
+							<a class="transition" href="${contextPath }/donation/donationInfo"><strong
 								class="large-font hover-underline">후원 안내</strong></a> <a
 								class="transition" href="${contextPath }/donation/form"><strong
 								class="large-font hover-underline">후원하기</strong></a> <a
