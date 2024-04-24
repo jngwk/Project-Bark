@@ -17,6 +17,13 @@ import com.bark.domain.Dog;
 @Mapper
 public interface AdoptionMapper {	
 	
+	@Select("SELECT COUNT(1) FROM dog d JOIN shelter s ON d.shelterno = s.shelterno"
+			  + " AND ((#{cri.searchField} = 'dog' AND title LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) ")
+	public int totalPage(@Param("cri") Criteria cri);
+	
 	//입양목록 관련
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
