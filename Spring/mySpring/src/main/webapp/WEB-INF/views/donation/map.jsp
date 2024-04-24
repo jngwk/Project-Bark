@@ -107,8 +107,8 @@
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> 
-							<a href="${contextPath }/adoption/list?searchWord=${list.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
+							<a href="${contextPath }/donation/form?shelterno=\${item.shelterno}" class="donate green-btn large-btn">후원하기</a> 
+							<a href="${contextPath }/adoption/list?searchWord=\${item.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
 						</div>
 					</div>
 				</li>`
@@ -154,8 +154,8 @@
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> 
-							<a href="${contextPath }/adoption/list?searchWord=${list.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
+							<a href="${contextPath }/donation/form?shelterno=\${item.shelterno}" class="donate green-btn large-btn">후원하기</a> 
+							<a href="${contextPath }/adoption/list?searchWord=\${item.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
 						</div>
 					</div>
 				</li>`

@@ -17,7 +17,7 @@ public interface ShelterMapper {
 	
 //	@Insert("insert into shelter (shelterName, shelterAddr) values(#{shelterName},#{shelterAddr})")
 	@SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "shelterno", before = false, resultType = int.class)
-	@Insert("INSERT INTO shelter (shelterName, shelterAddr) VALUES(#{shelterName}, #{shelterAddr})")
+	@Insert("INSERT INTO shelter (shelterName, shelterAddr, careTel) VALUES(#{shelterName}, #{shelterAddr}, #{careTel})")
 	public int register(Shelter shelter);
 	
 	@Select("select * from shelter")
