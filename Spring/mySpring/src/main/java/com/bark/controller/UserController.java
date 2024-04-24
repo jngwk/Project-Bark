@@ -90,7 +90,8 @@ public class UserController {
 				Shelter shelter = new Shelter();
 				shelter.setShelterName(user.getName());
 				shelter.setShelterAddr(user.getAddr());
-				shelter.setShelterno(shelterService.register(shelter));
+				shelterService.register(shelter);
+				log.info(shelter.getShelterno());
 				service.updateShelterno(user.getId(), shelter.getShelterno());
 				log.info("신규 보호소: " + shelter.getShelterno() + "======");
 				return 1;
