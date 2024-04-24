@@ -6,11 +6,13 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 
 import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
+import com.bark.domain.Dog;
 
 public interface BoardMapper {
 	
@@ -47,6 +49,7 @@ public interface BoardMapper {
 		
 		// 게시글 등록
 		@Insert("INSERT INTO board VALUES(null, #{id}, #{title}, #{content}, now(), 0, 0, #{type})")
+		@SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "bno", before = false, resultType = int.class)
 		public int write(Board board);
 		
 		// 단건 조회

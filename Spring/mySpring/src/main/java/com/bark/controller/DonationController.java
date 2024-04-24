@@ -269,7 +269,7 @@ public class DonationController {
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("amount", amount);
 			model.addAttribute("board", boardservice.read(bno));
-			return "/board/noticeUpdate";
+			return "/donation/read";
 		}
 		return "main";
 	}

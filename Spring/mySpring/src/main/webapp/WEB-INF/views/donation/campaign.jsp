@@ -26,7 +26,7 @@
 					<li><a href="/donation/read?bno=${bList.bno}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="" />
+								<img class="banner-img" src="${bList.uploadPath}/${bList.fileName}" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>${bList.title}</p> 

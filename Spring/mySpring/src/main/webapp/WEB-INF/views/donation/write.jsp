@@ -79,16 +79,13 @@
 									<ul></ul>
 								</div>
 								<div class="card-footer d-flex">
-								<button type="submit" class="btn btn-success ml-auto">Submit</button>
-								<button type="reset" class="btn btn-warning ml-2">Reset</button>
 								</div>
 							</div>
 							<div class="write-button">
-								<input type="button" data-ico="->" onclick="history.back()"
+								<input type="button" data-ico="->" 
 									value="취소" class="btn brown-btn large-btn"  /> <input
-									data-ico="->" type="button" value="작성 완료"
-
-									class="btn brown-btn large-btn" id="write-button" onclick="writebtn()"/>
+									data-ico="->" type="submit" value="작성 완료"
+									class="btn brown-btn large-btn" id="write-button" />
 								<input type="hidden" name="id" value="<%=(String)session.getAttribute("userId")%>" />
 
 							</div>
@@ -102,11 +99,62 @@
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
-<script type="text/javascript">
+<script>
 
-alert(" dfc ");
 
-$(document).ready(function() {
+let formObj=$("form[role='form']");
+$("input[type='submit']").on("click", function(e) {
+	e.preventDefault();
+	
+//	alert("들어왔니??");
+	let WriteForm = document.WriteForm;
+//	alert("들어왔니??2222");
+	let Title = $("#Title").val();
+//	alert("들어왔니??3333");
+	let Content = $("#Content").val();
+
+	alert("aaa[" + Content +"]");
+	alert(Content);
+
+	if (Title == null || Title == "" || Title.length < 0 ) {
+		alert("제목을 입력하세요.");
+		e.preventDefault();
+		Title.focus();
+		return;
+	}
+
+	if (Content == null || Content == "" || Content.length < 0 ) {
+		alert("내용을 입력하세요.");
+		e.preventDefault();
+		Content.focus();
+		return;
+	}  
+	
+	
+	console.log("submit clicked");
+	let str="";
+	$(".uploadResult ul li").each(function(i, obj) {
+		var obj = $(obj);
+		console.dir(obj); 
+		str += `<input type='hidden' name='attachList[\${i}].fileName' value='\${obj.data("filename")}'>
+			<input type='hidden' name='attachList[\${i}].uuid' value='\${obj.data("uuid")}'>
+			<input type='hidden' name='attachList[\${i}].uploadPath' value='\${obj.data("path")}'>
+			<input type='hidden' name='attachList[\${i}].fileType' value='\${obj.data("type")}'>`;
+	});
+	
+	formObj.append(str).submit();
+
+
+});
+
+$("input[type='button']").on("click", function(e) {
+	
+	history.back();
+});
+
+
+//$(document).ready(function() {
+/*
 	let formObj=$("form[role='form']");
 	$("button[type='submit']").on("click", function(e) {
 		e.preventDefault();
@@ -123,7 +171,7 @@ $(document).ready(function() {
 		
 		formObj.append(str).submit();
 	});
-	
+*/	
 	$(document).on('input', '#uploadFile', function() {
 
 		let formData = new FormData();
@@ -155,7 +203,7 @@ $(document).ready(function() {
 	});
 	
 	let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	let	maxSize = 5242880;
+	let	maxSize = 25242880;
 	function checkExtension(fileName, fileSize) {
 		if (fileSize >= maxSize) {
 			alert("파일 크기 초가");
@@ -195,7 +243,7 @@ $(document).ready(function() {
 				str +=`<li data-path='\${item.uploadPath}' data-uuid='\${item.uuid}' 
 				data-filename='\${item.fileName}' data-type='\${item.fileType}'>
 				<a href="#" onclick="showImage('\${originPath}'); return false;">
-				<img src='/display?fileName=\${filePath}' style="width:20px;"></a>
+				<img src='/display?fileName=\${filePath}'></a>
 				<span data-file='\${filePath}' data-type="image">X</li>`;
 			}
 		});
@@ -246,32 +294,9 @@ $(document).ready(function() {
 		});
 	});
 	
-});
+//});
 
-function writebtn() {
 
-	let WriteForm = document.WriteForm;
-	let Title = $("#Title").val();
-	let Content = $("#Content").val();
-
-//	alert("aaa[" + Content +"]");
-//	alert(Content);
-
-	if (Title == null || Title == "" || Title.length < 0 ) {
-		alert("제목을 입력하세요.");
-		e.preventDefault();
-		Title.focus();
-		return;
-	}
-
-if (Content == null || Content == "" || Content.length < 0 ) {
-		alert("내용을 입력하세요.");
-		e.preventDefault();
-		Content.focus();
-		return;
-}  
-	document.WriteForm.submit();
-}
 </script>
 </body>
 </html>
