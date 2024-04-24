@@ -11,6 +11,7 @@ import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.DogAttached;
+import com.bark.domain.Donate;
 import com.bark.mapper.AdoptionMapper;
 import com.bark.mapper.DogAttachMapper;
 
@@ -47,6 +48,11 @@ public class AdoptionService {
 		log.info("searchListByShelterno : " + cri);
 		log.info("searchListByShelterno : " + shelterno);
 		return mapper.searchDogListByShelterno(cri, shelterno);
+	}
+
+	//입양하기 검색
+	public List<Dog> dogListSearch(String filter, String input) {
+		return mapper.dogListSearch(filter,input);
 	}
 	
 	// 입양 상세 -> 입양 신청 처리
@@ -139,6 +145,7 @@ public class AdoptionService {
 	public List<Adoption> shelterAdoptionList(String id) {
 		return mapper.shelterAdoptionList(id);
 	}
+
 	
 
 }
