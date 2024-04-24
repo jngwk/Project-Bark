@@ -50,18 +50,10 @@ public class UploadController {
 	@PostMapping(value="/uploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public ResponseEntity<List<Attached>>  uploadAjaxPost(MultipartFile[] uploadFile) {
-		
-		String uploadFolder=context.getRealPath("/resources/images");
+		String uploadFolder=context.getRealPath("/resources/images/dogs");
 		log.info("uploadFolder " + uploadFolder);
 		List<Attached> list = new ArrayList<Attached>();
 		
-		//파일을 upload 지정 폴더 내부에 새로운 폴더를 생성하여 저장하기로 
-		File uploadPath  = new File(uploadFolder, getFolder());
-		log.info("upload Path : "+uploadPath);
-		if(uploadPath.exists() ==false) { //폴더가 존재하지 않으면 새로 생성
-			uploadPath.mkdirs();  //yyyy/MM/dd 폴더 생성
-		}
-
 		for(MultipartFile multipartFile: uploadFile) {
 			Attached attached = new Attached();
 			
@@ -76,7 +68,7 @@ public class UploadController {
 			
 			uploadFileName = uuid.toString()+"_"+uploadFileName;
 
-			File saveFile = new File(uploadPath, uploadFileName);
+			File saveFile = new File(uploadFolder, uploadFileName);
 			try { 
 				multipartFile.transferTo(saveFile); 
 				attached.setUuid(uuid.toString()); attached.setUploadPath(getFolder());
@@ -85,7 +77,7 @@ public class UploadController {
 					attached. setFileType(true);
 
 					FileOutputStream thumbnail 
-					= new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
+					= new FileOutputStream(new File(uploadFolder, "s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				}
@@ -143,7 +135,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]>getFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File("d:/upload/board/"+fileName);
+	   File file = new File(context.getRealPath("/resources/images/dogs")+fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
@@ -160,7 +152,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]>dogGetFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File("C:\\Users\\yjlee\\git\\Bark\\Project-Bark\\Spring\\mySpring\\src\\main\\webapp\\resources\\images\\dogs"+fileName);
+	   File file = new File(context.getRealPath("/resources/images/dogs")+fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {

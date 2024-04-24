@@ -42,7 +42,6 @@ public class AdoptionController {
 
 	
 	//입양하기 강아지 전체 목록
-
 	@GetMapping("/list")
 	public void list(Model model, @RequestParam(required = false, value = "shelterno") Integer shelterno, // 보호소 조회에서
 																											// 넘어올 때 보호소

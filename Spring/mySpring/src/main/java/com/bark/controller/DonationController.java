@@ -85,7 +85,7 @@ public class DonationController {
         log.info("-------insert into HaspMap--------");
         
         List<Shelter> sList = service.getShelterList();
-        log.info("-------get shelter list--------");
+        log.info(sList);
         
     	model.addAttribute("sList", sList);
 
