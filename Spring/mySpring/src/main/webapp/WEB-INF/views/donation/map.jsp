@@ -98,7 +98,7 @@
 				if(result.length>=1){
 					result.forEach(function(item){
 						str=`
-						<li onclick="shelterMap(\${list.shelterAddr}); expandList(this);">
+						<li onclick="shelterMap('\${item.shelterAddr}'); expandList(this);">
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
@@ -107,9 +107,8 @@
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a>
-							<a href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-							<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> 
+							<a href="${contextPath }/adoption/list?searchWord=${list.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
 						</div>
 					</div>
 				</li>`
@@ -146,7 +145,7 @@
 				if(result.length>=1){
 					result.forEach(function(item){
 						str=`
-						<li onclick="shelterMap(\${list.shelterAddr}); expandList(this);">
+						<li onclick="shelterMap('\${item.shelterAddr}'); expandList(this);">
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
@@ -155,9 +154,8 @@
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> <a
-								href="#" class="shelter-story green-btn large-btn">보호소	이야기</a>
-								<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> 
+							<a href="${contextPath }/adoption/list?searchWord=${list.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
 						</div>
 					</div>
 				</li>`
