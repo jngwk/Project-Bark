@@ -79,7 +79,7 @@ public class UserController {
 	public int join(User user) {
 		log.info("join: " + user);
 		if(user.getAddrDetail() != null) {
-			user.setAddr(user.getAddr() + user.getAddrDetail()); // 주소 한줄로 만들기
+			user.setAddr(user.getAddr() + " "+ user.getAddrDetail()); // 주소 한줄로 만들기
 		}
 		
 		if (!service.join(user)) { // 일단 user db에 삽입
