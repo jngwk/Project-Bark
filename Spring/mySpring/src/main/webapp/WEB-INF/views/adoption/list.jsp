@@ -57,7 +57,14 @@
 		<div class="card__container">
 			<c:forEach var="dogList" items="${dogList}">
 				<article class="card__article">
-					<img src="${dogList.imgUrl}" alt="image" class="card__img" />
+					<c:choose>
+						<c:when test="${not empty dogList.imgUrl}">
+							<img src="${dogList.imgUrl}" alt="image" class="card__img" />
+						</c:when>
+						<c:when test="${not empty dogList.filename}">
+							<img src="${ServletContext.request.contextPath}/resources/images/dogs/${dogList.uuid}_${dogList.filename}" alt="image" class="card__img" />
+						</c:when>
+					</c:choose>
 					<div class="card__data">
 						<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
@@ -105,16 +112,25 @@
 				$('.card__container').empty();
 				if(result.length>=1){
 					result.forEach(function(dogList){
-							str=`<article class="card__article">
-									<img src="\${dogList.imgUrl}" alt="image" class="card__img" />
-										<div class="card__data">
+							str=`<article class="card__article">`
+							
+									if(dogList.imgUrl =="" || dogList.imgUrl ==null){
+							str+= `			<img src="\${dogList.imgUrl}" alt="image" class="card__img" />`
+
+									}else if(dogList.imgUrl =="" || dogList.imgUrl ==null){
+							str+=`			<img src="${ServletContext.request.contextPath}/resources/images/dogs/\${dogList.uuid}_\${dogList.filename}" alt="image" class="card__img" />`
+									}
+							
+							str+=`		<div class="card__data">
 											<span class="card__description">\${dogList.shelterName}</span>
 											<h2 class="card__title">`
-												if(dogList.name =="" || dogList.name ==null){
+											
+									if(dogList.name =="" || dogList.name ==null){
 													str += `\${dogList.breed }`
-												}else{
+									}else{
 													str += `\${dogList.name }`
-												}
+									}
+											
 							str += `		</h2>
 											<a href="${contextPath }/adoption/detail?dogno=\${dogList.dogno}" class="card__button">입양하기</a>
 										</div>
