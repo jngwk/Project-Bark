@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
+import com.bark.domain.Donate;
 import com.bark.domain.Page;
 import com.bark.service.AdoptionService;
 import com.bark.service.SecurityService;
@@ -39,6 +41,7 @@ public class AdoptionController {
 		log.info("adoptionInfo");
 	}
 	
+	//입양하기 강아지 전체 목록
 	@GetMapping("/list")
 	public void list(Model model,
 			@RequestParam(required=false, value="shelterno") Integer shelterno,	// 보호소 조회에서 넘어올 때 보호소 번호 가져오기
@@ -46,7 +49,7 @@ public class AdoptionController {
 			 @RequestParam(required=false, value="amount") Integer amount) {	//입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
 		
-		System.out.println("noticeList type-feild-pageNum-amount : " + pageNum + "-" + amount);
+		System.out.println("dogList type-feild-pageNum-amount : " + pageNum + "-" + amount);
 		
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
@@ -77,7 +80,17 @@ public class AdoptionController {
 			
 		}
 	}
-		
+	//입양하기 검색 목록
+	@PostMapping(value = "dogListSearch", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Dog> dogListSearch(@RequestParam("filter") String filter, @RequestParam("input") String input,Model model) {
+		log.info(filter);
+		log.info(input);
+		log.info(service.dogListSearch(filter, input));
+		return service.dogListSearch(filter, input);
+	}
+
+	
 	@GetMapping("/detail")
 	public String detail(@RequestParam("dogno") int dogno, 
 						 Model model, HttpSession session) {	//입양상세: 강아지 정보

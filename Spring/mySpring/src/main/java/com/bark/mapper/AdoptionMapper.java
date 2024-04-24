@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Update;
 import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
+import com.bark.domain.Donate;
 
 @Mapper
 public interface AdoptionMapper {	
@@ -20,6 +21,11 @@ public interface AdoptionMapper {
 	//입양목록 관련
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
+	//입양 검색 목록
+	@Select("select * from dog d join attach a on d.dogno=a.dogno "
+			+ " join shelter s on s.shelterno = d.shelterno"
+			+ " where ${param1} like concat('%',#{param2},'%');")
+	public List<Dog> dogListSearch(String filter, String input);
 	
 	@Select("select d.dogno, d.gender,d.feature, d.neuter, d.age, d.breed, d.available, s.shelterName, a.imgUrl, a.uuid, a.filename, s.careTel, s.shelterAddr"
 			+ "			from dog d"
@@ -135,6 +141,8 @@ public interface AdoptionMapper {
 			+ "	    join shelter s on s.shelterno = d.shelterno where s.sheltername = (select name from user where id=#{id})"
 			+ "		order by a.state desc")
 	public List<Adoption> shelterAdoptionList(String id);
+
+
 
 	
 	
