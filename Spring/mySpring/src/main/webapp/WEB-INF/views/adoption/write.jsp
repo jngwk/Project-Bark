@@ -61,7 +61,7 @@
             
         </div>
         <div class="card" style="width: 100%;">
-          <div class="card-header ">File Attach</div>
+          <div class="card-header ">파일 선택</div>
           <div class="card-body">
             <div class="form-group uploadDiv">
               <input type="file" name='uploadFile' id='uploadFile' multiple>
@@ -149,6 +149,7 @@ $(document).ready(function() {
 		      }
 		   }); //$.ajax
 	    });
+	
 	//썸네일 표시 부분
 	   let uploadResult = $(".uploadResult ul");
 	   function showUploadedFile(uploadResultArr){

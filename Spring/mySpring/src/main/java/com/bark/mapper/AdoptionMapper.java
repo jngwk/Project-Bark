@@ -21,7 +21,7 @@ public interface AdoptionMapper {
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
 	
-	@Select("select d.dogno, d.gender,d.feature, d.neuter, d.age, d.breed, d.available, s.shelterName, a.imgUrl, s.careTel, s.shelterAddr"
+	@Select("select d.dogno, d.gender,d.feature, d.neuter, d.age, d.breed, d.available, s.shelterName, a.imgUrl, a.uuid, a.filename, s.careTel, s.shelterAddr"
 			+ "			from dog d"
 			+ "				join attach a"
 			+ "						on d.dogno = a.dogno"
@@ -31,7 +31,7 @@ public interface AdoptionMapper {
 	public Dog getDog(int dogno);	//특정 강아지 정보, detail
 	
 	
-	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, a.uuid, s.shelterName\r\n"
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, a.uuid, a.filename, s.shelterName\r\n"
 			+ "			FROM dog d "
 			+ "			join attach a "
 			+ "				on d.dogno = a.dogno "
@@ -113,6 +113,8 @@ public interface AdoptionMapper {
 	public List<Adoption> getUserState(String filter,String input,int state);
 	
 
+	
+	
 	//회원페이지 입양내역
 	@Select("select a.adoptionno, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 			+ "	from adoption a join dog d on d.dogno = a.dogno\r\n"
