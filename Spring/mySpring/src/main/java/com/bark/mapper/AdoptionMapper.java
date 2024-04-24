@@ -50,6 +50,10 @@ public interface AdoptionMapper {
 			+ "				on d.dogno = a.dogno "
 			+ "			join shelter s "
 			+ "				on d.shelterno = s.shelterno "
+			+ " AND ((#{cri.searchField} = 'shelterName' AND s.shelterName LIKE #{cri.searchWordSql}) "
+		    + " OR   (#{cri.searchField} = 'shelterAddr' AND s.shelterAddr LIKE #{cri.searchWordSql}) "
+		    + " OR   (#{cri.searchField} = 'breed' AND d.breed LIKE #{cri.searchWordSql}) "
+		    + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) "
 			+ "				ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
 	

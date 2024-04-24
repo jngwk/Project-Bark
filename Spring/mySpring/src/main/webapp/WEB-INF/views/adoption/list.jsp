@@ -33,22 +33,22 @@
 
 	<div id="board-search">
 		<div class="search-window">
-
+			<form action="/adoption/list" method="get">
 				<div class="search-wrap">
 					<select id="searchField" name="searchField">
 						<option value=""
 							<c:if test="${page.cri.searchField ==''}">${'selected'}</c:if>>선택</option>
 						<option value="breed"
-							<c:if test="${page.cri.searchField == 'dogName'}">${'selected'}</c:if>>견종</option>
+							<c:if test="${page.cri.searchField == 'breed'}">${'selected'}</c:if>>견종</option>
 						<option value="shelterAddr"
-							<c:if test="${page.cri.searchField == 'addr'}">${'selected'}</c:if>>지역명</option>
+							<c:if test="${page.cri.searchField == 'shelterAddr'}">${'selected'}</c:if>>지역명</option>
 						<option value="shelterName" 
 							<c:if test="${page.cri.searchField == 'shelterName'}">${'selected'}</c:if>>보호소명</option>
 					</select>
 					<input id="searchWord" type="search" name="searchWord" placeholder="검색어를 입력해주세요." value="${page.cri.searchWord}" />
-					<button type="button" class="listBtn btn-dark">검색</button>
+					<button type="submit" class="listBtn btn-dark">검색</button>
 				</div>
-			
+			</form>
 		</div>
 	</div>
 
@@ -82,7 +82,9 @@
 			</c:if>
 		</div>
 	</div>
-	<jsp:include page="${views }/include/adoptPagination.jsp" flush="false" />
+	<div class="pagination-wrapper">
+		<jsp:include page="${views }/include/adoptPagination.jsp" flush="false" />
+	</div>
 
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 
@@ -91,7 +93,7 @@
 		dogListSearch();
 	})
 	
-	function dogListSearch(){
+	/* function dogListSearch(){
 		console.log($("#searchField").val());
 		$.ajax({
 			type: 'POST',
@@ -126,7 +128,7 @@
 			}
 				
 		})
-	}
+	} */
 	
 </script>
 </body>

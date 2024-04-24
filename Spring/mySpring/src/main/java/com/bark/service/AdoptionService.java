@@ -145,6 +145,10 @@ public class AdoptionService {
 		return mapper.shelterAdoptionList(id);
 	}
 
+	public int totalPage(Criteria cri) {
+		return mapper.totalPage(cri);
+	}
+
 	
 
 }
