@@ -24,7 +24,9 @@
   	   <div class="adoption-list-header">
     <p class="page-title">Adoption</p><p class="page-subtitle">[입양 목록]</p>
          <div class="story-button">
+         <c:if test="${userType == 2 }">
 			<a class="large-btn brown-btn" href="${contextPath }/adoption/write">등록하기</a>
+			</c:if>
 		</div>
     </div>
 
@@ -33,8 +35,15 @@
 		<div class="card__container">
 		<c:forEach var="dogList" items="${dogList}" >
 			<article class="card__article">
-				<img src="${dogList.imgUrl}" alt="image" class="card__img" />
-				<div class="card__data">
+					<c:choose>
+						<c:when test="${not empty dogList.imgUrl}">
+						      <img src="${dogList.imgUrl}" alt="image" class="card__img" />
+						</c:when>
+						<c:when test="${not empty dogList.filename}">
+						      <img src="/resources/images/dogs/${dogList.uuid}_${dogList.filename}" alt="image" class="card__img" />
+						</c:when>
+					</c:choose>
+					<div class="card__data">
 					<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
 							<c:choose>

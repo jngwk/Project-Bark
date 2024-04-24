@@ -44,8 +44,16 @@
 			</a>
 			<div class="navigation-menu">
 				<ul>
-					<li><a class="transition" href="#"><strong
-							class="xlarge-font hover-underline">소개</strong></a></li>
+					<!-- <li><a class="transition" href="#"><strong
+							class="xlarge-font hover-underline">소개</strong></a></li> -->
+					<li class="dropdown"><a class="transition" href="#"><strong
+							class="xlarge-font hover-underline">소개</strong></a>
+						<div class="dropdown-content">
+							<a class="transition" href="${contextPath }/static/about"><strong
+								class="large-font hover-underline">About</strong></a> <a
+								class="transition" href="${contextPath }/board/noticeList"><strong
+								class="large-font hover-underline">공지사항</strong></a>
+						</div></li>
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">보호소 및 후원</strong></a>
 						<div class="dropdown-content">
@@ -61,23 +69,25 @@
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">입양</strong></a>
 						<div class="dropdown-content">
-							<a class="transition" href="${contextPath }/adoption/adoptionInfo"><strong
+							<a class="transition"
+								href="${contextPath }/adoption/adoptionInfo"><strong
 								class="large-font hover-underline">입양 안내</strong></a> <a
 								class="transition" href="${contextPath }/adoption/list"><strong
 								class="large-font hover-underline">입양하기</strong></a>
 						</div></li>
-					<li class="dropdown"><a class="transition" href="#"><strong
+					<%--<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">게시판</strong></a>
 						<div class="dropdown-content">
 							<a class="transition" href="${contextPath }/board/noticeList"><strong
-								class="large-font hover-underline">공지사항</strong></a> <%-- <a
+								class="large-font hover-underline">공지사항</strong></a>  <a
 								class="transition" href="${contextPath }/board/shareList"><strong
 								class="large-font hover-underline">정보공유</strong></a> <a
 								class="transition" href="#"><strong
-								class="large-font hover-underline">보호소 이야기</strong></a> --%> <a
-								class="transition" href="${contextPath }/board/contactWrite"><strong
-								class="large-font hover-underline">문의하기</strong></a>
-						</div></li>
+								class="large-font hover-underline">보호소 이야기</strong></a>  
+						</div></li>--%>
+					<li><a class="transition"
+						href="${contextPath }/board/contactWrite"><strong
+							class="xlarge-font hover-underline">문의하기</strong></a></li>
 					<li>
 						<!-- 로그인 상태 확인 --> <c:choose>
 							<c:when test="${empty userId}">
@@ -118,7 +128,7 @@
 														href="${contextPath }/user/userDonationList?id=${userId}">기부/입양
 															관리</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/user/userWriteList">문의 내역</a></li>
+														href="${contextPath }/user/userWriteList">문의내역</a></li>
 													<li><img src="${icons }/logout.png" /><a
 														href="${contextPath }/user/logout">로그아웃</a></li>
 												</ul>
@@ -127,14 +137,14 @@
 												<h3>${userName}<br> <span>${userId}</span>
 												</h3>
 												<ul>
-													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/admin/adminAdoptionList">입양 내역</a></li>
-													<li><img src="${icons }/post.png" /><a
-														href="${contextPath }/admin/donationList">기부 내역</a></li>
+													<li><img src="${icons }/adoption.png" /><a
+														href="${contextPath }/admin/adminAdoptionList">입양내역</a></li>
+													<li><img src="${icons }/donation.png" /><a
+														href="${contextPath }/admin/donationList">기부내역</a></li>
 													<li><img src="${icons }/book-heart.png" /><a
-														href="${contextPath }/admin/userList">회원 관리</a></li>
+														href="${contextPath }/admin/userList">회원관리</a></li>
 													<li><img src="${icons }/post.png" /><a
-														href="${contextPath}/admin/userWriteList">문의 내역</a></li>
+														href="${contextPath}/admin/userWriteList">문의내역</a></li>
 													<li><img src="${icons }/logout.png" /><a
 														href="${contextPath }/user/logout">로그아웃</a></li>
 												</ul>

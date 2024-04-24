@@ -31,12 +31,8 @@ public class ShelterService {
 		return mapper.searchShelterAddr(addr);
 	}
 
-	public boolean register(Shelter shelter) {
-		int result = mapper.register(shelter);
-		if(result == 1) {
-			return true;
-		}
-		return false;
+	public int register(Shelter shelter) {
+		return mapper.register(shelter);
 		
 	}
 	

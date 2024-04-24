@@ -26,8 +26,8 @@
               <div class="search-wrap">
                 <label for="search" class="blind">공지사항 내용 검색</label>
                 <select class="searchfilter">
-                  <option value="phone">카테고리</option>
-                  <option value="id">아이디</option>
+                  <option value="phone">선택</option>
+                  <option value="u.id">아이디</option>
                   <option value="u.name">이름</option>
                 </select>
                 <input
@@ -58,9 +58,9 @@
                 <th scope="col" class="th-exe">
                   <select class="userState">
                     <option>기부상태</option>
-                    <option value="1">처리중</option>
-                    <option value="2">처리완료</option>
-                    <option value="0">처리실패</option>
+                    <option value="0">처리중</option>
+                    <option value="1">처리완료</option>
+                    <option value="2">처리실패</option>
                   </select>
                 </th>
               </tr>
@@ -74,7 +74,17 @@
                 <td>${dList.shelterName}</td>
                 <td>${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
                 <td>${dList.paymentDate}</td>
-                <td>${dList.state}</td>
+                <c:choose>
+					<c:when test="${dList.state == 0}">
+							<td>처리중</td>
+					</c:when>
+					<c:when test="${dList.state == 1}">
+						<td>처리완료</td>
+					</c:when>
+					<c:otherwise>
+						<td>처리실패</td>
+					</c:otherwise>
+				</c:choose>
               </tr>
               </c:forEach>
             </tbody>
@@ -114,8 +124,17 @@
 			                <td>\${dList.shelterName}</td>
 			                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
 			                <td>\${dList.paymentDate}</td>
-			                <td>\${dList.state}</td>
-			              </tr>`
+			                `
+				             if(dList.state==0){
+				            	 str+= `<td>처리중</td>
+						                </tr>`
+				             }else if(dList.state==1){
+				            	 str+= `<td>처리완료</td>
+						                </tr>`
+				             }else{
+				            	 str+= `<td>처리실패</td>
+						                </tr>`
+                                }
 						$('.donationList').append(str);
         			}) 
 				}
@@ -129,15 +148,15 @@
 	//state검색
 
 	$(".userState").change(function(){
-		getUserState();
+		getDonationState();
 	})
 
 
-	function getUserState(){
+	function getDonationState(){
 		console.log($(".userState").val());
 		$.ajax({
 			type: 'POST',
-			url : "/admin/getUserState",
+			url : "/admin/getDonationState",
 			data : {
 				filter: $(".searchfilter").val(),
 				input: $("#searchInput").val(),
@@ -147,7 +166,7 @@
 				$('.donationList').empty();
 				if(result.length>=1){
 					result.forEach(function(dList){
-						if(dList.state ==1){
+						console.log(dList);
 							str=`
 					            <tr>
 				                <td>\${dList.donationno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
@@ -156,25 +175,23 @@
 				                <td>\${dList.shelterName}</td>
 				                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
 				                <td>\${dList.paymentDate}</td>
-				                <td>\${dList.state}</td>
-				              </tr>`
-						}else if(dList.state ==2){
-							str=`
-					            <tr>
-				                <td>\${dList.donationno}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adoptionno로 수정했어요 -->
-				                <td>\${dList.id}</td>
-				                <td>\${dList.userName}</td>
-				                <td>\${dList.shelterName}</td>
-				                <td>\${dList.amount}</td>	<!-- 테이블 컬럼명이랑 헷갈리지 않게 adopt_date로 수정했어요 -->
-				                <td>\${dList.paymentDate}</td>
-				                <td>\${dList.state}</td>
-				              </tr>`
-						}
+				                `
+					             if(dList.state==0){
+					            	 str+= `<td>처리중</td>
+							                </tr>`
+					             }else if(dList.state==1){
+					            	 str+= `<td>처리완료</td>
+							                </tr>`
+					             }else{
+					            	 str+= `<td>처리실패</td>
+							                </tr>`
+                                    }
 
 						$('.donationList').append(str);
+                                
 	        		}) 
-				}
-			}
+			    }
+            }
 		})
 	}
 

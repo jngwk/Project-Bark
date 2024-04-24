@@ -135,7 +135,7 @@
 											<label class="popup-label"> <span>이름</span> <input
 												type="text" name="name" class="login-popup-input" />
 											</label> <label class="popup-label"> <span>전화번호</span> <input
-												type="tel" name="phone" class="login-popup-input" />
+												type="tel" name="phone" class="login-popup-input" maxlength=13/>
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -234,7 +234,7 @@
 										<!-- 보호소 전화번호 이메일 인증 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>전화번호</span> <input
-												type="tel" name="phone" class="login-popup-input" />
+												type="tel" name="phone" class="login-popup-input" maxlength=13/>
 											</label> <label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
 											</label> <label class="popup-label verify-label pending hide">
@@ -308,7 +308,21 @@
 				}				
 			})
 		}
-
+		
+		function checkRegisteredShelter(shelterName){ // 원래는 shelterno으로 검사하는게 맞지만..
+			$.ajax({
+				type: 'GET',
+				url : "/user/check-regi-shelter",
+				success: function(isRegistered){
+				    if(isRegistered){
+				    	// add class "duplicate-shelter"
+				    }
+				},error: (error) => {
+				     console.log(JSON.stringify(error));
+				}				
+			})
+		}
+		
 		function addShelter(selectedShelter) {
 			if(shelterNames.length <= 0){
 				// 가져오지 못하면 다시 가져와!
@@ -329,6 +343,7 @@
 		  wrapper.classList.remove("active");
 		  selectBtn.firstElementChild.innerText = selectedLi.innerText;
 		  selectBtn.firstElementChild.classList.add("font-dark");
+		  /* checkRegisteredShelter(selectedLi.innerText); */
 		}
 
 		searchInp.addEventListener("keyup", () => {

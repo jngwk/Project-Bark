@@ -89,18 +89,14 @@ public class UploadController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	//C:\\Users\\yjlee\\git\\Bark\\Project-Bark\\Spring\\mySpring\\src\\main\\webapp\\resources\\images\\dogs
 	@PostMapping(value="/DogUploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public ResponseEntity<List<DogAttached>> dogUploadAjaxPost(MultipartFile[] uploadFile) {
-		String uploadFolder="d:/upload/dog/";
-		List<DogAttached> list = new ArrayList<DogAttached>();
-		//파일을 upload 지정 폴더 내부에 새로운 폴더를 생성하여 저장하기로 
+	public void dogUploadAjaxPost(MultipartFile[] uploadFile) {
+		String uploadFolder="d:upload/dog/";	//본인 웹프로젝트에 images/dogs 경로로 설정!!
 		File uploadPath  = new File(uploadFolder, getFolder());
 		log.info("upload Path : "+uploadPath);
-		if(uploadPath.exists() ==false) { //폴더가 존재하지 않으면 새로 생성
-			uploadPath.mkdirs();  //yyyy/MM/dd 폴더 생성
-		}
-
+		
 		for(MultipartFile multipartFile: uploadFile) {
 			DogAttached dogAttached = new DogAttached();
 			
@@ -114,12 +110,12 @@ public class UploadController {
 
 			uploadFileName = uuid.toString()+"_"+uploadFileName;
 
-			File saveFile = new File(uploadPath, uploadFileName);
+			File saveFile = new File(uploadFolder, uploadFileName);
 			try { 
 				multipartFile.transferTo(saveFile); 
 				dogAttached.setUuid(uuid.toString()); 
 				dogAttached.setUploadPath(getFolder());
-
+				
 				if(checkImageType(saveFile)) {
 					dogAttached. setFileType(true);
 
@@ -128,12 +124,14 @@ public class UploadController {
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				}
-				list.add(dogAttached); log.info("dog : attached : "+dogAttached);
-
-			} catch (Exception e) {  log.error(e.getMessage());  }
+				
+			} catch (Exception e) {  
+				log.error(e.getMessage());  
+			}
 		}
-		return new ResponseEntity<>(list, HttpStatus.OK);
+		
 	}
+	
 	
 	// board 썸네일 표시 기능
 	@GetMapping("/display")

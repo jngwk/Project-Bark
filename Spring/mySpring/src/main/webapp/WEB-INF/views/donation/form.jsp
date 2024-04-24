@@ -71,6 +71,17 @@ input[type='radio']:checked + label {
 					<table class="donate-table">					
 						<tr>
 							<th>이름</th>
+<!-- 							<td><input type="text" name="userName" value="김지현" readonly /></td> -->
+							<td><input type="text" name="userName" value="<%=(String) session.getAttribute("userName")%>" readonly /></td>
+						</tr>
+						<tr>
+							<th>휴대전화</th>
+<!-- 							<td><input type="text" name="userPhone" value="010-0000-0000" readonly /></td> -->
+							<td><input type="text" name="userPhone" value="<%=(String) session.getAttribute("userId")%>" readonly /></td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+<!-- 							<td><input type="text" name="userId" value="jihyeon2368" readonly /></td> -->
 							<td><input type="text" name="userName" value="<%=(String) session.getAttribute("userName")%>" readonly /></td>
 						</tr>
 						<tr>
@@ -84,6 +95,7 @@ input[type='radio']:checked + label {
 					</table>
 				</div>
 				</form>
+
 				<div class="bank-info">
 					<div class="donate-subtitle">후원 정보</div>
 					<table class="donate-table">
@@ -123,7 +135,6 @@ input[type='radio']:checked + label {
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
 	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </body>
-</html>
 
 <script>
 IMP.init("imp60737432");
@@ -248,7 +259,7 @@ button.addEventListener("click", onClickPay); */
 	            console.log(err);
 	          }
 	        }); //ajax
-	        location.href ="${contextPath}/user/userDonationList?id=${userId}"; 
+	        location.href ="${contextPath}/donation/formComplete"; 
 	      } else {
 	          var msg = '결제 실패';
 	          msg += '\n에러내용 : ' + rsp.error_msg;

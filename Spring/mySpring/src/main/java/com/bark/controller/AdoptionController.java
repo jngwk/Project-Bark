@@ -1,5 +1,7 @@
 package com.bark.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.Page;
 import com.bark.service.AdoptionService;
+import com.bark.service.SecurityService;
 import com.bark.service.UserService;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +32,7 @@ import lombok.extern.log4j.Log4j;
 public class AdoptionController {
 	private AdoptionService service;
 	private UserService 	userservice;
+	private SecurityService securityService;
 	
 	@GetMapping("/adoptionInfo")
 	public void adoptionInfo() {
@@ -37,6 +41,7 @@ public class AdoptionController {
 	
 	@GetMapping("/list")
 	public void list(Model model,
+			@RequestParam(required=false, value="shelterno") Integer shelterno,	// 보호소 조회에서 넘어올 때 보호소 번호 가져오기
 			 @RequestParam(required=false, value="pageNum") Integer pageNum,
 			 @RequestParam(required=false, value="amount") Integer amount) {	//입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
@@ -63,7 +68,14 @@ public class AdoptionController {
 		Page page = new Page(cri, total);
 		
 		model.addAttribute("page", page);
-		model.addAttribute("dogList", service.searchList(cri));
+		if(shelterno == null) {
+			model.addAttribute("dogList", service.searchList(cri));
+		}
+		else {
+			log.info(service.searchListByShelterno(cri, shelterno).size());
+			model.addAttribute("dogList", service.searchListByShelterno(cri, shelterno));
+			
+		}
 	}
 		
 	@GetMapping("/detail")
@@ -114,13 +126,22 @@ public class AdoptionController {
 	}
 	
 	@GetMapping("/write")
-	public void dogAdd() {
+	public String dogAdd(HttpSession session) {
 		log.info("write");
+		if(securityService.hasRole(2, session)) {
+			return "/adoption/write";
+		}
+		return "main";
 	}
 	
-	@PostMapping("/write") // 게시글저장
+	@PostMapping("/write") // 유기견 등록
 	public String write(Dog dog, RedirectAttributes rttr) {
 		log.info("write :" + dog);
+		if(dog.getGender().equals("남")) {
+			dog.setGender("M");
+		} else if(dog.getGender().equals("여")) {
+			dog.setGender("F");
+		}
 		if (dog.getDogAttachedList() != null) {
 			dog.getDogAttachedList().forEach(attach -> log.info(attach));
 		}

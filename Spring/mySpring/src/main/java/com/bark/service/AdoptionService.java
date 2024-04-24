@@ -42,6 +42,13 @@ public class AdoptionService {
 		return mapper.searchDogList(cri);
 	}
 	
+	// 보호소 조회에서 입양 목록 넘어올 때
+	public List<Dog> searchListByShelterno(Criteria cri, Integer shelterno) {
+		log.info("searchListByShelterno : " + cri);
+		log.info("searchListByShelterno : " + shelterno);
+		return mapper.searchDogListByShelterno(cri, shelterno);
+	}
+	
 	// 입양 상세 -> 입양 신청 처리
 	public void adoptionWrite(Adoption adoption) {
 		log.info("adoptionWrite : " + adoption);
@@ -78,8 +85,7 @@ public class AdoptionService {
 		return mapper.getUserState(filter,input,state);
 	}
 	
-	
-	
+
 	
 	//강아지 파일 업로드
 	public List<DogAttached> getAttachList(Integer dogno) {	
@@ -127,5 +133,11 @@ public class AdoptionService {
 	public List<Adoption> getAState(String id,int state) {
 		return mapper.getAState(id,state);
 	}
+	
+	//보호소페이지 입양내역
+	public List<Adoption> shelterAdoptionList(String id) {
+		return mapper.shelterAdoptionList(id);
+	}
+	
 
 }

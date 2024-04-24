@@ -7,8 +7,8 @@
 }
 
 .notice{
-	padding-top: 140px;
-    min-height: 100dvh;
+    padding-top: 140px;
+    height: 100dvh;
     background:var(--color-bright);
 }
 
@@ -21,11 +21,22 @@
 .notice-button a {
 float: right;
 }
-.page-subtitle{
+.page-title{
+	display: flex;
+}
+.slash{
 	font-size: 25px;
-    width: 60%;
-    margin: 0 auto;
-    transform: translate(380px,-90px);
+	padding:0 20px;
+	transform: translate(0px, 45px);
+}
+.page-lefttitle,.page-title a{
+	font-size: 25px;
+    transform: translate(0px, 45px);
+    color:var(--color-dark);
+}
+.page-righttitle{
+	font-size: 15px;
+    transform: translate(0px, 55px);
 }
 /* 테이블 */
 table {
@@ -68,15 +79,11 @@ table {
   }
   #board-search .search-window .search-wrap .searchUserBtn {
     position: absolute;
-    right: 45px;
-    top: -5px;
-    font-size: 16px;
-  }
-  #board-search .search-window .search-wrap .total-btn {
-    position: absolute;
-    right: -50px;
-    top: -5px;
+    right: 0;
+    top: 0;
     bottom: 0;
+    width: 108px;
+    padding: 0;
     font-size: 16px;
   }
   
@@ -104,6 +111,11 @@ table {
     border-radius: 5px;
     color: var(--color-bright);
   }
+  
+  .board-table .th-dogName{
+    width: 150px;
+  }
+  
   .board-table .th-exe{
     width: 150px;
   }
@@ -197,11 +209,3 @@ button {
     justify-content: center;
   }
   
-  .mailto{
-  	color: var(--color-dark) !important;
-  }
-  .mailto:hover{
-  	pointer: cursor;
-  	text-decoration: underline;
-  }
-/* 페이지 버튼 */

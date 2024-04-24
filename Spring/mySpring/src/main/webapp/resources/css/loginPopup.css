@@ -336,6 +336,10 @@ body {
 	  content: "관리자 승인 후 이용이 가능합니다.";
 	    color: red;
 }
+.popup-label.rejected-user::after{
+	  content: "가입이 거절된 계정입니다. 관리자에게 문의해주세요.";
+	    color: red;
+}
 .popup-label.invalid::after{
 	content: "올바르지 않은 형식입니다.";
 	    color: red;

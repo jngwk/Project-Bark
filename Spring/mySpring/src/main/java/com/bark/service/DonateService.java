@@ -42,10 +42,19 @@ public class DonateService {
 	public List<Donate> userDonationList(String id) {
 		return mapper.userDonationList(id);
 	}
-	
+	//개인 처리상태
 	public List<Donate> getDState(String id,int state) {
 		// TODO Auto-generated method stub
 		return mapper.getDState(id,state);
+	}
+	//보호소페이지 기부내역
+	public List<Donate> shelterDonationList(String id) {
+		return mapper.shelterDonationList(id);
+	}
+	//보호소 처리상태
+	public List<Donate> getSDState(String id, int state) {
+		// TODO Auto-generated method stub
+		return mapper.getSDState(id,state);
 	}
 
 

@@ -56,9 +56,11 @@ public class UserController {
 		log.info("id: " + id);
 		if (user == null) {
 			return 0;
-		} else if (user.getAvailable() == 2) {
+		} else if (user.getAvailable() == 0) { // 처리중
 			return 2;
-		} else if (user.getPwd().equals(pwd)) {
+		} else if (user.getAvailable() == 2) { // 처리중
+			return 3;
+		}else if (user.getPwd().equals(pwd)) {
 			session.setAttribute("userId", id);
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
@@ -73,18 +75,46 @@ public class UserController {
 
 	@PostMapping(value = "join", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public boolean join(User user) {
+	public int join(User user) {
 		log.info("join: " + user);
-		if (!service.join(user))
-			return false;
-		if (user.getType() == 2) {
-			Shelter shelter = new Shelter();
-			shelter.setShelterName(user.getName());
-			shelter.setShelterAddr(user.getAddr());
-			if (!shelterService.register(shelter))
-				return false;
+		if(user.getAddrDetail() != null) {
+			user.setAddr(user.getAddr() + user.getAddrDetail()); // 주소 한줄로 만들기
 		}
-		return true;
+		
+		if (!service.join(user)) { // 일단 user db에 삽입
+			return 0; // user 테이블 삽입 오류
+		}
+		
+		if (user.getType() == 2) { // 보호소 회원이면
+			if(user.getAddrDetail() != null) { // 세부 주소가 있으면 신규 보호소
+				Shelter shelter = new Shelter();
+				shelter.setShelterName(user.getName());
+				shelter.setShelterAddr(user.getAddr());
+				shelter.setShelterno(shelterService.register(shelter));
+				service.updateShelterno(user.getId(), shelter.getShelterno());
+				log.info("신규 보호소: " + shelter.getShelterno() + "======");
+				return 1;
+			}
+			else { // 주소가 있으면 등록된 보호소
+				log.info("이미 등록된 보호소 ===========================");
+				List<Shelter> sList = shelterService.getShelterList();
+				if(sList.size() > 1) { 
+					for(Shelter s : sList) {
+						if(s.getShelterAddr().equals(user.getAddr())) { // 이름 중복 있으면 주소 맞는거 찾아서 shelterno 반환
+							service.updateShelterno(user.getId(), s.getShelterno());
+							return 1;
+						}
+					}
+				}
+				else {
+					service.updateShelterno(user.getId(), sList.get(0).getShelterno());
+					return 1;
+				}
+				
+			}
+		}
+		
+		return 0;
 	}
 
 	@GetMapping("/userDetail")
@@ -124,7 +154,7 @@ public class UserController {
 	public User getUser(@RequestParam("id") String id) {
 		return service.getUser(id);
 	}
-
+	
 	@PostMapping(value = "checkId", produces = "application/json; charset=utf8")
 	@ResponseBody
 	public int checkId(@RequestParam("id") String id) {
@@ -175,22 +205,32 @@ public class UserController {
 		log.info("result: " + result);
 		return result;
 	}
-
+	
+    //----------------------------------------------------------------------------------------------------------
 	// 유저 페이지 기부 관리
 	@GetMapping("/userDonationList")
 	public String userDonationList(@RequestParam("id") String id,Model model, HttpSession session) {
-		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+		
+		if(securityService.hasRole(1, session)) { //개인 페이지
 			log.info("userDonationList...........");
 			List<Donate> dList = donateservice.userDonationList(id);
 	
 
 			model.addAttribute("dList", dList);
 	
-			return "/user/userDonationList";
+			return "/mypage/userDonationList";
+			
+		}else if(securityService.hasRole(2, session)){ //보호소 페이지
+			log.info("shelterDonationList...........");
+			List<Donate> dList = donateservice.shelterDonationList(id);
+	
+			model.addAttribute("dList", dList);
+	
+			return "/mypage/shelterDonationList";
 		}
 		return "main";
 	}
-	
+	//개인 처리상태
 	 @PostMapping(value="getDState",produces = "application/json; charset=utf8")
 	 @ResponseBody
 	 public List<Donate> getDState(@RequestParam("id") String id,@RequestParam ("state") String state,Model model) {
@@ -198,17 +238,36 @@ public class UserController {
 		 log.info(state);
 		 return donateservice.getDState(id,Integer.parseInt(state));
 	 }
-
+	 //보호소 처리상태
+	 @PostMapping(value="getSDState",produces = "application/json; charset=utf8")
+	 @ResponseBody
+	 public List<Donate> getSDState(@RequestParam("id") String id,@RequestParam ("state") String state,Model model) {
+		 log.info("-------Donation search mapping o--------");
+		 log.info(state);
+		 return donateservice.getSDState(id,Integer.parseInt(state));
+	 }
+	 
+	 
+    //---------------------------------------------------------------------------------------------------------
 	// 유저 페이지 입양 관리
 	@GetMapping("/userAdoptionList")
 	public String userAdoptionList(@RequestParam("id") String id,Model model, HttpSession session) {
-		if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+		
+		if(securityService.hasRole(1, session) ) { //개인페이지
 			log.info("userAdoptionList...........");
 			List<Adoption> aList = adoptionservice.userAdoptionList(id);
 	
 			model.addAttribute("aList", aList);
 	
-			return "/user/userAdoptionList";
+			return "/mypage/userAdoptionList";
+			
+		}else if(securityService.hasRole(2, session)){ //보호소 페이지
+			log.info("shelterAdoptionList...........");
+			List<Adoption> aList = adoptionservice.shelterAdoptionList(id);
+	
+			model.addAttribute("aList", aList);
+	
+			return "/mypage/shelterAdoptionList";
 		}
 		return "main";
 	}
@@ -219,6 +278,22 @@ public class UserController {
 		 log.info(state);
 		 return adoptionservice.getAState(id,Integer.parseInt(state));
 	 }
+	 
+	// 보호소 페이지 회원조회 보호소 승인
+	@GetMapping("/adoptionState")
+	public String adoptionState(@RequestParam("state") String state, @RequestParam("userId") String userId,@RequestParam("id") String id,
+			RedirectAttributes rttr,Model model) {
+		log.info(userId);
+		log.info(id);
+		
+		boolean result = service.adoptionState(state, userId);
+		rttr.addFlashAttribute("result", result);
+		rttr.addAttribute("id", id);
+
+		return "redirect:/user/userAdoptionList";
+	}
+	 
+	 //---------------------------------------------------------------------------------------------------------
 
 	@GetMapping("/userWriteList")//다건
 	public void noticeList(Model model,

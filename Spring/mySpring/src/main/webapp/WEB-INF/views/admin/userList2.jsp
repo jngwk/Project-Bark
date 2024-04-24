@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,6 +9,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/userList.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
+    <!-- <script src="../js/popup.js"></script> -->
+<%--     <script src="resources/js/js/userList.js"></script> --%>
   </head>
   <body>
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/include/header.jsp" flush="false" />
@@ -24,9 +25,9 @@
           <div class="search-window">
             <form action="#" method="post">
               <div class="search-wrap">
-                <label for="search" class="blind">회원 검색</label>
+                <label for="search" class="blind">공지사항 내용 검색</label>
                 <select class="searchfilter">
-                  <option value="phone">선택</option>
+                  <option value="phone">카테고리</option>
                   <option value="id">아이디</option>
                   <option value="name">이름</option>
                 </select>
@@ -73,11 +74,11 @@
                 <td>${count}</td>
                 <td>${List.id }</td>
                 <td>${List.name }</td>
-                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${List.regDate}" /></td>
-                <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">${List.email }</a></td>
+                <td>${List.regDate }</td>
+                <td>${List.email }</td>
+                <td>${List.type }</td>
                 <c:choose>
                 	<c:when test = "${List.type== 2}">
-                		<td>보호소</td>
                 		<c:choose>
                 			<c:when test="${List.available== 2}">
              		    		<td><a href="${contextPath}/admin/available?available=1&id=${List.id }" class="shelterReceive-btn brown-btn">승인</a></td>
@@ -87,12 +88,11 @@
 			            	</c:when>
 			            	<c:otherwise>
 			            		<td><a href="${contextPath}/admin/available?available=1&id=${List.id }" class="shelterReceive-btn brown-btn">승인</a>
-			            		<a href="${contextPath}/admin/available?available=2&id=${List.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
+			            		<a href="${contextPath}/admin/available?available=2&id=${List.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
 			            	</c:otherwise>
 			            </c:choose>
               		</c:when>
               		<c:otherwise>
-              		<td>개인</td>
               			<td><td>
               		</c:otherwise>
               	</c:choose>
@@ -110,12 +110,6 @@
 	
 	
 	<script>
-	
-	function formatDate(timestamp) {
-	    const date = new Date(timestamp);
-	    return date.toISOString().substring(0, 10); // Returns date in 'YYYY-MM-DD' format
-	}
-	
 	//type검색
 
  		$(".userType").change(function(){
@@ -143,7 +137,6 @@
 				if(result.length>=1){
 					let count=result.length+1;
 					result.forEach(function(uList){
-						console.log(formatDate(uList.regDate));
 						count--;
 						if(uList.type ==2){
 							if(uList.available ==2){
@@ -152,9 +145,9 @@
 						               <td>\${count}</td>
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
-						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-						               <td>보호소</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
 				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
 							           </td>
 					              	</tr>`
@@ -164,10 +157,10 @@
 						               <td>\${count}</td>
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
-						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-						               <td>보호소</td>
-				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
 							           </td>
 					              	</tr>`
 							}
@@ -177,11 +170,11 @@
 						               <td>\${count}</td>
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
-						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-						               <td>보호소</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
 						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
-							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
+							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
 							           </td>
 					              	</tr>`
 							}
@@ -192,9 +185,9 @@
 					                <td>\${count}</td>
 					                <td>\${uList.id }</td>
 					                <td>\${uList.name }</td>
-					                <td>\${formatDate(uList.regDate)}</td>
-					                <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-					                <td>개인</td>
+					                <td>\${uList.regDate }</td>
+					                <td>\${uList.email }</td>
+					                <td>\${uList.type }</td>
 				              		<td><td>
 				              	</tr>`
 						}
@@ -235,9 +228,9 @@
 						               <td>\${count}</td>
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
-						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-						               <td>보호소</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
 				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
 							           </td>
 					              	</tr>`
@@ -247,10 +240,10 @@
 						               <td>\${count}</td>
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
-						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-						               <td>보호소</td>
-				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
+				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
 							           </td>
 					              	</tr>`
 							}
@@ -260,11 +253,11 @@
 						               <td>\${count}</td>
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
-						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-						               <td>보호소</td>
+						               <td>\${uList.regDate }</td>
+						               <td>\${uList.email }</td>
+						               <td>\${uList.type }</td>
 						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
-							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
+							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn brown-btn">거절</a></td>
 							           </td>
 					              	</tr>`
 							}
@@ -275,9 +268,9 @@
 					                <td>\${count}</td>
 					                <td>\${uList.id }</td>
 					                <td>\${uList.name }</td>
-					                <td>\${formatDate(uList.regDate)}</td>
-					                <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
-					                <td>개인</td>
+					                <td>\${uList.regDate }</td>
+					                <td>\${uList.email }</td>
+					                <td>\${uList.type }</td>
 				              		<td><td>
 				              	</tr>`
 						}
