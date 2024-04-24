@@ -16,8 +16,8 @@ public interface ShelterMapper {
 	public void putShelter(Shelter shelter);
 	
 //	@Insert("insert into shelter (shelterName, shelterAddr) values(#{shelterName},#{shelterAddr})")
-	@SelectKey(statement = "SELECT shelterno('shelter')", keyProperty = "id", before = false, resultType = int.class)
 	@Insert("INSERT INTO shelter (shelterName, shelterAddr) VALUES(#{shelterName}, #{shelterAddr})")
+	@SelectKey(statement = "SELECT shelter('shelterno')", keyProperty = "id", before = false, resultType = int.class)
 	public int register(Shelter shelter);
 	
 	@Select("select * from shelter")
