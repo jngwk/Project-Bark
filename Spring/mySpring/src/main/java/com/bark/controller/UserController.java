@@ -345,6 +345,9 @@ public class UserController {
 		model.addAttribute("bList", boardservice.searchListById(cri,id));
 	}	
 	
-	
+	@GetMapping("/about")
+	public void about() {
+		
+	}
 
 }

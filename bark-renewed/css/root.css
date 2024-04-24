@@ -9,7 +9,8 @@
   --color-honeydew: #e4f2e3;
   --color-green: #83c680;
   --color-sky-blue: #a6d2fd;
-  --color-blue: #94c2f9;
+  --color-bright-blue: #94c2f9;
+  --color-blue: #6282a8;
   --color-bright: #ffffff;
   --color-dark: #000000;
   --color-grey: #eeeeee;
@@ -187,6 +188,16 @@ textarea:focus {
   color: var(--color-bright);
 }
 .green-btn:hover {
+  background-color: var(--color-olive);
+  color: var(--color-bright);
+}
+
+/* 파란색 버튼 */
+.blue-btn {
+  background-color: var(--color-blue);
+  color: var(--color-bright);
+}
+.blue-btn:hover {
   background-color: var(--color-olive);
   color: var(--color-bright);
 }
