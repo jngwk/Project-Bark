@@ -79,7 +79,7 @@ public class UserController {
 	public int join(User user) {
 		log.info("join: " + user);
 		if(user.getAddrDetail() != null) {
-			user.setAddr(user.getAddr() + user.getAddrDetail()); // 주소 한줄로 만들기
+			user.setAddr(user.getAddr() + " " + user.getAddrDetail()); // 주소 한줄로 만들기
 		}
 		
 		if (!service.join(user)) { // 일단 user db에 삽입
@@ -91,6 +91,7 @@ public class UserController {
 				Shelter shelter = new Shelter();
 				shelter.setShelterName(user.getName());
 				shelter.setShelterAddr(user.getAddr());
+				shelter.setCareTel(user.getPhone());
 				shelterService.register(shelter);
 				log.info(shelter.getShelterno());
 				service.updateShelterno(user.getId(), shelter.getShelterno());

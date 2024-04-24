@@ -70,7 +70,10 @@ public class AdoptionController {
 			searchField = "";
 			searchWord = "";
 		}
-
+		
+		if(shelterno != null) {
+			
+		}
 		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리
 		cri.setPageSql((pageNum - 1) * 10);
 		cri.setAmount(amount);
@@ -79,31 +82,37 @@ public class AdoptionController {
 		cri.setSearchWordSql("%" + searchWord + "%");
 		cri.setPageNum(pageNum);
 		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리
-
-		if (shelterno == null) {
-			int total = service.getDogList().size(); // 201마리
-			Page page = new Page(cri, total);
-			model.addAttribute("page", page);
-			model.addAttribute("dogList", service.searchList(cri));
-		} else {
-			// 조회 조건에 따른 전게 건수
-			int total = service.getDogList().size(); // 201마리
-			Page page = new Page(cri, total);
-			model.addAttribute("page", page);
-			log.info(service.searchListByShelterno(cri, shelterno).size());
-			model.addAttribute("dogList", service.searchListByShelterno(cri, shelterno));
-
-		}
+		int total = service.totalPage(cri); // 201마리
+		Page page = new Page(cri, total);
+		model.addAttribute("page", page);
+		model.addAttribute("dogList", service.searchList(cri));
 	}
 
 	//입양하기 검색 목록
 	@PostMapping(value = "dogListSearch", produces = "application/json; charset=utf8")
 	@ResponseBody
-	public List<Dog> dogListSearch(@RequestParam("filter") String filter, @RequestParam("input") String input,Model model) {
+	public List<Dog> dogListSearch(@RequestParam("filter") String filter, @RequestParam("input") String input, Model model) {
 		log.info(filter);
 		log.info(input);
-		log.info(service.dogListSearch(filter, input));
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리
+		Criteria cri = new Criteria();
+		cri.setPageSql(0);
+		cri.setAmount(16);
+		cri.setSearchField(filter);
+		cri.setSearchWord(input);
+		cri.setSearchWordSql("%" + input + "%");
+		cri.setPageNum(1);
+		
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리
+		int total = service.getDogList().size(); // 201마리
+		Page page = new Page(cri, total);
+		log.info("rttr에 데이터 삽입 =========");
+		model.addAttribute("page", page);
 		return service.dogListSearch(filter, input);
+		/*
+		 * log.info(service.dogListSearch(filter, input)); return
+		 * service.dogListSearch(filter, input);
+		 */
 	}
 
 	@GetMapping("/detail")

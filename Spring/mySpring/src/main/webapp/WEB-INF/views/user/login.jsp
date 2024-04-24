@@ -8,6 +8,7 @@
 <title>Document</title>
 <link rel="stylesheet" href="${css }/loginPopup.css" />
 <link rel="stylesheet" href="${css }/searchDropdown.css" />
+<link rel="stylesheet" href="${css }/findAddr.css" />
 </head>
 <body>
 	<div class="popup_layer " id="popup_layer">
@@ -220,11 +221,11 @@
 										<!-- 보호소 주소 -->
 										<div class="form-slide shelter-addr-slide">
 											<label class="popup-label"> <span>주소</span> <input
-												type="text" name="addr" class="login-popup-input" readonly /><img
+												type="text" name="addr" class="login-popup-input" id="join-addr" readonly/><img
 												class="search-btn-icon" src="${icons }/search-btn.png"
-												alt="검색" />
+												alt="검색" onclick="findAddrInJoin()"/>
 											</label> <label class="popup-label"> <span>세부 주소</span> <input
-												type="text" name="addrDetail" class="login-popup-input" />
+												type="text" name="addrDetail" class="login-popup-input" id="join-addrDetail"/>
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -269,6 +270,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="find-addr-layer" id="join-layer">
+		<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+			id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
+	</div>
 	</div>
 	<script>
 		// 주소 설정하기
@@ -411,5 +416,8 @@
 		
 	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
+	<script src="${js }/userJoinFindAddr.js"></script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>
