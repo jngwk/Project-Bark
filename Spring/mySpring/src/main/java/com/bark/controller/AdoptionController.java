@@ -118,7 +118,7 @@ public class AdoptionController {
 		
 		service.adoptionUpdateDog(dogno, 0);    // 0: 입양불가, 1:입양가능
 		rttr.addFlashAttribute("result", dogno);
-		return "redirect:/user/userDonationList?id=" + id;
+		return "redirect:/user/userAdoptionList?id=" + id;
 	}
 
 	public void dogUploadAjax() {
