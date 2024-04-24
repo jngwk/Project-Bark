@@ -47,10 +47,10 @@
 					<!-- <li><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">소개</strong></a></li> -->
 					<li class="dropdown"><a class="transition" href="#"><strong
-							class="xlarge-font hover-underline">ABOUT</strong></a>
+							class="xlarge-font hover-underline">소개</strong></a>
 						<div class="dropdown-content">
 							<a class="transition" href="${contextPath }/static/about"><strong
-								class="large-font hover-underline">소개</strong></a> <a
+								class="large-font hover-underline">About</strong></a> <a
 								class="transition" href="${contextPath }/board/noticeList"><strong
 								class="large-font hover-underline">공지사항</strong></a>
 						</div></li>

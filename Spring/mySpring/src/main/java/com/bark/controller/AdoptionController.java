@@ -1,5 +1,8 @@
 package com.bark.controller;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bark.domain.Adoption;
@@ -36,6 +40,9 @@ public class AdoptionController {
 		log.info("adoptionInfo");
 	}
 
+	
+	//입양하기 강아지 전체 목록
+
 	@GetMapping("/list")
 	public void list(Model model, @RequestParam(required = false, value = "shelterno") Integer shelterno, // 보호소 조회에서
 																											// 넘어올 때 보호소
@@ -45,9 +52,8 @@ public class AdoptionController {
 			@RequestParam(required = false, value = "pageNum") Integer pageNum,
 			@RequestParam(required = false, value = "amount") Integer amount) { // 입양목록: 강아지 리스트 가져오기
 		log.info("list...........");
-
-		System.out.println("noticeList type-feild-pageNum-amount : " + pageNum + "-" + amount);
-
+		
+		System.out.println("dogList type-feild-pageNum-amount : " + pageNum + "-" + amount);
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
 
@@ -90,6 +96,16 @@ public class AdoptionController {
 		}
 	}
 
+	//입양하기 검색 목록
+	@PostMapping(value = "dogListSearch", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public List<Dog> dogListSearch(@RequestParam("filter") String filter, @RequestParam("input") String input,Model model) {
+		log.info(filter);
+		log.info(input);
+		log.info(service.dogListSearch(filter, input));
+		return service.dogListSearch(filter, input);
+	}
+
 	@GetMapping("/detail")
 	public String detail(@RequestParam("dogno") int dogno, Model model, HttpSession session) { // 입양상세: 강아지 정보
 		log.info("detail...........");
@@ -128,7 +144,7 @@ public class AdoptionController {
 
 		service.adoptionUpdateDog(dogno, 0); // 0: 입양불가, 1:입양가능
 		rttr.addFlashAttribute("result", dogno);
-		return "redirect:/user/userDonationList?id=" + id;
+		return "redirect:/user/userAdoptionList?id=" + id;
 	}
 
 	public void dogUploadAjax() {
@@ -144,9 +160,15 @@ public class AdoptionController {
 		return "main";
 	}
 
-	@PostMapping("/write") // 게시글저장
+	
+	@PostMapping("/write") // 유기견 등록
 	public String write(Dog dog, RedirectAttributes rttr) {
 		log.info("write :" + dog);
+		if(dog.getGender().equals("남")) {
+			dog.setGender("M");
+		} else if(dog.getGender().equals("여")) {
+			dog.setGender("F");
+		}
 		if (dog.getDogAttachedList() != null) {
 			dog.getDogAttachedList().forEach(attach -> log.info(attach));
 		}

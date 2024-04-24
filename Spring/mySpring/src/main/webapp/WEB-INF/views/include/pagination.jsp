@@ -73,7 +73,7 @@
         		 break;	
 		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
 				 break;
-		case '3' : 
+		case '3' : window.location.href='/donation/campaign?pageNum=' + pageNumPrev + '&amount=' + amount;
 				 break;	
 		case '4' :
 				 break;
@@ -90,7 +90,7 @@
         		 break;	
 		case '2' : window.location.href='/user/userWriteList?pageNum=' + num + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
 				 break;
-		case '3' : 
+		case '3' : window.location.href='/donation/campaign?pageNum=' + num + '&amount=' + amount; 
 				 break;	
 		case '4' :
 				 break;
@@ -105,7 +105,7 @@
         		 break;	
 		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
 				 break;
-		case '3' : 
+		case '3' : window.location.href='/donation/campaign?pageNum=' + pageNumNext + '&amount=' + amount ;
 				 break;	
 		case '4' :
 				 break;

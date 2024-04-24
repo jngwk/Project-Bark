@@ -135,7 +135,7 @@
 											<label class="popup-label"> <span>이름</span> <input
 												type="text" name="name" class="login-popup-input" />
 											</label> <label class="popup-label"> <span>전화번호</span> <input
-												type="tel" name="phone" class="login-popup-input" />
+												type="tel" name="phone" class="login-popup-input" maxlength=13/>
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -234,7 +234,7 @@
 										<!-- 보호소 전화번호 이메일 인증 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>전화번호</span> <input
-												type="tel" name="phone" class="login-popup-input" />
+												type="tel" name="phone" class="login-popup-input" maxlength=13/>
 											</label> <label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
 											</label> <label class="popup-label verify-label pending hide">

@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/userDonationList.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shelterDonationList.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/root.css" />
     <!-- <script src="../js/popup.js"></script> -->
 
@@ -30,12 +30,13 @@
             <thead>
               <tr>
                 <th scope="col" class="th-num">번호</th>
-                <th scope="col" class="th-shelterName">보호소</th>
+                <th scope="col" class="th-userName">이름</th>
+                <th scope="col" class="th-userId">아이디</th>
                 <th scope="col" class="th-dogName">기부금액</th>
                 <th scope="col" class="th-regDate">기부날짜</th>
                 <th scope="col" class="th-exe">
                   <select class="userState">
-                    <option>입양상태</option>
+                    <option value="">입양상태</option>
                     <option value="0">처리중</option>
                     <option value="1">처리완료</option>
                     <option value="2">처리실패</option>
@@ -46,11 +47,22 @@
             <tbody class="donationList">
             <c:forEach var="dList" items="${dList}">
               <tr>
-                <td>${dList.no}</td>
-                <td>${dList.shelterName}</td>
+                <td>${dList.donationno}</td>
+                <td>${dList.userName}</td>
+                <td>${dList.id}</td>
                 <td>${dList.amount}</td>
                 <td>${dList.paymentDate}</td>
-                <td>${dList.state}</td>
+				<c:choose>
+					<c:when test="${dList.state == 0}">
+							<td>처리중</td>
+					</c:when>
+					<c:when test="${dList.state == 1}">
+						<td>처리완료</td>
+					</c:when>
+					<c:otherwise>
+						<td>처리실패</td>
+					</c:otherwise>
+				</c:choose>
               </tr>
               </c:forEach>
             </tbody>
@@ -67,13 +79,13 @@
 	//state검색
 
 	$(".userState").change(function(){
-		getDState();
+		getSDState();
 	})
-	function getDState(){
+	function getSDState(){
 		console.log($(".userState").val());
 		$.ajax({
 			type: 'POST',
-			url : "/user/getDState",
+			url : "/user/getSDState",
 			data : {
 				id: "${userId}",
 				state: $(".userState").val()},
@@ -84,14 +96,15 @@
 					result.forEach(function(dList){
 							str=`
 							<tr>
-				                <td>\${dList.no}</td>
-				                <td>\${dList.shelterName}</td>
+				                <td>\${dList.donationno}</td>
+				                <td>\${dList.userName}</td>
+				                <td>\${dList.id}</td>
 				                <td>\${dList.amount}</td>
 				                <td>\${dList.paymentDate}</td>`
 				             if(dList.state==0){
 				            	 str+= `<td>처리중</td>
 						                </tr>`
-				             }else if(dList.state==0=1){
+				             }else if(dList.state==1){
 				            	 str+= `<td>처리완료</td>
 						                </tr>`
 				             }else{
@@ -102,6 +115,7 @@
 	        		}) 
 				}
 			}
+				
 		})
 	}
 

@@ -1,0 +1,51 @@
+.header-container {
+	background-color: var(--color-olive);
+}
+
+.header-container strong {
+	color: var(--main-font-color) !important;
+}
+
+.donate-container {
+	display: flex;
+	justify-content: center;
+	background-color: var(--color-honeydew);
+	padding-block: 140px 50px;
+	min-height:100dvh;
+}
+
+.donate-page {
+	width: 800px;
+	margin: 100px;
+	display: flex;
+	justify-content: center;
+	background: var(--color-bright);
+	border-radius: 5px;
+}
+
+.donate-page img {
+	position: relative;
+	width: 80px;
+	margin-left: 50%;
+	right: 40px;
+	top: 30px;
+}
+
+.donate-title {
+	font-size: 32px;
+	text-align: center;
+	margin: 100px;
+}
+
+.donate-subtitle {
+	font-size: 20px;
+	text-align: center;
+	padding: 30px;
+	margin: 100px 0;
+}
+
+.donate-button {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 50px;
+}

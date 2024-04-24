@@ -36,7 +36,7 @@ public class ShelterService {
 		
 	}
 	
-	// kyw : 20240422-16:22  입양신청서(adoptiondetail.jsp) 처리시 조회 내용  
+	// kyw : 20240424-11:41  캠페인 처리시 조회 내용  
 	public Shelter getShelter(Integer shelterno) {
 		return mapper.getShelter(shelterno);
 	}

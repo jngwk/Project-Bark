@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Update;
 import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
+import com.bark.domain.Donate;
 
 @Mapper
 public interface AdoptionMapper {	
@@ -27,8 +28,13 @@ public interface AdoptionMapper {
 	//입양목록 관련
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
+	//입양 검색 목록
+	@Select("select * from dog d join attach a on d.dogno=a.dogno "
+			+ " join shelter s on s.shelterno = d.shelterno"
+			+ " where ${param1} like concat('%',#{param2},'%');")
+	public List<Dog> dogListSearch(String filter, String input);
 	
-	@Select("select d.dogno, d.gender,d.feature, d.neuter, d.age, d.breed, d.available, s.shelterName, a.imgUrl, s.careTel, s.shelterAddr"
+	@Select("select d.dogno, d.gender,d.feature, d.neuter, d.age, d.breed, d.available, s.shelterName, a.imgUrl, a.uuid, a.filename, s.careTel, s.shelterAddr"
 			+ "			from dog d"
 			+ "				join attach a"
 			+ "						on d.dogno = a.dogno"
@@ -38,7 +44,7 @@ public interface AdoptionMapper {
 	public Dog getDog(int dogno);	//특정 강아지 정보, detail
 	
 	
-	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, a.uuid, s.shelterName\r\n"
+	@Select("SELECT ROW_NUMBER() OVER (ORDER BY dogno DESC) AS row_num, d.*, a.imgUrl, a.uuid, a.filename, s.shelterName\r\n"
 			+ "			FROM dog d "
 			+ "			join attach a "
 			+ "				on d.dogno = a.dogno "
@@ -93,7 +99,7 @@ public interface AdoptionMapper {
 	@Select("select a.adoptionno no, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 		+ "	from adoption a join user u on a.id = u.id\r\n"
 		+ "    join dog d on d.dogno = a.dogno\r\n"
-		+ "    join shelter s on s.shelterno = d.shelterno;")
+		+ "    join shelter s on s.shelterno = d.shelterno order by a.regDate;")
 	public List<Adoption> getAdoptionList();
 	//관리자 입양관리페이지 페이지
 	@Select("SELECT ROW_NUMBER() OVER (ORDER BY a.adoptionno DESC) AS row_num, a.adoptionno no, a.id id, u.name userName, s.shelterName, d.name dogName, a.adopt_date date, a.state\r\n"
@@ -114,14 +120,14 @@ public interface AdoptionMapper {
 			+ "where ${param1} like concat('%',#{param2},'%')")
 	public List<Adoption> getSearchAdoption(String filter,String input);
 	//관리자 입양관리페이지 state검색
-	@Select("select a.adoptionno, a.id id, u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
-			+ "	from adoption a join user u on a.id = u.id\r\n"
-			+ "    join dog d on d.dogno = a.dogno\r\n"
-			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
-			+ "where ${param1} like concat('%',#{param2},'%') and state=#{param3};")
+	@Select("select a.adoptionno,u.id,u.name userName, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on u.id=a.id join dog d on d.dogno=a.dogno join shelter s on s.shelterno=d.shelterno"
+			+ "	where ${param1} like concat('%',#{param2},'%') and a.state=#{param3};")
 	public List<Adoption> getUserState(String filter,String input,int state);
 	
 
+	
+	
 	//회원페이지 입양내역
 	@Select("select a.adoptionno, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
 			+ "	from adoption a join dog d on d.dogno = a.dogno\r\n"
@@ -134,6 +140,16 @@ public interface AdoptionMapper {
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "    where id = #{param1} and state = ${param2}")
 	public List<Adoption> getAState(String id,int state);
+
+	//보호소페이지 입양내역
+	@Select("select a.adoptionno, a.id id, u.name userName,d.name dogName,a.adopt_date date,a.state\r\n"
+			+ "	from adoption a join user u on a.id = u.id\r\n"
+			+ "	    join dog d on d.dogno = a.dogno\r\n"
+			+ "	    join shelter s on s.shelterno = d.shelterno where s.sheltername = (select name from user where id=#{id})"
+			+ "		order by a.state desc")
+	public List<Adoption> shelterAdoptionList(String id);
+
+
 
 	
 	

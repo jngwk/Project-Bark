@@ -483,6 +483,27 @@ $(".login-form").keypress(function (e) {
   }
 });
 
+// Define the function that formats the phone number
+const hyphenTel = (event) => {
+  let target = event.target;  // Access the event target
+  // Ensure target is a valid element and has a value property
+  if (target && "value" in target) {
+    // Only process modifications if the input is not empty to avoid unnecessary processing
+    if (target.value.trim() !== "") {
+      target.value = target.value
+        .replace(/[^0-9]/g, "") // Remove all non-digits
+        .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`); // Format with hyphens
+    }
+  } else {
+    console.error("Invalid target or missing value property");
+  }
+};
+
+// Attach the event listener correctly
+$("input[name=phone]").each(function() {
+  $(this).on("input", hyphenTel); // Pass the hyphenTel function as a callback
+});
+
 // 이메일 유효성
 $("input[name='email']").on("input", function () {
   emailValidChk($(this)); // Pass the jQuery object itself
