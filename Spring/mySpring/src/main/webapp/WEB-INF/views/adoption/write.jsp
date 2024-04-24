@@ -191,9 +191,6 @@ $(document).ready(function() {
 		       targetLi.remove()}
 		   }); //$.ajax
 		}); //span x event
-
-	
-	
 });  //document ready
 
 

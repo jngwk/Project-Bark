@@ -96,7 +96,7 @@ public class AdoptionService {
 	@Transactional
 	public void write(Dog dog) {
 		
-		dog.setShelterno(mapper.getShelterno(dog.getShelterName()));	//입력받은 보호소이름으로 보홋소 번호 가져와서 해당 강아지에 추가
+		dog.setShelterno(mapper.getShelterno(dog.getShelterName()));	//입력받은 보호소이름으로 보호소 번호 가져와서 해당 강아지에 추가
 		mapper.insertSelectKey(dog);
 		log.info("write...." + dog.getDogno());
 		if (dog.getDogAttachedList() == null || dog.getDogAttachedList().size() <= 0) {

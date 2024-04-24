@@ -40,7 +40,7 @@
 						      <img src="${dogList.imgUrl}" alt="image" class="card__img" />
 						</c:when>
 						<c:when test="${not empty dogList.filename}">
-						      <img src="/resources/images/dogs/${dogList.uuid}_${dogList.filename}" alt="image" class="card__img" />
+						      <img src="${pageContext.request.contextPath}/resources/images/dogs/${dogList.uuid}_${dogList.filename}" alt="image" class="card__img" />
 						</c:when>
 					</c:choose>
 					<div class="card__data">
