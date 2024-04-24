@@ -52,7 +52,7 @@
 						<p>캠페인 쓰기</p>
 					</div>
 					<div class="write-read">
-						<form method="post" action="/donation/write" name="WriteForm">
+						<form role='form' method="post" action="/donation/write" name="WriteForm">
 							<div class="form-bg">
 								<table class="write-table">
 									<thead>
@@ -69,25 +69,33 @@
 										</tr>
 									</tbody>
 								</table>
-								<!-- 
-<div class="write-imgUpload">
-<input class="upload-name" value="첨부파일" placeholder="첨부파일"
-readonly /> <label for="file" class="secondary-btn">파일찾기</label>
-<input type="file" id="file" />
-</div>
- -->
+								 
+								<div class="write-imgUpload">
+									<!-- <input class="upload-name" value="첨부파일" placeholder="첨부파일" readonly /> --> 
+									<label for="uploadFile" class="secondary-btn"  >파일찾기</label>
+									<input type="file"  name='uploadFile' id='uploadFile'  multiple />
+								</div>
+								<div class="uploadResult">
+									<ul></ul>
+								</div>
+								<div class="card-footer d-flex">
+								<button type="submit" class="btn btn-success ml-auto">Submit</button>
+								<button type="reset" class="btn btn-warning ml-2">Reset</button>
+								</div>
 							</div>
 							<div class="write-button">
 								<input type="button" data-ico="->" onclick="history.back()"
-									value="취소" class="btn brown-btn large-btn" /> <input
+									value="취소" class="btn brown-btn large-btn"  /> <input
 									data-ico="->" type="button" value="작성 완료"
 
 									class="btn brown-btn large-btn" id="write-button" onclick="writebtn()"/>
 								<input type="hidden" name="id" value="<%=(String)session.getAttribute("userId")%>" />
 
 							</div>
-
 						</form>
+						<div class="bigPictureWrapper">
+									<div class="bigPicture"></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -96,12 +104,154 @@ readonly /> <label for="file" class="secondary-btn">파일찾기</label>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
 <script type="text/javascript">
 
+alert(" dfc ");
+
+$(document).ready(function() {
+	let formObj=$("form[role='form']");
+	$("button[type='submit']").on("click", function(e) {
+		e.preventDefault();
+		console.log("submit clicked");
+		let str="";
+		$(".uploadResult ul li").each(function(i, obj) {
+			var obj = $(obj);
+			console.dir(obj); 
+			str += `<input type='hidden' name='attachList[\${i}].fileName' value='\${obj.data("filename")}'>
+				<input type='hidden' name='attachList[\${i}].uuid' value='\${obj.data("uuid")}'>
+				<input type='hidden' name='attachList[\${i}].uploadPath' value='\${obj.data("path")}'>
+				<input type='hidden' name='attachList[\${i}].fileType' value='\${obj.data("type")}'>`;
+		});
+		
+		formObj.append(str).submit();
+	});
+	
+	$(document).on('input', '#uploadFile', function() {
+
+		let formData = new FormData();
+		let inputFile = $("input[name='uploadFile']");
+		let files = inputFile[0].files;
+		console.log(files);
+		let cloneObj = $(".uploadDiv").clone();
+		for(let i=0; i<files.length; i++) {
+			if (!checkExtension(files[i].name, files[i].size)) {
+				return false;
+			}
+			formData.append("uploadFile", files[i]);
+		}
+		console.log("files.length : " + files.length);
+		$.ajax({
+			url:'/uploadAjaxAction',
+			processData: false, // 전달할 데이터를 query string을 만들지 말것
+			contentType: false,
+			data:formData, //전달할 데이터
+			type:'POST',
+			success: function(result){
+				// alert('Uploaded');
+				console.log(result);
+				showUploadedFile(result);
+				$(".uploadDiv").html(cloneObj.html());
+
+			}
+		});
+	});
+	
+	let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	let	maxSize = 5242880;
+	function checkExtension(fileName, fileSize) {
+		if (fileSize >= maxSize) {
+			alert("파일 크기 초가");
+			return false;
+		}
+		if (regex.test(fileName)) {
+			alert("해당 종류의 파일은 업로드 할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	let uploadResult = $(".uploadResult ul");
+	function showUploadedFile(uploadResultArr) {
+		
+		if (!uploadResultArr||uploadResultArr.length==0) {
+			return;
+		}
+		let str = "";
+		$(uploadResultArr).each(function(i, item) {
+			if	(!item.fileType) {
+				
+				let filePath = item.uploadPath + "/" + item.uuid + "_" + item.fileName;
+				filePath = filePath.replace(new RegExp(/\\/g), "/");
+				console.log('filePath : ', filePath);
+				str +=`<li data-path='\${item.uploadPath}' data-uuid='\${item.uuid}' 
+				data-filename='\${item.fileName}' data-type='\${item.fileType}'>
+				<a href='/download?fileName=\${filePath}'>
+				<img src="/resources/images/File-explorer_36762.png" style="width:20px;">\${item.fileName}</a>
+				<span data-file='\${filePath}' data-type="file">X</span></li>`;
+			} else {
+				let filePath =item.uploadPath + "/s_" + item.uuid + "_" + item.fileName;
+				let originPath =item.uploadPath + "/" + item.uuid + "_" + item.fileName;
+				filePath = filePath.replace(new RegExp(/\\/g),"/"); //폴더 구분자인 경우 '/'로 통일
+			    originPath = originPath.replace(new RegExp(/\\/g),"/"); //폴더 구분자인 경우 '/'로 통일
+				console.log('originPath : ', originPath);
+				str +=`<li data-path='\${item.uploadPath}' data-uuid='\${item.uuid}' 
+				data-filename='\${item.fileName}' data-type='\${item.fileType}'>
+				<a href="#" onclick="showImage('\${originPath}'); return false;">
+				<img src='/display?fileName=\${filePath}' style="width:20px;"></a>
+				<span data-file='\${filePath}' data-type="image">X</li>`;
+			}
+		});
+		console.log('showUploadedFile end');
+		uploadResult.append(str);
+		
+	}
+	
+	
+	
+	
+	
+	
+	function showImage(filePath) {
+		//alert(filePath);
+
+ 		console.log('filePath : ', filePath);
+		$(".bigPictureWrapper").css("display", "flex").show();
+		$(".bigPicture")
+		.html(`<img src='/display?fileName=\${filePath}'>`)
+		.animate({width:'100%', height:'100%'}, 1000 ); 
+		
+		$(".bigPictureWrapper").on("click", function(e){
+		$(".bigPicture").animate({width: '0%', height:'0%'}, 1000);
+		setTimeout(function(){
+		     $('.bigPictureWrapper').hide();
+			}, 1000);
+		}); //bigPictureWrapper click
+		
+	}
+	
+	
+	$(".uploadResult").on("click", "span", function(e){
+		let targetFile = $(this).data("file");
+		let type = $(this).data("type");
+		let targetLi = $(this).closest("li");
+		console.log(targetFile);
+		$.ajax({
+			url:'/deleteFile',
+			data: {fileName:targetFile, type:type},
+			dataType: 'text',
+			type:'POST',
+			success: function(result){
+				alert('Delete');
+				//console.log(result);
+				targetLi.remove()
+			}
+		});
+	});
+	
+});
+
 function writebtn() {
-//	alert("들어왔니??");
+
 	let WriteForm = document.WriteForm;
-//	alert("들어왔니??2222");
 	let Title = $("#Title").val();
-//	alert("들어왔니??3333");
 	let Content = $("#Content").val();
 
 //	alert("aaa[" + Content +"]");
@@ -121,7 +271,7 @@ if (Content == null || Content == "" || Content.length < 0 ) {
 		return;
 }  
 	document.WriteForm.submit();
-} 
+}
 </script>
 </body>
 </html>
