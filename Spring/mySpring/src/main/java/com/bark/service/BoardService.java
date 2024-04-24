@@ -115,7 +115,7 @@ public class BoardService {
 		board.getAttachList().forEach(attach->{
 			attach.setBno(board.getBno());
 			System.out.println("attach : " + attach);
-			attachMapper.insert(attach);
+			attachMapper.insertKyw(attach);
 		});
 		return result;
 	}	
