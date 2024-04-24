@@ -1,6 +1,8 @@
 package com.bark.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -16,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
-import com.bark.domain.Donate;
 import com.bark.domain.Page;
 import com.bark.service.AdoptionService;
 import com.bark.service.SecurityService;
