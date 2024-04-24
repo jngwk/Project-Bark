@@ -33,8 +33,15 @@
 		<div class="card__container">
 		<c:forEach var="dogList" items="${dogList}" >
 			<article class="card__article">
-				<img src="${dogList.imgUrl}" alt="image" class="card__img" />
-				<div class="card__data">
+					<c:choose>
+						<c:when test="${not empty dogList.imgUrl}">
+						      <img src="${dogList.imgUrl}" alt="image" class="card__img" />
+						</c:when>
+						<c:when test="${not empty dogList.filename}">
+						      <img src="/resources/images/dogs/${dogList.uuid}_${dogList.filename}" alt="image" class="card__img" />
+						</c:when>
+					</c:choose>
+					<div class="card__data">
 					<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
 							<c:choose>

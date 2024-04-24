@@ -78,8 +78,7 @@ public class AdoptionService {
 		return mapper.getUserState(filter,input,state);
 	}
 	
-	
-	
+
 	
 	//강아지 파일 업로드
 	public List<DogAttached> getAttachList(Integer dogno) {	

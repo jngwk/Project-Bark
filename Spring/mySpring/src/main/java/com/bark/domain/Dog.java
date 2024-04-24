@@ -21,7 +21,10 @@ public class Dog {
 	private Date   	regDate; 
 	private Integer neuter; 
 	private String 	careTel;
-	private String imgUrl;
 	private String shelterAddr;
+	private String imgUrl;
+	private String uuid;
+	private String filename;
+	private String filePath;
 	private List<DogAttached> dogAttachedList; 
 }

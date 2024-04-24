@@ -1,5 +1,7 @@
 package com.bark.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -88,9 +90,14 @@ public class AdoptionController {
 		log.info("write");
 	}
 	
-	@PostMapping("/write") // 게시글저장
+	@PostMapping("/write") // 유기견 등록
 	public String write(Dog dog, RedirectAttributes rttr) {
 		log.info("write :" + dog);
+		if(dog.getGender().equals("남")) {
+			dog.setGender("M");
+		} else if(dog.getGender().equals("여")) {
+			dog.setGender("F");
+		}
 		if (dog.getDogAttachedList() != null) {
 			dog.getDogAttachedList().forEach(attach -> log.info(attach));
 		}

@@ -25,11 +25,14 @@
         /></a>
         <div class="summary">
           <div class="img-wrapper">
-            <img
-              src="${dog.imgUrl }"
-              alt=""
-              class="dog1-large"
-            />
+          <c:choose>
+				<c:when test="${not empty dog.imgUrl}">
+					<img src="${dog.imgUrl}" alt="image" class="card__img" />
+				</c:when>
+				<c:when test="${not empty dog.filename}">
+					<img src="/resources/images/dogs/${dog.uuid}_${dog.filename}" alt="image" class="dog1-large" />							
+				</c:when>
+		  </c:choose>
           </div>
           <div class="summary-cont">
             <table>
