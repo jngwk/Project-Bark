@@ -499,7 +499,6 @@ const hyphenTel = (event) => {
   }
 };
 
-// Attach the event listener correctly
 $("input[name=phone]").each(function() {
   $(this).on("input", hyphenTel); // Pass the hyphenTel function as a callback
 });

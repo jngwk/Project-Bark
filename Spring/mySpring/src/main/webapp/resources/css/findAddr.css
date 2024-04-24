@@ -22,3 +22,7 @@
 	top: -3px;
 	z-index: 10003 !important;
 }
+
+#join-layer{
+	transform: translateX(80px);
+}
