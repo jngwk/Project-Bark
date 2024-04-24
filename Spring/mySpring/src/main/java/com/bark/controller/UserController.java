@@ -65,6 +65,7 @@ public class UserController {
 			session.setAttribute("userType", user.getType());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userPhone", user.getPhone());
+			session.setAttribute("userEmail", user.getEmail());
 			return 1;
 		} else if (!user.getPwd().equals(pwd)) {
 			return -1;
