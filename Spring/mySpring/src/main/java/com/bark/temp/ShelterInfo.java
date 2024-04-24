@@ -62,7 +62,8 @@ public class ShelterInfo {
 					if (!sMap.containsKey((jsonArray.getJSONObject(i).getString("careNm")))) { // 키값이 같으면 넣지	X -> 중복제거																			
 							sMap.put(jsonArray.getJSONObject(i).getString("careNm"),
 								new Shelter(jsonArray.getJSONObject(i).getString("careNm"),
-										jsonArray.getJSONObject(i).getString("careAddr")));
+										jsonArray.getJSONObject(i).getString("careAddr"),
+										jsonArray.getJSONObject(i).getString("careTel")));
 					}
 				}
 			}
