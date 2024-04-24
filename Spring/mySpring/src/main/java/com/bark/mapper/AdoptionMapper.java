@@ -29,7 +29,7 @@ public interface AdoptionMapper {
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
 	//입양 검색 목록
-	@Select("select * from dog d join attach a on d.dogno=a.dogno "
+	@Select("select d.*, a.uuid, a.filename from dog d join attach a on d.dogno=a.dogno "
 			+ " join shelter s on s.shelterno = d.shelterno"
 			+ " where ${param1} like concat('%',#{param2},'%');")
 	public List<Dog> dogListSearch(String filter, String input);

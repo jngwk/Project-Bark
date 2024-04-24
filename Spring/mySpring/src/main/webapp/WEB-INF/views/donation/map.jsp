@@ -49,7 +49,7 @@
 				<div class="shelter-list">
 					<ul class="shelter-ul">
 						<c:forEach var="list" items="${sList}">
-							<li onclick="shelterMap(${list.lat},${list.lng}); expandList(this)">
+							<li onclick="shelterMap('${list.shelterAddr}'); expandList(this);">
 								<div class="shelter-detail">
 									<p>${list.shelterName}</p>
 									<span>${list.shelterAddr}</span>
@@ -76,7 +76,7 @@
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051&libraries=services"></script>
 	<script src="${js }/shelterMap.js"></script>
 	<script>
 	//이름 ajax
@@ -98,7 +98,7 @@
 				if(result.length>=1){
 					result.forEach(function(item){
 						str=`
-						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+						<li onclick="shelterMap(\${list.shelterAddr}); expandList(this);">
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
@@ -146,7 +146,7 @@
 				if(result.length>=1){
 					result.forEach(function(item){
 						str=`
-						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+						<li onclick="shelterMap(\${list.shelterAddr}); expandList(this);">
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>

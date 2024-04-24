@@ -58,17 +58,17 @@
 			<c:forEach var="dogList" items="${dogList}">
 				<article class="card__article">
 					<img src="${dogList.imgUrl}" alt="image" class="card__img" />
+					<%-- <c:choose>
+						<c:when test="${not empty dogList.imgUrl}">
+							<img src="${dogList.imgUrl}" alt="image" class="card__img" />
+						</c:when>
+						<c:when test="${not empty dogList.filename}">
+							<img src="${ServletContext.request.contextPath}/resources/images/dogs/${dogList.uuid}_${dogList.filename}" alt="image" class="card__img" />
+						</c:when>
+					</c:choose> --%>
 					<div class="card__data">
 						<span class="card__description">${dogList.shelterName}</span>
 						<h2 class="card__title">
-							<c:choose>
-								<c:when test="${not empty dogList.name}">
-						            ${dogList.name}
-						        </c:when>
-								<c:otherwise>
-						            ${dogList.breed }
-						        </c:otherwise>
-							</c:choose>
 						</h2>
 						<a href="${contextPath }/adoption/detail?dogno=${dogList.dogno}"
 							class="card__button">입양하기</a>
