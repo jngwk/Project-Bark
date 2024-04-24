@@ -35,14 +35,15 @@ public class BoardService {
 	
 	// 게시판 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
 	public List<Board> searchList(Criteria cri) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
-		log.info("searchList : " + cri);
+		System.out.println("Service.searchList : " + cri);
+		
+		List <Board> bList = new ArrayList<Board>();
+		
+		// 리스트 GET
+		bList = mapper.searchList(cri);
 		
 		// 캠페인인 경우 저장된 이미지를 포함하여 가져온다.
 		if (cri.getType() == 3) {
-			List <Board> bList = new ArrayList<Board>();
-			
-			// 캠페인 리스트 GET 
-			bList = mapper.searchList(cri);
 			
 			// 첨부파일 리스트 GET
 			bList.forEach(board -> 
@@ -56,16 +57,17 @@ public class BoardService {
 				{
 					// 첨부파일 타입이 1(true)이면 이미지 0(false)이면 첨부파일 
 					if (attach.isFileType()) {
-//					 	board 도메인에 신규 컬럼 추가 필요 (캠페인 이미지 경로/파일 등등)
-//						board.setXXX = attach.getUploadPath(); 
-//						board.setXXX = attach.getFileName();
+						board.setUploadPath(attach.getUploadPath()); 
+						board.setFileName(attach.getFileName());
 					}
 				});
 			});
 			
+			
 		}
+		System.out.println("Service.bList : " + bList);
 		
-		return mapper.searchList(cri);
+		return bList;
 	}
 	
 	public List<Board> searchListById(Criteria cri,String id) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
