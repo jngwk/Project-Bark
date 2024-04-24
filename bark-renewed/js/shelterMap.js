@@ -12,7 +12,7 @@ var geocoder = new kakao.maps.services.Geocoder();
 function setMapByAddress(address) {
   // 주소로 좌표를 검색합니다
   geocoder.addressSearch(
-    "서울시 강남구 도산대로 101길 29 103동 301호",
+    address,
     function (result, status) {
       // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {

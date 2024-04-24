@@ -18,11 +18,11 @@ import com.bark.domain.Dog;
 public interface AdoptionMapper {	
 	
 	@Select("SELECT COUNT(1) FROM dog d JOIN shelter s ON d.shelterno = s.shelterno"
-			  + " AND ((#{cri.searchField} = 'dog' AND title LIKE #{cri.searchWordSql}) "
-			  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
-			  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
+			  + " AND ((#{cri.searchField} = 'shelterName' AND s.shelterName LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'shelterAddr' AND s.shelterAddr LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'breed' AND d.breed LIKE #{cri.searchWordSql}) "
 			  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) ")
-	public int totalPage(@Param("cri") Criteria cri);
+	public int totalPage(@Param("cri") Criteria cri); // 지현님 한테 물어보기
 	
 	//입양목록 관련
 	@Select("select * from dog;")

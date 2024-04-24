@@ -74,17 +74,16 @@ public class AdoptionController {
 		cri.setSearchWordSql("%" + searchWord + "%");
 		cri.setPageNum(pageNum);
 		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리
-
+		int total = service.getDogList().size(); // 201마리
+		Page page = new Page(cri, total);
+		model.addAttribute("page", page);
+		
+		// 입양 목록 페이지에서 조회
 		if (shelterno == null) {
-			int total = service.getDogList().size(); // 201마리
-			Page page = new Page(cri, total);
-			model.addAttribute("page", page);
 			model.addAttribute("dogList", service.searchList(cri));
-		} else {
-			// 조회 조건에 따른 전게 건수
-			int total = service.getDogList().size(); // 201마리
-			Page page = new Page(cri, total);
-			model.addAttribute("page", page);
+		} 
+		// 보호소 조회 페이지에서 조회
+		else {
 			log.info(service.searchListByShelterno(cri, shelterno).size());
 			model.addAttribute("dogList", service.searchListByShelterno(cri, shelterno));
 
