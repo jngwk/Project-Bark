@@ -112,7 +112,7 @@ public class UploadController {
 			try { 
 				multipartFile.transferTo(saveFile); 
 				dogAttached.setUuid(uuid.toString()); 
-				dogAttached.setUploadPath(getFolder());
+				dogAttached.setUploadPath(uploadFileName);
 
 				if(checkImageType(saveFile)) {
 					dogAttached. setFileType(true);
