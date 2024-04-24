@@ -50,7 +50,7 @@
 						<p>게시글 수정</p>
 					</div>
 					<div class="write-read">
-						<form method="post" action="/board/noticeUpdate">
+						<form method="post" action="/donation/update">
 							<div class="form-bg">
 								<table class="write-table">
 									<thead>

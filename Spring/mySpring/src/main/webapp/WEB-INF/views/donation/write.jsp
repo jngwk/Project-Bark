@@ -113,8 +113,8 @@ $("input[type='submit']").on("click", function(e) {
 //	alert("들어왔니??3333");
 	let Content = $("#Content").val();
 
-	alert("aaa[" + Content +"]");
-	alert(Content);
+//	alert("aaa[" + Content +"]");
+//	alert(Content);
 
 	if (Title == null || Title == "" || Title.length < 0 ) {
 		alert("제목을 입력하세요.");

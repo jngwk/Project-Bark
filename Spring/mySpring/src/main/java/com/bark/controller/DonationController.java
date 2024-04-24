@@ -248,30 +248,37 @@ public class DonationController {
 		}
 		return "main";
 	}
-	
-	@GetMapping("/upate")
-	public String update(HttpSession session) {
-		if(securityService.hasRole(2, session)) {
-			return "/donation/update";
-		}
-		return "main";
-	}
-	
+
 	@GetMapping("/update")
 	public String update(Model model, 
 						@RequestParam("bno") Integer  bno,
 			 			@RequestParam(required=false, value="pageNum") Integer pageNum,
 			 			@RequestParam(required=false, value="amount") Integer amount, HttpSession session) {
-		log.info("noticeUpdate : " + bno);
+		log.info("donation/update : " + bno);
 		if(securityService.hasRole(2, session)) {
 			Integer type = 3;   				
 			System.out.println("read [" + bno + "-" + type + "-" + pageNum + "-" + amount + "]");
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("amount", amount);
 			model.addAttribute("board", boardservice.read(bno));
-			return "/donation/read";
+			return "/donation/update";
 		}
 		return "main";
+	}
+	
+	
+	@PostMapping("/update")
+	public String modify(Board board,
+ 						 @RequestParam(required=false, value="pageNum") Integer pageNum,
+ 						 @RequestParam(required=false, value="amount") Integer amount) {
+
+		log.info("modify : " + pageNum + "-" + amount);
+		log.info("modify : " + board);
+		
+		boardservice.update(board);
+
+		return "redirect:/donation/read?bno=" + board.getBno() + "&pageNum=" + pageNum + "&amount" + amount ;
+
 	}
 
 }

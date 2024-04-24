@@ -71,10 +71,11 @@ public class BoardService {
 				{
 					// 첨부파일 타입이 1(true)이면 이미지 0(false)이면 첨부파일 
 					if (attach.isFileType()) {
-						if (board.getUploadPath() == null || board.getFileName() == null) {
+						if (board.getFileName() == null) {
 							board.setUploadPath(attach.getUploadPath()); 
 							board.setFileName(attach.getFileName());
-							System.out.println("attach.getUploadPath() : " + attach.getUploadPath());
+							board.setUuid(attach.getUuid());
+							System.out.println("attach.getUuid() : " + attach.getUuid());
 							System.out.println("attach.getFileName() : " + attach.getFileName());
 						}
 						
