@@ -11,6 +11,8 @@ import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.mapper.BoardMapper;
+import com.bark.mapper.ShelterMapper;
+import com.bark.mapper.UserMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -21,6 +23,12 @@ public class BoardService {
 	@Setter(onMethod_=@Autowired)
 	private BoardMapper mapper;
 
+	@Setter(onMethod_ =@Autowired)
+	private ShelterMapper sheltermapper;
+	
+	@Setter(onMethod_ =@Autowired)
+	private UserMapper usermapper;
+	
 //	@Setter(onMethod_ =@Autowired)
 //	private BoardAttachMapper attachMapper;
 
@@ -47,20 +55,32 @@ public class BoardService {
 			
 			// 첨부파일 리스트 GET
 			bList.forEach(board -> 
-			{	
+			{
 				List<Attached> attachList = new ArrayList<Attached>();
+				
 				attachList = mapper.getAttachList(board.getBno());
 				board.setAttachList(attachList);
-				
+
+				// 캠페인 작성자 id로 user에서 shelterno 추출,  
+				// shelter에서 shelterName을 가져와 board에 Set 한다.
+				board.setShelterName(sheltermapper.getShelter(usermapper.getUser(board.getId()).getShelterno()).getShelterName());
+
 				// 첫 이미지를 캠페인 대표 이미지로 Keep 
 				attachList.forEach(attach -> 
 				{
 					// 첨부파일 타입이 1(true)이면 이미지 0(false)이면 첨부파일 
 					if (attach.isFileType()) {
-						board.setUploadPath(attach.getUploadPath()); 
-						board.setFileName(attach.getFileName());
+						if (board.getUploadPath() == null || board.getFileName() == null) {
+							board.setUploadPath(attach.getUploadPath()); 
+							board.setFileName(attach.getFileName());
+							System.out.println("attach.getUploadPath() : " + attach.getUploadPath());
+							System.out.println("attach.getFileName() : " + attach.getFileName());
+						}
+						
 					}
+					
 				});
+				
 			});
 			
 			

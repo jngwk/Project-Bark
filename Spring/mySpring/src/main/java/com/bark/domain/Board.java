@@ -19,5 +19,6 @@ public class Board {
 	private List<Attached> attachList; 
 	private String	uploadPath;	// 캠페인 리스트 조회시 대표 이미지 경로
 	private String	fileName;	// 캠페인 리스트 조회시 대표 이미지 명
+	private String  shelterName;// 캠페인 리스트 조회시 보호소명
 }
 
