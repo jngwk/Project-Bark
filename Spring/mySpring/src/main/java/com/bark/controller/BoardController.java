@@ -171,7 +171,7 @@ public class BoardController {
 	@GetMapping("/noticeUpate")
 	public String update(HttpSession session) {
 		if(securityService.hasRole(3, session)) {
-			return "/board/noticeWrite";
+			return "/board/noticeUpate";
 		}
 		return "main";
 	}

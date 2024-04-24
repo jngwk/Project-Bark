@@ -18,47 +18,15 @@
 		<div class="story">
 			<p class="page-title">Campaign</p><p class="page-subtitle">[캠페인 둘러보기]</p>
 			<div class="story-button">
-				<a class="large-btn green-btn" href="#">글쓰기</a>
+				<a class="large-btn green-btn" onclick="writebtn();">글쓰기</a>
 			</div>
 			<ul>
 				<div class="story-list">
-				<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/many-dogs.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
 				<c:forEach var="bList" items="${bList}" >
-					<li>
+					<li><a href="/donation/read?bno=${bList.bno}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="${images}/many-dogs.jpg" />
+								<img class="banner-img" src="" />
 							</div>
 							<div class="story-title xlarge-font">
 								<p>${bList.title}</p> 
@@ -69,7 +37,7 @@
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />삼송보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />${bList.shelterName}
 									</p>
 								</div>
 								<div class="sub-info">
@@ -86,33 +54,29 @@
 								</div>
 							</div>
 						</div>
-					</li>
+					</a></li>
 				</c:forEach>	
 				</div>
 			</ul>
 		</div>
-		<div class="story-page">
-			<div class="pagination">
-				<span class="pagination__number-indicator"></span>
-				<button class="pagination__arrow">
-					<span class="pagination__arrow-half"></span> <span
-						class="pagination__arrow-half"></span>
-				</button>
-				<button class="pagination__number">1</button>
-				<button class="pagination__number">2</button>
-				<button class="pagination__number">3</button>
-				<button class="pagination__number pagination__number--active">4</button>
-				<button class="pagination__number">5</button>
-				<button class="pagination__number">6</button>
-				<button class="pagination__number">7</button>
-				<button class="pagination__arrow pagination__arrow--right">
-					<span class="pagination__arrow-half"></span> <span
-						class="pagination__arrow-half"></span>
-				</button>
-			</div>
-		</div>
-	</div>
+	<!-- 페이지넘버 -->
+	<jsp:include page="${views }/include/pagination.jsp" flush="false" />
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
 	<script src="${js }/campaign.js"></script>
+<script>
+let idValue ='<%=(String)session.getAttribute("userId")%>';	// 접속자 id
+
+function writebtn() {
+ 	
+	//alert(idValue.length);
+	if (idValue == null || idValue  == "null") {
+		alert("로그인 후 글쓰기 가능합니다.");
+		return;		
+
+	} 
+	window.location.href = "/donation/write";
+
+}
+</script>
 </body>
 </html>
