@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.bark.domain.Page;
 import com.bark.domain.Shelter;
 import com.bark.service.BoardService;
 import com.bark.service.ShelterService;
+import com.bark.service.UserService;
 import com.bark.temp.ShelterInfo;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +34,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class DonationController {
 	private ShelterService service;
-	//private UserService userService;
+	private UserService userservice;
+	private ShelterService shelterservice;
 	private BoardService boardservice;
 	
 	@GetMapping("/form")
@@ -128,13 +131,14 @@ public class DonationController {
 	
 	// board 테이블에서 캠페인(type=3) 리스트를 가져온다.
 	@GetMapping("/campaign")
-	public void campaignAjax(Model model,
+	public void campaign(Model model,
   		   				 @RequestParam(required=false, value="pageNum") Integer pageNum,
-  		   				 @RequestParam(required=false, value="amount") Integer amount) {
+  		   				 @RequestParam(required=false, value="amount") Integer amount,
+  		   				 HttpSession session) {
 		log.info("campaign...........");
 		
 		Integer type = 3;   				// 캠페인
-		System.out.println("noticeList [" + type +"-"+ pageNum + "-" + amount + "]");
+		log.info("campaign [" + type +"-"+ pageNum + "-" + amount + "]");
 
 		// pageNum, amount를 객체에 Set
 		Criteria cri = new Criteria();
@@ -157,9 +161,13 @@ public class DonationController {
 		Page page = new Page(cri, total);
 		
 		model.addAttribute("page", page);
+		
+		String id = (String)session.getAttribute("userId");
+		//userservice.getUser(id).getS 
+		//model.addAttribute("shelter", shelterservice.getShelter(cri));
 		model.addAttribute("bList", boardservice.searchList(cri));
 
-		
+		log.info("campaign End");
 	}
 
 }

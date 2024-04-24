@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +22,7 @@
 			</div>
 			<ul>
 				<div class="story-list">
-					<li>
+				<li>
 						<div class="story-card">
 							<div class="story-banner">
 								<img class="banner-img" src="${images}/many-dogs.jpg" />
@@ -52,262 +54,40 @@
 							</div>
 						</div>
 					</li>
+				<c:forEach var="bList" items="${bList}" >
 					<li>
 						<div class="story-card">
 							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
+								<img class="banner-img" src="${images}/many-dogs.jpg" />
 							</div>
 							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
+								<p>${bList.title}</p> 
 							</div>
 							<div class="story-info">
 								<div class="story-content">
-									<p>내용입니다</p>
+									<p><pre>${bList.content}</pre></p>
 								</div>
 								<div class="story-write">
 									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
+										<img class="icon-img" src="${icons}/shelter-icon.png" />삼송보호소
 									</p>
 								</div>
 								<div class="sub-info">
 									<div class="story-date xsmall-font">
 										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
+											<img class="icon-img" src="${icons}/calendar-icon.png" /><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" />
 										</p>
 									</div>
 									<div class="story-hit xsmall-font">
 										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
+											<img class="icon-img" src="${icons}/hit-icon.png" /><fmt:formatNumber type="number" maxFractionDigits="3" value="${bList.hit}" />
 										</p>
 									</div>
 								</div>
 							</div>
 						</div>
 					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="story-card">
-							<div class="story-banner">
-								<img class="banner-img" src="${images}/dogs/dog13.jpg" />
-							</div>
-							<div class="story-title xlarge-font">
-								<p>제목입니다</p>
-							</div>
-							<div class="story-info">
-								<div class="story-content">
-									<p>내용입니다</p>
-								</div>
-								<div class="story-write">
-									<p>
-										<img class="icon-img" src="${icons}/shelter-icon.png" />2조보호소
-									</p>
-								</div>
-								<div class="sub-info">
-									<div class="story-date xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/calendar-icon.png" />2024-04-12
-										</p>
-									</div>
-									<div class="story-hit xsmall-font">
-										<p>
-											<img class="icon-img" src="${icons}/hit-icon.png" />234
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</li>
+				</c:forEach>	
 				</div>
 			</ul>
 		</div>
@@ -333,6 +113,6 @@
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
-	<script src="${js }/js/campaign.js"></script>
+	<script src="${js }/campaign.js"></script>
 </body>
 </html>
