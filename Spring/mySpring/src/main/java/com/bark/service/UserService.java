@@ -81,7 +81,7 @@ public class UserService {
 		return mapper.updateShelterno(id, shelterno);
 	}
 	//보호소페이지 입양승인
-	public boolean adoptionState(String state, String id) {
-		return mapper.adoptionState(state,id)==1;
+	public boolean adoptionState(String state, String adoptionno) {
+		return mapper.adoptionState(state,adoptionno)==1;
 	}
 }
