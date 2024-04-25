@@ -24,7 +24,7 @@
 				<div class="category-menu">
 					<div class="menu-notice">
 						<p>
-							<img src="${icons }/board-icon.png" />공지사항
+							공지사항
 						</p>
 					</div>
 					<div class="menu-shelter">
@@ -34,7 +34,9 @@
 						<p>정보공유</p>
 					</div>
 					<div class="menu-qna">
-						<p>문의하기</p>
+						<p>
+						<img src="${icons }/board-icon.png" />문의하기
+						</p>
 					</div>
 				</div>
 			</div>

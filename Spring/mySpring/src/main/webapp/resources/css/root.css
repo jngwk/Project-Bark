@@ -43,6 +43,9 @@ li {
 a {
   text-decoration: none;
 }
+pre{
+	text-wrap: pretty;
+}
 input:focus,
 textarea:focus {
   outline: none;
