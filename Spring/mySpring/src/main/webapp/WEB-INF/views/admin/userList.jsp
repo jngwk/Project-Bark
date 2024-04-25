@@ -77,6 +77,7 @@
                 <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">${List.email }</a></td>
                 <c:choose>
                 	<c:when test = "${List.type== 2}">
+                		<td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">${List.email }</a></td>
                 		<td>보호소</td>
                 		<c:choose>
                 			<c:when test="${List.available== 2}">
@@ -153,7 +154,7 @@
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
 						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
+						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">\${uList.email }</a></td>
 						               <td>보호소</td>
 				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
 							           </td>
@@ -165,7 +166,7 @@
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
 						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
+						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">\${uList.email }</a></td>
 						               <td>보호소</td>
 				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
 							           </td>
@@ -178,7 +179,7 @@
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
 						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
+						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">\${uList.email }</a></td>
 						               <td>보호소</td>
 						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
 							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
@@ -236,7 +237,7 @@
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
 						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
+						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">\${uList.email }</a></td>
 						               <td>보호소</td>
 				            	 	   <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
 							           </td>
@@ -248,7 +249,7 @@
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
 						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
+						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">\${uList.email }</a></td>
 						               <td>보호소</td>
 				            	 	   <td><a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
 							           </td>
@@ -261,7 +262,7 @@
 						               <td>\${uList.id }</td>
 						               <td>\${uList.name }</td>
 						               <td>\${formatDate(uList.regDate)}</td>
-						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark]">\${uList.email }</a></td>
+						               <td><a class="mailto" href="mailto:﻿\${uList.email }?subject=[Bark] 회원가입 관련 이메일입니다&body=보호소 회원가입을 완료하기 위해,  아래에 기재된 서류를 제출해주시기 바랍니다. 감사합니다.">\${uList.email }</a></td>
 						               <td>보호소</td>
 						               <td><a href="${contextPath}/admin/available?available=1&id=\${uList.id }" class="shelterReceive-btn brown-btn">승인</a>
 							            <a href="${contextPath}/admin/available?available=2&id=\${uList.id }" class="shelterRefuse-btn secondary-btn">거절</a></td>
