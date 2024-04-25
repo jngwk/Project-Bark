@@ -93,6 +93,9 @@ ul{
 /* 제목 */
 .story-title {
   text-align: center;
+      text-overflow: ellipsis;
+    text-wrap: nowrap;
+    padding: 0 16px;
 }
 
 /* 카드 아래 */
