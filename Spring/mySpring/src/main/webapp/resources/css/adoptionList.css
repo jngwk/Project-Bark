@@ -74,7 +74,12 @@
 	background: var(--color-light-brown);
 	color: var(--color-bright);
 }
-
+/*검색내용없을때  */
+.noResults{
+	height: 50dvh;
+    padding: 20dvh;
+    text-align: center;
+}
 
 /* 목록 */
 .story-button {

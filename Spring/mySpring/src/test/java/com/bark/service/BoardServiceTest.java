@@ -1,5 +1,7 @@
 package com.bark.service;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Page;
+import com.bark.domain.User;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -23,7 +26,8 @@ public class BoardServiceTest {
 	@Setter(onMethod_= {@Autowired})
 	private BoardService service;
 
-
+	@Setter(onMethod_= {@Autowired})
+	private UserService userservice;
 //	@Test
 //	public void testExist() {
 //		log.info(service);
@@ -256,25 +260,71 @@ public class BoardServiceTest {
 		public void dummyInsertKo() {
 			Board board = new Board();
 
-			List<String> idList = new ArrayList<String>();
-			idList  = service.getId();				// user 테이블의 id와 맞추기 위해 처리
+			List<User> uList = new ArrayList<User>();
+			uList  = service.getUserDummy();				// user 테이블의 id와 맞추기 위해 처리
 			
-			int cnt = idList.size();
-			if (cnt > 0) {
-				cnt = (cnt > 30)? 30 : cnt ;   			// user id가 30개가 넘을 경우 30개만 사용
-				for (int i = 0; i < 635; i++) {
-					//board.setBno(i);					// AUTO_INCREMENT
-					board.setId(idList.get(i % cnt));
-					board.setTitle("제목입니다. " + i);
-					board.setContent("국회는 헌법 또는 법률에 특별한 규정이 없는 한 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 의결한다. 가부동수인 때에는 부결된 것으로 본다.\r\n"
-							+ "\r\n"
-							+ "대법원장은 국회의 동의를 얻어 대통령이 임명한다. 국회는 상호원조 또는 안전보장에 관한 조약, 중요한 국제조직에 관한 조약, 우호통상항해조약, 주권의 제약에 관한 조약, 강화조약, 국가나 국민에게 중대한 재정적 부담을 지우는 조약 또는 입법사항에 관한 조약의 체결·비준에 대한 동의권을 가진다.");
-					//board.setRegDate(null);			// default 현재일시
-					board.setHit(0);
-					board.setVote(0);
-					board.setType((i % 4)+1);
+			int cnt = uList.size();
+			// 공지사항 샘플 150건 등록 
+			uList.forEach(user -> {
+				if (user.getType() == 3) {
+					for (int i = 0; i < 145; i++) {
+						//board.setBno(i);					// AUTO_INCREMENT
+						board.setId(user.getId());
+						board.setTitle("제목입니다. " + i);
+						board.setContent("국회는 헌법 또는 법률에 특별한 규정이 없는 한 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 의결한다. 가부동수인 때에는 부결된 것으로 본다.\r\n"
+								+ "\r\n"
+								+ "대법원장은 국회의 동의를 얻어 대통령이 임명한다. 국회는 상호원조 또는 안전보장에 관한 조약, 중요한 국제조직에 관한 조약, 우호통상항해조약, 주권의 제약에 관한 조약, 강화조약, 국가나 국민에게 중대한 재정적 부담을 지우는 조약 또는 입법사항에 관한 조약의 체결·비준에 대한 동의권을 가진다. \r\n"
+								+ i );
+						//board.setRegDate(null);			// default 현재일시
+						board.setHit(0);
+						board.setVote(0);
+						board.setType(3);
 
-					service.write(board);
+						service.write(board);
+				}
+			}
+			});
+			
+
+			// 캠페인 샘플 등록(보호소 회원 여러명 가능)
+			for (int i = 1; i <= 113 ; i++) {
+				for(int j = 0; j < cnt ; j++) {
+					if (uList.get(j).getType() == 2) {
+						
+						board.setId(uList.get(j).getId());
+						board.setTitle("후원해주세요. " + i + j);
+						board.setContent("국회는 헌법 또는 법률에 특별한 규정이 없는 한 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 의결한다. 가부동수인 때에는 부결된 것으로 본다.\r\n"
+								+ "\r\n"
+								+ "대법원장은 국회의 동의를 얻어 대통령이 임명한다. 국회는 상호원조 또는 안전보장에 관한 조약, 중요한 국제조직에 관한 조약, 우호통상항해조약, 주권의 제약에 관한 조약, 강화조약, 국가나 국민에게 중대한 재정적 부담을 지우는 조약 또는 입법사항에 관한 조약의 체결·비준에 대한 동의권을 가진다. \r\n"
+								+ i + j);
+						//board.setRegDate(null);			// default 현재일시
+						board.setHit(0);
+						board.setVote(0);
+						board.setType(2);
+
+						service.write(board);
+					}
+				}
+			}
+
+			// 문의 하기 샘플 등록 (개인회원 여러명 가능)
+			for (int i = 1; i <= 103 ; i++) {
+				for(int j = 0; j < cnt ; j++) {
+					if (uList.get(j).getType() == 1 || uList.get(j).getType() == 2 ) {
+						
+						board.setId(uList.get(j).getId());
+						board.setTitle("문의합니다.. " + i + j);
+						board.setContent("국회는 헌법 또는 법률에 특별한 규정이 없는 한 재적의원 과반수의 출석과 출석의원 과반수의 찬성으로 의결한다. 가부동수인 때에는 부결된 것으로 본다.\r\n"
+								+ "\r\n"
+								+ "대법원장은 국회의 동의를 얻어 대통령이 임명한다. 국회는 상호원조 또는 안전보장에 관한 조약, 중요한 국제조직에 관한 조약, 우호통상항해조약, 주권의 제약에 관한 조약, 강화조약, 국가나 국민에게 중대한 재정적 부담을 지우는 조약 또는 입법사항에 관한 조약의 체결·비준에 대한 동의권을 가진다. \r\n"
+								+ i + j);
+						//board.setRegDate(null);			// default 현재일시
+						board.setHit(0);
+						board.setVote(0);
+						board.setType(1);
+
+						service.write(board);
+					}
 				}
 			}
 			

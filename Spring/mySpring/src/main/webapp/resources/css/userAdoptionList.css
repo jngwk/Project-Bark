@@ -12,6 +12,11 @@
     background:var(--color-bright);
 }
 
+.noResults{
+	text-align: center;
+    padding: 100px;
+}
+
 /* 버튼 */
 .notice-button {
   height: 70px;

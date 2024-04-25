@@ -54,22 +54,36 @@
 									</c:otherwise>
 								</c:choose>
 								<td>${aList.adopt_date}</td>
-		                		<c:choose>
-		                			<c:when test="${aList.state== 2}">
-		             		    		<td><a href="${contextPath}/user/adoptionState?state=1&userId=${aList.id }&id=${userId}" class="shelterReceive-btn brown-btn">승인</a></td>
-		             		    	</c:when>
-		             		    	<c:when test="${aList.state== 1}">
-					            		<td><a href="${contextPath}/user/adoptionState?state=2&userId=${aList.id }&id=${userId}" class="shelterRefuse-btn brown-btn">거절</a></td>
-					            	</c:when>
-					            	<c:otherwise>
-					            		<td><a href="${contextPath}/user/adoptionState?state=1&userId=${aList.id }&id=${userId}" class="shelterReceive-btn brown-btn">승인</a>
-					            		<a href="${contextPath}/user/adoptionState?state=2&userId=${aList.id }&id=${userId}" class="shelterRefuse-btn secondary-btn">거절</a></td>
-					            	</c:otherwise>
-					            </c:choose>
+								<c:choose>
+									<c:when test="${aList.state== 2}">
+										<td><a
+											href="${contextPath}/user/adoptionState?adoptionno=${aList.adoptionno}&state=1&userId=${aList.id }&id=${userId}"
+											class="shelterReceive-btn brown-btn">승인</a></td>
+									</c:when>
+									<c:when test="${aList.state== 1}">
+										<td><a
+											href="${contextPath}/user/adoptionState?adoptionno=${aList.adoptionno}&state=2&userId=${aList.id }&id=${userId}"
+											class="shelterRefuse-btn brown-btn">거절</a></td>
+									</c:when>
+									<c:otherwise>
+										<td><a
+											href="${contextPath}/user/adoptionState?adoptionno=${aList.adoptionno}&state=1&userId=${aList.id }&id=${userId}"
+											class="shelterReceive-btn brown-btn">승인</a> <a
+											href="${contextPath}/user/adoptionState?adoptionno=${aList.adoptionno}&state=2&userId=${aList.id }&id=${userId}"
+											class="shelterRefuse-btn secondary-btn">거절</a></td>
+									</c:otherwise>
+								</c:choose>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<c:choose>
+					<c:when test="${aList.size()==0}">
+						<div class="noResults">
+							<p>입양 내역이 없습니다.</p>
+						</div>
+					</c:when>
+				</c:choose>
 			</div>
 		</div>
 	</section>
