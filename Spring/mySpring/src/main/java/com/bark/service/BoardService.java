@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
+import com.bark.domain.User;
 import com.bark.mapper.BoardAttachMapper;
 import com.bark.mapper.BoardMapper;
 import com.bark.mapper.ShelterMapper;
@@ -198,6 +199,9 @@ public class BoardService {
 	// User 테이블의 회원 Id List 추출 
 	public List<String> getId() {
 		return mapper.getId(); 
+	}
+	public List<User> getUserDummy() {
+		return usermapper.getUserDummy(); 
 	}
 	// end -------------------------------------
 

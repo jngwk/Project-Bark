@@ -135,7 +135,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]>getFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File(context.getRealPath("/resources/images/dogs")+fileName);
+	   File file = new File(fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
@@ -152,7 +152,7 @@ public class UploadController {
 	@ResponseBody
 	public ResponseEntity<byte[]>dogGetFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File(context.getRealPath("/resources/images/dogs")+fileName);
+	   File file = new File(fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
