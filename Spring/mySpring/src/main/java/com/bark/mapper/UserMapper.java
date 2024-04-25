@@ -61,7 +61,7 @@ public interface UserMapper {
 			+ "	where id = #{id};")
     public int updateShelterno(@Param("id") String id, @Param("shelterno")Integer shelterno);
     
-    @Update("update adoption set state=#{param1} where id=#{param2}")
-	public int adoptionState(String state, String id);
+    @Update("update adoption set state=${param1}, adopt_date=sysdate()  where adoptionno=${param2};")
+	public int adoptionState(String state, String adoptionno);
 	
 }
