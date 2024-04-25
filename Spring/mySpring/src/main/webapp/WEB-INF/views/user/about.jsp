@@ -64,9 +64,9 @@
 			<h2>보호소와 예비 견주님을 이어줍니다.</h2>
 			<p>'보호소 조회'를 통해 모금중인 캠페인을 확인하고 여러분의 마음을 전해보세요!</p>
 			<div class="button-wrap">
-				<a href="${contextPath }/donation/map"><button class="blue-btn large-btn hidden">보호소 조회</button></a>
-				<a href="${contextPath }/donation/campaign"><button class="blue-btn large-btn hidden">캠페인 둘러보기</button></a>
-				<a href="${contextPath }/adoption/list"><button class="blue-btn large-btn hidden">입양하기</button></a>
+				<a href="${contextPath }/donation/map"><button class="brown-btn large-btn hidden">보호소 조회</button></a>
+				<a href="${contextPath }/donation/campaign"><button class="brown-btn large-btn hidden">캠페인 둘러보기</button></a>
+				<a href="${contextPath }/adoption/list"><button class="brown-btn large-btn hidden">입양하기</button></a>
 			</div>
 		</section>
 		<section class="hidden">
