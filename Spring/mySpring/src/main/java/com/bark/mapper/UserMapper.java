@@ -61,13 +61,14 @@ public interface UserMapper {
 			+ "	where id = #{id};")
     public int updateShelterno(@Param("id") String id, @Param("shelterno")Integer shelterno);
     
-    @Update("update adoption set state=#{param1} where id=#{param2}")
-	public int adoptionState(String state, String id);
-    
-    // dummy 게시판 Data 생성시 필요 ------TEST--------------
- 	// User 테이블의 회원 Id List 추출 
+    @Update("update adoption set state=${param1}, adopt_date=sysdate()  where adoptionno=${param2};")
+	public int adoptionState(String state, String adoptionno);
+
+	// dummy 게시판 Data 생성시 필요 ------TEST--------------
+	// User 테이블의 회원 Id List 추출 
 	@Select("SELECT * FROM user ")
 	public List<User> getUserDummy();
 	// ------------------------------
+
 	
 }

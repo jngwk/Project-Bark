@@ -54,6 +54,14 @@
 
 	<div class="grid__container">
 		<!-- <h1 class="adoption-list-header">입양 목록</h1> -->
+		<c:choose>
+			<c:when test="${dogList.size()==0}">
+				<div class="noResults">
+					<p>검색 내용과 일치하는 강아지가 없습니다.</p>
+					<p>다시 검색해주세요.</p>
+				</div>
+			</c:when>
+		</c:choose>
 		<div class="card__container">
 			<c:forEach var="dogList" items="${dogList}">
 				<article class="card__article">

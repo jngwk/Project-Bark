@@ -72,6 +72,13 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<c:choose>
+					<c:when test="${aList.size()==0}">
+						<div class="noResults">
+							<p>입양 내역이 없습니다.</p>
+						</div>
+					</c:when>
+				</c:choose>
 			</div>
 		</div>
 	</section>

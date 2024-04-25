@@ -6,6 +6,11 @@
 	color: var(--main-font-color) !important;
 }
 
+.noResults{
+	text-align: center;
+    padding: 100px;
+}
+
 .notice{
     padding-top: 140px;
     height: 100dvh;
