@@ -50,7 +50,7 @@ public class UploadController {
 	@PostMapping(value="/uploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public ResponseEntity<List<Attached>>  uploadAjaxPost(MultipartFile[] uploadFile) {
-		String uploadFolder=context.getRealPath("/resources/images/dogs");
+		String uploadFolder=context.getRealPath("/resources/data");
 		log.info("uploadFolder " + uploadFolder);
 		List<Attached> list = new ArrayList<Attached>();
 		
