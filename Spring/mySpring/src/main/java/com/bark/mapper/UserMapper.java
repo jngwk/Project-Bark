@@ -63,5 +63,11 @@ public interface UserMapper {
     
     @Update("update adoption set state=#{param1} where id=#{param2}")
 	public int adoptionState(String state, String id);
+    
+    // dummy 게시판 Data 생성시 필요 ------TEST--------------
+ 	// User 테이블의 회원 Id List 추출 
+	@Select("SELECT * FROM user ")
+	public List<User> getUserDummy();
+	// ------------------------------
 	
 }
