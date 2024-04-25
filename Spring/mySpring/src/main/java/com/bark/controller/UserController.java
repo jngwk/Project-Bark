@@ -349,5 +349,10 @@ public class UserController {
 	public void about() {
 		
 	}
+	
+	@GetMapping("/loginRequired")
+	public void loginRequired() {
+		
+	}
 
 }

@@ -49,10 +49,13 @@ public class DonationController {
 	}
 	
 	@GetMapping("/form")
-	public void form(Model model, 
-			 @RequestParam(required=false, value="shelterno") Integer selectedShelterno) {
+	public String form(Model model, 
+			 @RequestParam(required=false, value="shelterno") Integer selectedShelterno, HttpSession session) {
 		log.info("form ===========");
 		log.info(selectedShelterno);
+		if(session.getAttribute("userId") == null || session.getAttribute("userId") == "") {
+			return "/user/loginRequired";
+		}
 		
 		List<Shelter> sList = service.getShelterList();
 		log.info(sList.size());
@@ -60,6 +63,7 @@ public class DonationController {
 		if(selectedShelterno != null) {
 			model.addAttribute("selectedShelterno", selectedShelterno);
 		}
+		return "/donation/form";
 	}
 	
 	@GetMapping("/formComplete")
