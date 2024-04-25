@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
+import com.bark.mapper.BoardAttachMapper;
 import com.bark.mapper.BoardMapper;
 import com.bark.mapper.ShelterMapper;
 import com.bark.mapper.UserMapper;
@@ -29,8 +30,8 @@ public class BoardService {
 	@Setter(onMethod_ =@Autowired)
 	private UserMapper usermapper;
 	
-//	@Setter(onMethod_ =@Autowired)
-//	private BoardAttachMapper attachMapper;
+	@Setter(onMethod_ =@Autowired)
+	private BoardAttachMapper attachMapper;
 
 	// 게시판 전체 건수 얻기
 	public int totalPage(Criteria cri) {
@@ -70,10 +71,11 @@ public class BoardService {
 				{
 					// 첨부파일 타입이 1(true)이면 이미지 0(false)이면 첨부파일 
 					if (attach.isFileType()) {
-						if (board.getUploadPath() == null || board.getFileName() == null) {
+						if (board.getFileName() == null) {
 							board.setUploadPath(attach.getUploadPath()); 
 							board.setFileName(attach.getFileName());
-							System.out.println("attach.getUploadPath() : " + attach.getUploadPath());
+							board.setUuid(attach.getUuid());
+							System.out.println("attach.getUuid() : " + attach.getUuid());
 							System.out.println("attach.getFileName() : " + attach.getFileName());
 						}
 						
@@ -108,14 +110,14 @@ public class BoardService {
 	@Transactional
 	public int write(Board board) {
 		int result = mapper.write(board);
-//		if (board.getAttachList() == null || board.getAttachList().size()<=0) {
-//			return result;
-//		}
-//		board.getAttachList().forEach(attach->{
-//			attach.setBno(board.getBno());
-//			System.out.println("attach : " + attach);
-//			attachMapper.insert(attach);
-//		});
+		if (board.getAttachList() == null || board.getAttachList().size()<=0) {
+			return result;
+		}
+		board.getAttachList().forEach(attach->{
+			attach.setBno(board.getBno());
+			System.out.println("attach : " + attach);
+			attachMapper.insertKyw(attach);
+		});
 		return result;
 	}	
 	

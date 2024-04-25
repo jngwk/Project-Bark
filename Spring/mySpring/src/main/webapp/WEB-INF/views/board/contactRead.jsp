@@ -60,7 +60,7 @@
 					<a class="large-btn brown-btn" href='javascript:void(0);' onclick="btn4();">삭제</a>
 				</div>
 				<div class="story-button">
-					<a class="large-btn brown-btn" href="/admin/userWriteList">목록</a>
+					<a class="large-btn brown-btn" href="/user/userWriteList?pageNum=${page.cri.pageNum}&amount=${page.cri.amount}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}">목록</a>
 				</div>
 			</div>
 			<div class="reply-container">
@@ -431,7 +431,7 @@ function btn4() {
 	}
 	else {
 		if(confirm("삭제 하시겠습니까?")){
-	 		window.location.href = '/board/noticeDelete?bno=' + bnoValue;				
+	 		window.location.href = '/board/contactDelete?bno=' + bnoValue;				
 		}else{
 			alert("취소 하셨습니다.");
 		}

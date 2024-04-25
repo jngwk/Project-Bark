@@ -49,17 +49,15 @@
 				<div class="shelter-list">
 					<ul class="shelter-ul">
 						<c:forEach var="list" items="${sList}">
-							<li onclick="shelterMap(${list.lat},${list.lng}); expandList(this)">
+							<li onclick="shelterMap('${list.shelterAddr}'); expandList(this);">
 								<div class="shelter-detail">
 									<p>${list.shelterName}</p>
 									<span>${list.shelterAddr}</span>
-									<p style="display: none;">${list.lat}</p>
-									<p style="display: none;">${list.lng}</p>
 								</div>
 								<div class="shelter-buttons">
 									<div class="detail-box">
 										<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> 
-										<a href="${contextPath }/adoption/list?shelterno=${list.shelterno}" class="donate green-btn large-btn">유기견 목록</a> 
+										<a href="${contextPath }/adoption/list?searchWord=${list.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a> 
 										<%-- <a href="#" class="shelter-story green-btn large-btn">보호소 이야기</a> 
 										<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인
 											둘러보기</a> --%>
@@ -76,7 +74,7 @@
 	<jsp:include page="${views }/include/footer.jsp" flush="false"></jsp:include>
 
 	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=312e4647a38431cd979b5ac0e76d0051&libraries=services"></script>
 	<script src="${js }/shelterMap.js"></script>
 	<script>
 	//이름 ajax
@@ -98,18 +96,15 @@
 				if(result.length>=1){
 					result.forEach(function(item){
 						str=`
-						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+						<li onclick="shelterMap('\${item.shelterAddr}'); expandList(this);">
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
-							<p style="display: none;">\${item.lat}</p>
-						<p style="display: none;">\${item.lng}</p>
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a>
-							<a href="#" class="shelter-story green-btn large-btn">보호소 이야기</a>
-							<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+							<a href="${contextPath }/donation/form?shelterno=\${item.shelterno}" class="donate green-btn large-btn">후원하기</a> 
+							<a href="${contextPath }/adoption/list?searchWord=\${item.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
 						</div>
 					</div>
 				</li>`
@@ -146,18 +141,15 @@
 				if(result.length>=1){
 					result.forEach(function(item){
 						str=`
-						<li onclick="shelterMap(\${item.lat},\${item.lng}); expandList(this);">
+						<li onclick="shelterMap('\${item.shelterAddr}'); expandList(this);">
 							<div class="shelter-detail" >
 						<p>\${item.shelterName}</p>
 						<span>\${item.shelterAddr}</span>
-							<p style="display: none;">\${item.lat}</p>
-						<p style="display: none;">\${item.lng}</p>
 					</div>
 					<div class="shelter-buttons">
 						<div class="detail-box">
-							<a href="${contextPath }/donation/form?shelterno=${list.shelterno}" class="donate green-btn large-btn">후원하기</a> <a
-								href="#" class="shelter-story green-btn large-btn">보호소	이야기</a>
-								<a href="${contextPath }/donation/campaign" class="campaign green-btn large-btn">캠페인 둘러보기</a>
+							<a href="${contextPath }/donation/form?shelterno=\${item.shelterno}" class="donate green-btn large-btn">후원하기</a> 
+							<a href="${contextPath }/adoption/list?searchWord=\${item.shelterName}&searchField=shelterName" class="donate green-btn large-btn">유기견 목록</a>
 						</div>
 					</div>
 				</li>`

@@ -19,17 +19,17 @@ import com.bark.domain.Donate;
 public interface AdoptionMapper {	
 	
 	@Select("SELECT COUNT(1) FROM dog d JOIN shelter s ON d.shelterno = s.shelterno"
-			  + " AND ((#{cri.searchField} = 'dog' AND title LIKE #{cri.searchWordSql}) "
-			  + " OR   (#{cri.searchField} = 'content' AND content LIKE #{cri.searchWordSql}) "
-			  + " OR   (#{cri.searchField} = 'id' AND id LIKE #{cri.searchWordSql}) "
+			  + " AND ((#{cri.searchField} = 'shelterName' AND s.shelterName LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'shelterAddr' AND s.shelterAddr LIKE #{cri.searchWordSql}) "
+			  + " OR   (#{cri.searchField} = 'breed' AND d.breed LIKE #{cri.searchWordSql}) "
 			  + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) ")
-	public int totalPage(@Param("cri") Criteria cri);
+	public int totalPage(@Param("cri") Criteria cri); // 지현님 한테 물어보기
 	
 	//입양목록 관련
 	@Select("select * from dog;")
 	public List<Dog> getDogList();
 	//입양 검색 목록
-	@Select("select * from dog d join attach a on d.dogno=a.dogno "
+	@Select("select d.*, a.uuid, a.filename from dog d join attach a on d.dogno=a.dogno "
 			+ " join shelter s on s.shelterno = d.shelterno"
 			+ " where ${param1} like concat('%',#{param2},'%');")
 	public List<Dog> dogListSearch(String filter, String input);
@@ -50,6 +50,10 @@ public interface AdoptionMapper {
 			+ "				on d.dogno = a.dogno "
 			+ "			join shelter s "
 			+ "				on d.shelterno = s.shelterno "
+			+ " AND ((#{cri.searchField} = 'shelterName' AND s.shelterName LIKE #{cri.searchWordSql}) "
+		    + " OR   (#{cri.searchField} = 'shelterAddr' AND s.shelterAddr LIKE #{cri.searchWordSql}) "
+		    + " OR   (#{cri.searchField} = 'breed' AND d.breed LIKE #{cri.searchWordSql}) "
+		    + " OR   (#{cri.searchField} is null ) OR (#{cri.searchField} = '')) "
 			+ "				ORDER BY dogno DESC LIMIT #{cri.pageSql}, #{cri.amount}")
 	public List<Dog> searchDogList(@Param("cri") Criteria cri);	//한 페이지당 강아지 리스트
 	

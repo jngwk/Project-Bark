@@ -8,7 +8,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Document</title>
-<link rel="stylesheet" href="${css }/root.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/root.css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/userWriteList.css" />
 </head>
 <body>
@@ -54,7 +54,7 @@
 					<c:forEach var="bList" items="${bList}" >
 						<tr>
 							<td>${bList.no}</td>
-							<td><a href="/board/noticeRead?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
+							<td><a href="/board/contactRead?bno=${bList.bno}&searchField=${page.cri.searchField}&searchWord=${page.cri.searchWord}&pageNum=${page.cri.pageNum}&amount=${page.cri.amount}">
 							${bList.title}</a></td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${bList.regDate}" /> </td>
 							<td>${bList.hit}</td>

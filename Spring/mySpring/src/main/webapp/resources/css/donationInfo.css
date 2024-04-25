@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.header-container {
+	background-color: var(--color-olive);
+}
+
+.header-container strong {
+	color: var(--main-font-color) !important;
+}
+
+.adoptionInfo-total{padding-top:140px;background:var(--color-bright);}
+
+
+.adoptionInfo-container {
+	display: flex;
+	justify-content: center;
+	gap: 100px;
+	padding: 100px 0 300px 0;
+	
+}
+
+.adoptionInfo-background {
+	margin-bottom: 20px;
+	padding: 10px;
+		border-bottom: 2px solid var(--color-light-brown);
+}
+
+.adoptionInfo-title {
+	font-size: 20px;
+}
+
+.page-title {
+	margin: 50px auto;
+	font-size: 60px;
+	color: #333333;
+	font-weight: 400;
+	width: 60%;
+	top:140px;
+}
+
+.page-subtitle {
+	font-size: 25px;
+	width: 60%;
+	margin: 0 auto;
+	transform: translate(390px, -90px);
+}
+
+.adoptionInfo-content {
+	padding: 30px;
+	line-height: 40px;
+}
+
+.donationInfo-dog {
+	width: 400px;
+	height: 500px;
+	object-fit: cover;
+}

@@ -49,7 +49,7 @@
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">소개</strong></a>
 						<div class="dropdown-content">
-							<a class="transition" href="${contextPath }/static/about"><strong
+							<a class="transition" href="${contextPath }/user/about"><strong
 								class="large-font hover-underline">About</strong></a> <a
 								class="transition" href="${contextPath }/board/noticeList"><strong
 								class="large-font hover-underline">공지사항</strong></a>
@@ -57,7 +57,7 @@
 					<li class="dropdown"><a class="transition" href="#"><strong
 							class="xlarge-font hover-underline">보호소 및 후원</strong></a>
 						<div class="dropdown-content">
-							<a class="transition" href="#"><strong
+							<a class="transition" href="${contextPath }/donation/donationInfo"><strong
 								class="large-font hover-underline">후원 안내</strong></a> <a
 								class="transition" href="${contextPath }/donation/form"><strong
 								class="large-font hover-underline">후원하기</strong></a> <a
