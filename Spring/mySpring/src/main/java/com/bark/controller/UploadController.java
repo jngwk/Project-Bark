@@ -50,7 +50,7 @@ public class UploadController {
 	@PostMapping(value="/uploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public ResponseEntity<List<Attached>>  uploadAjaxPost(MultipartFile[] uploadFile) {
-		String uploadFolder=context.getRealPath("/resources/images/dogs");
+		String uploadFolder=context.getRealPath("/resources/data");
 		log.info("uploadFolder " + uploadFolder);
 		List<Attached> list = new ArrayList<Attached>();
 		
@@ -58,8 +58,8 @@ public class UploadController {
 			Attached attached = new Attached();
 			
 			log.info("---------------------------------------");
-			log.info("Upload File Name : "+multipartFile.getOriginalFilename());
-			log.info("Upload File Size : "+multipartFile.getSize());
+			log.info("uploadAjaxAction Upload File Name : "+multipartFile.getOriginalFilename());
+			log.info("uploadAjaxAction Upload File Size : "+multipartFile.getSize());
 
 			UUID uuid = UUID.randomUUID();
 			String uploadFileName = multipartFile.getOriginalFilename();
@@ -71,10 +71,10 @@ public class UploadController {
 			File saveFile = new File(uploadFolder, uploadFileName);
 			try { 
 				multipartFile.transferTo(saveFile); 
-				attached.setUuid(uuid.toString()); attached.setUploadPath(getFolder());
+				attached.setUuid(uuid.toString()); attached.setUploadPath(uploadFolder);
 
 				if(checkImageType(saveFile)) {
-					attached. setFileType(true);
+					attached.setFileType(true);
 
 					FileOutputStream thumbnail 
 					= new FileOutputStream(new File(uploadFolder, "s_"+uploadFileName));
