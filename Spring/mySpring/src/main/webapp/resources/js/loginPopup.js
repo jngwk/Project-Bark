@@ -18,6 +18,7 @@ const generalSlide = document.querySelector(".general-slide");
 const shelterForm = document.querySelector(".shelter-form");
 const shelterSlide = document.querySelector(".shelter-slide");
 const inputs = document.querySelectorAll(".login-popup-input");
+const loginRedirect = document.querySelector(".login-redirect-btn");
 
 //   open or close
 if (openPopBtn != null) {

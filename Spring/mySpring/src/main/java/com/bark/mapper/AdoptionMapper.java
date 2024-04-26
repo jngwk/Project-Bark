@@ -133,20 +133,20 @@ public interface AdoptionMapper {
 	
 	
 	//회원페이지 입양내역
-	@Select("select a.adoptionno, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+	@Select("select a.adoptionno, s.shelterName,d.name dogName,a.adopt_date,a.state\r\n"
 			+ "	from adoption a join dog d on d.dogno = a.dogno\r\n"
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "    where id = #{id}")
 	public List<Adoption> userAdoptionList(String id);
 	//회원페이지 입양내역 state검색
-	@Select("select a.adoptionno, s.shelterName,d.name dogName,a.adopt_date date,a.state\r\n"
+	@Select("select a.adoptionno, s.shelterName,d.name dogName,a.adopt_date,a.state\r\n"
 			+ "	from adoption a join dog d on d.dogno = a.dogno\r\n"
 			+ "    join shelter s on s.shelterno = d.shelterno\r\n"
 			+ "    where id = #{param1} and state = ${param2}")
 	public List<Adoption> getAState(String id,int state);
 
 	//보호소페이지 입양내역
-	@Select("select a.adoptionno, a.id id, u.name userName,d.name dogName,a.adopt_date date,a.state\r\n"
+	@Select("select a.adoptionno, a.id id, u.name userName,d.name dogName,a.adopt_date,a.state\r\n"
 			+ "	from adoption a join user u on a.id = u.id\r\n"
 			+ "	    join dog d on d.dogno = a.dogno\r\n"
 			+ "	    join shelter s on s.shelterno = d.shelterno where s.sheltername = (select name from user where id=#{id})"

@@ -29,7 +29,7 @@
         
         <div class="form-group">
           <label>보호소 이름</label>
-          <input class="form-control" name='shelterName'>
+          <input class="form-control" name='shelterName' value="${userName }">
         </div>
         
         <div class="form-group">
@@ -38,7 +38,12 @@
         </div>
         
         <div class="form-group">
-          <label>성별</label><input class="form-control" name='gender'>
+          <label>성별</label>
+          <!-- <input class="form-control" name='gender'> -->
+          <select class="form-control" name="gender">
+          	<option selected value="M">남</option>
+          	<option value="F">여</option>
+          </select>
         </div>
         <div class="form-group">
           <label>견종</label><input class="form-control" name='breed'>
@@ -56,7 +61,7 @@
             <label class="neuterTitle">중성화 여부</label><br>
             <label for="neutered" class="neuter">완료</label>
             <input type="radio" id="neutered" class="neuter" name="neuter" value="1">
-            <label for="notNeutered" class="neuter">X</label>
+            <label for="notNeutered" class="neuter">미완</label>
             <input type="radio" id="notNeutered" class="neuter" name="neuter" value="0">
             
         </div>

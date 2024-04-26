@@ -259,7 +259,7 @@ public class UserController {
 		if(securityService.hasRole(1, session) ) { //개인페이지
 			log.info("userAdoptionList...........");
 			List<Adoption> aList = adoptionservice.userAdoptionList(id);
-	
+			log.info(aList);
 			model.addAttribute("aList", aList);
 	
 			return "/mypage/userAdoptionList";
@@ -284,12 +284,12 @@ public class UserController {
 	 
 	// 보호소 페이지 회원조회 보호소 승인
 	@GetMapping("/adoptionState")
-	public String adoptionState(@RequestParam("state") String state, @RequestParam("userId") String userId,@RequestParam("id") String id,
+	public String adoptionState(@RequestParam("state") String state, @RequestParam("adoptionno") String adoptionno,@RequestParam("id") String id,
 			RedirectAttributes rttr,Model model) {
-		log.info(userId);
+		log.info(adoptionno);
 		log.info(id);
 		
-		boolean result = service.adoptionState(state, userId);
+		boolean result = service.adoptionState(state, adoptionno);
 		rttr.addFlashAttribute("result", result);
 		rttr.addAttribute("id", id);
 
@@ -347,6 +347,11 @@ public class UserController {
 	
 	@GetMapping("/about")
 	public void about() {
+		
+	}
+	
+	@GetMapping("/loginRequired")
+	public void loginRequired() {
 		
 	}
 
