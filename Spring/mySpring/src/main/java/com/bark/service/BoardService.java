@@ -1,14 +1,20 @@
 package com.bark.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bark.domain.Attached;
 import com.bark.domain.Board;
 import com.bark.domain.Criteria;
+import com.bark.domain.User;
+import com.bark.mapper.BoardAttachMapper;
 import com.bark.mapper.BoardMapper;
+import com.bark.mapper.ShelterMapper;
+import com.bark.mapper.UserMapper;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -19,8 +25,14 @@ public class BoardService {
 	@Setter(onMethod_=@Autowired)
 	private BoardMapper mapper;
 
-//	@Setter(onMethod_ =@Autowired)
-//	private BoardAttachMapper attachMapper;
+	@Setter(onMethod_ =@Autowired)
+	private ShelterMapper sheltermapper;
+	
+	@Setter(onMethod_ =@Autowired)
+	private UserMapper usermapper;
+	
+	@Setter(onMethod_ =@Autowired)
+	private BoardAttachMapper attachMapper;
 
 	// 게시판 전체 건수 얻기
 	public int totalPage(Criteria cri) {
@@ -33,8 +45,57 @@ public class BoardService {
 	
 	// 게시판 조회 조건으로 ? page, 10 건 가져오기, 1page 10건 처리
 	public List<Board> searchList(Criteria cri) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
-		log.info("searchList : " + cri);
-		return mapper.searchList(cri);
+		System.out.println("Service.searchList : " + cri);
+		
+		List <Board> bList = new ArrayList<Board>();
+		
+		// 리스트 GET
+		bList = mapper.searchList(cri);
+		
+		// 캠페인인 경우 저장된 이미지를 포함하여 가져온다.
+		if (cri.getType() == 3) {
+			
+			// 첨부파일 리스트 GET
+			bList.forEach(board -> 
+			{
+				List<Attached> attachList = new ArrayList<Attached>();
+				
+				attachList = mapper.getAttachList(board.getBno());
+				board.setAttachList(attachList);
+
+				// 캠페인 작성자 id로 user에서 shelterno 추출,  
+				// shelter에서 shelterName을 가져와 board에 Set 한다.
+				board.setShelterName(sheltermapper.getShelter(usermapper.getUser(board.getId()).getShelterno()).getShelterName());
+
+				// 첫 이미지를 캠페인 대표 이미지로 Keep 
+				attachList.forEach(attach -> 
+				{
+					// 첨부파일 타입이 1(true)이면 이미지 0(false)이면 첨부파일 
+					if (attach.isFileType()) {
+						if (board.getFileName() == null) {
+							board.setUploadPath(attach.getUploadPath()); 
+							board.setFileName(attach.getFileName());
+							board.setUuid(attach.getUuid());
+							System.out.println("attach.getUuid() : " + attach.getUuid());
+							System.out.println("attach.getFileName() : " + attach.getFileName());
+						}
+						
+					}
+					
+				});
+				
+			});
+			
+			
+		}
+		System.out.println("Service.bList : " + bList);
+		
+		return bList;
+	}
+	
+	public List<Board> searchListById(Criteria cri,String id) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
+		log.info("searchListById : " + cri);
+		return mapper.searchListById(cri,id);
 	}
 
 	public Board read(Integer bno) {	//화면에서 받은 type(게시판 구분)의 (다건)Board를 리턴
@@ -50,14 +111,14 @@ public class BoardService {
 	@Transactional
 	public int write(Board board) {
 		int result = mapper.write(board);
-//		if (board.getAttachList() == null || board.getAttachList().size()<=0) {
-//			return result;
-//		}
-//		board.getAttachList().forEach(attach->{
-//			attach.setBno(board.getBno());
-//			System.out.println("attach : " + attach);
-//			attachMapper.insert(attach);
-//		});
+		if (board.getAttachList() == null || board.getAttachList().size()<=0) {
+			return result;
+		}
+		board.getAttachList().forEach(attach->{
+			attach.setBno(board.getBno());
+			System.out.println("attach : " + attach);
+			attachMapper.insertKyw(attach);
+		});
 		return result;
 	}	
 	
@@ -138,6 +199,9 @@ public class BoardService {
 	// User 테이블의 회원 Id List 추출 
 	public List<String> getId() {
 		return mapper.getId(); 
+	}
+	public List<User> getUserDummy() {
+		return usermapper.getUserDummy(); 
 	}
 	// end -------------------------------------
 

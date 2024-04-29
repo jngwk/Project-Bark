@@ -73,7 +73,7 @@
 									value="취소" class="btn brown-btn large-btn" /> <input
 									data-ico="->" type="submit" value="작성 완료"
 									class="btn brown-btn large-btn" />
-									<input type="hidden" name="user_id" value="<%=(String) session.getAttribute("userId")%>" />
+									<input type="hidden" name="id" value="<%=(String) session.getAttribute("userId")%>" />
 <!-- 									<input type="hidden" name="user_id" value="jihyeon2368" /> -->
 							</div>
 						</form>

@@ -42,8 +42,8 @@
 <script>
 	
 	//alert("KYW 확인용[" + ${page.start} + "-" + ${page.end} + "-" + ${page.prev} + "-" + ${page.next} +"]\n["
-	//		+ ${page.cri.pageNum} + "-" + ${page.cri.amount} + "]");
-
+	//		+ ${page.cri.pageNum} + "-" + ${page.cri.amount} + "]" );
+ 
 			
 	if (${page.prev}) {
 		document.getElementById('prev').style.display = 'block';
@@ -69,11 +69,11 @@
 	function  showPrev() {
 		
 		switch (type) {
-		case '1' : window.location.href='/board/noticeList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+		case '1' : window.location.href='/board/noticeList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
         		 break;	
-		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumPrev + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
 				 break;
-		case '3' : 
+		case '3' : window.location.href='/donation/campaign?pageNum=' + pageNumPrev + '&amount=' + amount;
 				 break;	
 		case '4' :
 				 break;
@@ -86,11 +86,11 @@
 		let num=$(obj).data("num");
 
 		switch (type) {
-		case '1' : window.location.href='/board/noticeList?pageNum=' + num + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+		case '1' : window.location.href='/board/noticeList?pageNum=' + num + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
         		 break;	
-		case '2' : window.location.href='/user/userWriteList?pageNum=' + num + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+		case '2' : window.location.href='/user/userWriteList?pageNum=' + num + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
 				 break;
-		case '3' : 
+		case '3' : window.location.href='/donation/campaign?pageNum=' + num + '&amount=' + amount; 
 				 break;	
 		case '4' :
 				 break;
@@ -101,11 +101,11 @@
 
 	function  showNext() {
 		switch (type) {
-		case '1' : window.location.href='/board/noticeList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+		case '1' : window.location.href='/board/noticeList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
         		 break;	
-		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchfield=' + searchField + '&searchWord=' + searchWord ;
+		case '2' : window.location.href='/user/userWriteList?pageNum=' + pageNumNext + '&amount=' + amount + '&searchField=' + searchField + '&searchWord=' + searchWord ;
 				 break;
-		case '3' : 
+		case '3' : window.location.href='/donation/campaign?pageNum=' + pageNumNext + '&amount=' + amount ;
 				 break;	
 		case '4' :
 				 break;

@@ -31,7 +31,6 @@ public class UserService {
 		return mapper.getUser(id);
 	}
 	public boolean join(User user) {
-		user.setAddr(user.getAddr() + user.getAddrDetail());
 		log.info("insert..................");
 		return mapper.insert(user)==1;
 	}
@@ -57,14 +56,14 @@ public class UserService {
 	public int updateUserPwd(String email, String pwd) {
 		return mapper.updateUserPwd(email, pwd);
 	}
-	public List<User> getUserType(String filter,String input,int type) {
-		return mapper.getUserType(filter,input,type);
+	public List<User> getUserType(String filter,String input, int type) {
+		return mapper.getUserType(filter, input,type);
 	}
 
 	public List<User> getSearchUser(String filter,String input) {
 		return mapper.getSearchUser(filter,input);
 	}
-
+	//관리자페이지 보호소승인
 	public boolean availableUpdate(String available,String id) {
 		return mapper.availableUpdate(available,id)==1;
 	}
@@ -72,5 +71,17 @@ public class UserService {
 	public int updateUser(User user) {
 		return mapper.update(user);
 	}
-
+	
+	// 입양상세 -> 입양 신청시 회원 주소 update
+	public int updateAddr(String id, String address) {
+		return mapper.updateAddr(id, address);
+	}
+	
+	public int updateShelterno(String id, Integer shelterno) {
+		return mapper.updateShelterno(id, shelterno);
+	}
+	//보호소페이지 입양승인
+	public boolean adoptionState(String state, String adoptionno) {
+		return mapper.adoptionState(state,adoptionno)==1;
+	}
 }

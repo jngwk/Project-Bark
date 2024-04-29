@@ -18,19 +18,21 @@
 		<p class="page-title">Notice</p><p class="page-subtitle">[공지사항]</p>
 
 		<!-- board seach area -->
+		<c:if test="${userType == 3 }">
 		<div class="notice-button">
 			<a class="medium-btn brown-btn" onclick="writebtn();">글쓰기</a>
 		</div>
+		</c:if>
 		<div id="board-search">
 			<div class="container">
 				<div class="search-window">
 					<form action="/board/noticeList" method="get">
 						<div class="search-wrap">
 							<label for="search" class="blind">공지사항 내용 검색</label> <select id="searchField" name="searchField" onchange="chageLangSelect()">
-								<option value="" >카테고리</option>
-								<option value="content" <c:if test="${page.cri.searchField == 'content'}">selected</c:if>>내용</option>
-								<option value="title" <c:if test="${page.cri.searchField == 'title'}">selected</c:if>>제목</option>
-								<option value="user_id" <c:if test="${page.cri.searchField == 'user_id'}">selected</c:if>>작성자</option>
+								<option value="" <c:if test="${page.cri.searchField ==''}">${'selected'}</c:if>>선택</option>
+								<option value="content" <c:if test="${page.cri.searchField == 'content'}">${'selected'}</c:if>>내용</option>
+								<option value="title" <c:if test="${page.cri.searchField == 'title'}">${'selected'}</c:if>>제목</option>
+								<option value="id" <c:if test="${page.cri.searchField == 'id'}">${'selected'}</c:if>>작성자</option>
 							</select> <input id="searchWord" type="search" name="searchWord"
 								placeholder="검색어를 입력해주세요." value="${page.cri.searchWord}" />
 							<button type="submit" class="btn btn-dark">검색</button>
@@ -75,7 +77,7 @@
 
 // 변경시 검색 단어 Clear
 function chageLangSelect(){
-
+	
 	$("#searchWord").val("");
     
 }

@@ -11,6 +11,7 @@ import com.bark.domain.Adoption;
 import com.bark.domain.Criteria;
 import com.bark.domain.Dog;
 import com.bark.domain.DogAttached;
+import com.bark.domain.Donate;
 import com.bark.mapper.AdoptionMapper;
 import com.bark.mapper.DogAttachMapper;
 
@@ -42,6 +43,32 @@ public class AdoptionService {
 		return mapper.searchDogList(cri);
 	}
 	
+	// 보호소 조회에서 입양 목록 넘어올 때
+	public List<Dog> searchListByShelterno(Criteria cri, Integer shelterno) {
+		log.info("searchListByShelterno : " + cri);
+		log.info("searchListByShelterno : " + shelterno);
+		return mapper.searchDogListByShelterno(cri, shelterno);
+	}
+
+	//입양하기 검색
+	public List<Dog> dogListSearch(String filter, String input) {
+		return mapper.dogListSearch(filter,input);
+	}
+	
+	// 입양 상세 -> 입양 신청 처리
+	public void adoptionWrite(Adoption adoption) {
+		log.info("adoptionWrite : " + adoption);
+		mapper.adoptionWrite(adoption);
+		return;
+	}
+	// 입양 상세 -> 입양 신청 처리
+	public void adoptionUpdateDog(Integer dogno, Integer available) {
+		log.info("adoptionUpdateDog : " + dogno);
+		mapper.adoptionUpdateDog(dogno, available);
+		return;
+	}
+	
+	
 	
 	//관리자페이지 입양내역 검색
 	public List<Adoption> getAdoptionList(){
@@ -64,8 +91,7 @@ public class AdoptionService {
 		return mapper.getUserState(filter,input,state);
 	}
 	
-	
-	
+
 	
 	//강아지 파일 업로드
 	public List<DogAttached> getAttachList(Integer dogno) {	
@@ -75,8 +101,10 @@ public class AdoptionService {
 	
 	@Transactional
 	public void write(Dog dog) {
-		log.info("write...." + dog.getDogno());
+		dog.setShelterno(mapper.getShelterno(dog.getShelterName()));	//입력받은 보호소이름으로 보호소 번호 가져와서 해당 강아지에 추가
+		log.info(mapper.getShelterno(dog.getShelterName()));
 		mapper.insertSelectKey(dog);
+		log.info("write...." + dog.getDogno());
 		if (dog.getDogAttachedList() == null || dog.getDogAttachedList().size() <= 0) {
 			return;
 		}
@@ -111,5 +139,16 @@ public class AdoptionService {
 	public List<Adoption> getAState(String id,int state) {
 		return mapper.getAState(id,state);
 	}
+	
+	//보호소페이지 입양내역
+	public List<Adoption> shelterAdoptionList(String id) {
+		return mapper.shelterAdoptionList(id);
+	}
+
+	public int totalPage(Criteria cri) {
+		return mapper.totalPage(cri);
+	}
+
+	
 
 }

@@ -3,8 +3,6 @@ package com.bark.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,8 +10,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,6 +33,10 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 public class UploadController {
+	
+	@Autowired
+	ServletContext context;	//application
+	
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
 		log.info("uploadAjax ajax");
@@ -47,38 +50,34 @@ public class UploadController {
 	@PostMapping(value="/uploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public ResponseEntity<List<Attached>>  uploadAjaxPost(MultipartFile[] uploadFile) {
-		String uploadFolder="d:/upload/board/";
+		String uploadFolder=context.getRealPath("/resources/data");
+		log.info("uploadFolder " + uploadFolder);
 		List<Attached> list = new ArrayList<Attached>();
-		//파일을 upload 지정 폴더 내부에 새로운 폴더를 생성하여 저장하기로 
-		File uploadPath  = new File(uploadFolder, getFolder());
-		log.info("upload Path : "+uploadPath);
-		if(uploadPath.exists() ==false) { //폴더가 존재하지 않으면 새로 생성
-			uploadPath.mkdirs();  //yyyy/MM/dd 폴더 생성
-		}
-
+		
 		for(MultipartFile multipartFile: uploadFile) {
 			Attached attached = new Attached();
 			
 			log.info("---------------------------------------");
-			log.info("Upload File Name : "+multipartFile.getOriginalFilename());
-			log.info("Upload File Size : "+multipartFile.getSize());
+			log.info("uploadAjaxAction Upload File Name : "+multipartFile.getOriginalFilename());
+			log.info("uploadAjaxAction Upload File Size : "+multipartFile.getSize());
 
 			UUID uuid = UUID.randomUUID();
 			String uploadFileName = multipartFile.getOriginalFilename();
 			attached.setFileName(uploadFileName);
-
+			
+			
 			uploadFileName = uuid.toString()+"_"+uploadFileName;
 
-			File saveFile = new File(uploadPath, uploadFileName);
+			File saveFile = new File(uploadFolder, uploadFileName);
 			try { 
 				multipartFile.transferTo(saveFile); 
-				attached.setUuid(uuid.toString()); attached.setUploadPath(getFolder());
+				attached.setUuid(uuid.toString()); attached.setUploadPath(uploadFolder);
 
 				if(checkImageType(saveFile)) {
-					attached. setFileType(true);
+					attached.setFileType(true);
 
 					FileOutputStream thumbnail 
-					= new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
+					= new FileOutputStream(new File(uploadFolder, "s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				}
@@ -89,17 +88,12 @@ public class UploadController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	//D:\WorkSpace\BarkWorkSpace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Bark\resources\images
 	@PostMapping(value="/DogUploadAjaxAction", produces= MediaType.APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public ResponseEntity<List<DogAttached>>  dogUploadAjaxPost(MultipartFile[] uploadFile) {
-		String uploadFolder="d:/upload/dog/";
+	public ResponseEntity<List<DogAttached>> dogUploadAjaxPost(MultipartFile[] uploadFile) {
+		String uploadFolder = context.getRealPath("/resources/images/dogs");	
 		List<DogAttached> list = new ArrayList<DogAttached>();
-		//파일을 upload 지정 폴더 내부에 새로운 폴더를 생성하여 저장하기로 
-		File uploadPath  = new File(uploadFolder, getFolder());
-		log.info("upload Path : "+uploadPath);
-		if(uploadPath.exists() ==false) { //폴더가 존재하지 않으면 새로 생성
-			uploadPath.mkdirs();  //yyyy/MM/dd 폴더 생성
-		}
 
 		for(MultipartFile multipartFile: uploadFile) {
 			DogAttached dogAttached = new DogAttached();
@@ -114,17 +108,17 @@ public class UploadController {
 
 			uploadFileName = uuid.toString()+"_"+uploadFileName;
 
-			File saveFile = new File(uploadPath, uploadFileName);
+			File saveFile = new File(uploadFolder, uploadFileName);
 			try { 
 				multipartFile.transferTo(saveFile); 
 				dogAttached.setUuid(uuid.toString()); 
-				dogAttached.setUploadPath(getFolder());
+				dogAttached.setUploadPath(uploadFileName);
 
 				if(checkImageType(saveFile)) {
 					dogAttached. setFileType(true);
 
 					FileOutputStream thumbnail 
-					= new FileOutputStream(new File(uploadPath, "s_"+uploadFileName));
+					= new FileOutputStream(new File(uploadFolder, "s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					thumbnail.close();
 				}
@@ -135,12 +129,13 @@ public class UploadController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
+	
 	// board 썸네일 표시 기능
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]>getFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File("d:/upload/board/"+fileName);
+	   File file = new File(fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
@@ -151,12 +146,13 @@ public class UploadController {
 	   } catch (IOException e) { e.printStackTrace();}
 	   return result;
 	}
+	
 	// dog 표시 기능
 	@GetMapping("/dogdisplay")
 	@ResponseBody
 	public ResponseEntity<byte[]>dogGetFile(String fileName){
 	   log.info("fileName : "+fileName);
-	   File file = new File("d:/upload/dog/"+fileName);
+	   File file = new File(fileName);
 	   log.info("file : "+ file);
 	   ResponseEntity<byte[]> result = null;
 	   try {
@@ -167,99 +163,7 @@ public class UploadController {
 	   } catch (IOException e) { e.printStackTrace();}
 	   return result;
 	}
-	// board 다운로드
-	@GetMapping(value="/download", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	@ResponseBody
-	public ResponseEntity<Resource> downloadFile(String fileName){
-	   log.info("download file : "+ fileName);
-	   Resource resource = new FileSystemResource("d:/upload/board/"+fileName);
-	   if(resource.exists() ==false) {return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
-
-	   log.info("resource : "+ resource);
 	
-	   String resourceName = resource.getFilename();
-	 //remove UUID, 추가된 부분
-	   String resourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1);
-	   log.info("resourceOriginalName : "+resourceOriginalName);
-
-	   HttpHeaders headers = new HttpHeaders();
-	   try {
-	      headers.add("Content-Disposition", "attachment; fileName=" 
-	              + new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1"));
-	   } catch (UnsupportedEncodingException e) {
-	      e.printStackTrace();
-	   } 
-	   return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-
-	}
-	// dog 다운로드
-	@GetMapping(value="/dogdownload", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
-	@ResponseBody
-	public ResponseEntity<Resource> dogDownloadFile(String fileName){
-	   log.info("download file : "+ fileName);
-	   Resource resource = new FileSystemResource("d:/upload/dog/"+fileName);
-	   if(resource.exists() ==false) {return new ResponseEntity<>(HttpStatus.NOT_FOUND); }
-
-	   log.info("resource : "+ resource);
-	
-	   String resourceName = resource.getFilename();
-	 //remove UUID, 추가된 부분
-	   String resourceOriginalName = resourceName.substring(resourceName.indexOf("_")+1);
-	   log.info("resourceOriginalName : "+resourceOriginalName);
-
-	   HttpHeaders headers = new HttpHeaders();
-	   try {
-	      headers.add("Content-Disposition", "attachment; fileName=" 
-	              + new String(resourceOriginalName.getBytes("UTF-8"), "ISO-8859-1"));
-	   } catch (UnsupportedEncodingException e) {
-	      e.printStackTrace();
-	   } 
-	   return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
-
-	}
-	// board 삭제
-	@PostMapping("/deleteFile")
-	@ResponseBody
-	public ResponseEntity<String> deleteFile(String fileName, String type){
-	    log.info("deleteFile: "+fileName);
-	    File file;
-	    try {
-	       file = new File("d:/upload/board/"+URLDecoder.decode(fileName, "UTF-8"));
-	       file.delete(); //upload 폴더에서 해당 이름의 파일 삭제 
-	       if(type.equals("image")) {//이미지인 경우, 원본 파일 삭제
-	            String largeFileName  = file.getAbsolutePath().replace("s_", "");
-	            log.info("largeFileName : "+largeFileName);
-	            file = new File(largeFileName);
-	            file.delete();
-	       }
-	   } catch (UnsupportedEncodingException e) {
-	      e.printStackTrace();
-	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	   }
-	   return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	}
-	//dog 삭제
-	@PostMapping("/dogdeleteFile")
-	@ResponseBody
-	public ResponseEntity<String> dogDeleteFile(String fileName, String type){
-	    log.info("deleteFile: "+fileName);
-	    File file;
-	    try {
-	       file = new File("d:/upload/dog/"+URLDecoder.decode(fileName, "UTF-8"));
-	       file.delete(); //upload 폴더에서 해당 이름의 파일 삭제 
-	       if(type.equals("image")) {//이미지인 경우, 원본 파일 삭제
-	            String largeFileName  = file.getAbsolutePath().replace("s_", "");
-	            log.info("largeFileName : "+largeFileName);
-	            file = new File(largeFileName);
-	            file.delete();
-	       }
-	   } catch (UnsupportedEncodingException e) {
-	      e.printStackTrace();
-	      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	   }
-	   return new ResponseEntity<String>("deleted", HttpStatus.OK);
-	}
-
 	
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

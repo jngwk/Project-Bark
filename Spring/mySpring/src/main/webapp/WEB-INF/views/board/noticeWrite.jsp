@@ -52,19 +52,19 @@
 						<p>게시글 쓰기</p>
 					</div>
 					<div class="write-read">
-						<form method="post" action="/board/noticeWrite">
+						<form method="post" action="/board/noticeWrite" name="WriteForm">
 							<div class="form-bg">
 								<table class="write-table">
 									<thead>
 										<tr>
 											<th>제목</th>
-											<th><input type="text" name="Title" maxlength="50" /></th>
+											<th><input type="text" id="Title" name="title" maxlength="50" /></th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td class="textarea" colspan="3"><textarea
-													placeholder="내용을 작성하세요." name="Content" maxlength="2048"></textarea>
+													placeholder="내용을 작성하세요." id="Content" name="Content" maxlength="2048"></textarea>
 											</td>
 										</tr>
 									</tbody>
@@ -80,9 +80,9 @@ readonly /> <label for="file" class="secondary-btn">파일찾기</label>
 							<div class="write-button">
 								<input type="button" data-ico="->" onclick="history.back()"
 									value="취소" class="btn brown-btn large-btn" /> <input
-									data-ico="->" type="submit" value="작성 완료"
+									data-ico="->" type="button" value="작성 완료"
 
-									class="btn brown-btn large-btn" />
+									class="btn brown-btn large-btn" id="write-button" onclick="writebtn()"/>
 								<input type="hidden" name="id" value="<%=(String)session.getAttribute("userId")%>" />
 
 							</div>
@@ -94,5 +94,34 @@ readonly /> <label for="file" class="secondary-btn">파일찾기</label>
 		</div>
 	</div>
 	<jsp:include page="${views }/include/footer.jsp" flush="false" />
+<script type="text/javascript">
+
+function writebtn() {
+//	alert("들어왔니??");
+	let WriteForm = document.WriteForm;
+//	alert("들어왔니??2222");
+	let Title = $("#Title").val();
+//	alert("들어왔니??3333");
+	let Content = $("#Content").val();
+
+//	alert("aaa[" + Content +"]");
+//	alert(Content);
+
+	if (Title == null || Title == "" || Title.length < 0 ) {
+		alert("제목을 입력하세요.");
+		e.preventDefault();
+		Title.focus();
+		return;
+	}
+
+if (Content == null || Content == "" || Content.length < 0 ) {
+		alert("내용을 입력하세요.");
+		e.preventDefault();
+		Content.focus();
+		return;
+}  
+	document.WriteForm.submit();
+}
+</script>
 </body>
 </html>

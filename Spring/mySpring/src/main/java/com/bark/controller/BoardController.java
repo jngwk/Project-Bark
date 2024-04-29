@@ -1,5 +1,7 @@
 package com.bark.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +14,8 @@ import com.bark.domain.Board;
 import com.bark.domain.Criteria;
 import com.bark.domain.Page;
 import com.bark.mapper.CommentMapper;
-import com.bark.service.AdoptionService;
 import com.bark.service.BoardService;
-import com.bark.service.UserService;
+import com.bark.service.SecurityService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,14 +26,15 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class BoardController {
 	private BoardService service;
+	private SecurityService securityService;
 	
 	private CommentMapper commentmapper;
 
 	@GetMapping("/noticeList")//다건
 	public void noticeList(Model model,
+			     		   @RequestParam(required=false, value="pageNum") Integer pageNum,
+			   			   @RequestParam(required=false, value="searchWord") String searchWord,
 						   @RequestParam(required=false, value="searchField") String searchField,
-						   @RequestParam(required=false, value="searchWord") String searchWord,
-						   @RequestParam(required=false, value="pageNum") Integer pageNum,
 						   @RequestParam(required=false, value="amount") Integer amount) {
 
 		Integer type = 1;   				// 공지사항
@@ -72,7 +74,52 @@ public class BoardController {
 		model.addAttribute("page", page);
 		model.addAttribute("bList", service.searchList(cri));
 	}	
-	
+	//문의사항 리스트
+	@GetMapping("/userWriteList")//다건
+	public void userWriteList(Model model,
+			     		   @RequestParam(required=false, value="pageNum") Integer pageNum,
+			   			   @RequestParam(required=false, value="searchWord") String searchWord,
+						   @RequestParam(required=false, value="searchField") String searchField,
+						   @RequestParam(required=false, value="amount") Integer amount) {
+
+		Integer type = 2;   				// 공지사항
+		System.out.println("noticeList [" + type +"-"+ searchField + "-" + searchWord + "-" + pageNum + "-" + amount + "]");
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 0 Set
+			pageNum = 1; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null || searchField == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
+			searchWord = "";
+		}
+
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+		// 조회 조건에 따른 전게 건수 
+		int total = service.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("bList", service.searchList(cri));
+	}
+	//공지사항 read
 	@GetMapping("/noticeRead")//단건
 	public void read(Model model, 
 					 @RequestParam("bno") Integer  bno,						   
@@ -82,6 +129,59 @@ public class BoardController {
 					 @RequestParam(required=false, value="amount") Integer amount) {
 		
 		Integer type = 1;   				// 공지사항
+		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
+
+		// pageNum, amount를 객체에 Set
+		Criteria cri = new Criteria();
+		
+		if (pageNum == null || pageNum == 0) { // 값이 없으면 1 Set
+			pageNum = 1; 
+		}
+		if (amount == null) {			// 값이 없으면 10 Set		
+			amount = 10;
+		}
+		if (searchField == null || searchField == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		if (searchWord == null || searchWord == "") {
+			searchField = "";
+			searchWord = "";
+		}
+		
+		cri.setPageNum(pageNum);
+		// sql에서 쓰이는 Limit에서는 0 부터 시작 하므로 -1 처리 
+		cri.setPageSql((pageNum -1)* 10);
+		cri.setAmount(amount);
+		cri.setType(type);					// 공지사항 "2"
+		cri.setSearchField(searchField);
+		cri.setSearchWord(searchWord);
+		cri.setSearchWordSql("%" + searchWord + "%"); 
+
+		// 조회 조건에 따른 전게 건수 
+		int total = service.totalPage(cri);
+		Page page = new Page(cri, total);
+		
+		Board board = new Board();
+		board = service.read(bno);
+		
+		// 조회 수(hit) 증가
+		service.updateHit(bno);
+		
+		model.addAttribute("page", page);
+		model.addAttribute("board", service.read(bno));
+		model.addAttribute("commentCount", commentmapper.getCount(bno));
+	}
+	//문의사항 read
+	@GetMapping("/contactRead")//단건
+	public void contactRead(Model model, 
+					 @RequestParam("bno") Integer  bno,						   
+					 @RequestParam(required=false, value="searchField") String searchField,
+					 @RequestParam(required=false, value="searchWord") String searchWord,
+					 @RequestParam(required=false, value="pageNum") Integer pageNum,
+					 @RequestParam(required=false, value="amount") Integer amount) {
+		
+		Integer type = 2;   				// 공지사항
 		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
 
 		// pageNum, amount를 객체에 Set
@@ -137,7 +237,11 @@ public class BoardController {
 	}
  
 	@GetMapping("/noticeWrite")
-	public void write() {
+	public String write(HttpSession session) {
+		if(securityService.hasRole(3, session)) {
+			return "/board/noticeWrite";
+		}
+		return "main";
 
 	}
 	
@@ -159,12 +263,16 @@ public class BoardController {
 		board.setType(2);				// 문의하기는 2로
 		service.write(board);
 		rttr.addFlashAttribute("result", board.getBno());
-		return "redirect:/board/noticeList";
+		return "redirect:/user/userWriteList";
 	}
 	
 	@GetMapping("/noticeUpate")
-	public void update() {
-	
+	public String update(HttpSession session) {
+		if(securityService.hasRole(3, session)) {
+			return "/board/noticeUpate";
+		}
+		
+		return "main";
 	}
 
 //	@GetMapping("/noticeUpdate")
@@ -175,25 +283,35 @@ public class BoardController {
 //	}
 	
 	@GetMapping("/noticeUpdate")
-	public void update(Model model, 
+	public String update(Model model, 
 						@RequestParam("bno") Integer  bno,
 			 			@RequestParam(required=false, value="searchField") String searchField,
 			 			@RequestParam(required=false, value="searchWord") String searchWord,
 			 			@RequestParam(required=false, value="pageNum") Integer pageNum,
-			 			@RequestParam(required=false, value="amount") Integer amount) {
+			 			@RequestParam(required=false, value="amount") Integer amount, HttpSession session) {
 		log.info("noticeUpdate : " + bno);
-		
-		Integer type = 1;   				// 공지사항
-		System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
-
-		
-		model.addAttribute("searchField", searchField);
-		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("pageNum", pageNum);
-		model.addAttribute("amount", amount);
-		model.addAttribute("board", service.read(bno));
-
-
+		if(securityService.hasRole(3, session)) {
+			Integer type = 1;   				// 공지사항
+			System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
+			model.addAttribute("searchField", searchField);
+			model.addAttribute("searchWord", searchWord);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("amount", amount);
+			model.addAttribute("type", type);
+			model.addAttribute("board", service.read(bno));
+			return "/board/noticeUpdate";
+		}else if(securityService.hasRole(1, session) || securityService.hasRole(2, session)) {
+			Integer type = 2;   				// 문의사항
+			System.out.println("read [" + bno + "-" + type +"-"+ searchField + "-" + searchWord +"-" + pageNum + "-" + amount + "]");
+			model.addAttribute("searchField", searchField);
+			model.addAttribute("searchWord", searchWord);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("amount", amount);
+			model.addAttribute("type", type);
+			model.addAttribute("board", service.read(bno));
+			return "/board/noticeUpdate";
+		}
+		return "main";
 	}
 	
 	@PostMapping("/noticeUpdate")
@@ -224,11 +342,13 @@ public class BoardController {
 	
 	
 	@GetMapping("/noticeDelete")
-	public String delete(@RequestParam("bno") Integer  bno) {
-		
-		log.info("delete : " + bno);
-		service.delete(bno);
-		return "redirect:/board/noticeList";
+	public String delete(@RequestParam("bno") Integer  bno, HttpSession session) {
+		if(securityService.hasRole(3, session)) {
+			log.info("delete : " + bno);
+			service.delete(bno);
+			return "redirect:/board/noticeList";
+		}
+		return "main";
 	}	
 	
 	@PostMapping("/noticeDelete")
@@ -239,6 +359,26 @@ public class BoardController {
 		service.delete(bno);
 		rttr.addFlashAttribute("result", bno);
 		return "redirect:/board/noticeList";
+	}
+	
+	@GetMapping("/contactDelete")
+	public String contactDelete(@RequestParam("bno") Integer  bno, HttpSession session) {
+		if(securityService.hasRole(1, session) || securityService.hasRole(2, session) || securityService.hasRole(3, session)) {
+			log.info("delete : " + bno);
+			service.delete(bno);
+			return "redirect:/user/userWriteList";
+		}
+		return "main";
+	}	
+	
+	@PostMapping("/contactDelete")
+	public String contactDelete(@RequestParam("bno") Integer  bno, RedirectAttributes rttr) {
+		
+		log.info("delete : " + bno);
+
+		service.delete(bno);
+		rttr.addFlashAttribute("result", bno);
+		return "redirect:/user/userWriteList";
 	}
 	
 

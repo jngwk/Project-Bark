@@ -31,16 +31,12 @@ public class ShelterService {
 		return mapper.searchShelterAddr(addr);
 	}
 
-	public boolean register(Shelter shelter) {
-		int result = mapper.register(shelter);
-		if(result == 1) {
-			return true;
-		}
-		return false;
+	public int register(Shelter shelter) {
+		return mapper.register(shelter);
 		
 	}
 	
-	// kyw : 20240422-16:22  입양신청서(adoptiondetail.jsp) 처리시 조회 내용  
+	// kyw : 20240424-11:41  캠페인 처리시 조회 내용  
 	public Shelter getShelter(Integer shelterno) {
 		return mapper.getShelter(shelterno);
 	}

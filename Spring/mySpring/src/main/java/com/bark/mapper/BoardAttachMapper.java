@@ -23,4 +23,8 @@ public interface BoardAttachMapper {
 	@Select("select * from attach where uploadpath = DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 DAY),'%Y\\%m\\%d' )")
 	public List<Attached> getOldFiles();
 
+	// kyw : 위 insert 누가 쓸 수 있어서(????????) 추가 등록
+	@Insert("insert into attach values(null, #{bno}, null, null, #{uploadPath}, #{fileName}, #{fileType}, #{uuid}) ")
+	public void insertKyw(Attached vo);
+	// ----------------------------
 }   

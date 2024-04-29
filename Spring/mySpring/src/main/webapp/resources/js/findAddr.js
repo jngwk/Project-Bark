@@ -17,7 +17,7 @@ function findAddr(){
                     addr = data.jibunAddress;
                 }
 
-                document.getElementById('postcode').value = data.zonecode;
+				/*document.getElementById('postcode').value = data.zonecode;*/
                 document.getElementById("addr").value = addr;
                 document.getElementById("addrDetail").focus();
                 element_layer.style.display = 'none';

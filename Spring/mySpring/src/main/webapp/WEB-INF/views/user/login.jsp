@@ -8,6 +8,7 @@
 <title>Document</title>
 <link rel="stylesheet" href="${css }/loginPopup.css" />
 <link rel="stylesheet" href="${css }/searchDropdown.css" />
+<link rel="stylesheet" href="${css }/findAddr.css" />
 </head>
 <body>
 	<div class="popup_layer " id="popup_layer">
@@ -135,7 +136,7 @@
 											<label class="popup-label"> <span>이름</span> <input
 												type="text" name="name" class="login-popup-input" />
 											</label> <label class="popup-label"> <span>전화번호</span> <input
-												type="tel" name="phone" class="login-popup-input" />
+												type="tel" name="phone" class="login-popup-input" maxlength=13/>
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -220,11 +221,11 @@
 										<!-- 보호소 주소 -->
 										<div class="form-slide shelter-addr-slide">
 											<label class="popup-label"> <span>주소</span> <input
-												type="text" name="addr" class="login-popup-input" readonly /><img
+												type="text" name="addr" class="login-popup-input" id="join-addr" readonly/><img
 												class="search-btn-icon" src="${icons }/search-btn.png"
-												alt="검색" />
+												alt="검색" onclick="findAddrInJoin()"/>
 											</label> <label class="popup-label"> <span>세부 주소</span> <input
-												type="text" name="addrDetail" class="login-popup-input" />
+												type="text" name="addrDetail" class="login-popup-input" id="join-addrDetail"/>
 											</label>
 											<button type="button" class="next-btn login-popup-btn">
 												다음</button>
@@ -234,7 +235,7 @@
 										<!-- 보호소 전화번호 이메일 인증 -->
 										<div class="form-slide">
 											<label class="popup-label"> <span>전화번호</span> <input
-												type="tel" name="phone" class="login-popup-input" />
+												type="tel" name="phone" class="login-popup-input" maxlength=13/>
 											</label> <label class="popup-label"> <span>이메일</span> <input
 												type="email" name="email" class="login-popup-input" />
 											</label> <label class="popup-label verify-label pending hide">
@@ -269,6 +270,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="find-addr-layer" id="join-layer">
+		<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+			id="btnCloseLayer" onclick="closeDaumPostcode()" alt="닫기 버튼">
+	</div>
 	</div>
 	<script>
 		// 주소 설정하기
@@ -308,7 +313,21 @@
 				}				
 			})
 		}
-
+		
+		function checkRegisteredShelter(shelterName){ // 원래는 shelterno으로 검사하는게 맞지만..
+			$.ajax({
+				type: 'GET',
+				url : "/user/check-regi-shelter",
+				success: function(isRegistered){
+				    if(isRegistered){
+				    	// add class "duplicate-shelter"
+				    }
+				},error: (error) => {
+				     console.log(JSON.stringify(error));
+				}				
+			})
+		}
+		
 		function addShelter(selectedShelter) {
 			if(shelterNames.length <= 0){
 				// 가져오지 못하면 다시 가져와!
@@ -329,6 +348,7 @@
 		  wrapper.classList.remove("active");
 		  selectBtn.firstElementChild.innerText = selectedLi.innerText;
 		  selectBtn.firstElementChild.classList.add("font-dark");
+		  /* checkRegisteredShelter(selectedLi.innerText); */
 		}
 
 		searchInp.addEventListener("keyup", () => {
@@ -396,5 +416,8 @@
 		
 	</script>
 	<script type="text/javascript" src="${js }/loginPopup.js"></script>
+	<script src="${js }/userJoinFindAddr.js"></script>
+	<script
+		src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 </html>

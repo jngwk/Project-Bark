@@ -34,6 +34,7 @@
   padding: 20px;
   background: var(--color-bright);
   border-radius: 5px;
+  display:none;
 }
 
 .category-title p {

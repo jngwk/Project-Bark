@@ -161,6 +161,7 @@ align-items: center;
   align-items: center;
   width: 99%;
   padding: 10px 0;
+  gap: 16px;
   
 }
 .shelter-buttons a {

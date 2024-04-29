@@ -20,16 +20,19 @@
     <div class="dog-desc-container">
     <p class="page-title">Detail</p><p class="page-subtitle">[상세보기]</p>
       <div class="dog-desc-inner">
-        <a href="${contextPath }/adoption/list"
-          ><img class="arrow" src="${icons }/arrow-back.png" alt="arrow"
-        /></a>
+        <a href="javascript:history.back()">
+        <img class="arrow" src="${icons }/arrow-back.png" alt="arrow"/>
+        </a>
         <div class="summary">
           <div class="img-wrapper">
-            <img
-              src="${dog.imgUrl }"
-              alt=""
-              class="dog1-large"
-            />
+          <c:choose>
+				<c:when test="${not empty dog.imgUrl}">
+					<img src="${dog.imgUrl}" alt="image" class="card__img" />
+				</c:when>
+				<c:when test="${not empty dog.filename}">
+					<img src="/resources/images/dogs/${dog.uuid}_${dog.filename}" alt="image" class="dog1-large" />							
+				</c:when>
+		  </c:choose>
           </div>
           <div class="summary-cont">
             <table>
@@ -118,8 +121,10 @@
             산책과 활동을 필요로 합니다. 영철이와 함께 활동적인 생활을 해주실 수
             있는 견주님을 찾습니다. 
           </p> -->
-          <button class="large-btn brown-btn expand-btn">입양하기</button>
+          <c:if test="${userType == 1 || userType == 3 }">
+          	<button class="large-btn brown-btn expand-btn">입양하기</button>
           <!-- <button class="prev-btn secondary-btn font-bright">목록</button> -->
+          </c:if>
         </div>
       </div>
     </div>
@@ -127,7 +132,7 @@
     <div class="adoption-form">
       <div class="form-container">
         <div class="form-page">
-          <form action="#" method="post">
+          <form action="/adoption/adoptionWrite" method="post">
             <img src="${images }/logo-brown.png" />
             <!-- <div class="form-title">영철이의 가족이 되어 주세요</div> -->
             
@@ -151,7 +156,7 @@
                   <td>
                     <input
                       type="text"
-                      name="shelterNumber"
+                      name="careTel"
                       value="${dog.careTel}"
                       readonly
                     />
@@ -163,9 +168,10 @@
                     <input
                       type="text"
                       name="shelterAddr"
-                      value="${dog.shelterAddr }"
+                      value="${dog.shelterAddr}"
                       readonly
                     />
+                    <input type="hidden"  name="dogno"  value="${dog.dogno}" />
                   </td>
                 </tr>
               </table>
@@ -178,8 +184,8 @@
                   <td>
                     <input
                       type="text"
-                      name="userName"
-                      value="${user.name }"
+                      name="name"
+                      value="${user.name}"
                       readonly
                     />
                   </td>
@@ -189,7 +195,7 @@
                   <td>
                     <input
                       type="text"
-                      name="userName"
+                      name="phone"
                       value="${user.phone }"
                       readonly
                     />
@@ -200,7 +206,7 @@
                   <td>
                     <input
                       type="text"
-                      name="emailName"
+                      name="email"
                       value="${user.email }"
                       readonly
                     />
@@ -266,8 +272,9 @@
                 class="large-btn secondary-btn inactive submit-adoption-form"
                 type="submit"
                 value="입양하기"
-                onClick="location.href=/adoption/write"
-              />
+              />                
+                <!-- onClick="location.href=/adoption/adoptionWrite" -->
+
             </div>
           </form>
         </div>
